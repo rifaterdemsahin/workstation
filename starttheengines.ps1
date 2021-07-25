@@ -1,4 +1,5 @@
 cls
+write-host "Most methods are here https://github.com/MScholtes/PSVirtualDesktop#remove-desktop--desktop-desktop"
 
 Import-Module VirtualDesktop
 
@@ -6,43 +7,24 @@ function startminiprocess {
 
     param (
        [string]$processpath,
-       [int]$desktop
-    )
-
+       [int]$desktopIndex
+       )
+    
+    write-host "Switch started desktop" $desktopIndex
+    Switch-Desktop -Desktop $desktopIndex
+    return
     $proc = Start-Process $processpath -PassThru
     while ( ($myhandlepointer = $proc.MainWindowHandle) -eq 0 ) {
         write-host "the process handle is not ready for : " $processpath
     }
     write-host "Handler after waiting for the handler id: $myhandlepointer"
-    write-host "Switch started desktop" $desktop
    
-    Switch-Desktop -Desktop $desktop
+
     $mycurrentDesktop = Get-CurrentDesktop
-    write-host "move started to " $desktop
+    write-host "move started to " $desktopIndex
     Move-Window -Desktop $mycurrentDesktop -Hwnd $myhandlepointer
 }
 
-function findDesktopIndexFromName { 
-
-    param (
-       [string]$desktopname
-    )
-
-    write-host "no method here https://github.com/MScholtes/PSVirtualDesktop#remove-desktop--desktop-desktop"
-    $collection = Get-DesktopList
-    foreach ($item in $collection) {
-
-        if ($desktopname -eq $item.Name ) {
-            $index = Get-DesktopIndex -Desktop $item
-            write-host "Found desktop index by the id"
-            
-            return $index
-        }
-        
-    }
-    write-host "Could not locate the desktop by the name"
-    return -2
-}
 
 Write-Host "Imported modules"
 
@@ -89,12 +71,12 @@ New-Desktop | Set-DesktopName -Name "Contracting"
 Start-Sleep 5
 write-host "Left over desktop messes it up"
 
-$desktopindex =( findDesktopIndexFromName -desktopname "Instant Message")
-startminiprocess -processpath "C:\Program Files (x86)\Microsoft\Skype for Desktop\Skype.exe" -desktop $desktopindex 
+$desktopindex =( Get-DesktopIndex -Desktop "Instant Message")
+# startminiprocess -processpath "C:\Program Files (x86)\Microsoft\Skype for Desktop\Skype.exe" -desktop $desktopindex 
 startminiprocess -processpath "C:\Users\erdem\AppData\Roaming\Telegram Desktop\Telegram.exe" -desktop $desktopindex
-startminiprocess -processpath "C:\Users\erdem\AppData\Local\Programs\signal-desktop\Signal.exe" -desktop $desktopindex
-startminiprocess -processpath "C:\Program Files\WindowsApps\5319275A.WhatsAppDesktop_2.2126.11.0_x64__cv1g1gvanyjgm\app\Whatsapp.exe" -desktop $desktopindex
-startminiprocess -processpath "C:\Users\erdem\AppData\Local\Discord\Update.exe --processStart Discord.exe" -desktop $desktopindex
+# startminiprocess -processpath "C:\Users\erdem\AppData\Local\Programs\signal-desktop\Signal.exe" -desktop $desktopindex
+# startminiprocess -processpath "C:\Program Files\WindowsApps\5319275A.WhatsAppDesktop_2.2126.11.0_x64__cv1g1gvanyjgm\app\Whatsapp.exe" -desktop $desktopindex
+# startminiprocess -processpath "C:\Users\erdem\AppData\Local\Discord\Update.exe --processStart Discord.exe" -desktop $desktopindex
 
 
 
