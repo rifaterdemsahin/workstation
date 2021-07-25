@@ -12,14 +12,21 @@ function startminiprocess {
     
     write-host "Switch started desktop" $desktopIndex
     Switch-Desktop -Desktop $desktopIndex
+
+
+    write-host "If it is allready on find the process and switch" 
+    write-host "TODO" 
+
+
     $proc = Start-Process $processpath -PassThru
+
     while ( ($myhandlepointer = $proc.MainWindowHandle) -eq 0 ) {
-        write-host "the process handle is not ready for : " $processpath
+        write-host "0 the process handle is not ready for : " $processpath
     }
     write-host "Handler after waiting for the handler id: $myhandlepointer"
    
     $mycurrentDesktop = Get-CurrentDesktop
-    write-host "move started to " $desktopIndex
+    write-host "1 move started to " $desktopIndex
     Move-Window -Desktop $mycurrentDesktop -Hwnd $myhandlepointer
 }
 
@@ -70,11 +77,11 @@ Start-Sleep 5
 write-host "Left over desktop messes it up"
 
 $desktopindex =( Get-DesktopIndex -Desktop "Instant Message")
-# startminiprocess -processpath "C:\Program Files (x86)\Microsoft\Skype for Desktop\Skype.exe" -desktop $desktopindex 
+startminiprocess -processpath "C:\Program Files (x86)\Microsoft\Skype for Desktop\Skype.exe" -desktop $desktopindex 
 startminiprocess -processpath "C:\Users\erdem\AppData\Roaming\Telegram Desktop\Telegram.exe" -desktop $desktopindex
-# startminiprocess -processpath "C:\Users\erdem\AppData\Local\Programs\signal-desktop\Signal.exe" -desktop $desktopindex
-# startminiprocess -processpath "C:\Program Files\WindowsApps\5319275A.WhatsAppDesktop_2.2126.11.0_x64__cv1g1gvanyjgm\app\Whatsapp.exe" -desktop $desktopindex
-# startminiprocess -processpath "C:\Users\erdem\AppData\Local\Discord\Update.exe --processStart Discord.exe" -desktop $desktopindex
+startminiprocess -processpath "C:\Users\erdem\AppData\Local\Programs\signal-desktop\Signal.exe" -desktop $desktopindex
+startminiprocess -processpath "C:\Program Files\WindowsApps\5319275A.WhatsAppDesktop_2.2126.11.0_x64__cv1g1gvanyjgm\app\Whatsapp.exe" -desktop $desktopindex
+startminiprocess -processpath "C:\Users\erdem\AppData\Local\Discord\Update.exe --processStart Discord.exe" -desktop $desktopindex
 
 
 
