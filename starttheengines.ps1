@@ -12,14 +12,12 @@ function startminiprocess {
     
     write-host "Switch started desktop" $desktopIndex
     Switch-Desktop -Desktop $desktopIndex
-    return
     $proc = Start-Process $processpath -PassThru
     while ( ($myhandlepointer = $proc.MainWindowHandle) -eq 0 ) {
         write-host "the process handle is not ready for : " $processpath
     }
     write-host "Handler after waiting for the handler id: $myhandlepointer"
    
-
     $mycurrentDesktop = Get-CurrentDesktop
     write-host "move started to " $desktopIndex
     Move-Window -Desktop $mycurrentDesktop -Hwnd $myhandlepointer
