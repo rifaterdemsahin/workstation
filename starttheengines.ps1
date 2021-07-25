@@ -65,6 +65,7 @@ if ($desktopCount -gt 1) {
 Write-Host "Create all the Desktops and switch to them than start to create the apps"
 New-Desktop | Set-DesktopName -Name "Desktop"
 New-Desktop | Set-DesktopName -Name "Editting"
+New-Desktop | Set-DesktopName -Name "Streaming - Atem"
 New-Desktop | Set-DesktopName -Name "Tweet"
 New-Desktop | Set-DesktopName -Name "Notion"
 New-Desktop | Set-DesktopName -Name "Code"
@@ -72,6 +73,7 @@ New-Desktop | Set-DesktopName -Name "Instant Message"
 New-Desktop | Set-DesktopName -Name "Watch"
 New-Desktop | Set-DesktopName -Name "Operating System"
 New-Desktop | Set-DesktopName -Name "Contracting"
+New-Desktop | Set-DesktopName -Name "Ask - Reddit - Discord"
 
 Start-Sleep 5
 write-host "Left over desktop messes it up"
@@ -119,3 +121,8 @@ Write-Host "Ended Start Machine"
 Write-Host "References wait issue https://www.reddit.com/r/PowerShell/comments/or9ee9/why_cant_i_get_the_windows_handle_id_from_the/"
 Write-Host "References Erdem github https://github.com/rifaterdemsahin/workstation/blob/master/starttheengines.ps1"
 Write-Host "References Virtual Desktop Library Reference https://github.com/MScholtes/PSVirtualDesktop"
+
+#TODOS
+#- remove the noise
+#- set variables
+#- iterate open all process ( at 5 percent now )
