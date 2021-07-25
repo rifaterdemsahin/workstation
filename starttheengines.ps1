@@ -49,7 +49,15 @@ New-Desktop | Switch-Desktop
 
 Move-Window -Desktop $mydesktop -Hwnd $myhandlepointer
 
-Get-CurrentDesktop | Set-DesktopName -Name "Recording ZZZZZZ"
+Get-CurrentDesktop | Set-DesktopName -Name "Notes"
+
+$processpath = "C:\Program Files\Microsoft VS Code\Code.exe"
+$proc = Start-Process $processpath  -PassThru
+while ( ($myhandlepointernew = $proc.MainWindowHandle) -eq 0 ) {
+	write-host "the process handle is not ready:" $processpath 
+}
+Move-Window -Desktop $mydesktop -Hwnd $myhandlepointernew
+write-host "Handler after waiting for the handler id: $myhandlepointernew"
 
 return
 
