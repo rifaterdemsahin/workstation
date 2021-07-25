@@ -37,17 +37,20 @@ if ($desktopCount -gt 1) {
 
  
 Write-Host "Library Reference https://github.com/MScholtes/PSVirtualDesktop"
-New-Desktop | Set-DesktopName -Name "Recording X"
+
 
 $proc = Start-Process "C:\Windows\system32\notepad.exe" -PassThru
 while ( ($myhandlepointer = $proc.MainWindowHandle) -eq 0 ) {
-	write-host "not yet"
+	write-host "the process handle is not ready for notepad"
 }
-write-host "ok now: $myhandlepointer"
+write-host "Handler after waiting for the handler id: $myhandlepointer"
 
-$mydesktop = Get-CurrentDesktop
-Move-Window -Desktop $mydesktop -Hwnd $mydesktop 
- 
+New-Desktop | Switch-Desktop 
+
+Move-Window -Desktop $mydesktop -Hwnd $myhandlepointer
+
+Get-CurrentDesktop | Set-DesktopName -Name "Recording ZZZZZZ"
+
 return
 
 Write-Host "Open Stream Labs"
