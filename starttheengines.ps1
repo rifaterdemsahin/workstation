@@ -22,6 +22,28 @@ function startminiprocess {
     Move-Window -Desktop $mycurrentDesktop -Hwnd $myhandlepointer
 }
 
+function findDesktopIndexFromName { 
+
+    param (
+       [string]$desktopname
+    )
+
+    write-host "no method here https://github.com/MScholtes/PSVirtualDesktop#remove-desktop--desktop-desktop"
+    $collection = Get-DesktopList
+    foreach ($item in $collection) {
+
+        if ($desktopname -eq $item.Name ) {
+            $index = Get-DesktopIndex -Desktop $item
+            write-host "Found desktop index by the id"
+            
+            return $index
+        }
+        
+    }
+    write-host "Could not locate the desktop by the name"
+    return -2
+}
+
 Write-Host "Imported modules"
 
 
@@ -54,23 +76,27 @@ if ($desktopCount -gt 1) {
 
 
 Write-Host "Create all the Desktops and switch to them than start to create the apps"
-New-Desktop | Set-DesktopName -Name "Desktop 0"
-New-Desktop | Set-DesktopName -Name "Editting 1"
-New-Desktop | Set-DesktopName -Name "Tweet 2"
-New-Desktop | Set-DesktopName -Name "Notion 3"
-New-Desktop | Set-DesktopName -Name "Code 4"
-New-Desktop | Set-DesktopName -Name "Instant Message 5"
-New-Desktop | Set-DesktopName -Name "Watch 6"
-New-Desktop | Set-DesktopName -Name "Operating System 7"
-New-Desktop | Set-DesktopName -Name "Contracting 8"
+New-Desktop | Set-DesktopName -Name "Desktop"
+New-Desktop | Set-DesktopName -Name "Editting"
+New-Desktop | Set-DesktopName -Name "Tweet"
+New-Desktop | Set-DesktopName -Name "Notion"
+New-Desktop | Set-DesktopName -Name "Code"
+New-Desktop | Set-DesktopName -Name "Instant Message"
+New-Desktop | Set-DesktopName -Name "Watch"
+New-Desktop | Set-DesktopName -Name "Operating System"
+New-Desktop | Set-DesktopName -Name "Contracting"
 
 Start-Sleep 5
 write-host "Left over desktop messes it up"
 
-startminiprocess -processpath "C:\Program Files (x86)\Microsoft\Skype for Desktop\Skype.exe" -desktop 6
-startminiprocess -processpath "C:\Users\erdem\AppData\Roaming\Telegram Desktop\Telegram.exe" -desktop 6
-startminiprocess -processpath "C:\Users\erdem\AppData\Local\Programs\signal-desktop\Signal.exe" -desktop 6
-startminiprocess -processpath "C:\Program Files\WindowsApps\5319275A.WhatsAppDesktop_2.2126.11.0_x64__cv1g1gvanyjgm\app\Whatsapp.exe" -desktop 6
+$desktopindex =( findDesktopIndexFromName -desktopname "Instant Message")
+startminiprocess -processpath "C:\Program Files (x86)\Microsoft\Skype for Desktop\Skype.exe" -desktop $desktopindex 
+startminiprocess -processpath "C:\Users\erdem\AppData\Roaming\Telegram Desktop\Telegram.exe" -desktop $desktopindex
+startminiprocess -processpath "C:\Users\erdem\AppData\Local\Programs\signal-desktop\Signal.exe" -desktop $desktopindex
+startminiprocess -processpath "C:\Program Files\WindowsApps\5319275A.WhatsAppDesktop_2.2126.11.0_x64__cv1g1gvanyjgm\app\Whatsapp.exe" -desktop $desktopindex
+startminiprocess -processpath "C:\Users\erdem\AppData\Local\Discord\Update.exe --processStart Discord.exe" -desktop $desktopindex
+
+
 
 Start-Sleep 5
 return
