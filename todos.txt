@@ -1,3 +1,5 @@
 When w11 is ready wipe
 Reinstall using wget( if ready ) or choco
 Backup system to make sure it is easy to restore
+Shortcuts
+  https://twitter.com/rifaterdemsahin/status/1419647893154172935
