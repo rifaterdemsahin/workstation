@@ -3,3 +3,9 @@ w111 disc backup today https://twitter.com/rifaterdemsahin/status/14195969191318
 
 Aomei backup
 = Restore disc read
+
+
+Use 2 drives
+  -1 windows
+  -2 aomei
+  
