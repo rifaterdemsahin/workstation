@@ -1,3 +1,6 @@
+Todo
+. Skip in the script if they exist https://twitter.com/rifaterdemsahin/status/1421363755414401024/photo/1
+
 set it for the desktop background
 Wall papers
 https://github.com/MScholtes/VirtualDesktop/blob/master/VirtualDesktopInsider.cs
