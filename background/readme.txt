@@ -7,6 +7,9 @@ https://github.com/MScholtes/VirtualDesktop/blob/master/VirtualDesktopInsider.cs
 #
 Edit Desktops
 
+Canva Folder
+https://www.canva.com/folder/FAElvqxhA-8
+
 Messaging
   https://www.canva.com/design/DAElhMCDWoU/xvtlXm_JlPLDYZrlApJ33w/edit
 
