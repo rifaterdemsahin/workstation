@@ -1,0 +1,752 @@
+PS C:\WINDOWS\system32> Get-WmiObject -Class Win32_Product
+
+
+IdentifyingNumber : {CF8E6E00-9C03-4440-81C0-21FACB921A6B}
+Name              : ASUS Aura SDK
+Vendor            : ASUSTek COMPUTER INC.
+Version           : 3.04.07
+Caption           : ASUS Aura SDK
+
+IdentifyingNumber : {A171D320-C42C-4F3B-A2D8-C6A09F6788CC}
+Name              : AMD Ryzen Balanced Driver
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 6.0.0.7
+Caption           : AMD Ryzen Balanced Driver
+
+IdentifyingNumber : {5158E770-0862-478B-ADC3-E22B33061A86}
+Name              : 3Dconnexion Trainer
+Vendor            : 3Dconnexion
+Version           : 3.2.7.17569
+Caption           : 3Dconnexion Trainer
+
+IdentifyingNumber : {E937DA80-FBD4-4AF9-8080-86CFDCAC9C68}
+Name              : 3Dconnexion LCD Applets for SpacePilot Pro
+Vendor            : 3Dconnexion
+Version           : 1.5.1
+Caption           : 3Dconnexion LCD Applets for SpacePilot Pro
+
+IdentifyingNumber : {966E33F0-6786-4B38-AA29-C1B3F6C1955D}
+Name              : PHISON HAL
+Vendor            : PHISON Electronics Corp.
+Version           : 1.0.6.0
+Caption           : PHISON HAL
+
+IdentifyingNumber : {2BD1A7F0-8F3A-4ABB-80C3-43E76E4E4243}
+Name              : 3Dconnexion 3DxSoftware
+Vendor            : 3Dconnexion
+Version           : 10.7.4.3350
+Caption           : 3Dconnexion 3DxSoftware
+
+IdentifyingNumber : {9BE9E7F0-F9F1-487B-A2FC-790CD2898388}
+Name              : Python 3.9.6 Executables (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.9.6150.0
+Caption           : Python 3.9.6 Executables (64-bit)
+
+IdentifyingNumber : {ad7f5f31-0d6f-40f2-83b1-5556e0d0f9b1}
+Name              : AMD_Chipset_Drivers
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 2.09.28.509
+Caption           : AMD_Chipset_Drivers
+
+IdentifyingNumber : {01FAEC41-B3BC-44F4-B185-5E8475AEB855}
+Name              : Microsoft Visual C++ 2019 X86 Additional Runtime - 14.29.30037
+Vendor            : Microsoft Corporation
+Version           : 14.29.30037
+Caption           : Microsoft Visual C++ 2019 X86 Additional Runtime - 14.29.30037
+
+IdentifyingNumber : {DC2C8F41-BE16-4442-BC11-6A36B995A2B3}
+Name              : 4K Capture Utility
+Vendor            : Elgato Systems
+Version           : 1.7.4.4808
+Caption           : 4K Capture Utility
+
+IdentifyingNumber : {0E536061-3B55-4D45-BF58-0BDA261C94B0}
+Name              : AURA Service
+Vendor            : ASUSTeK Computer Inc.
+Version           : 3.05.06
+Caption           : AURA Service
+
+IdentifyingNumber : {B3FA5A71-A9C3-42B3-B567-F92C163F3F5B}
+Name              : Microsoft Visual C++ 2019 X64 Additional Runtime - 14.29.30040
+Vendor            : Microsoft Corporation
+Version           : 14.29.30040
+Caption           : Microsoft Visual C++ 2019 X64 Additional Runtime - 14.29.30040
+
+IdentifyingNumber : {1D8E6291-B0D5-35EC-8441-6616F567A0F7}
+Name              : Microsoft Visual C++ 2010  x64 Redistributable - 10.0.40219
+Vendor            : Microsoft Corporation
+Version           : 10.0.40219
+Caption           : Microsoft Visual C++ 2010  x64 Redistributable - 10.0.40219
+
+IdentifyingNumber : {8122DAB1-ED4D-3676-BB0A-CA368196543E}
+Name              : Microsoft Visual C++ 2013 x86 Minimum Runtime - 12.0.40664
+Vendor            : Microsoft Corporation
+Version           : 12.0.40664
+Caption           : Microsoft Visual C++ 2013 x86 Minimum Runtime - 12.0.40664
+
+IdentifyingNumber : {BEFC10C1-7032-3C8E-80BC-621A77BFEABD}
+Name              : Microsoft Help Viewer 2.3
+Vendor            : Microsoft Corporation
+Version           : 2.3.28107
+Caption           : Microsoft Help Viewer 2.3
+
+IdentifyingNumber : {F0C3E5D1-1ADE-321E-8167-68EF0DE699A5}
+Name              : Microsoft Visual C++ 2010  x86 Redistributable - 10.0.40219
+Vendor            : Microsoft Corporation
+Version           : 10.0.40219
+Caption           : Microsoft Visual C++ 2010  x86 Redistributable - 10.0.40219
+
+IdentifyingNumber : {0916C6E1-6A0A-4887-9E00-D96FD44AFACE}
+Name              : vs_minshellmsires
+Vendor            : Microsoft Corporation
+Version           : 16.10.31303
+Caption           : vs_minshellmsires
+
+IdentifyingNumber : {D6580352-5B95-49A9-B2F3-313D12D13968}
+Name              : Python 3.9.6 Development Libraries (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.9.6150.0
+Caption           : Python 3.9.6 Development Libraries (64-bit)
+
+IdentifyingNumber : {2CDAA352-3028-4DA7-833E-BA22DA8EB33F}
+Name              : 3Dconnexion Add-In for AutoCAD
+Vendor            : 3Dconnexion
+Version           : 5.7.1.17918
+Caption           : 3Dconnexion Add-In for AutoCAD
+
+IdentifyingNumber : {92EBA652-2941-4D20-8CD8-EC6A0019F7FD}
+Name              : 3Dconnexion Plug-in for Acrobat 3D
+Vendor            : 3Dconnexion
+Version           : 1.4.2
+Caption           : 3Dconnexion Plug-in for Acrobat 3D
+
+IdentifyingNumber : {C56D2482-32F7-4CB7-AF41-4CC51EBCB17D}
+Name              : Microsoft Visual C++ 2019 X64 Minimum Runtime - 14.29.30040
+Vendor            : Microsoft Corporation
+Version           : 14.29.30040
+Caption           : Microsoft Visual C++ 2019 X64 Minimum Runtime - 14.29.30040
+
+IdentifyingNumber : {6E3610B2-430D-4EB0-81E3-2B57E8B9DE8D}
+Name              : Bonjour
+Vendor            : Apple Inc.
+Version           : 3.0.0.10
+Caption           : Bonjour
+
+IdentifyingNumber : {C0CC35B2-5AC1-4F8D-9586-D48966A4709E}
+Name              : XSplit Broadcaster
+Vendor            : SplitmediaLabs
+Version           : 4.1.2104.2317
+Caption           : XSplit Broadcaster
+
+IdentifyingNumber : {511119D2-41C4-48E1-A3DA-0A6A1E68AC76}
+Name              : Python 3.9.6 Utility Scripts (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.9.6150.0
+Caption           : Python 3.9.6 Utility Scripts (64-bit)
+
+IdentifyingNumber : {634F7BE2-E181-4544-946F-B8BA774B9059}
+Name              : vs_vswebprotocolselectormsi
+Vendor            : Microsoft Corporation
+Version           : 16.10.31206
+Caption           : vs_vswebprotocolselectormsi
+
+IdentifyingNumber : {0D78BEE2-F8FF-4498-AF1A-3FF81CED8AC6}
+Name              : Razer Synapse
+Vendor            : Razer Inc.
+Version           : 2.21.24.34
+Caption           : Razer Synapse
+
+IdentifyingNumber : {6AC5E623-5E87-426A-8E6A-353D5DB1D250}
+Name              : 3Dconnexion Assembly Demo
+Vendor            : 3Dconnexion
+Version           : 0.9.8.0
+Caption           : 3Dconnexion Assembly Demo
+
+IdentifyingNumber : {E9B4EF43-AF3E-4AE2-8CA3-475F487B90B5}
+Name              : Node.js
+Vendor            : Node.js Foundation
+Version           : 16.5.0
+Caption           : Node.js
+
+IdentifyingNumber : {05CA3463-0B45-425D-9AF2-E1964AB85CBB}
+Name              : vs_FileTracker_Singleton
+Vendor            : Microsoft Corporation
+Version           : 16.10.31303
+Caption           : vs_FileTracker_Singleton
+
+IdentifyingNumber : {EC27BF73-AB7E-4867-9EEC-3AD456006835}
+Name              : Python 3.9.6 Add to Path (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.9.6150.0
+Caption           : Python 3.9.6 Add to Path (64-bit)
+
+IdentifyingNumber : {6B527314-CE72-4188-AD1D-331582F18188}
+Name              : 3Dconnexion Plug-In for Creo 2.0 - 8.0
+Vendor            : 3Dconnexion
+Version           : 2.4.4.18413
+Caption           : 3Dconnexion Plug-In for Creo 2.0 - 8.0
+
+IdentifyingNumber : {E6AAC334-9D4D-4E40-8705-BF40DCCA2680}
+Name              : SQL Server Management Studio for Reporting Services
+Vendor            : Microsoft Corporation
+Version           : 15.0.18386.0
+Caption           : SQL Server Management Studio for Reporting Services
+
+IdentifyingNumber : {53CF6934-A98D-3D84-9146-FC4EDF3D5641}
+Name              : Microsoft Visual C++ 2013 x64 Minimum Runtime - 12.0.40664
+Vendor            : Microsoft Corporation
+Version           : 12.0.40664
+Caption           : Microsoft Visual C++ 2013 x64 Minimum Runtime - 12.0.40664
+
+IdentifyingNumber : {9D6F8754-28E9-4940-B319-3FC8588CF18F}
+Name              : Microsoft OLE DB Driver for SQL Server
+Vendor            : Microsoft Corporation
+Version           : 18.5.0.0
+Caption           : Microsoft OLE DB Driver for SQL Server
+
+IdentifyingNumber : {C5A4A164-4428-4931-B728-96EEF0FA3C44}
+Name              : AURA lighting effect add-on x64
+Vendor            : ASUS
+Version           : 0.0.16
+Caption           : AURA lighting effect add-on x64
+
+IdentifyingNumber : {CBD54374-141A-4C71-AE46-3870CC7F0838}
+Name              : Microsoft Visual Studio Setup Configuration
+Vendor            : Microsoft Corporation
+Version           : 2.7.3111.17308
+Caption           : Microsoft Visual Studio Setup Configuration
+
+IdentifyingNumber : {DC7A4694-7835-4C99-9D12-8964278869FB}
+Name              : 3Dconnexion Plugin for Unreal Editor
+Vendor            : 3Dconnexion
+Version           : 1.1.0.32
+Caption           : 3Dconnexion Plugin for Unreal Editor
+
+IdentifyingNumber : {EFC40EB4-F50B-4D1D-997A-79E90186B7D7}
+Name              : 3Dconnexion Plug-In for Photoshop
+Vendor            : 3Dconnexion
+Version           : 2.9.5.18069
+Caption           : 3Dconnexion Plug-In for Photoshop
+
+IdentifyingNumber : {77B482C4-B8C6-3E7C-A524-3EA1D10CCCD9}
+Name              : Google Chrome
+Vendor            : Google LLC
+Version           : 92.0.4515.107
+Caption           : Google Chrome
+
+IdentifyingNumber : {AA6453E4-E04B-4DC1-9B59-DD7745C842CA}
+Name              : Elgato Wave Link
+Vendor            : Elgato Systems
+Version           : 1.3.0.2536
+Caption           : Elgato Wave Link
+
+IdentifyingNumber : {826388E4-E31F-4514-948B-3BB954FB3EAF}
+Name              : Universal Holtek RGB DRAM
+Vendor            : PD
+Version           : 1.0.0.1
+Caption           : Universal Holtek RGB DRAM
+
+IdentifyingNumber : {26A24AE4-039D-4CA4-87B4-2F32180291F0}
+Name              : Java 8 Update 291
+Vendor            : Oracle Corporation
+Version           : 8.0.2910.10
+Caption           : Java 8 Update 291
+
+IdentifyingNumber : {26A24AE4-039D-4CA4-87B4-2F64180291F0}
+Name              : Java 8 Update 291 (64-bit)
+Vendor            : Oracle Corporation
+Version           : 8.0.2910.10
+Caption           : Java 8 Update 291 (64-bit)
+
+IdentifyingNumber : {64A3A4F4-B792-11D6-A78A-00B0D0180211}
+Name              : Java SE Development Kit 8 Update 211 (64-bit)
+Vendor            : Oracle Corporation
+Version           : 8.0.2110.12
+Caption           : Java SE Development Kit 8 Update 211 (64-bit)
+
+IdentifyingNumber : {085E2365-0A70-4230-B664-02D5E4FE7E9C}
+Name              : WD_BLACK AN1500
+Vendor            : ENE TECHNOLOGY INC.
+Version           : 1.0.12.0
+Caption           : WD_BLACK AN1500
+
+IdentifyingNumber : {06CA3675-CA3D-4CE9-9917-9604F5A34940}
+Name              : Elgato Stream Deck
+Vendor            : Elgato Systems GmbH
+Version           : 5.0.1.14252
+Caption           : Elgato Stream Deck
+
+IdentifyingNumber : {E5A95BC5-81DF-4F0C-B910-B59DD012F037}
+Name              : Microsoft Update Health Tools
+Vendor            : Microsoft Corporation
+Version           : 2.81.0.0
+Caption           : Microsoft Update Health Tools
+
+IdentifyingNumber : {3B4AC506-4C3C-45F0-91C3-38790CE8BFEB}
+Name              : VMware Workstation
+Vendor            : VMware, Inc.
+Version           : 16.1.2
+Caption           : VMware Workstation
+
+IdentifyingNumber : {538BA876-44A3-48B3-BE6C-B2439B824ECC}
+Name              : 3Dconnexion Viewer
+Vendor            : 3Dconnexion
+Version           : 1.0.0.40
+Caption           : 3Dconnexion Viewer
+
+IdentifyingNumber : {AC76BA86-7AD7-FFFF-7B44-AC0F074E4100}
+Name              : Adobe Acrobat Reader DC MUI
+Vendor            : Adobe Systems Incorporated
+Version           : 21.005.20058
+Caption           : Adobe Acrobat Reader DC MUI
+
+IdentifyingNumber : {71BB96A6-EAC4-45AE-A17D-D3ED43FF1D14}
+Name              : ASUS AURA VGA Component
+Vendor            : ASUSTek COMPUTER INC.
+Version           : 0.0.3.1
+Caption           : ASUS AURA VGA Component
+
+IdentifyingNumber : {1A59F8A6-6AB4-4522-9340-F420B9155A31}
+Name              : paint.net
+Vendor            : dotPDN LLC
+Version           : 4.2.16
+Caption           : paint.net
+
+IdentifyingNumber : {F2B60FA6-7872-4FF9-A8C9-97C79B8ED7A0}
+Name              : 3Dconnexion Collage
+Vendor            : 3Dconnexion
+Version           : 1.3.2.745
+Caption           : 3Dconnexion Collage
+
+IdentifyingNumber : {2D87BFB6-C184-4A59-9BBE-3E20CE797631}
+Name              : ROG Live Service
+Vendor            : ASUSTek COMPUTER INC.
+Version           : 1.2.12.5
+Caption           : ROG Live Service
+
+IdentifyingNumber : {F4B62FE6-27F1-408B-A4E2-A3BE06DEA365}
+Name              : 3Dconnexion Navigation Library Server
+Vendor            : 3Dconnexion
+Version           : 1.4.1.18506
+Caption           : 3Dconnexion Navigation Library Server
+
+IdentifyingNumber : {B0AA3BF6-3C13-4C9A-A043-4CEFBBE0A2D3}
+Name              : vs_filehandler_x86
+Vendor            : Microsoft Corporation
+Version           : 16.10.31206
+Caption           : vs_filehandler_x86
+
+IdentifyingNumber : {5C5B7907-C4E8-4E09-8CD6-3E844C7D65E2}
+Name              : Python 3.9.6 Test Suite (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.9.6150.0
+Caption           : Python 3.9.6 Test Suite (64-bit)
+
+IdentifyingNumber : {24850C07-D3D6-4050-A0AE-25403AC88D67}
+Name              : XSplit VCam
+Vendor            : XSplit
+Version           : 2.3.2106.1406
+Caption           : XSplit VCam
+
+IdentifyingNumber : {012C3D17-E621-4146-85C9-099B72C2AD67}
+Name              : Elgato Game Capture HD
+Vendor            : Elgato Systems GmbH
+Version           : 3.70.51.3051
+Caption           : Elgato Game Capture HD
+
+IdentifyingNumber : {E6B8D127-6C17-4E21-BA5C-B1D0C322BBA2}
+Name              : vs_minshellmsi
+Vendor            : Microsoft Corporation
+Version           : 16.10.31320
+Caption           : vs_minshellmsi
+
+IdentifyingNumber : {4938A647-7EA4-4496-A843-5E338B91C07E}
+Name              : Integration Services
+Vendor            : Microsoft Corporation
+Version           : 15.0.2000.168
+Caption           : Integration Services
+
+IdentifyingNumber : {E5629267-C38E-4899-931E-A734A1499223}
+Name              : Microsoft Visual Studio Setup WMI Provider
+Vendor            : Microsoft Corporation
+Version           : 2.7.3111.17308
+Caption           : Microsoft Visual Studio Setup WMI Provider
+
+IdentifyingNumber : {9D93D367-A2CC-4378-BD63-79EF3FE76C78}
+Name              : Microsoft SQL Server 2012 Native Client
+Vendor            : Microsoft Corporation
+Version           : 11.4.7462.6
+Caption           : Microsoft SQL Server 2012 Native Client
+
+IdentifyingNumber : {7C56D977-225C-4EBA-8308-E47DF9FA867F}
+Name              : Python 3.9.6 Tcl/Tk Support (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.9.6150.0
+Caption           : Python 3.9.6 Tcl/Tk Support (64-bit)
+
+IdentifyingNumber : {F5F692A7-CA87-4303-8B5F-F46EF4996C1D}
+Name              : AWS Command Line Interface v2
+Vendor            : Amazon Web Services
+Version           : 2.2.21.0
+Caption           : AWS Command Line Interface v2
+
+IdentifyingNumber : {37B8F9C7-03FB-3253-8781-2517C99D7C00}
+Name              : Microsoft Visual C++ 2012 x64 Additional Runtime - 11.0.61030
+Vendor            : Microsoft Corporation
+Version           : 11.0.61030
+Caption           : Microsoft Visual C++ 2012 x64 Additional Runtime - 11.0.61030
+
+IdentifyingNumber : {A86613F7-3BB1-43BB-8D2D-A3DB2B46FADF}
+Name              : Sourcetree
+Vendor            : Atlassian
+Version           : 3.4.1.0
+Caption           : Sourcetree
+
+IdentifyingNumber : {FDAF3128-1900-4B53-85E5-9C8577A7EDA2}
+Name              : 3Dconnexion Extension for SketchUp
+Vendor            : 3Dconnexion
+Version           : 5.2.0.17889
+Caption           : 3Dconnexion Extension for SketchUp
+
+IdentifyingNumber : {F469B548-030B-41CD-BD46-D37A7EC9A530}
+Name              : Logitech LCD Manager
+Vendor            : Logitech Inc.
+Version           : 3.06.109
+Caption           : Logitech LCD Manager
+
+IdentifyingNumber : {988F14B8-79A8-475D-BAC7-83F96AD3D821}
+Name              : AMD PSP Driver
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 4.13.0.0
+Caption           : AMD PSP Driver
+
+IdentifyingNumber : {9AFE5429-866B-457D-A864-80BCF7672EE8}
+Name              : AURA DRAM Component
+Vendor            : ASUS
+Version           : 1.1.08
+Caption           : AURA DRAM Component
+
+IdentifyingNumber : {B70D1629-89F3-405D-A92D-4E02153CA2D0}
+Name              : SSMS Post Install Tasks
+Vendor            : Microsoft Corporation
+Version           : 15.0.18386.0
+Caption           : SSMS Post Install Tasks
+
+IdentifyingNumber : {A92DAB39-4E2C-4304-9AB6-BC44E68B55E2}
+Name              : ASUS Update Helper
+Vendor            : ASUSTeK Computer Inc.
+Version           : 1.3.107.53
+Caption           : ASUS Update Helper
+
+IdentifyingNumber : {4DD10049-CC97-48AE-BE76-4CB6E3111F7B}
+Name              : Python 3.9.6 Standard Library (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.9.6150.0
+Caption           : Python 3.9.6 Standard Library (64-bit)
+
+IdentifyingNumber : {C4B7FF79-1195-436F-AA85-28EE995151B7}
+Name              : Python 3.9.6 Core Interpreter (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.9.6150.0
+Caption           : Python 3.9.6 Core Interpreter (64-bit)
+
+IdentifyingNumber : {1E0D5689-40F1-4E46-ABBB-EAAC68B5CD89}
+Name              : PuTTY release 0.76 (64-bit)
+Vendor            : Simon Tatham
+Version           : 0.76.0.0
+Caption           : PuTTY release 0.76 (64-bit)
+
+IdentifyingNumber : {49AE2E89-2CC3-46C5-B333-5269BDE2BA2E}
+Name              : SQL Server Management Studio
+Vendor            : Microsoft Corporation
+Version           : 15.0.18386.0
+Caption           : SQL Server Management Studio
+
+IdentifyingNumber : {B31D92D9-2914-46B0-9738-F668A563DE73}
+Name              : AMD I2C Driver
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 1.2.0.105
+Caption           : AMD I2C Driver
+
+IdentifyingNumber : {3CC89AD9-6FF2-40BE-ADF4-8ADDD3030FCE}
+Name              : Python Launcher
+Vendor            : Python Software Foundation
+Version           : 3.9.7483.0
+Caption           : Python Launcher
+
+IdentifyingNumber : {5A69C62A-B2C9-4FDF-87DA-3C4F3B58EFF4}
+Name              : 3Dconnexion Add-In for Solid Edge
+Vendor            : 3Dconnexion
+Version           : 3.6.3
+Caption           : 3Dconnexion Add-In for Solid Edge
+
+IdentifyingNumber : {7D75664A-6C04-424C-82A1-EE88913E5F16}
+Name              : Microsoft Visual C++ 2019 X86 Minimum Runtime - 14.29.30037
+Vendor            : Microsoft Corporation
+Version           : 14.29.30037
+Caption           : Microsoft Visual C++ 2019 X86 Minimum Runtime - 14.29.30037
+
+IdentifyingNumber : {010792BA-551A-3AC0-A7EF-0FAB4156C382}
+Name              : Microsoft Visual C++ 2013 x64 Additional Runtime - 12.0.40664
+Vendor            : Microsoft Corporation
+Version           : 12.0.40664
+Caption           : Microsoft Visual C++ 2013 x64 Additional Runtime - 12.0.40664
+
+IdentifyingNumber : {853997DA-6FCB-4FB9-918E-E0FF881FAF65}
+Name              : Microsoft ODBC Driver 17 for SQL Server
+Vendor            : Microsoft Corporation
+Version           : 17.7.2.1
+Caption           : Microsoft ODBC Driver 17 for SQL Server
+
+IdentifyingNumber : {B9BE443B-4924-4693-9025-88E834906DB7}
+Name              : Synergy (64-bit)
+Vendor            : Symless Ltd
+Version           : 1.14.0
+Caption           : Synergy (64-bit)
+
+IdentifyingNumber : {8C3DD53B-8339-4994-95AD-A7E2BBFF51C7}
+Name              : SQL Server Management Studio
+Vendor            : Microsoft Corporation
+Version           : 15.0.18386.0
+Caption           : SQL Server Management Studio
+
+IdentifyingNumber : {1E2EA04B-FCA7-457E-B6F4-F33E1858E859}
+Name              : AURA lighting effect add-on
+Vendor            : ASUS
+Version           : 0.0.16
+Caption           : AURA lighting effect add-on
+
+IdentifyingNumber : {AAA9F15B-AF45-4562-9991-93A848D3A902}
+Name              : Visual Studio 2017 Isolated Shell for SSMS
+Vendor            : Microsoft Corporation
+Version           : 15.0.28307.421
+Caption           : Visual Studio 2017 Isolated Shell for SSMS
+
+IdentifyingNumber : {14BF4E6B-457E-4687-BE54-A71AC488233B}
+Name              : Oracle VM VirtualBox 6.1.24
+Vendor            : Oracle Corporation
+Version           : 6.1.24
+Caption           : Oracle VM VirtualBox 6.1.24
+
+IdentifyingNumber : {538E598B-CF61-4DE3-8F0B-38E23315D3F7}
+Name              : XSplit Presenter
+Vendor            : XSplit
+Version           : 1.0.2107.1901
+Caption           : XSplit Presenter
+
+IdentifyingNumber : {4F1405AB-36A8-4383-9C1A-AE00491C255F}
+Name              : Microsoft Analysis Services OLE DB Provider
+Vendor            : Microsoft Corporation
+Version           : 15.0.2000.568
+Caption           : Microsoft Analysis Services OLE DB Provider
+
+IdentifyingNumber : {83ABBCBB-3E23-41B5-BBCC-3C84DA11A6D0}
+Name              : 3Dconnexion Plug-In for 3ds Max 2014 - 2022
+Vendor            : 3Dconnexion
+Version           : 7.0.8.18365
+Caption           : 3Dconnexion Plug-In for 3ds Max 2014 - 2022
+
+IdentifyingNumber : {8B6AE4FB-1E51-4BB4-B52C-CAC8A0340310}
+Name              : vs_filehandler_amd64
+Vendor            : Microsoft Corporation
+Version           : 16.10.31206
+Caption           : vs_filehandler_amd64
+
+IdentifyingNumber : {B175520C-86A2-35A7-8619-86DC379688B9}
+Name              : Microsoft Visual C++ 2012 x86 Additional Runtime - 11.0.61030
+Vendor            : Microsoft Corporation
+Version           : 11.0.61030
+Caption           : Microsoft Visual C++ 2012 x86 Additional Runtime - 11.0.61030
+
+IdentifyingNumber : {CF2BEA3C-26EA-32F8-AA9B-331F7E34BA97}
+Name              : Microsoft Visual C++ 2012 x64 Minimum Runtime - 11.0.61030
+Vendor            : Microsoft Corporation
+Version           : 11.0.61030
+Caption           : Microsoft Visual C++ 2012 x64 Minimum Runtime - 11.0.61030
+
+IdentifyingNumber : {E050E98C-5524-4AFB-9E53-97700BEF2C02}
+Name              : ENE RGB HAL
+Vendor            : Ene Tech.
+Version           : 1.1.31.3
+Caption           : ENE RGB HAL
+
+IdentifyingNumber : {237E1CAC-1708-4940-AC34-DF15C079AB70}
+Name              : ASUS AURA Extension Card HAL
+Vendor            : ASUSTeK COMPUTER INC.
+Version           : 1.1.0.6
+Caption           : ASUS AURA Extension Card HAL
+
+IdentifyingNumber : {A61131DC-B92D-4AD8-A925-E2D6D5FE217C}
+Name              : SD Card Formatter
+Vendor            : SD Association
+Version           : 5.0.1
+Caption           : SD Card Formatter
+
+IdentifyingNumber : {69BCB7EC-54AF-47F2-A891-D335CE44A530}
+Name              : Python 3.9.6 pip Bootstrap (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.9.6150.0
+Caption           : Python 3.9.6 pip Bootstrap (64-bit)
+
+IdentifyingNumber : {3B96C1FC-9C8C-4500-899F-3FC4BF43C855}
+Name              : 3Dconnexion Plug-In for NX 8.0 - 1980 Series
+Vendor            : 3Dconnexion
+Version           : 3.4.19.18496
+Caption           : 3Dconnexion Plug-In for NX 8.0 - 1980 Series
+
+IdentifyingNumber : {D401961D-3A20-3AC7-943B-6139D5BD490A}
+Name              : Microsoft Visual C++ 2013 x86 Additional Runtime - 12.0.40664
+Vendor            : Microsoft Corporation
+Version           : 12.0.40664
+Caption           : Microsoft Visual C++ 2013 x86 Additional Runtime - 12.0.40664
+
+IdentifyingNumber : {8B4C0A3D-C135-4E1F-98D8-3926494B4D61}
+Name              : Patriot Viper M2 SSD RGB
+Vendor            : Patriot Memory
+Version           : 1.0.6.3
+Caption           : Patriot Viper M2 SSD RGB
+
+IdentifyingNumber : {AAE0E27D-C88A-49BA-8715-77ADCD4286A3}
+Name              : AMD SBxxx SMBus Driver Alpha
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 5.12.0.38
+Caption           : AMD SBxxx SMBus Driver Alpha
+
+IdentifyingNumber : {AFFB9D8D-6E58-38A0-A7DD-F6F1F4247B36}
+Name              : Microsoft Visual Studio Tools for Applications 2017 x64 Hosting Support
+Vendor            : Microsoft Corporation
+Version           : 15.0.27520
+Caption           : Microsoft Visual Studio Tools for Applications 2017 x64 Hosting Support
+
+IdentifyingNumber : {BD95A8CD-1D9F-35AD-981A-3E7925026EBB}
+Name              : Microsoft Visual C++ 2012 x86 Minimum Runtime - 11.0.61030
+Vendor            : Microsoft Corporation
+Version           : 11.0.61030
+Caption           : Microsoft Visual C++ 2012 x86 Minimum Runtime - 11.0.61030
+
+IdentifyingNumber : {673493FD-5218-4E3E-AF4C-D78C05C2EA4C}
+Name              : Slack (Machine - MSI)
+Vendor            : Slack Technologies Inc.
+Version           : 4.18.0.0
+Caption           : Slack (Machine - MSI)
+
+IdentifyingNumber : {D0512FFD-6194-4D2E-967E-25B82A3322FF}
+Name              : ENE IO Driver
+Vendor            : ENE TECHNOLOGY INC.
+Version           : 3.3.0
+Caption           : ENE IO Driver
+
+IdentifyingNumber : {2994270E-FE74-49E5-98BB-E65F5F0EC304}
+Name              : Python 3.9.6 Documentation (64-bit)
+Vendor            : Python Software Foundation
+Version           : 3.9.6150.0
+Caption           : Python 3.9.6 Documentation (64-bit)
+
+IdentifyingNumber : {B7BCB90E-000F-481D-9316-5BC1DF4A2D49}
+Name              : 3Dconnexion Add-In for Microsoft Office
+Vendor            : 3Dconnexion
+Version           : 1.0.2.16923
+Caption           : 3Dconnexion Add-In for Microsoft Office
+
+IdentifyingNumber : {CE3B5A0E-7E1F-40D7-A23C-1A6B49594811}
+Name              : 3Dconnexion Add-In for SOLIDWORKS
+Vendor            : 3Dconnexion
+Version           : 3.5.11.18523
+Caption           : 3Dconnexion Add-In for SOLIDWORKS
+
+IdentifyingNumber : {1F9C282E-CCB4-4D8E-A5CB-7B74DFCD8C95}
+Name              : Patriot Viper DRAM RGB
+Vendor            : Patriot Memory
+Version           : 1.0.9.1
+Caption           : Patriot Viper DRAM RGB
+
+IdentifyingNumber : {3C9B782E-29B6-4084-AA6F-DF13A7A2F9C2}
+Name              : 3Dconnexion Add-In for Autodesk Inventor
+Vendor            : 3Dconnexion
+Version           : 2.4.0.18187
+Caption           : 3Dconnexion Add-In for Autodesk Inventor
+
+IdentifyingNumber : {9786E83E-B71A-4526-B58F-64F35C7E2CFE}
+Name              : Microsoft Analysis Services OLE DB Provider
+Vendor            : Microsoft Corporation
+Version           : 15.0.2000.568
+Caption           : Microsoft Analysis Services OLE DB Provider
+
+IdentifyingNumber : {36EF257E-21D5-44F7-8451-07923A8C465E}
+Name              : Windows Subsystem for Linux Update
+Vendor            : Microsoft Corporation
+Version           : 5.10.16
+Caption           : Windows Subsystem for Linux Update
+
+IdentifyingNumber : {9594C97E-6A20-38B3-81BB-2778C4780BE1}
+Name              : Microsoft Visual Studio Tools for Applications 2017 x86 Hosting Support
+Vendor            : Microsoft Corporation
+Version           : 15.0.27520
+Caption           : Microsoft Visual Studio Tools for Applications 2017 x86 Hosting Support
+
+IdentifyingNumber : {5205339E-9900-4F07-97CE-E3A7ABA4F8B4}
+Name              : 3Dconnexion 3DxWinCore
+Vendor            : 3Dconnexion
+Version           : 17.7.4.18504
+Caption           : 3Dconnexion 3DxWinCore
+
+IdentifyingNumber : {C2CFEA9E-83E3-4008-86AD-5E688580F5F3}
+Name              : Microsoft Azure CLI
+Vendor            : Microsoft Corporation
+Version           : 2.26.1
+Caption           : Microsoft Azure CLI
+
+IdentifyingNumber : {EA6A87BE-8AD3-40D2-944C-9DF5FBFF4332}
+Name              : ASUS Framework Service
+Vendor            : ASUSTek COMPUTER INC.
+Version           : 2.0.2.6
+Caption           : ASUS Framework Service
+
+IdentifyingNumber : {80EC3CEE-2940-42A1-A776-B5D810D39F1E}
+Name              : AMD PCI Driver
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 1.0.0.80
+Caption           : AMD PCI Driver
+
+IdentifyingNumber : {3FFBCA3F-2971-4B34-A092-8FDB5B81B234}
+Name              : Blackmagic ATEM Switchers
+Vendor            : Blackmagic Design
+Version           : 8.6.2.0
+Caption           : Blackmagic ATEM Switchers
+
+IdentifyingNumber : {965CDF5F-901C-476F-B3A8-7396701B1129}
+Name              : Kingston AURA DRAM Component
+Vendor            : KINGSTON COMPONENTS INC.
+Version           : 1.1.6
+Caption           : Kingston AURA DRAM Component
+
+IdentifyingNumber : {4A03706F-666A-4037-7777-5F2748764D10}
+Name              : Java Auto Updater
+Vendor            : Oracle Corporation
+Version           : 2.8.291.10
+Caption           : Java Auto Updater
+
+IdentifyingNumber : {E9DD399F-21A3-479E-A7DF-D6CF4B2ADBF3}
+Name              : AMD GPIO2 Driver
+Vendor            : Advanced Micro Devices, Inc.
+Version           : 2.2.0.130
+Caption           : AMD GPIO2 Driver
+
+IdentifyingNumber : {BE7A99DF-E9CD-4232-B3FB-184879D4E25C}
+Name              : SQL Server Management Studio for Analysis Services
+Vendor            : Microsoft Corporation
+Version           : 15.0.18386.0
+Caption           : SQL Server Management Studio for Analysis Services
+
+IdentifyingNumber : {EF3944FF-2501-4568-B15C-5701E726719E}
+Name              : ARMOURY CRATE Lite Service
+Vendor            : ASUS
+Version           : 4.1.6
+Caption           : ARMOURY CRATE Lite Service
+
+IdentifyingNumber : {25D619FF-0DE9-421E-9741-018F59A5C262}
+Name              : 3Dconnexion Plug-In for Maya
+Vendor            : 3Dconnexion
+Version           : 6.0.8.18367
+Caption           : 3Dconnexion Plug-In for Maya
