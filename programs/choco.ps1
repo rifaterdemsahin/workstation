@@ -1,4 +1,3 @@
-PS C:\WINDOWS\system32> choco list --localonly
 
 $list = New-Object Collections.Generic.List[String]
 $list.Add("audacity")
@@ -35,40 +34,23 @@ $list.Add("")
 $list.Add("")
 $list.Add("")
 $list.Add("")
+$list.Add("obs-studio")
+$list.Add("notepadplusplus.install")
+$list.Add("nomachine")
+$list.Add("nodejs.install")
+$list.Add("nodejs")
+$list.Add("logitech-options")
+$list.Add("lightshot.install")
+$list.Add("jre8")
+$list.Add("jdk8")
+$list.Add("javaruntime")
+$list.Add("GoogleChrome")
 $list.Add("")
-$list.Add("")
-$list.Add("")
-$list.Add("")
-$list.Add("")
-$list.Add("")
-$list.Add("")
-$list.Add("")
-$list.Add("")
-$list.Add("")
-$list.Add("")
-$list.Add("")
-$list.Add("")
+$list.Add("greenshot")
+
+todo add a loop here
 choco install audacity -y
 
- 2.32.0.2
-GoogleChrome 92.0.4515.107
-greenshot 1.2.10.6
-javaruntime 8.0.231
-jdk8 8.0.211
-jre8 8.0.291
-KB2670838 1.0.20181019
-KB2919355 1.0.20160915
-KB2919442 1.0.20160915
-KB2999226 1.0.20181019
-KB3033929 1.0.5
-KB3035131 1.0.3
-lightshot.install 5.5.0.7
-logitech-options 8.54.161
-nodejs 16.5.0
-nodejs.install 16.5.0
-nomachine 7.6.2.400
-notepadplusplus.install 8.1.2
-obs-studio 27.0.1
 obs-studio.install 27.0.1
 paint.net 4.2.16
 postman 8.7.0
@@ -97,5 +79,6 @@ vlc 3.0.16
 vscode 1.58.2
 vscode.install 1.58.2
 wox 1.3.524.20180714
-72 packages installed.
-PS C:\WINDOWS\system32>
+
+choco list --localonly
+todo verify install count
