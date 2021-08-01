@@ -1,31 +1,56 @@
 PS C:\WINDOWS\system32> choco list --localonly
+
+$list = New-Object Collections.Generic.List[String]
+$list.Add("audacity")
+$list.Add("git.install")
+$list.Add("git")
+$list.Add("Firefox")
+$list.Add("Everything")
+$list.Add("dotnetfx")
+$list.Add("docker-desktop")
+$list.Add("discord")
+$list.Add("curl")
+$list.Add("chocolatey-windowsupdate.extension")
+$list.Add("chocolatey-visualstudio.extension")
+$list.Add("chocolatey-dotnetfx.extension")
+$list.Add("chocolatey-dotnetfx.extension")
+$list.Add("chocolatey-core.extension")
+$list.Add("chocolatey")
+$list.Add("ccleaner")
+$list.Add("beyondcompare")
+$list.Add("azure-cli")
+$list.Add("awscli")
+$list.Add("autohotkey.install")
+$list.Add("autohotkey")
+$list.Add("adobereader")
+$list.Add("7zip.install")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
+$list.Add("")
 choco install audacity -y
-7zip.install 19.0
-adobereader 2021.005.20058
-autohotkey 1.1.33.09
-autohotkey.install 1.1.33.09
-awscli 2.2.21
-azure-cli 2.26.1
-beyondcompare 4.3.7.25118
-ccleaner 5.82.8950
-chocolatey 0.10.15
-chocolatey-core.extension 1.3.5.1
-chocolatey-dotnetfx.extension 1.0.1
-chocolatey-misc-helpers.extension 0.0.4
-chocolatey-visualstudio.extension 1.9.0
-chocolatey-windowsupdate.extension 1.0.4
-curl 7.78.0
-discord 1.0.9002
-docker-desktop 3.5.2
-DotNet4.5.2 4.5.2.20140902
-DotNet4.6.1 4.6.01055.20170308
-dotnet4.7.1 4.7.2558.20190226
-dotnet4.7.2 4.7.2.20180712
-dotnetfx 4.8.0.20190930
-Everything 1.4.11009
-Firefox 90.0.1
-git 2.32.0.2
-git.install 2.32.0.2
+
+ 2.32.0.2
 GoogleChrome 92.0.4515.107
 greenshot 1.2.10.6
 javaruntime 8.0.231
