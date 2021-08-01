@@ -1,7 +1,5 @@
-       0.8+.
-Chocolatey v0.10.15
 PS C:\WINDOWS\system32> choco list --localonly
-Chocolatey v0.10.15
+choco install audacity -y
 7zip.install 19.0
 adobereader 2021.005.20058
 autohotkey 1.1.33.09
