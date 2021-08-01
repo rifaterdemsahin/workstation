@@ -1,11 +1,19 @@
-When w11 is ready wipe
-Reinstall using wget( if ready ) or choco
-Backup system to make sure it is easy to restore
+Updates
+- mention them in here any update with related folder
+
+Operating System
+- When w11 is ready wipe
+- Reinstall using wget( if ready ) or choco
+Backup
+- system to make sure it is easy to restore
+- Usb Drives ready
+
 Shortcuts
   https://twitter.com/rifaterdemsahin/status/1419647893154172935
   
 Drive 
-  https://drive.google.com/drive/u/1/folders/1byqP_N0A-p_Ia7x2dNNf52wa2X5NycYM
+ - https://drive.google.com/drive/u/1/folders/1byqP_N0A-p_Ia7x2dNNf52wa2X5NycYM
+ 
  Youtube Studio
  Youtube Live
   
