@@ -19,6 +19,7 @@ $list = New-Object Collections.Generic.List[String]
 $list.Add("audacity")
 $list.Add("git.install")
 $list.Add("gpu-z")
+$list.Add("msiafterburner")
 $list.Add("git")
 $list.Add("Firefox")
 $list.Add("Everything")
