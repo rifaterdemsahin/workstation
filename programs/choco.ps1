@@ -66,8 +66,10 @@ $list.Add("sql-server-management-studio")
 $list.Add("sourcetree")
 $list.Add("audacity")
 
-todo add a loop here
-choco install  -y
+Foreach ($mypackage in $list)
+{
+choco install $mypackage -y
+}
 
 
 
