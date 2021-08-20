@@ -7,19 +7,15 @@ return
 
 F1:: Run, https://twitter.com/compose/tweet
 return 
-F2:: Run, https://www.reddit.com/message/unread/
+F2:: Run, https://www.notion.so/pexabo/4a9b3cee59fe4ab38230359fee6aa70a?v=64fcbe11b3f54c62bfe1a09f66fc217f
 return 
-F3:: Run, paint3d
+F3:: Run, chrome
 return 
-F4:: Run, https://www.etoro.com/people/rifaterdemsahin/stats
-return 
-F5:: Run, https://www.notion.so/096601df5c1c46ac839acfaac4c88d0a?v=fbbb6ce5cc32407d896a6882a29108ce
-return 
-F6:: Run, https://app.diagrams.net/
+F4:: Run, C:\
 return 
 F7:: Run, C:\Users\erdem\Downloads
-F8:: Run, https://www.google.com/search?q=usdtry&rlz=1C1GCEA_enAE928AE928&oq=usdtry&aqs=chrome..69i57j69i60j69i61j69i65l3.1255j0j4&sourceid=chrome&ie=UTF-8
-F9:: Run, https://web.whatsapp.com/
-F10:: Run, https://www.canva.com/folder/all-designs
-F11:: Run, http://rifaterdemsahin.quickconnect.to/
-F12:: Run, https://www.youtube.com/feed/history
+F8:: Run, https://www.notion.so/pexabo/Search-To-dos-a5fee2a38afc429ebecb205da28ba297
+F9:: Run, https://www.notion.so/pexabo/Kanbans-c66aaa7f87fa4bf3848c573b94e2f667
+F10:: Run, https://www.notion.so/pexabo/To-do-Views-c80ecc0096b94f1a94ab95ade0fc7127
+F11:: Run, https://www.canva.com/folder/all-designs
+F12:: Run, https://analytics.twitter.com/user/rifaterdemsahin/tweets
