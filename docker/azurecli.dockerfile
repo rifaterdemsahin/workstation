@@ -5,3 +5,6 @@ FROM mcr.microsoft.com/azure-cli
 
 UI and the shelkl combo on the local machine action
 https://twitter.com/rifaterdemsahin/status/1439687169380175873
+
+Ref
+https://github.com/RichardChmielek/aspnetcore-runtime-pwsh-az
