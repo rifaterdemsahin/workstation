@@ -1,5 +1,4 @@
-FROM mcr.microsoft.com/powershell
+FROM mcr.microsoft.com/azure-cli
 RUN apt-get update
-RUN apt-get install azure-cli
 
 CMD ["pwsh"]
