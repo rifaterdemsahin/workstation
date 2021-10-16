@@ -52,5 +52,7 @@ updateshortcuts
 shortcuts to start
 
 Update the github repo
+benchmark and compare the compute to the rest of the stack 
+understand the usecase
 
 submut the latest install guide to github
