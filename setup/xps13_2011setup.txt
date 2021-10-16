@@ -47,7 +47,9 @@ choco install zoom
 
 enter vmware licence > get it from last pass
 
-
+start location to favorites
+updateshortcuts
+shortcuts to start
 
 Update the github repo
 
