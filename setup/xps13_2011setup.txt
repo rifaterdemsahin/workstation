@@ -1,0 +1,54 @@
+dell xps setup
+
+- wifi
+- 2 keyboard layouts
+next next next ( aggree to all )
+upgrade to w11
+updates
+powershell task bar
+powershell run as admin
+choco install
+choco install chrome
+remove shortcuts
+goto github https://github.com/rifaterdemsahin/workstation
+download https://github.com/rifaterdemsahin/workstation/blob/master/programs/choco.ps1
+run choco.ps1
+
+manual install if it cant be found
+-driver booster
+	choco install driverbooster
+-system care
+	choco install afedteated
+run systemcare
+	licences enter
+
+Check new sources
+	https://community.chocolatey.org/packages
+	choco install firefox
+use chrome
+	do the login
+	activeta last past
+
+login skye
+manul updates ( when asked )
+
+remove unnecessary
+>>> elgato streamdeck laptop
+
+wsl install
+wsl config
+docker helloworld
+
+choco install vmwareworkstation
+
+pen pair
+
+choco install zoom
+
+enter vmware licence > get it from last pass
+
+
+
+Update the github repo
+
+submut the latest install guide to github
