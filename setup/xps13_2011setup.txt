@@ -58,5 +58,7 @@ Grammarly login
 https://twitter.com/rifaterdemsahin/status/1449628070365863936
 
 understand the usecase
+auto run system care
+vendor drivers update
 
 submut the latest install guide to github
