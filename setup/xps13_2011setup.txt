@@ -60,5 +60,6 @@ https://twitter.com/rifaterdemsahin/status/1449628070365863936
 understand the usecase
 auto run system care
 vendor drivers update
+stream labs to min settings with the files 
 
 submut the latest install guide to github
