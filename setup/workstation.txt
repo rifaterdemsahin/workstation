@@ -1,0 +1,3 @@
+drıve booster update .restart
+wsl.exe --set-default-version 2
+choco install docker-desktop
