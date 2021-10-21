@@ -11,5 +11,5 @@ Cleanup
 Remove-Item 'C:\Users\erdem\AppData\local\Docker' -Recurse
 Remove-Item 'C:\Users\erdem\AppData\Roaming\Docker Desktop' -Recurse
 Remove-Item 'C:\Users\erdem\AppData\Roaming\Docker' -Recurse
-
 https://forums.docker.com/t/docker-failed-to-initialize-operation-timed-out/111321/2
+Licence agreed now it works!!!
