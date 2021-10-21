@@ -1,0 +1,1 @@
+choco uninstall docker-desktop
