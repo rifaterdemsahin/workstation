@@ -1,0 +1,329 @@
+FROM ubuntu:18.04 as buildagent
+RUN echo "Azure DevOps Agent Setup Started"
+ENV DEBIAN_FRONTEND=noninteractive
+RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    wget \
+    curl \
+    bash \
+    unzip \
+    jq \
+    git \
+    iputils-ping \
+    libcurl4 \
+    libicu60 \
+    libunwind8 \
+    netcat \
+    libssl1.0 \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN curl -LsS https://aka.ms/InstallAzureCLIDeb | bash \
+  && rm -rf /var/lib/apt/lists/*
+
+ARG TARGETARCH=amd64
+ARG AGENT_VERSION=2.185.1
+
+WORKDIR /azp
+RUN if [ "$TARGETARCH" = "amd64" ]; then \
+      AZP_AGENTPACKAGE_URL=https://vstsagentpackage.azureedge.net/agent/${AGENT_VERSION}/vsts-agent-linux-x64-${AGENT_VERSION}.tar.gz; \
+    else \
+      AZP_AGENTPACKAGE_URL=https://vstsagentpackage.azureedge.net/agent/${AGENT_VERSION}/vsts-agent-linux-${TARGETARCH}-${AGENT_VERSION}.tar.gz; \
+    fi; \
+    curl -LsS "$AZP_AGENTPACKAGE_URL" | tar -xz
+
+RUN echo "Azure DevOps Agent Setup Complete"
+
+RUN echo "Multistage Dockerfile Stage Linux Base start" 
+FROM ubuntu:18.04 as workloadmain
+COPY --from=buildagent / /
+RUN echo "Multistage Dockerfile Stage Linux Base end" 
+
+RUN echo "Workload Setup Started" 
+
+RUN echo "python3.7 installation started" 
+RUN apt update
+RUN apt install software-properties-common
+RUN add-apt-repository ppa:deadsnakes/ppa -y
+RUN echo "python3.7 installation ended" 
+
+RUN echo "PowershellCore installation started check..." 
+RUN apt-get update
+RUN apt-get install -y wget apt-transport-https software-properties-common
+RUN wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
+RUN dpkg -i packages-microsoft-prod.deb
+RUN apt-get update
+RUN apt-get install -y powershell
+RUN echo "PowershellCore installation ended" 
+
+
+RUN echo "Curl installation started" 
+RUN apt update
+RUN apt install -y curl
+RUN echo "Curl installation ended" 
+
+RUN echo "docker-compose installation started"
+RUN apt update
+RUN curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+RUN chmod +x /usr/local/bin/docker-compose
+RUN docker-compose --version
+RUN echo "docker-compose installation ended" 
+
+RUN echo "wget installation started"
+RUN apt update
+RUN apt install -y wget
+RUN echo "wget installation ended" 
+
+RUN echo "apt-transport-https  installation started" 
+RUN apt update
+RUN apt install -y apt-transport-https  
+RUN echo "apt-transport-https  installation ended" 
+
+RUN echo "software-properties-common installation started" 
+RUN apt update
+RUN apt install -y software-properties-common
+RUN echo "software-properties-common installation ended" 
+
+RUN echo "moby-engine   installation started" 
+RUN apt update
+RUN apt install -y moby-engine  
+RUN echo "moby-engine   installation ended" 
+
+RUN echo " libglu1-mesa installation started" 
+RUN apt update
+RUN apt install -y libglu1-mesa   
+RUN echo " libglu1-mesa installation ended" 
+
+RUN echo "python3 installation started" 
+RUN apt update
+RUN apt install -y python3
+RUN echo "python3 installation ended" 
+
+RUN echo "pip installation started" 
+RUN apt-get update
+RUN apt-get upgrade
+RUN apt-get install python-pip -y
+RUN apt install python3-pip
+RUN pip -V
+RUN pip3 -V
+RUN echo " installation ended" 
+
+RUN echo "seyon installation started" 
+RUN echo 'Telecomunications package'
+RUN apt update
+RUN apt install -y seyon
+RUN echo "seyon installation ended" 
+
+RUN echo "libqt5opengl5 installation started" 
+RUN apt update
+RUN echo 'OpenGL is a standard API for rendering 3D graphiucs'
+RUN apt install -y libqt5opengl5 
+RUN echo "libqt5opengl5 installation ended" 
+
+RUN echo " installation started" 
+RUN echo 'OpenGL Utility Toolkit development files GLUT is a window system independent toolkit for writing OpenGL programs.'
+RUN apt-get update -y
+RUN apt-get install -y freeglut3-dev
+RUN echo " installation ended" 
+
+RUN echo "libxi-dev installation started....check" 
+RUN echo 'libXi provides an X Window System client interface to the XINPUT extension to the X protocol.'
+RUN apt-get update -y
+RUN apt-get install -y libxi-dev
+RUN echo " installation ended" 
+
+RUN echo "libxmu-dev installation started...check" 
+RUN echo 'libXi provides an X Window System client interface to the XINPUT extension to the X protocol.'
+RUN apt-get update -y
+RUN apt-get install -y libxmu-dev
+RUN echo "libxmu-dev installation ended" 
+
+RUN echo "build-essential installation started" 
+RUN echo 'lThe default Ubuntu repositories contain a meta-package named “build-essential” that includes the GNU compiler collection, GNU debugger, and other development libraries and tools required for compiling software.'
+RUN apt-get update -y
+RUN apt install build-essential
+RUN echo "build-essential installation ended" 
+
+RUN echo " python-dev   installation started" 
+RUN echo 'lpython code development tools'
+RUN apt-get update -y
+RUN apt install python-dev -y
+RUN echo " python-dev   installation ended" 
+
+RUN echo "pip tools installation started" 
+RUN echo 'Installing with pip tools'
+RUN pip install -U setuptools
+RUN echo "pip tools installation ended" 
+
+RUN echo "libboost-python-dev installation started" 
+RUN echo 'Installing with python libboost-python-dev'
+RUN apt install libboost-python-dev -y
+RUN echo "libboost-python-dev installation ended" 
+
+RUN echo "Multistage Dockerfile Stage Gpu Workload start" 
+FROM ubuntu:18.04 as workloadgpu
+COPY --from=workloadmain / /
+RUN echo "Multistage Dockerfile Stage Gpu Workload end" 
+
+RUN echo "GPU Workload installation started" 
+
+#Avoid keyboard selection issue
+RUN DEBIAN_FRONTEND=noninteractive apt-get install keyboard-configuration
+RUN echo "nvidia-driver-460 installation started" 
+RUN apt update
+RUN apt install -y nvidia-driver-460 
+RUN echo "nvidia-driver-460  installation ended" 
+
+RUN echo "libboost-thread-devnvidia-container-runtime  installation started" 
+# RUN curl https://get.docker.com | sh \
+#   && sudo systemctl --now enable docker
+RUN distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
+   && curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - \
+   && curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+RUN curl -s -L https://nvidia.github.io/nvidia-container-runtime/experimental/$distribution/nvidia-container-runtime.list | sudo tee /etc/apt/sources.list.d/nvidia-container-runtime.list
+# RUN apt-get install -y nvidia-docker2
+# RUN systemctl restart docker
+RUN echo "libboost-thread-devnvidia-container-runtime  installation ended" 
+
+RUN echo "Tk interface” installation started" 
+RUN echo '(“Tk interface”) is the standard Python interface to the Tcl/Tk GUI toolkit.'
+RUN add-apt-repository ppa:deadsnakes/ppa
+RUN echo 'python3.6-tk resolve timezone issue'
+ENV TZ=Europe/Minsk
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN apt install -y python3.6-tk
+RUN echo "Tk interface” installation ended" 
+
+# RUN echo "snap  installation started" 
+# RUN apt-get update -y
+# RUN apt install snapd -y
+# RUN snap version
+# RUN systemctl enable --now snapd.socket
+# RUN systemctl restart snapd snapd.socket
+# RUN snap refresh snapd
+# RUN echo "snap  installation ended" 
+
+# RUN echo "dotnet-sdk  installation started" 
+# RUN echo "reference https://docs.microsoft.com/en-us/dotnet/core/install/linux-snap" 
+# RUN snap install dotnet-runtime-60 --classic
+# RUN sudo snap alias dotnet-runtime-60.dotnet dotnet
+# RUN echo "dotnet-sdk  installation ended" 
+
+RUN echo "dot net manual install started" 
+RUN wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+RUN dpkg -i packages-microsoft-prod.deb
+RUN rm packages-microsoft-prod.deb
+RUN apt-get update
+RUN apt-get install -y apt-transport-https 
+RUN apt-get update
+RUN apt-get install -y dotnet-sdk-6.0
+RUN echo "dot net manual install ended" 
+
+
+RUN echo "pyCuda installation started...check" 
+RUN apt-get install libboost-all-dev
+RUN apt-get install python-numpy -y
+RUN apt-get install build-essential python-dev python-setuptools libboost-python-dev libboost-thread-dev -y
+RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-repo-ubuntu1804_10.0.130-1_amd64.deb
+RUN dpkg -i cuda-repo-ubuntu1804_10.0.130-1_amd64.deb
+RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+RUN apt-get update
+RUN wget http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64/nvidia-machine-learning-repo-ubuntu1804_1.0.0-1_amd64.deb
+RUN apt install ./nvidia-machine-learning-repo-ubuntu1804_1.0.0-1_amd64.deb
+# RUN apt-get install --no-install-recommends nvidia-driver-418 
+RUN apt-get install build-essential binutils gdb
+RUN apt-get install freeglut3 freeglut3-dev libxi-dev libxmu-dev -y
+RUN apt install nvidia-cuda-toolkit
+RUN apt-get install build-essential python-dev python-setuptools libboost-python-dev libboost-thread-dev -y
+
+RUN echo "pyCuda installation ended" 
+
+
+RUN echo "Pip installation started" 
+RUN echo "Pip library for Cuda GPU processing" 
+RUN pip install -Iv pycuda
+# RUN pip install -Iv pycuda==2021.1
+# PyCUDA lets you access Nvidia’s CUDA parallel computation API from Python. Several wrappers of the CUDA API already exist-so what’s so special about PyCUDA?
+# RUN echo "todo go all over the libraries" 
+# RUN echo "todo remove the repeating libraries" 
+# Ensure pip, setuptools, and wheel are up to date
+RUN python3 -m pip install --upgrade pip setuptools wheel 
+# RUN pip install -Iv numpy-quaternionpython3
+RUN pip install -Iv keyring
+# RUN pip install -Iv artifacts-keyringpython3
+RUN pip install -Iv imageio==2.8.0
+RUN pip install -Iv numpy==1.18.1
+# RUN pip install -Iv open3d>=0.11.0.0,<0.12.0.0
+RUN pip install -Iv open3d
+RUN pip install -Iv scikit-image==0.17.2
+RUN pip install -Iv scipy==1.4.1
+RUN pip install -Iv tqdm==4.46.0
+# RUN pip install -Iv qck-utils>=1.1.0,<1.2.0
+# RUN pip install -Iv qck-azure>=1.0.0,<1.1.0
+RUN pip install -Iv trimesh==3.9.1
+RUN pip install -Iv typeguard==2.10.0
+RUN pip install -Iv astroid==2.4.2
+RUN pip install -Iv atomicwrites==1.4.0
+RUN pip install -Iv attrs==20.2.0
+RUN pip install -Iv colorama==0.4.3
+RUN pip install -Iv colorlog==4.1.0
+RUN pip install -Iv cycler==0.10.0
+RUN pip install -Iv doxypypy==0.8.8.6
+RUN pip install -Iv enum34==1.1.10
+RUN pip install -Iv importlib-metadata==2.0.0
+RUN pip install -Iv isort==5.5.4
+RUN pip install -Iv lazy-object-proxy==1.4.3
+RUN pip install -Iv matplotlib==2.1.1
+RUN pip install -Iv mccabe==0.6.1
+RUN pip install -Iv more-itertools==8.5.0
+RUN pip install -Iv Nuitka==0.6.5
+RUN pip install -Iv numpy==1.16.4
+RUN pip install -Iv cmake
+# cmake needed for openmesh
+RUN pip install -Iv openmesh==1.1.2
+RUN pip install -Iv packaging==20.4
+RUN pip install -Iv pandas==0.25.3
+RUN pip install -Iv Pillow==6.2.1
+RUN pip install -Iv pluggy==0.13.1
+RUN pip install -Iv plyfile==0.7.1
+RUN pip install -Iv py==1.9.0
+RUN pip install -Iv PyGLM==0.4.5b1
+# Fix the unicode error for pyglut start
+RUN apt-get update -y
+RUN apt-get install --reinstall -y locales
+# uncomment chosen locale to enable it's generation
+RUN sed -i 's/# pl_PL.UTF-8 UTF-8/pl_PL.UTF-8 UTF-8/' /etc/locale.gen
+# generate chosen locale
+RUN locale-gen pl_PL.UTF-8
+# set system-wide locale settings 
+ENV LANG pl_PL.UTF-8
+ENV LANGUAGE pl_PL
+ENV LC_ALL pl_PL.UTF-8
+# Fix the unicode error end
+
+RUN pip install -Iv pyglut==1.0.0
+RUN pip install -Iv pylint==2.6.0
+RUN pip install -Iv pylint-runner==0.6.0
+RUN pip install -Iv PyOpenGL==3.1.0
+RUN pip install -Iv pyparsing==2.4.7
+RUN pip install -Iv pytest==5.0.1
+RUN pip install -Iv python-dateutil==2.8.1
+RUN pip install -Iv pytz==2020.1
+RUN pip install -Iv pyueye==4.90.0.0
+RUN pip install -Iv six==1.15.0
+RUN pip install -Iv toml==0.10.1
+RUN pip install -Iv transforms3d==0.3.1
+RUN pip install -Iv typed-ast==1.4.1
+RUN pip install -Iv vtk==8.1.2
+RUN pip install -Iv wcwidth==0.2.5
+RUN pip install -Iv wrapt==1.12.1
+RUN pip install -Iv zipp==3.3.0
+RUN echo " Pip installation ended" 
+
+RUN echo "Workload Setup Complete" 
+
+COPY ./start.sh .
+RUN chmod +x start.sh
+
+ENTRYPOINT [ "./start.sh" ]
