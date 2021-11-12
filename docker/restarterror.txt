@@ -1,0 +1,27 @@
+Docker.Core.BackendAPI.ServiceNotRunningException:
+Unable to start Docker Desktops service: 2
+   at Docker.Core.BackendAPI.BackendAPIPipeResolver.<ResolvePipeAsync>d__5.MoveNext() in C:\workspaces\master-merge\src\github.com\docker\pinata\win\src\Docker.Core\BackendAPI\BackendAPIPipeResolver.cs:line 78
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Docker.Core.BackendAPI.ServiceAPIClient.<CreateSystemHttpClientAsync>d__3.MoveNext() in C:\workspaces\master-merge\src\github.com\docker\pinata\win\src\Docker.Core\BackendAPI\ServiceAPIClient.cs:line 24
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Docker.Core.BackendAPI.ServiceAPIClient.<DestroyHyperVVMAsync>d__14.MoveNext() in C:\workspaces\master-merge\src\github.com\docker\pinata\win\src\Docker.Core\BackendAPI\ServiceAPIClient.cs:line 125
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Docker.Engines.LinuxHyperVEngine.<DoDestroyAsync>d__20.MoveNext() in C:\workspaces\master-merge\src\github.com\docker\pinata\win\src\Docker.Engines\LinuxHyperVEngine.cs:line 158
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Docker.ApiServices.StateMachines.DestroyTransition.<DoRunAsync>d__6.MoveNext() in C:\workspaces\master-merge\src\github.com\docker\pinata\win\src\Docker.ApiServices\StateMachines\DestroyTransition.cs:line 36
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Docker.ApiServices.StateMachines.EngineStateMachine.<DestroyAsync>d__16.MoveNext() in C:\workspaces\master-merge\src\github.com\docker\pinata\win\src\Docker.ApiServices\StateMachines\EngineStateMachine.cs:line 90
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Docker.Engines.Engines.<ResetToDefaultAsync>d__23.MoveNext() in C:\workspaces\master-merge\src\github.com\docker\pinata\win\src\Docker.Engines\Engines.cs:line 155
