@@ -1,0 +1,480 @@
+PS C:\Users\erdem> foreach($obj in $InstalledSoftware){write-host $obj.GetValue('DisplayName') -NoNewline; write-host " - " -NoNewline; write-host $obj.GetValue('DisplayVersion')} >> c:\installedprograms.txt
+Streamlabs OBS 1.6.0 - 1.6.0
+Imaginary Teleprompter 2.4.0 - 2.4.0
+7-Zip 19.00 (x64) - 19.00
+Audacity 3.1.1 (64-bit) - 3.1.1
+AutoHotkey 1.1.33.10 - 1.1.33.10
+Beyond Compare 4.4.0 - 4.4.0.25886
+CCleaner - 5.86
+ -
+Docker Desktop - 4.2.0
+Everything 1.4.1.1009 (x64) - 1.4.1.1009
+XMind 11.1.2 - 11.1.2
+Focusrite Usb 4.65.5.658 - 4.65.5.658
+Git - 2.33.1
+HWiNFO64 Version 7.06 - 7.06
+Logi Bolt - 1.01.415.0
+Logitech Options - 9.40.86
+Maxon Cinema 4D 22 - S22
+Microsoft Azure Compute Emulator - v2.9.7 - 2.9.8999.43
+Mozilla Firefox (x64 en-US) - 94.0.1
+Mozilla Maintenance Service - 93.0
+Notepad++ (64-bit x64) - 8.1.9
+Microsoft 365 Apps for enterprise - en-us - 16.0.14430.20342
+Microsoft OneDrive - 21.225.1031.0005
+PerformanceTest v10.1 - 10.1.1002.0
+Intel(R) Network Connections 26.2.0.1 - 26.2.0.1
+Command & Conquer™ Remastered Collection -
+The Sims™ 4 -
+Unravel -
+Rocket Arena -
+Need for Speed™ Hot Pursuit Remastered -
+World of Tanks Blitz -
+Sid Meier's Civilization V -
+Vim 8.2 (x64) - 8.2.3582
+VLC media player - 3.0.16
+Wacom Tablet - 6.3.44-1
+ -
+WinRAR 6.02 (64-bit) - 6.02.0
+XSplit Presenter - 1.0.2107.1901
+XSplit VCam - 2.3.2110.1404
+Microsoft Visual C++ 2013 x64 Additional Runtime - 12.0.40664 - 12.0.40664
+Elgato Game Capture HD - 3.70.51.3051
+SQL Server Management Studio for Reporting Services - 15.0.18390.0
+Microsoft Azure Compute Emulator - v2.9.7 - 2.9.8999.43
+Python 3.9.7 Standard Library (64-bit) - 3.9.7150.0
+Microsoft .NET AppHost Pack - 6.0.0 Rc 2 (x64_x86) - 48.3.29733
+IIS Express Application Compatibility Database for x64 -
+Microsoft .NET Core AppHost Pack - 3.1.20 (x64_arm) - 24.80.30521
+WD_BLACK AN1500 - 1.0.13.0
+RODE Central - 1.2.3
+Microsoft .NET Toolset 6.0.100-rc.2.21505.57 (x64) - 24.3.53949
+Microsoft ASP.NET Core 3.1.20 Shared Framework (x64) - 3.1.20.21472
+Microsoft .NET Host - 5.0.11 (x64) - 40.44.30523
+Microsoft .NET Core AppHost Pack - 3.1.20 (x64_x86) - 24.80.30521
+Microsoft Visual C++ 2010  x64 Redistributable - 10.0.40219 - 10.0.40219
+Python 3.10.0 Add to Path (64-bit) - 3.10.150.0
+PuTTY release 0.76 (64-bit) - 0.76.0.0
+DiagnosticsHub_CollectionService - 16.1.28901
+Patriot Viper DRAM RGB - 1.0.9.2
+Slack (Machine - MSI) - 4.22.0.0
+Slack (Machine) - 4.22.0
+ASUS AURA Extension Card HAL - 1.1.0.11
+Python 3.10.0 Documentation (64-bit) - 3.10.150.0
+3Dconnexion Plug-In for Maya - 6.0.8.18367
+vs_communityx64msi - 17.0.31808
+Java 8 Update 311 (64-bit) - 8.0.3110.11
+icecap_collection_x64 - 16.10.31306
+Microsoft .NET Host FX Resolver - 5.0.12 (x64) - 40.48.30622
+3Dconnexion 3DxSoftware - 10.7.4.3350
+Microsoft ASP.NET Core 6.0.0 RC 2 Build rc.2.21480.10 Shared Framework (x64) - 6.0.0.21480
+3Dconnexion Add-In for AutoCAD - 5.7.1.17918
+Microsoft .NET Host FX Resolver - 5.0.11 (x64) - 40.44.30523
+Microsoft .NET AppHost Pack - 6.0.0 Rc 2 (x64) - 48.3.29733
+Microsoft .NET Core Targeting Pack - 3.1.0 (x64) - 24.64.28315
+Microsoft .NET Host - 6.0.0 Rc 2 (x64) - 48.3.29733
+Microsoft .NET Targeting Pack - 5.0.0 (x64) - 40.0.29419
+Microsoft SQL Server 2019 LocalDB  - 15.0.4153.1
+ENE_EHD_M2_HAL - 1.0.9.1
+Microsoft Visual C++ 2012 x64 Additional Runtime - 11.0.61030 - 11.0.61030
+Microsoft.NET.Workload.Emscripten.Manifest - 24.1.47401
+3Dconnexion Plug-In for NX 8.0 - 1980 Series - 3.4.19.18496
+Microsoft Azure PowerShell - April 2018 - 5.7.0.18831
+Microsoft Windows Desktop Runtime - 5.0.12 (x64) - 40.48.30623
+3Dconnexion Add-In for Autodesk Inventor - 2.4.0.18187
+Windows Subsystem for Linux WSLg Preview - 1.0.27
+Microsoft ASP.NET Core 5.0.11 Shared Framework (x64) - 5.0.11.21476
+VMware Workstation - 16.2.0
+SQL Server Management Studio - 15.0.18390.0
+XSplit Broadcaster - 4.2.2109.2903
+Blackmagic ATEM Switchers - 8.6.2.0
+Microsoft .NET AppHost Pack - 5.0.11 (x64_arm64) - 40.44.30523
+Python 3.9.7 Utility Scripts (64-bit) - 3.9.7150.0
+Microsoft Command Line Utilities 15 for SQL Server - 15.0.1300.359
+Microsoft Windows Desktop Targeting Pack - 6.0.0 Rc 2 (x64) - 48.3.30870
+VS JIT Debugger - 17.0.114.0
+Elgato Stream Deck - 5.1.2.14743
+GoPro Webcam - 1.2.0.738
+IIS 10.0 Express - 10.0.05927
+SSMS Post Install Tasks - 15.0.18390.0
+Microsoft .NET Core Runtime - 3.1.20 (x64) - 24.80.30521
+3Dconnexion 3DxWinCore - 17.7.4.18504
+Microsoft SQL Server Data-Tier Application Framework (x64) - 15.0.5282.3
+3Dconnexion Viewer - 1.0.0.40
+XSplit Presenter - 1.0.2107.1901
+Microsoft Visual C++ 2013 x64 Minimum Runtime - 12.0.40664 - 12.0.40664
+Python 3.10.0 Utility Scripts (64-bit) - 3.10.150.0
+3Dconnexion Add-In for Solid Edge - 3.6.3
+XSplit VCam - 2.3.2110.1404
+paint.net - 4.3.2
+Microsoft System CLR Types for SQL Server 2019 - 15.0.2000.5
+Microsoft Visual C++ 2008 Redistributable - x64 9.0.30729.6161 - 9.0.30729.6161
+Microsoft .NET AppHost Pack - 6.0.0 Rc 2 (x64_arm) - 48.3.29733
+Java SE Development Kit 8 Update 211 (64-bit) - 8.0.2110.12
+Azure Data Studio - 1.32.0
+Microsoft Visual C++ 2022 X64 Minimum Runtime - 14.30.30704 - 14.30.30704
+Microsoft .NET AppHost Pack - 5.0.11 (x64) - 40.44.30523
+Python 3.9.7 Test Suite (64-bit) - 3.9.7150.0
+Camera Hub - 1.1.0.268
+3Dconnexion Plug-In for Creo 2.0 - 8.0 - 2.4.4.18413
+Python 3.10.0 Test Suite (64-bit) - 3.10.150.0
+Google Drive - 52.0.6.0
+Active Directory Authentication Library for SQL Server - 15.0.1300.359
+Google Chrome - 95.0.4638.69
+Microsoft Visual C++ 2022 X64 Additional Runtime - 14.30.30704 - 14.30.30704
+Bonjour - 3.0.0.10
+Python 3.9.7 Tcl/Tk Support (64-bit) - 3.9.7150.0
+Microsoft Visual Studio Installer - 3.0.4491.49903
+Microsoft ASP.NET Core 6.0.0 RC 2 Build rc.2.21480.10 Targeting Pack (x64) - 6.0.0.21480
+Snagit 2021 - 21.4.4
+ASUS AURA VGA Component - 0.0.4.3
+Microsoft .NET Toolset 5.0.402 (x64) - 20.3.50998
+icecap_collection_x64 - 17.0.31808
+Oracle VM VirtualBox 6.1.28 - 6.1.28
+Microsoft .NET Core 3.1 Templates 5.0.402 (x64) - 12.23.50998
+Microsoft Windows Desktop Targeting Pack - 3.1.0 (x64) - 24.64.28315
+Microsoft ASP.NET Core 5.0.0 Targeting Pack (x64) - 5.0.0.20526
+Microsoft .NET AppHost Pack - 6.0.0 Rc 2 (x64_arm64) - 48.3.29733
+Universal Holtek RGB DRAM - 1.0.0.2
+Python 3.9.7 Add to Path (64-bit) - 3.9.7150.0
+3Dconnexion Plug-In for 3ds Max 2014 - 2022 - 7.0.8.18365
+Microsoft .NET Runtime - 5.0.12 (x64) - 40.48.30622
+Microsoft ODBC Driver 17 for SQL Server - 17.7.2.1
+Python 3.9.7 Executables (64-bit) - 3.9.7150.0
+Microsoft.NET.Sdk.Android.Manifest-6.0.100 - 124.25.16400
+Python 3.9.7 Core Interpreter (64-bit) - 3.9.7150.0
+Microsoft Silverlight - 5.1.50918.0
+Patriot Viper M2 SSD RGB - 1.0.6.4
+Windows Subsystem for Linux Update - 5.10.60.1
+Office 16 Click-to-Run Licensing Component - 16.0.14430.20342
+Office 16 Click-to-Run Extensibility Component - 16.0.14430.20342
+Microsoft Azure Authoring Tools - v2.9.7 - 2.9.8999.45
+Microsoft.NET.Sdk.tvOS.Manifest-6.0.100 - 60.25.16415
+Microsoft SQL Server 2016 LocalDB  - 13.1.4001.0
+Camtasia 2021 - 21.0.8.32516
+Imaging Edge Desktop (Remote/Viewer/Edit) - 3.2.00.05271
+Kingston AURA DRAM Component - 1.1.8
+PHISON HAL - 1.0.9.0
+Python 3.9.7 Development Libraries (64-bit) - 3.9.7150.0
+Microsoft Analysis Services OLE DB Provider - 15.0.2000.568
+AURA DRAM Component - 1.1.14
+Microsoft SQL Server 2017 LocalDB  - 14.0.3391.2
+Microsoft OLE DB Driver for SQL Server - 18.5.0.0
+Microsoft SQL Server 2012 Native Client  - 11.4.7462.6
+Microsoft .NET Runtime - 5.0.11 (x64) - 40.44.30523
+VS Script Debugging Common - 17.0.114.0
+SQL Server Management Studio for Analysis Services - 15.0.18390.0
+SQL Server Management Studio - 15.0.18390.0
+Microsoft.NET.Sdk.Maui.Manifest-6.0.100 - 24.25.18227
+Microsoft .NET Runtime - 6.0.0 Rc 2 (x64) - 48.3.29733
+Microsoft.NET.Sdk.iOS.Manifest-6.0.100 - 60.25.16415
+Microsoft .NET SDK 5.0.402 (x64) from Visual Studio - 5.4.221.47606
+Microsoft .NET Standard Targeting Pack - 2.1.0 (x64) - 24.0.28113
+Sourcetree - 3.4.1.0
+Python 3.10.0 Development Libraries (64-bit) - 3.10.150.0
+Python 3.9.7 Documentation (64-bit) - 3.9.7150.0
+Elgato Wave Link - 1.3.0.2536
+Intel(R) Network Connections 26.2.0.1 - 26.2.0.1
+IIS Express Application Compatibility Database for x86 -
+Python 3.10.0 Tcl/Tk Support (64-bit) - 3.10.150.0
+Microsoft Visual Studio Tools for Applications 2017 x64 Hosting Support - 15.0.27520
+Python 3.10.0 Core Interpreter (64-bit) - 3.10.150.0
+Microsoft .NET Host - 5.0.12 (x64) - 40.48.30622
+Microsoft .NET SDK 6.0.100-rc.2.21505.57 (x64) from Visual Studio - 6.1.21.50557
+Microsoft Windows Desktop Runtime - 3.1.20 (x64) - 24.80.30521
+Microsoft Windows Desktop Targeting Pack - 5.0.0 (x64) - 40.0.29420
+3Dconnexion Add-In for Microsoft Office - 1.0.2.16923
+Microsoft .NET Core AppHost Pack - 3.1.20 (x64) - 24.80.30521
+Synergy (64-bit) - 1.14.0
+Microsoft .NET AppHost Pack - 5.0.11 (x64_arm) - 40.44.30523
+Python 3.10.0 Standard Library (64-bit) - 3.10.150.0
+Microsoft .NET 6.0 Templates 6.0.100-rc.2.21505.57 (x64) - 24.3.53949
+Microsoft.NET.Workload.Mono.Toolchain.Manifest - 24.5.64389
+Microsoft Windows Desktop Runtime - 6.0.0 Rc 2 (x64) - 48.3.30870
+Microsoft .NET Core AppHost Pack - 3.1.20 (x64_arm64) - 24.80.30521
+AURA lighting effect add-on x64 - 0.0.18
+Microsoft Azure Libraries for .NET – v2.9 - 3.0.0127.060
+Elgato Control Center - 1.1.4.792
+3Dconnexion Add-In for SOLIDWORKS - 3.5.11.18523
+Microsoft Visual C++ 2012 x64 Minimum Runtime - 11.0.61030 - 11.0.61030
+ASUS Aura SDK - 3.04.07
+ASUS DisplayWidget - 3.4.0.041
+Imaging Edge Webcam - 1.1.00.10051
+Python 3.10.0 pip Bootstrap (64-bit) - 3.10.150.0
+Python 3.10.0 Executables (64-bit) - 3.10.150.0
+Microsoft Web Deploy 4.0 - 10.0.5402
+4K Capture Utility - 1.7.4.4808
+vs_devenx64vmsi - 17.0.31804
+3Dconnexion Plugin for Unreal Editor - 1.1.0.32
+ENE RGB HAL - 1.1.37.0
+Camtasia 2019 - 19.0.7.5034
+Microsoft Update Health Tools - 2.81.0.0
+Microsoft .NET Targeting Pack - 6.0.0 Rc 2 (x64) - 48.3.29733
+Imaging Edge Desktop - 1.1.00.05260
+Script-Q 6.1.0 -
+vs_minshellinteropx64msi - 17.0.31804
+Microsoft .NET Host FX Resolver - 6.0.0 Rc 2 (x64) - 48.3.29733
+3Dconnexion LCD Applets for SpacePilot Pro - 1.5.1
+Microsoft Visual Studio Code - 1.62.2
+Microsoft.NET.Sdk.MacCatalyst.Manifest-6.0.100 - 60.25.16415
+Microsoft Windows Desktop Runtime - 5.0.11 (x64) - 40.44.30524
+Microsoft .NET AppHost Pack - 5.0.11 (x64_x86) - 40.44.30523
+ARMOURY CRATE Lite Service - 4.2.12
+DisplayLink Graphics - 10.0.82.0
+3Dconnexion Plug-In for Photoshop - 2.9.5.18069
+vs_minshellx64msi - 17.0.31808
+Python 3.9.7 pip Bootstrap (64-bit) - 3.9.7150.0
+PowerToys (Preview) - 0.46.0
+Microsoft .NET Core 5.0 Templates 5.0.402 (x64) - 20.3.50998
+Logitech LCD Manager - 3.06.109
+Microsoft ASP.NET Core Module V2 for IIS Express - 16.0.21269.0
+IntelliTraceProfilerProxy - 15.0.21225.01
+Microsoft ASP.NET Core Module for IIS Express - 12.2.18292.0
+AWS Command Line Interface v2 - 2.3.6.0
+3Dconnexion Extension for SketchUp - 5.2.0.17889
+Microsoft ASP.NET Core 3.1.10 Targeting Pack (x64) - 3.1.10.20520
+Microsoft.NET.Sdk.macOS.Manifest-6.0.100 - 48.25.16415
+>> : The term '>>' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the
+spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:162
++ ...  " -NoNewline; write-host $obj.GetValue('DisplayVersion')} >> c:\inst ...
++                                                                ~~
+    + CategoryInfo          : ObjectNotFound: (>>:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\erdem> foreach($obj in $InstalledSoftware){write-host $obj.GetValue('DisplayName') -NoNewline; write-host " - " -NoNewline; write-host $obj.GetValue('DisplayVersion')} > c:\installedprograms.txt
+Streamlabs OBS 1.6.0 - 1.6.0
+Imaginary Teleprompter 2.4.0 - 2.4.0
+7-Zip 19.00 (x64) - 19.00
+Audacity 3.1.1 (64-bit) - 3.1.1
+AutoHotkey 1.1.33.10 - 1.1.33.10
+Beyond Compare 4.4.0 - 4.4.0.25886
+CCleaner - 5.86
+ -
+Docker Desktop - 4.2.0
+Everything 1.4.1.1009 (x64) - 1.4.1.1009
+XMind 11.1.2 - 11.1.2
+Focusrite Usb 4.65.5.658 - 4.65.5.658
+Git - 2.33.1
+HWiNFO64 Version 7.06 - 7.06
+Logi Bolt - 1.01.415.0
+Logitech Options - 9.40.86
+Maxon Cinema 4D 22 - S22
+Microsoft Azure Compute Emulator - v2.9.7 - 2.9.8999.43
+Mozilla Firefox (x64 en-US) - 94.0.1
+Mozilla Maintenance Service - 93.0
+Notepad++ (64-bit x64) - 8.1.9
+Microsoft 365 Apps for enterprise - en-us - 16.0.14430.20342
+Microsoft OneDrive - 21.225.1031.0005
+PerformanceTest v10.1 - 10.1.1002.0
+Intel(R) Network Connections 26.2.0.1 - 26.2.0.1
+Command & Conquer™ Remastered Collection -
+The Sims™ 4 -
+Unravel -
+Rocket Arena -
+Need for Speed™ Hot Pursuit Remastered -
+World of Tanks Blitz -
+Sid Meier's Civilization V -
+Vim 8.2 (x64) - 8.2.3582
+VLC media player - 3.0.16
+Wacom Tablet - 6.3.44-1
+ -
+WinRAR 6.02 (64-bit) - 6.02.0
+XSplit Presenter - 1.0.2107.1901
+XSplit VCam - 2.3.2110.1404
+Microsoft Visual C++ 2013 x64 Additional Runtime - 12.0.40664 - 12.0.40664
+Elgato Game Capture HD - 3.70.51.3051
+SQL Server Management Studio for Reporting Services - 15.0.18390.0
+Microsoft Azure Compute Emulator - v2.9.7 - 2.9.8999.43
+Python 3.9.7 Standard Library (64-bit) - 3.9.7150.0
+Microsoft .NET AppHost Pack - 6.0.0 Rc 2 (x64_x86) - 48.3.29733
+IIS Express Application Compatibility Database for x64 -
+Microsoft .NET Core AppHost Pack - 3.1.20 (x64_arm) - 24.80.30521
+WD_BLACK AN1500 - 1.0.13.0
+RODE Central - 1.2.3
+Microsoft .NET Toolset 6.0.100-rc.2.21505.57 (x64) - 24.3.53949
+Microsoft ASP.NET Core 3.1.20 Shared Framework (x64) - 3.1.20.21472
+Microsoft .NET Host - 5.0.11 (x64) - 40.44.30523
+Microsoft .NET Core AppHost Pack - 3.1.20 (x64_x86) - 24.80.30521
+Microsoft Visual C++ 2010  x64 Redistributable - 10.0.40219 - 10.0.40219
+Python 3.10.0 Add to Path (64-bit) - 3.10.150.0
+PuTTY release 0.76 (64-bit) - 0.76.0.0
+DiagnosticsHub_CollectionService - 16.1.28901
+Patriot Viper DRAM RGB - 1.0.9.2
+Slack (Machine - MSI) - 4.22.0.0
+Slack (Machine) - 4.22.0
+ASUS AURA Extension Card HAL - 1.1.0.11
+Python 3.10.0 Documentation (64-bit) - 3.10.150.0
+3Dconnexion Plug-In for Maya - 6.0.8.18367
+vs_communityx64msi - 17.0.31808
+Java 8 Update 311 (64-bit) - 8.0.3110.11
+icecap_collection_x64 - 16.10.31306
+Microsoft .NET Host FX Resolver - 5.0.12 (x64) - 40.48.30622
+3Dconnexion 3DxSoftware - 10.7.4.3350
+Microsoft ASP.NET Core 6.0.0 RC 2 Build rc.2.21480.10 Shared Framework (x64) - 6.0.0.21480
+3Dconnexion Add-In for AutoCAD - 5.7.1.17918
+Microsoft .NET Host FX Resolver - 5.0.11 (x64) - 40.44.30523
+Microsoft .NET AppHost Pack - 6.0.0 Rc 2 (x64) - 48.3.29733
+Microsoft .NET Core Targeting Pack - 3.1.0 (x64) - 24.64.28315
+Microsoft .NET Host - 6.0.0 Rc 2 (x64) - 48.3.29733
+Microsoft .NET Targeting Pack - 5.0.0 (x64) - 40.0.29419
+Microsoft SQL Server 2019 LocalDB  - 15.0.4153.1
+ENE_EHD_M2_HAL - 1.0.9.1
+Microsoft Visual C++ 2012 x64 Additional Runtime - 11.0.61030 - 11.0.61030
+Microsoft.NET.Workload.Emscripten.Manifest - 24.1.47401
+3Dconnexion Plug-In for NX 8.0 - 1980 Series - 3.4.19.18496
+Microsoft Azure PowerShell - April 2018 - 5.7.0.18831
+Microsoft Windows Desktop Runtime - 5.0.12 (x64) - 40.48.30623
+3Dconnexion Add-In for Autodesk Inventor - 2.4.0.18187
+Windows Subsystem for Linux WSLg Preview - 1.0.27
+Microsoft ASP.NET Core 5.0.11 Shared Framework (x64) - 5.0.11.21476
+VMware Workstation - 16.2.0
+SQL Server Management Studio - 15.0.18390.0
+XSplit Broadcaster - 4.2.2109.2903
+Blackmagic ATEM Switchers - 8.6.2.0
+Microsoft .NET AppHost Pack - 5.0.11 (x64_arm64) - 40.44.30523
+Python 3.9.7 Utility Scripts (64-bit) - 3.9.7150.0
+Microsoft Command Line Utilities 15 for SQL Server - 15.0.1300.359
+Microsoft Windows Desktop Targeting Pack - 6.0.0 Rc 2 (x64) - 48.3.30870
+VS JIT Debugger - 17.0.114.0
+Elgato Stream Deck - 5.1.2.14743
+GoPro Webcam - 1.2.0.738
+IIS 10.0 Express - 10.0.05927
+SSMS Post Install Tasks - 15.0.18390.0
+Microsoft .NET Core Runtime - 3.1.20 (x64) - 24.80.30521
+3Dconnexion 3DxWinCore - 17.7.4.18504
+Microsoft SQL Server Data-Tier Application Framework (x64) - 15.0.5282.3
+3Dconnexion Viewer - 1.0.0.40
+XSplit Presenter - 1.0.2107.1901
+Microsoft Visual C++ 2013 x64 Minimum Runtime - 12.0.40664 - 12.0.40664
+Python 3.10.0 Utility Scripts (64-bit) - 3.10.150.0
+3Dconnexion Add-In for Solid Edge - 3.6.3
+XSplit VCam - 2.3.2110.1404
+paint.net - 4.3.2
+Microsoft System CLR Types for SQL Server 2019 - 15.0.2000.5
+Microsoft Visual C++ 2008 Redistributable - x64 9.0.30729.6161 - 9.0.30729.6161
+Microsoft .NET AppHost Pack - 6.0.0 Rc 2 (x64_arm) - 48.3.29733
+Java SE Development Kit 8 Update 211 (64-bit) - 8.0.2110.12
+Azure Data Studio - 1.32.0
+Microsoft Visual C++ 2022 X64 Minimum Runtime - 14.30.30704 - 14.30.30704
+Microsoft .NET AppHost Pack - 5.0.11 (x64) - 40.44.30523
+Python 3.9.7 Test Suite (64-bit) - 3.9.7150.0
+Camera Hub - 1.1.0.268
+3Dconnexion Plug-In for Creo 2.0 - 8.0 - 2.4.4.18413
+Python 3.10.0 Test Suite (64-bit) - 3.10.150.0
+Google Drive - 52.0.6.0
+Active Directory Authentication Library for SQL Server - 15.0.1300.359
+Google Chrome - 95.0.4638.69
+Microsoft Visual C++ 2022 X64 Additional Runtime - 14.30.30704 - 14.30.30704
+Bonjour - 3.0.0.10
+Python 3.9.7 Tcl/Tk Support (64-bit) - 3.9.7150.0
+Microsoft Visual Studio Installer - 3.0.4491.49903
+Microsoft ASP.NET Core 6.0.0 RC 2 Build rc.2.21480.10 Targeting Pack (x64) - 6.0.0.21480
+Snagit 2021 - 21.4.4
+ASUS AURA VGA Component - 0.0.4.3
+Microsoft .NET Toolset 5.0.402 (x64) - 20.3.50998
+icecap_collection_x64 - 17.0.31808
+Oracle VM VirtualBox 6.1.28 - 6.1.28
+Microsoft .NET Core 3.1 Templates 5.0.402 (x64) - 12.23.50998
+Microsoft Windows Desktop Targeting Pack - 3.1.0 (x64) - 24.64.28315
+Microsoft ASP.NET Core 5.0.0 Targeting Pack (x64) - 5.0.0.20526
+Microsoft .NET AppHost Pack - 6.0.0 Rc 2 (x64_arm64) - 48.3.29733
+Universal Holtek RGB DRAM - 1.0.0.2
+Python 3.9.7 Add to Path (64-bit) - 3.9.7150.0
+3Dconnexion Plug-In for 3ds Max 2014 - 2022 - 7.0.8.18365
+Microsoft .NET Runtime - 5.0.12 (x64) - 40.48.30622
+Microsoft ODBC Driver 17 for SQL Server - 17.7.2.1
+Python 3.9.7 Executables (64-bit) - 3.9.7150.0
+Microsoft.NET.Sdk.Android.Manifest-6.0.100 - 124.25.16400
+Python 3.9.7 Core Interpreter (64-bit) - 3.9.7150.0
+Microsoft Silverlight - 5.1.50918.0
+Patriot Viper M2 SSD RGB - 1.0.6.4
+Windows Subsystem for Linux Update - 5.10.60.1
+Office 16 Click-to-Run Licensing Component - 16.0.14430.20342
+Office 16 Click-to-Run Extensibility Component - 16.0.14430.20342
+Microsoft Azure Authoring Tools - v2.9.7 - 2.9.8999.45
+Microsoft.NET.Sdk.tvOS.Manifest-6.0.100 - 60.25.16415
+Microsoft SQL Server 2016 LocalDB  - 13.1.4001.0
+Camtasia 2021 - 21.0.8.32516
+Imaging Edge Desktop (Remote/Viewer/Edit) - 3.2.00.05271
+Kingston AURA DRAM Component - 1.1.8
+PHISON HAL - 1.0.9.0
+Python 3.9.7 Development Libraries (64-bit) - 3.9.7150.0
+Microsoft Analysis Services OLE DB Provider - 15.0.2000.568
+AURA DRAM Component - 1.1.14
+Microsoft SQL Server 2017 LocalDB  - 14.0.3391.2
+Microsoft OLE DB Driver for SQL Server - 18.5.0.0
+Microsoft SQL Server 2012 Native Client  - 11.4.7462.6
+Microsoft .NET Runtime - 5.0.11 (x64) - 40.44.30523
+VS Script Debugging Common - 17.0.114.0
+SQL Server Management Studio for Analysis Services - 15.0.18390.0
+SQL Server Management Studio - 15.0.18390.0
+Microsoft.NET.Sdk.Maui.Manifest-6.0.100 - 24.25.18227
+Microsoft .NET Runtime - 6.0.0 Rc 2 (x64) - 48.3.29733
+Microsoft.NET.Sdk.iOS.Manifest-6.0.100 - 60.25.16415
+Microsoft .NET SDK 5.0.402 (x64) from Visual Studio - 5.4.221.47606
+Microsoft .NET Standard Targeting Pack - 2.1.0 (x64) - 24.0.28113
+Sourcetree - 3.4.1.0
+Python 3.10.0 Development Libraries (64-bit) - 3.10.150.0
+Python 3.9.7 Documentation (64-bit) - 3.9.7150.0
+Elgato Wave Link - 1.3.0.2536
+Intel(R) Network Connections 26.2.0.1 - 26.2.0.1
+IIS Express Application Compatibility Database for x86 -
+Python 3.10.0 Tcl/Tk Support (64-bit) - 3.10.150.0
+Microsoft Visual Studio Tools for Applications 2017 x64 Hosting Support - 15.0.27520
+Python 3.10.0 Core Interpreter (64-bit) - 3.10.150.0
+Microsoft .NET Host - 5.0.12 (x64) - 40.48.30622
+Microsoft .NET SDK 6.0.100-rc.2.21505.57 (x64) from Visual Studio - 6.1.21.50557
+Microsoft Windows Desktop Runtime - 3.1.20 (x64) - 24.80.30521
+Microsoft Windows Desktop Targeting Pack - 5.0.0 (x64) - 40.0.29420
+3Dconnexion Add-In for Microsoft Office - 1.0.2.16923
+Microsoft .NET Core AppHost Pack - 3.1.20 (x64) - 24.80.30521
+Synergy (64-bit) - 1.14.0
+Microsoft .NET AppHost Pack - 5.0.11 (x64_arm) - 40.44.30523
+Python 3.10.0 Standard Library (64-bit) - 3.10.150.0
+Microsoft .NET 6.0 Templates 6.0.100-rc.2.21505.57 (x64) - 24.3.53949
+Microsoft.NET.Workload.Mono.Toolchain.Manifest - 24.5.64389
+Microsoft Windows Desktop Runtime - 6.0.0 Rc 2 (x64) - 48.3.30870
+Microsoft .NET Core AppHost Pack - 3.1.20 (x64_arm64) - 24.80.30521
+AURA lighting effect add-on x64 - 0.0.18
+Microsoft Azure Libraries for .NET – v2.9 - 3.0.0127.060
+Elgato Control Center - 1.1.4.792
+3Dconnexion Add-In for SOLIDWORKS - 3.5.11.18523
+Microsoft Visual C++ 2012 x64 Minimum Runtime - 11.0.61030 - 11.0.61030
+ASUS Aura SDK - 3.04.07
+ASUS DisplayWidget - 3.4.0.041
+Imaging Edge Webcam - 1.1.00.10051
+Python 3.10.0 pip Bootstrap (64-bit) - 3.10.150.0
+Python 3.10.0 Executables (64-bit) - 3.10.150.0
+Microsoft Web Deploy 4.0 - 10.0.5402
+4K Capture Utility - 1.7.4.4808
+vs_devenx64vmsi - 17.0.31804
+3Dconnexion Plugin for Unreal Editor - 1.1.0.32
+ENE RGB HAL - 1.1.37.0
+Camtasia 2019 - 19.0.7.5034
+Microsoft Update Health Tools - 2.81.0.0
+Microsoft .NET Targeting Pack - 6.0.0 Rc 2 (x64) - 48.3.29733
+Imaging Edge Desktop - 1.1.00.05260
+Script-Q 6.1.0 -
+vs_minshellinteropx64msi - 17.0.31804
+Microsoft .NET Host FX Resolver - 6.0.0 Rc 2 (x64) - 48.3.29733
+3Dconnexion LCD Applets for SpacePilot Pro - 1.5.1
+Microsoft Visual Studio Code - 1.62.2
+Microsoft.NET.Sdk.MacCatalyst.Manifest-6.0.100 - 60.25.16415
+Microsoft Windows Desktop Runtime - 5.0.11 (x64) - 40.44.30524
+Microsoft .NET AppHost Pack - 5.0.11 (x64_x86) - 40.44.30523
+ARMOURY CRATE Lite Service - 4.2.12
+DisplayLink Graphics - 10.0.82.0
+3Dconnexion Plug-In for Photoshop - 2.9.5.18069
+vs_minshellx64msi - 17.0.31808
+Python 3.9.7 pip Bootstrap (64-bit) - 3.9.7150.0
+PowerToys (Preview) - 0.46.0
+Microsoft .NET Core 5.0 Templates 5.0.402 (x64) - 20.3.50998
+Logitech LCD Manager - 3.06.109
+Microsoft ASP.NET Core Module V2 for IIS Express - 16.0.21269.0
+IntelliTraceProfilerProxy - 15.0.21225.01
+Microsoft ASP.NET Core Module for IIS Express - 12.2.18292.0
+AWS Command Line Interface v2 - 2.3.6.0
+3Dconnexion Extension for SketchUp - 5.2.0.17889
+Microsoft ASP.NET Core 3.1.10 Targeting Pack (x64) - 3.1.10.20520
+Microsoft.NET.Sdk.macOS.Manifest-6.0.100 - 48.25.16415
