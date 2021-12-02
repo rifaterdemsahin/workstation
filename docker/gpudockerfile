@@ -1,0 +1,107 @@
+FROM tensorflow/tensorflow:1.12.0-gpu-py3 as buildagent
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update
+RUN apt install software-properties-common -y
+RUN apt-get install aptitude -y
+RUN aptitude -f install libcurl4-openssl-dev -y
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    wget \
+    curl \
+    bash \
+    unzip \
+    jq \
+    git \
+    iputils-ping \
+    libunwind8 \
+    netcat \
+    software-properties-common \
+    libssl1.0 \
+  && rm -rf /var/lib/apt/lists/*
+
+
+# #Workload Setup Started" 
+RUN add-apt-repository ppa:deadsnakes/ppa -y
+RUN wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
+RUN dpkg -i packages-microsoft-prod.deb
+RUN curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+RUN chmod +x /usr/local/bin/docker-compose
+
+# Single Liner to have less layers
+RUN apt-get update && apt-get install -y -q --no-install-recommends \
+     apt-utils \
+     dialog \
+     build-essential \
+     wget  \
+     apt-transport-https \
+     powershell \
+     curl \
+     moby-engine \
+     seyon \
+     freeglut3-dev \
+     libxi-dev \
+     libxmu-dev \
+     libgl1-mesa-dev \
+     libboost-all-dev \
+     libboost-thread-dev \ 
+   && rm -rf /var/lib/apt/lists/*
+
+#Explicit repo errors
+RUN apt-get update && apt-get install build-essential && apt-get install -y \
+        libqt5opengl5 
+
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+RUN apt-get install -y -q keyboard-configuration 
+RUN apt-get install --reinstall -y locales
+RUN sed -i 's/# pl_PL.UTF-8 UTF-8/pl_PL.UTF-8 UTF-8/' /etc/locale.gen
+# # generate chosen locale
+RUN locale-gen pl_PL.UTF-8
+ENV LANG pl_PL.UTF-8
+ENV LANGUAGE pl_PL
+ENV LC_ALL pl_PL.UTF-8
+
+#dot net manual install started
+RUN wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+RUN dpkg -i packages-microsoft-prod.deb
+RUN rm packages-microsoft-prod.deb
+RUN apt-get update
+RUN apt-get install -y apt-transport-https 
+RUN apt-get update
+RUN apt-get install -y dotnet-sdk-6.0
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      binutils \
+      gdb \
+      freeglut3 \
+      freeglut3-dev 
+
+RUN apt-get update && apt-get install -y -q --no-install-recommends python3.7
+
+RUN apt-get install -y -q python3.7-distutils
+
+RUN wget https://bootstrap.pypa.io/get-pip.py
+RUN python3.7 get-pip.py
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y python-setuptools
+RUN apt-get install software-properties-common
+RUN add-apt-repository ppa:deadsnakes/ppa
+RUN apt-get update && apt-get install -y -q python3.7-dev libffi-dev libssl-dev
+
+COPY ./requirements.txt .
+
+RUN apt-get install -y -q libgtk-3-dev tox libboost-all-dev build-essential cmake libxml2-dev libxmlsec1-dev
+
+RUN python3.7 -m pip install --upgrade pip setuptools wheel p5py pep517 distlib poetry
+
+RUN python3.7 -m pip install --user --requirement requirements.txt
+RUN apt install python3.7-dev python3-pip python3.7-venv
+
+RUN python3.7 -m pip install numpy==1.19.5
+
+# FAILS AT THIS STEP
+# RUN python3.7 -m pip install pycuda
+
+RUN ln -s -f $(which python3.7) $(which python3)
+RUN ln -s -f $(which python3.7) $(which python)
