@@ -1,0 +1,4 @@
+http://www.rw-designer.com/cursor-detail/173622
+update the cur file
+todo : find the cursors to use
+choco install cursor-commander
