@@ -36,5 +36,9 @@ kubectl apply -f .\deployment-nginx-replication-controller.yaml \
 #service  \
  kubectl get service \
   kubectl describe service nginx \
-  kubectl get pod -o \
+  kubectl get pod -o wide \
   kubectl get deployment ngix-deployment \
+
+#all  \
+ kubectl get all \
+ kubectl get secret \
