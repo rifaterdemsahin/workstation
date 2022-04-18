@@ -23,4 +23,8 @@ kubectl version \
 
 
 #bulk up  \
- kubectl apply -f deployment.yaml
+ kubectl apply -f deployment.yaml \
+
+
+#service  \
+ kubectl get service \
