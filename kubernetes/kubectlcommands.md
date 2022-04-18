@@ -20,3 +20,7 @@ kubectl version \
  #debug 
  kubectl logs nginx-deployment-794f656f8b-zks75
  kubectl exec -it nginx-deployment-794f656f8b-zks75
+
+
+#bulk up
+ kubectl apply -f config.yaml
