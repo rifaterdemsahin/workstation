@@ -1,2 +1,4 @@
 minikube delete
+
+
 minikube start
