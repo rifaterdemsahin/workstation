@@ -28,3 +28,6 @@ kubectl version \
 
 #service  \
  kubectl get service \
+  kubectl describe service nginx \
+  kubectl get pod -o \
+  kubectl get deployment ngix-deployment \
