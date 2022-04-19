@@ -19,10 +19,10 @@ kubectl get pod -o wide
 kubectl apply -f mongo-configmap.yaml 
 
 #Send user interface \
-kubectl apply -f mongo-express.yaml 
+kubectl apply -f mongo-express.yaml \
 
-#Check deployment
+#Check deployment \
 minikube dashboard
 
-#Open gateway to ingress and get an ip address
-minikube service mong0-express-service
+#Open gateway to ingress and get an ip address \
+minikube service mongo-express-service
