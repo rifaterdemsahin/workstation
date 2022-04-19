@@ -2,6 +2,7 @@
 kubectl version \
  kubectl get pods -A \
  kubectl get nodes \
+ kubectl get services \
 
 #helloworld  \
  kubectl create deployment nginx-deployment --image=nginx \
