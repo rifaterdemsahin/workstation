@@ -1,0 +1,6 @@
+Goal free up your c drive which is optane and needs to run fast
+
+https://twitter.com/rifaterdemsahin/status/1518317943595188225/photo/1
+
+robocopy "" "" /sec /move /e
+mklink "" "" /j
