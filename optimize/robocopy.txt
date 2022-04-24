@@ -4,3 +4,7 @@ https://twitter.com/rifaterdemsahin/status/1518317943595188225/photo/1
 
 robocopy "" "" /sec /move /e
 mklink "" "" /j
+
+
+>>. If possible move like this
+https://twitter.com/rifaterdemsahin/status/1518326185675177984
