@@ -1,4 +1,29 @@
-drıve booster update .restart
-wsl.exe --set-default-version 2
-choco install docker-desktop
-manual updates for xsplıt as they are not ın choco
+order workstation setup
+windows download( latest )
+rufus to usb
+windows install wih selected bootable
+page drive swap> dedicated nvme
+test
+driver program
+pc optimize program
+  drıve booster update 
+   .restart
+
+Main ( only must have )
+  manual updates for xsplıt as they are not ın choco
+  xsplit / obs
+  Premiere
+  
+vmware
+...linux
+...aws
+...windows boxes
+  wsl.exe --set-default-version 2
+  choco install docker-desktop
+
+goal : leave optane empty
+
+
+
+
+
