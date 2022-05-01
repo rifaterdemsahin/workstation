@@ -1,2 +1,159 @@
 Running Vms
 'qm list | grep running'
+root@workstation:~# history
+    1  apt-get update
+    2  apt-get dist-upgrade
+    3  apt-get install xfce4 chromium lightdm
+    4  adduser rifaterdemsahin
+    5  sytemctl start lightdm
+    6  sytemctl start lightdm
+    7  reboot
+    8  apt install bluetooth pulse-audio-module-bluetooth blueman bluez-firmware
+    9  apt install bluetooth pulseaudio-module-bluetooth blueman bluez-firmware
+   10  apt install bluetooth pulseaudio-module-bluetooth blueman bluez-firmware
+   11  apt install bluetooth
+   12  apt install pulseaudio-module-bluetooth
+   13  apt install blueman
+   14  apt install bluez-firmware
+   15  apt install bluez-firmware
+   16  apt install bluez- firmware
+   17  apt install bluez
+   18  apt install bluez-firmware
+   19  apt install bluezfirmware
+   20  apt install bluez-firmware
+   21  apt install bluez-firmware
+   22  apt-get install bluez-firmware
+   23  apt-get update
+   24  apt-get install bluez-firmware
+   25  apt-get update
+   26  apt-get install bluez-firmware
+   27  reboot
+   28  boot
+   29  exit
+   30  apt-get install bluez-firmware
+   31  apt-get install bluez-utils
+   32  apt-get install bluez
+   33  cat /etc/pve/.vmlist
+   34  qm stop 100
+   35  qm stop 100
+   36  qm stop 100
+   37  qm stop 100
+   38  qm stop 100
+   39  qm unlock 100
+   40  qm unlock 100
+   41  qm unlock 100
+   42  echo "blacklist nvidia" >> /etc/modprobe.d/blacklist.conf 
+   43  echo "blacklist nouveau" >> /etc/modprobe.d/blacklist.conf 
+   44  apt-get install bluez
+   45  apt-get install bluez-firmware
+   46  lspci -n -s 01:00
+   47  echo "options vfio-pci ids=1002:14a0" > /etc/modprobe.d/vfio.conf
+   48  echo "blacklist radeon" >> /etc/modprobe.d/blacklist.conf 
+   49  qm unlock 100
+   50  qm unlock 103
+   51  qm stop 103
+   52  qm stop 103
+   53  qm stop 100
+   54  htop
+   55  top
+   56  GRUB_CMDLINE_LINUX_DEFAULT="quiet iommu=pt amd_iommu=on video=efifb:off"
+   57  upgrade-grub
+   58  upgrade-grub
+   59  apt-get install grub
+   60  upgrade-grub
+   61  upgrade-grub
+   62  sudo apt-get update; sudo apt-get install --reinstall grub
+   63  apt-get update; apt-get install --reinstall grub
+   64  upgrade-grub
+   65  grub-mkconfig -o /boot/grub/grub.cfg
+   66  /etc/default# dmesg | grep -e DMAR -e IOMMU
+   67   dmesg | grep -e DMAR -e IOMMU
+   68  echo vfio >> /etc/modules
+   69  echo vfio_iommu_type1 >> /etc/modules
+   70  echo vfio_pci >> /etc/modules
+   71  echo vfio_virqfd >> /etc/modules
+   72  update-initramfs -u
+   73   update-pciids
+   74   lspci -v
+   75   lspci -v | more
+   76  lspci -n -s 06:00
+   77  lspci -n -s 20:00
+   78   lspci -v | more
+   79  lspci -n -s 43
+   80  lspci -n -s 43:00
+   81  echo options vfio-pci ids=: 1002:73bf, 1002:ab28 disable_vga=1 > /etc/modprobe.d/vfio.conf
+   82  echo options vfio-pci ids=: 1002:73bf, 1002:ab28 disable_vga=1 > /etc/modprobe.d/vfio.conf
+   83  echo options vfio-pci ids=1002:73bf,1002:ab28 disable_vga=1 > /etc/modprobe.d/vfio.conf
+   84  echo 1 > /sys/module/kvm/parameters/ignore_msrs
+   85  wget -qO - http://www.webmin.com/jcameron-key.asc | sudo apt-key add -
+   86  sudo sh -c 'echo "deb http://ftp.au.debian.org/debian/ buster main non-free" > /etc/apt/sources.list.d/nonfree.list'
+   87  sh -c 'echo "deb http://ftp.au.debian.org/debian/ buster main non-free" > /etc/apt/sources.list.d/nonfree.list'
+   88  apt update
+   89  apt install wget
+   90  wget -qO - http://www.webmin.com/jcameron-key.asc | sudo apt-key add -
+   91  wget -qO - http://www.webmin.com/jcameron-key.asc | apt-key add -
+   92  sh -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
+   93  apt update
+   94  apt install webmin
+   95  apt install webmin
+   96  apt install webmin -force
+   97  apt install webmin -f
+   98  ls
+   99  ls
+  100  dmidecode -t memory | grep Channel 
+  101  nano /etc/default/grub
+  102  nano /etc/default/grub
+  103  update-grub
+  104  update-grub
+  105  update-grub
+  106  nano /etc/modules
+  107  nano  /etc/modprobe.d/iommu_unsafe_interrupts.conf
+  108  nano  /etc/modprobe.d/iommu_unsafe_interrupts.conf
+  109  nano /etc/modprobe.d/kvm.conf
+  110  nano /etc/modprobe.d/blacklist.conf
+  111  lspci -v
+  112  lspci -v | more
+  113  lspci -n -s 03:00;lspci -n -s 43:00
+  114  nano /etc/modprobe.d/vfio.conf
+  115  clear
+  116  update-initramfs -u
+  117  qm stop 109
+  118  nano /usr/share/perl5/PVE/QemuServer.pm
+  119  apt install pve-headers
+  120  cat /etc/apt/sources.list
+  121  cat  /etc/apt/sources.list.d/pve-enterprise.list
+  122  cat /etc/apt/sources.list
+  123  nano /etc/apt/sources.list
+  124  apt install pve-headers
+  125  apt install pve-headers-$(uname -r)
+  126  apt install pve-headers-$(root -r)
+  127  apt install pve-headers-$(uname -r)
+  128  apt install pve-headers-$(uname -r)
+  129  nano /etc/apt/sources.list
+  130  apt install pve-headers-$(uname -r)
+  131  apt install pve-headers-$(uname -r)
+  132  apt install pve-headers-$(uname -r)
+  133  apt install pve-headers-$(uname -r)
+  134  apt install pve-headers-$(root -r)
+  135  apt install pve-headers-$(uname -r)
+  136  apt install pve-headers
+  137  apt install pve-headers-$(uname -r)
+  138  nano /etc/apt/sources.list
+  139  apt install pve-headers-$(uname -r)
+  140  nano /etc/apt/sources.list
+  141  apt install pve-headers-$(uname -r)
+  142  apt install pve-headers
+  143  apt update
+  144  apt install pve-headers
+  145  apt install git dkms build-essential
+  146  git clone https://github.com/gnif/vendor-reset.git
+  147  cd vendor-reset
+  148  dkms install .
+  149  apt install pve-headers
+  150  dkms install .
+  151  echo "vendor-reset" >> /etc/modules
+  152  update-initramfs -u
+  153  shutdown -r now
+  154  qm stop 111
+  155  qm unlock 111
+  156  history
