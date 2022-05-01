@@ -1,0 +1,2 @@
+lspci -nnk
+dmesg -w
