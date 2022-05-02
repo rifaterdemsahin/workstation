@@ -1,3 +1,5 @@
+installazurecli
+
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 
@@ -14,3 +16,7 @@ echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO 
     
 sudo apt-get update
 sudo apt-get install azure-cli
+
+
+installkubectl
+snap install kubectl --classic
