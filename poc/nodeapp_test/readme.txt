@@ -1,20 +1,34 @@
 poc for node app on docker kubernetes blue green deployment
 
-initial part
-install the minbikube
+> initial part
+> install the minbikube
 
 Windows boxes
 choco install docker-engine
 choco install docker-desktop
-restart
-check box check
+> restart
+> check box check
 docker run hello-world
 
 Docker part
 docker build -t rifaterdemsahib/nodeapp . 
+> set experimental and restarrt / swith backendfort the stage
+
+docker login
 docker push rifaterdemsahib/nodeapp:latest 
+minikube delete > of there is a conflict detected!
+minikube start
+minikube status
+cat deployment.yml
+> check it and see
 kubectl apply -f deployment.yml
-kubectl create -f deployment.yml 
+> OR  > kubectl create -f deployment.yml 
+
+kubectl apply -f service.yml
+
+kubectl get deployments
+minikube service --all
+
 
 repull part
 kubectl get pods
