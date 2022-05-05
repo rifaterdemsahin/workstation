@@ -6,6 +6,9 @@ install the minbikube
 Windows boxes
 choco install docker-engine
 choco install docker-desktop
+restart
+check box check
+docker run hello-world
 
 Docker part
 docker build -t rifaterdemsahib/nodeapp . 
