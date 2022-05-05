@@ -27,8 +27,10 @@ kubectl apply -f deployment.yml
 kubectl apply -f service.yml
 
 kubectl get deployments
-minikube service --all
+> Check deployment
 
+minikube service --all
+> Get url
 
 repull part
 kubectl get pods
