@@ -2,6 +2,9 @@ poc for node app on docker kubernetes blue green deployment
 
 initial part
 install the minbikube
+
+Windows boxes
+choco install docker-engine
 choco install docker-desktop
 
 Docker part
