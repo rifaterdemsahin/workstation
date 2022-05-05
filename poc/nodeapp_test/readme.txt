@@ -31,7 +31,9 @@ kubectl get deployments
 
 minikube service --all
 > Get url
-
+http://192.168.49.2:31110/
+http://192.168.49.2:31110/will
+http://192.168.49.2:31110/ready
 repull part
 kubectl get pods
 kubectl delete pod nodeapp-deployment-5474484f79-mmb9k
