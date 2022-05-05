@@ -2,4 +2,8 @@
 sudo apt update
 sudo apt install snapd
 sudo snap install minikube
+sudo snap install docker
+
+minikube start
+
 ```
