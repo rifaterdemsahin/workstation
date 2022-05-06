@@ -1,3 +1,6 @@
+Ignored drivers
+https://twitter.com/rifaterdemsahin/status/1522606406326788098
+
 Practical Download
 https://drive.google.com/drive/folders/1Qiys3IhfrpntcCodrfjfnlFbvHnarYBq
 
