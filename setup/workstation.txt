@@ -1,3 +1,6 @@
+tpm
+w1  workstation edition
+acronis
 order workstation setup
 windows download( latest )
 rufus to usb
@@ -14,12 +17,14 @@ Main ( only must have )
   xsplit / obs
   Premiere
   
-vmware
+vmware workstation
 ...linux
 ...aws
 ...windows boxes
   wsl.exe --set-default-version 2
   choco install docker-desktop
+
+dual boot
 
 goal : leave optane empty
 
