@@ -1,11 +1,13 @@
-w111 disc backup today https://twitter.com/rifaterdemsahin/status/1419596919131803649
+w11 workstation ediyion
 
+disc backup today https://twitter.com/rifaterdemsahin/status/1419596919131803649
 
-Aomei backup
-= Restore disc read
+Acronis backup at start
+Drivers install 
+Test restore
 
-
-Use 2 drives
-  -1 windows
-  -2 aomei
+Use 3 drives
+  -1 operating windows
+  -2 data disc
+  -3 restore disc
   
