@@ -7,16 +7,16 @@ return
 
 F1:: Run, https://twitter.com/compose/tweet
 return 
-F2:: Run, https://www.notion.so/pexabo/4a9b3cee59fe4ab38230359fee6aa70a?v=64fcbe11b3f54c62bfe1a09f66fc217f
+F2:: Run, https://www.notion.so/pexabo/LMS-Problem-Solution-Product-7d5d7a8b129f46e3858f32b4cc8cc0f3
 return 
 F3:: Run, chrome
 return 
 F4:: Run, C:\
 return 
 F7:: Run, C:\Users\erdem\Downloads
-F8:: Run, https://www.notion.so/pexabo/Search-To-dos-a5fee2a38afc429ebecb205da28ba297
-F9:: Run, https://www.notion.so/pexabo/Erdem-s-Daily-KanBan-Board-6855f3f7cc8b481ca9425fcc0489c0ca
+F8:: Run, https://www.google.com
+F9:: Run, https://devopsengineering.thinkific.com/manage
 F10:: Run, https://www.notion.so/pexabo/To-do-Views-c80ecc0096b94f1a94ab95ade0fc7127
 F11:: Run, https://www.canva.com/folder/all-designs
-F12:: Run, https://analytics.twitter.com/user/rifaterdemsahin/tweets
+F12:: Run, https://studio.youtube.com/channel/UCSJyG3bTM7lnjMIZcV8C4OQ/analytics/tab-overview/period-default
 ; https://github.com/rifaterdemsahin/workstation/blob/master/autohotkey/keyboardmapping.ahk
