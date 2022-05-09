@@ -14,6 +14,7 @@ return
 F4:: Run, C:\
 return 
 F7:: Run, %userprofile%\downloads
+return 
 F8:: Run, https://www.google.com
 F9:: Run, https://devopsengineering.thinkific.com/manage
 F10:: Run, https://www.notion.so/pexabo/To-do-Views-c80ecc0096b94f1a94ab95ade0fc7127
