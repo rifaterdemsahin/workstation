@@ -2,3 +2,5 @@ New profiles
 The firefox cant handle the audio and video
 Add the bookmarks
 https://teams.microsoft.com
+Logins with mfa
+Move to the screens
