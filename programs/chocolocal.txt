@@ -1,193 +1,74 @@
- choco list local
+PS C:\Windows\system32> choco list --localonly
 Chocolatey v1.1.0
-Using the list command with remote sources is deprecated and will be made
-to only list locally installed packages in v2.0.0. Use the search, or find,
-command to find packages on remote sources (such as the Chocolatey Community
-Repository).
-laps 6.2.0.20210510 [Approved] Downloads cached for licensed users
-LocalAdminWMI 1.0.0.4
-enpass.install 6.8.0.1059 [Approved] Downloads cached for licensed users
-choco-package-list-backup 2022.02.06 [Approved]
-mssqlserver2014-sqllocaldb 12.0.5000.0 [Approved] Downloads cached for licensed users
-SqlServerLocalDb 11.0.6020.0 [Approved] Downloads cached for licensed users
-sqllocaldb 15.0.2000.20210311 [Approved] Downloads cached for licensed users
-minishift 1.34.3 [Approved]
-Minikube 1.25.2 [Approved]
-docker-desktop 4.8.1 [Approved] Downloads cached for licensed users
-hostinfo 1.0.1 [Approved] Downloads cached for licensed users
-azure-functions-core-tools-2 3.0.3442 [Approved]
-GoodSync 11.11.1 [Approved] Downloads cached for licensed users
-azure-functions-core-tools-3 3.0.3785
-azurestorageemulator 4.4.0 [Approved] Downloads cached for licensed users - Possibly broken for FOSS users (due to original download location changes by vendor)
-azure-functions-core-tools 4.0.4483 [Approved]
-sifon 1.2.6 [Approved]
-mkcert 1.4.4 [Approved]
-circleci-cli 0.1.17554 [Approved]
-mountainduck 4.11.3.19561 [Approved] Downloads cached for licensed users
-kind 0.13.0 [Approved] Downloads cached for licensed users
-vscode-gitignore 0.7.0 [Approved]
-synology-note-station-client 2.2.2.609 [Approved] Downloads cached for licensed users
-PsGet 1.0.4.407 [Approved]
-glow 1.4.1 [Approved]
-cloudberrybackup 7.5.0.82 [Approved] Downloads cached for licensed users
-CloudBerryExplorer.AmazonS3 5.9.1.192 [Approved] Downloads cached for licensed users
-virt-viewer 11.0.256 [Approved] Downloads cached for licensed users
-dell-omsa 7.2.0.121620132
-docfetcher 1.1.22 [Approved] Downloads cached for licensed users - Possibly broken for FOSS users (due to original download location changes by vendor)
-SkySiteFacilities 4.2.0 [Approved] Downloads cached for licensed users
-runassystem 1.1 [Approved] Downloads cached for licensed users
-psgetsid 1.45 [Approved] Downloads cached for licensed users - Possibly broken for FOSS users (due to original download location changes by vendor)
-ARCFacilitiesSync 3.0.0 [Approved] Downloads cached for licensed users
-qtdsync 0.6.20 [Approved] Downloads cached for licensed users
-rss-builder 2.1.8 [Approved] Downloads cached for licensed users
-cask 0.8.5 [Approved] Downloads cached for licensed users
-kamel 1.3.1 [Approved] Downloads cached for licensed users
-mirth-administrator-launcher.install 1.1.0 [Approved] Downloads cached for licensed users
-mirth-administrator-launcher.portable 1.1.0 [Approved] Downloads cached for licensed users
-mirth-administrator-launcher 1.1.0 [Approved]
-SkyDrive 16.4.20140630
-jsae 1.10 [Approved] Downloads cached for licensed users
-iishosts 1.0.1 [Approved] Downloads cached for licensed users
-encryption-software 108.30.2019.1 [Approved]
-bluedis 0.1.0 [Approved] Downloads cached for licensed users
-goliothctl 0.0.1 [Approved]
-ftpuse 2.0
-Git-TF 2.0.3.20131219 [Approved]
-turnedontimesview 1.41 [Approved] Downloads cached for licensed users
-vmware-horizon-client 8.5.0.19584195 [Approved] Downloads cached for licensed users
-k3d 5.4.1 [Approved]
-openssl 1.1.1.1500 [Approved]
-coolterm 1.9.1 [Approved]
-homeassistant 2021.5.5 [Approved]
-rsync 6.2.4 [Approved]
-sshfs 3.5.20357 [Approved]
-httrack.app 3.49.2 [Approved] Downloads cached for licensed users
-httrack 3.49.2 [Approved]
-videocacheview.install 3.05 [Approved] Downloads cached for licensed users
-cports 2.65 [Approved] Downloads cached for licensed users
-qfinderpro 7.7.0.1407 [Approved] Downloads cached for licensed users
-devmanview 1.76 [Approved] Downloads cached for licensed users
-hitmanpro 3.8.14.304 [Approved] Downloads cached for licensed users - Possibly broken for FOSS users (due to original download location changes by vendor)
-duckietv 1.1.5 [Approved] Downloads cached for licensed users
-TeamCityAddin 2022.1.1 [Approved]
-mamp 5.0.5
-disk2vhd 2.01.0.20160213 [Approved] Downloads cached for licensed users
-josm 18427.0 [Approved]
-languagetool 5.7 [Approved]
-carbon 2.10.2 [Approved]
-tightvnc 2.8.63 [Approved]
-pstools 1.2012.04.12 [Approved] Downloads cached for licensed users
-netscan.install 6.2.1 [Approved] Downloads cached for licensed users
-AzurePowerShell 6.9.0.20211025 [Approved] Downloads cached for licensed users
-httrack.tool 3.49.2 [Approved]
-veeam-backup-and-replication-catalog 11.0.1.1261 [Approved]
-mockoon 1.18.1 [Approved]
-dsinternals-psmodule 4.7 [Approved]
-fusioninventory-agent.portable 2.5.1 [Approved] Downloads cached for licensed users
-diskled 1.1.1 [Approved] Downloads cached for licensed users
-CloudBerryExplorer.OpenStackStorage 1.8.0.9 [Approved] Downloads cached for licensed users
-gittfs 0.32.0 [Approved] Downloads cached for licensed users
-jpegview 1.0.37 [Approved] Downloads cached for licensed users
-citrix-receiver 4.12 [Approved] Downloads cached for licensed users
-citrix-sharefile-sync 3.24.106.0 [Approved] Downloads cached for licensed users
-fusioninventory-agent 2.5.1 [Approved]
-fusioninventory-agent.install 2.5.1 [Approved] Downloads cached for licensed users
-citrix-workspace 22.4.1.62 [Approved] Downloads cached for licensed users
-citrix-workspace-ltsr 22.3.1.41 [Approved] Downloads cached for licensed users
-tsprintclient 3.2.0.7 [Approved] Downloads cached for licensed users
-devcon.portable 10.0.10586.23 [Approved]
-uninstallview 1.46 [Approved] Downloads cached for licensed users
-tcp-services2 0.8.1 [Approved]
-stunnel.beta 5.001.0.20131224 - Possibly broken
-locate32 3.1.11.7100 [Approved] Downloads cached for licensed users
-wul.portable 1.32 [Approved] Downloads cached for licensed users - Possibly broken for FOSS users (due to original download location changes by vendor)
-wul 1.32 [Approved] - Possibly broken
-wul.install 1.32 [Approved] Downloads cached for licensed users
-psshutdown 2.52 [Approved] Downloads cached for licensed users - Possibly broken for FOSS users (due to original download location changes by vendor)
-VS2013.5 1.0.0 [Approved] Downloads cached for licensed users
-vs2012.5 11.0.61219.0 [Approved] Downloads cached for licensed users
-PsVsts 1.0.0 [Approved]
-networkconnectlog 1.11 [Approved] Downloads cached for licensed users
-plentymarkets-client 229.3 [Approved] Downloads cached for licensed users
-clipboardic 1.15 [Approved] Downloads cached for licensed users
-mountain-duck 4.0.1.16800 [Approved] Downloads cached for licensed users
-zpaq 7.15 [Approved]
-azshell 0.2.2 [Approved] Downloads cached for licensed users
-colorconsole.install 4.03 [Approved] Downloads cached for licensed users - Possibly broken for FOSS users (due to original download location changes by vendor)
-regcool 1.317 [Approved]
-TcpView 4.17 [Approved] Downloads cached for licensed users
-hamachi 2.2.0.633
-regcool.portable 1.318 [Approved] Downloads cached for licensed users
-kodi 19.4 [Approved]
-skaffold 1.38.0 [Approved]
-azure-cosmosdb-emulator 2.14.7
-reqrypt 1.4.1 [Approved] Downloads cached for licensed users
-reqrypt.portable 1.4.1 [Approved] Downloads cached for licensed users
-inetmgr 1.2.0 [Approved] Downloads cached for licensed users
-adminservice 2.4 [Approved] Downloads cached for licensed users
-sdfcli 19.2.1 [Approved] Downloads cached for licensed users - Possibly broken for FOSS users (due to original download location changes by vendor)
-smart-console-utility 3.00.10 [Approved] Downloads cached for licensed users
-tsprint 2.0.0.8 [Approved]
-build-bot 1.0.1 [Approved]
-fastresolver 1.26 [Approved]
-fastresolver.install 1.26 [Approved] Downloads cached for licensed users
-folrep 1.21 [Approved] Downloads cached for licensed users
-siteshoter 1.42 [Approved] Downloads cached for licensed users
-webvideocap 1.41 [Approved]
-webvideocap.install 1.41 [Approved] Downloads cached for licensed users
-fastresolver.portable 1.26 [Approved] Downloads cached for licensed users
-webvideocap.portable 1.41 [Approved] Downloads cached for licensed users
-skypecontactsview 1.05 [Approved] Downloads cached for licensed users
-sharemouse 5.0.29 [Approved] Downloads cached for licensed users
-ksp-client 7.8.0.6 [Approved]
-smartftp 10.0.2971.0 [Approved]
-npppluginmanager 1.4.12 [Approved]
-aria2 1.36.0 [Approved] Downloads cached for licensed users
-tixati 2.89 [Approved]
-Wget 1.21.3 [Approved]
-PersonalBackup 6.2.1300 [Approved] Downloads cached for licensed users
-windows-admin-center 1.3.53858.0 [Approved]
-trid 2.24.20220511 [Approved]
-dynare 4.6.4 [Approved] Downloads cached for licensed users
-nxt 1.11.5 [Approved] Downloads cached for licensed users
-tcps 0.3.1 [Approved]
-winflector-client 3.9.6.2 [Approved]
-bitvise-ssh-server 8.49 [Approved] Downloads cached for licensed users
-tixati.portable 2.89 [Approved] Downloads cached for licensed users
-bleachbit.portable 3.0 [Approved]
-spacedesk-server 1.0.40 [Approved]
-gitlab-runner 14.10.0 [Approved]
-spacedesk-client 1.0.40 [Approved] Downloads cached for licensed users
-files 2.1.24 [Approved]
-vscode-kubernetes-tools 1.3.8 [Approved]
-bleachbit 4.4.2 [Approved]
-bleachbit.install 4.4.2 [Approved]
-microsoft-monitoring-agent 10.20.18064.0 [Approved]
-putty 0.76.0.20220214 [Approved]
-putty.portable 0.76.0.20220214 [Approved]
-putty.install 0.76.0.20220208 [Approved]
-choco-protocol-support 0.0.1.1 [Approved]
-unity-hub 3.1.2 [Approved] Downloads cached for licensed users
-croc 9.5.5 [Approved] Downloads cached for licensed users
-ecs-cli 1.21.0 [Approved] Downloads cached for licensed users
-msi2xml 2.2.1.957 [Approved]
-omnifyhotspot 3.2 [Approved]
-flyingcarpet.portable 5.0 [Approved]
-keeweb 1.18.6 [Approved]
-radare2 5.4.2 [Approved] Downloads cached for licensed users
-action 4.27.1 [Approved] Downloads cached for licensed users
-weasis 3.8.1 [Approved]
-hp-universal-print-driver-pcl 7.0.1.24923 [Approved] Downloads cached for licensed users
-flyingcarpet 5.0 [Approved]
-gom-player 2.3.75.5339 [Approved] Downloads cached for licensed users
-sql-server-2017 14.0.1000 [Approved]
-sql-server-2019 15.0.2000.20210324 [Approved]
-hp-universal-print-driver-ps 7.0.0.24832 [Approved] Downloads cached for licensed users
-radiant 2021.2.2 [Approved] Downloads cached for licensed users
-wechat 3.6.0.18 [Approved] Downloads cached for licensed users
-kubernetes-cli 1.24.0 [Approved]
-desktopicons-winconfig 0.0.1 [Approved]
-jmol 14.32.54 [Approved]
-knime.portable 4.5.2
-185 packages found.
-PS C:\Windows\system32>
+7zip.install 21.7
+adobereader 2022.001.20117
+audacity 3.1.3
+autohotkey 1.1.34.01
+autohotkey.install 1.1.34.01
+autohotkey.portable 1.1.34.01
+beyondcompare 4.4.2.26348
+chocolatey 1.1.0
+chocolatey-compatibility.extension 1.0.0
+chocolatey-core.extension 1.4.0
+chocolatey-dotnetfx.extension 1.0.1
+chocolatey-misc-helpers.extension 0.0.4
+chocolatey-visualstudio.extension 1.10.0
+chocolatey-windowsupdate.extension 1.0.4
+curl 7.83.0
+discord 1.0.9004
+discord.install 1.0.9004
+dotnet-6.0-desktopruntime 6.0.4
+DotNet4.5.2 4.5.2.20140902
+dotnet4.7.1 4.7.2558.20190226
+dotnetfx 4.8.0.20190930
+Everything 1.4.11015
+Firefox 100.0
+git 2.36.0
+git.install 2.36.0
+GoogleChrome 101.0.4951.64
+gpu-z 2.46.0
+greenshot 1.2.10.6
+handbrake 1.5.1
+handbrake.install 1.5.1
+javaruntime 8.0.231
+jdk8 8.0.211
+jre8 8.0.331
+KB2919355 1.0.20160915
+KB2919442 1.0.20160915
+KB2999226 1.0.20181019
+KB3033929 1.0.5
+KB3035131 1.0.3
+KB3063858 1.0.0
+lightshot.install 5.5.0.7
+logitech-options 9.60.87
+microsoft-teams 1.5.00.9163
+msiafterburner 4.6.4.20211212
+nodejs 17.9.0
+nodejs.install 17.9.0
+notepadplusplus.install 8.4
+obs-studio 27.2.4
+obs-studio.install 27.2.4
+paint.net 4.3.10
+postman 9.15.2
+PowerShell 5.1.14409.20180811
+procexp 16.43
+putty.install 0.76.0.20220208
+python 3.10.4
+python3 3.10.4
+skype 8.83.0.408
+slack 4.26.1
+sourcetree 3.4.1
+speccy 1.32.774
+steam-client 2.10.91.92
+streamdeck 5.2.1.15025
+streamlabs-obs 1.8.4
+vcredist140 14.31.31103.20220402
+vcredist2015 14.0.24215.20170201
+vcredist2017 14.16.27033
+vim 8.2.4937
+virtualbox 6.1.34
+vlc 3.0.17.4
+vlc.install 3.0.17.4
+vscode 1.67.1
+vscode.install 1.67.1
+71 packages installed.
