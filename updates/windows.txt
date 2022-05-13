@@ -1,0 +1,2 @@
+PS C:\Windows\system32> Install-Module PSWindowsUpdate
+PS C:\Windows\system32> Install-WindowsUpdate
