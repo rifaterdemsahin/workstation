@@ -15,3 +15,6 @@ LC49G95TSSNXZA
 
 Installed displays
 https://twitter.com/rifaterdemsahin/status/1527261216481091584
+
+Text Sizes
+https://twitter.com/rifaterdemsahin/status/1527622043038109697
