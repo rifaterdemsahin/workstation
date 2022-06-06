@@ -1,5 +1,15 @@
-dtc give access
+msdtc error give access
 https://twitter.com/rifaterdemsahin/status/1533865432477999104
+Hi! You may want trying to apply solution shared by Vitaliy 
 
-Asusdisable dcom
+1. Open the folder  C: \ Program Files (x86) \ Acronis \ TrueImageHome \.
+2. Find the ti_managers_proxy.dll file there
+3. Right-click on it, open “Properties”, then open the “Security” tab and add the current user there and grant all permission to this user
+
+If the issue still persist, please contact Acronis support, so that our engineers can analyse the diagnostic information from your system and find the solution. 
+
+
+
+
+Asusdisable services dcom error
 https://twitter.com/rifaterdemsahin/status/1533868575206907904
