@@ -8,8 +8,8 @@ Hi! You may want trying to apply solution shared by Vitaliy
 
 If the issue still persist, please contact Acronis support, so that our engineers can analyse the diagnostic information from your system and find the solution. 
 
-
-
-
 Asusdisable services dcom error
 https://twitter.com/rifaterdemsahin/status/1533868575206907904
+
+Function discovery error
+https://twitter.com/rifaterdemsahin/status/1534052219095502848
