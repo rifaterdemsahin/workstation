@@ -1,1 +1,3 @@
- choco install vmware-converter -y
+ did not make sense >>> choco install vmware-converter -y
+
+at start could make sense >>> choco install chocolatey-windowsupdate.extension
