@@ -1,0 +1,6 @@
+2 hours
+shutdown -s -t 7200
+
+
+restart
+shutsown -r -t 0
