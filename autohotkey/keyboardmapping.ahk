@@ -14,9 +14,6 @@ F4:: Run, C:\
 return 
 F7:: Run, %userprofile%\downloads
 return 
-F8:: Run, https://www.google.com
-F9:: Run, https://devopsengineering.thinkific.com/manage
-F10:: Run, https://www.notion.so/pexabo/To-do-Views-c80ecc0096b94f1a94ab95ade0fc7127
-F11:: Run, https://www.canva.com/folder/all-designs
-F12:: Run, https://studio.youtube.com/channel/UCSJyG3bTM7lnjMIZcV8C4OQ/analytics/tab-overview/period-default
+F8:: Run, C:\Users\rifat\Videos\XSplit\Broadcaster\info@pexabo.com
+; f9-f12 > snagit https://twitter.com/rifaterdemsahin/status/1543524369820966912
 ; https://github.com/rifaterdemsahin/workstation/blob/master/autohotkey/keyboardmapping.ahk
