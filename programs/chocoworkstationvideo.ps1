@@ -19,6 +19,7 @@ $list = New-Object Collections.Generic.List[String]
 $list.Add("gpu-z")
 $list.Add("msiafterburner")
 $list.Add("Firefox")
+$list.Add("unifying")
 $list.Add("kav")
 $list.Add("spotify")
 $list.Add("wavelink")
