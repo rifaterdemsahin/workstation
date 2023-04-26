@@ -20,6 +20,16 @@ Drive
 Pin the programs to the desktops
   https://twitter.com/rifaterdemsahin/status/1422473140815474723
 
+Vmware workstation
+  Install
+  Licence
+  Upload virtual machines
+
+Keyboars install and enable ( shift alt check )
+  UK
+  USA
+  TR
+
 References
   First Install https://drive.google.com/drive/u/0/folders/1zGVKaUThCHkkLsvNLZV1MvWQldOdQ4Gb
 
