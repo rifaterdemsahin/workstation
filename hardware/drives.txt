@@ -1,2 +1,218 @@
+v2 2024 july
+
+
+Storage
+		Hard drives
+				ST8000VN004-2M2101
+					Manufacturer	Seagate
+					Heads	16
+					Cylinders	972,801
+					Tracks	248,064,255
+					Sectors	15,628,048,065
+					SATA type	SATA-III 6.0Gb/s
+					Device type	Fixed
+					Serial Number	WSD56Y2Z
+					Firmware Version Number	SC60
+					LBA Size	48-bit LBA
+					Power On Count	897 times
+					Power On Time	210.0 days
+					Speed	7200 RPM
+					Features	S.M.A.R.T., NCQ
+					Max. Transfer Mode	SATA III 6.0Gb/s
+					Used Transfer Mode	SATA III 6.0Gb/s
+					Interface	SATA
+					Capacity	7452 GB
+					Real size	8,001,563,222,016 bytes
+					RAID Type	None
+						S.M.A.R.T
+							Status	Good
+							Temperature	32 °C
+							Temperature Range	OK (less than 50 °C)
+								S.M.A.R.T attributes
+										Attribute name	Real value	Current	Worst	Threshold	Raw Value	Status
+									01	Read Error Rate	0	82	64	44	00098E22D0	Good
+									03	Spin-Up Time	0 ms	82	81	0	0000000000	Good
+									04	Start/Stop Count	1,874	99	99	20	0000000752	Good
+									05	Reallocated Sectors Count	0	100	100	10	0000000000	Good
+									07	Seek Error Rate	0	71	60	45	0000BF2794	Good
+									09	Power-On Hours (POH)	210d 1h	95	95	0	00000013B1	Good
+									0A	Spin Retry Count	0	100	100	97	0000000000	Good
+									0C	Device Power Cycle Count	897	100	100	20	0000000381	Good
+									BB	Reported Uncorrectable Errors	0	100	100	0	0000000000	Good
+									BC	Command Timeout	17,180,131,332	100	99	0	0000040004	Good
+									BE	Airflow Temperature	32 °C	68	44	40	0020160020	Good
+									C0	Power-off Retract Count	123	100	100	0	000000007B	Good
+									C1	Load/Unload Cycle Count	23,352	89	89	0	0000005B38	Good
+									C2	Temperature	32 °C	32	56	0	0000000020	Good
+									C3	Hardware ECC Recovered	0	82	64	0	00098E22D0	Good
+									C5	Current Pending Sector Count	0	100	100	0	0000000000	Good
+									C6	Uncorrectable Sector Count	0	100	100	0	0000000000	Good
+									C7	UltraDMA CRC Error Count	0	200	200	0	0000000000	Good
+									F0	Head Flying Hours	29d 3h	100	253	0	00000002BB	Good
+									F1	Total LBAs Written	4,296,317,792	100	253	0	0000149B60	Good
+									F2	Total LBAs Read	32,665,457,837	100	253	0	009B0354AD	Good
+						Partition 0
+							Partition ID	Disk #0, Partition #0
+							Disk Letter	D:
+							File System	NTFS
+							Volume Serial Number	B04056E1
+							Size	7452 GB
+							Used Space	879 GB (11%)
+							Free Space	6572 GB (89%)
+				INTEL SSDPE21D480GA (SSD)
+					Manufacturer	Intel
+					Interface	Unknown
+					Capacity	447 GB
+					Real size	480,103,981,056 bytes
+					RAID Type	None
+						S.M.A.R.T
+							S.M.A.R.T not supported
+						Partition 0
+							Partition ID	Disk #1, Partition #0
+							Size	0.98 MB
+						Partition 1
+							Partition ID	Disk #1, Partition #1
+							File System	FAT32
+							Volume Serial Number	BA023C4D
+							Size	510 MB
+							Used Space	27.7 MB (5%)
+							Free Space	483 MB (95%)
+						Partition 2
+							Partition ID	Disk #1, Partition #2
+							Disk Letter	F:
+							File System	ReFS
+							Volume Serial Number	C4A272FE
+							Size	446 GB
+							Used Space	402 GB (90%)
+							Free Space	44 GB (10%)
+				Seagate FireCuda 530 ZP2000GM30013 (SSD)
+					Interface	Unknown
+					Capacity	1863 GB
+					Real size	2,000,398,934,016 bytes
+					RAID Type	None
+						S.M.A.R.T
+							S.M.A.R.T not supported
+						Partition 0
+							Partition ID	Disk #2, Partition #0
+							File System	FAT32
+							Volume Serial Number	A228BFD7
+							Size	96 MB
+							Used Space	28.1 MB (29%)
+							Free Space	67 MB (71%)
+						Partition 1
+							Partition ID	Disk #2, Partition #1
+							Disk Letter	C:
+							File System	NTFS
+							Volume Serial Number	A22A72C1
+							Size	1862 GB
+							Used Space	1012 GB (54%)
+							Free Space	850 GB (46%)
+						Partition 2
+							Partition ID	Disk #2, Partition #2
+							File System	NTFS
+							Volume Serial Number	CC82262B
+							Size	681 MB
+							Used Space	596 MB (87%)
+							Free Space	85 MB (13%)
+				Seagate FireCuda 530 ZP1000GM30013 (SSD)
+					Interface	Unknown
+					Capacity	931 GB
+					Real size	1,000,204,886,016 bytes
+					RAID Type	None
+						S.M.A.R.T
+							S.M.A.R.T not supported
+						Partition 0
+							Partition ID	Disk #3, Partition #0
+							Disk Letter	G:
+							File System	NTFS
+							Volume Serial Number	CE1740FD
+							Size	931 GB
+							Used Space	875 GB (93%)
+							Free Space	55 GB (7%)
+				Seagate FireCuda 530 ZP1000GM30013 (SSD)
+					Interface	Unknown
+					Capacity	931 GB
+					Real size	1,000,204,886,016 bytes
+					RAID Type	None
+						S.M.A.R.T
+							S.M.A.R.T not supported
+						Partition 0
+							Partition ID	Disk #4, Partition #0
+							Disk Letter	L:
+							File System	NTFS
+							Volume Serial Number	7611140A
+							Size	931 GB
+							Used Space	409 GB (43%)
+							Free Space	522 GB (57%)
+				Seagate FireCuda 530 ZP1000GM30013 (SSD)
+					Interface	Unknown
+					Capacity	931 GB
+					Real size	1,000,204,886,016 bytes
+					RAID Type	None
+						S.M.A.R.T
+							S.M.A.R.T not supported
+						Partition 0
+							Partition ID	Disk #5, Partition #0
+							Disk Letter	I:
+							File System	NTFS
+							Volume Serial Number	646D66F1
+							Size	931 GB
+							Used Space	151 GB (16%)
+							Free Space	779 GB (84%)
+				Seagate FireCuda 530 ZP1000GM30013 (SSD)
+					Interface	Unknown
+					Capacity	931 GB
+					Real size	1,000,204,886,016 bytes
+					RAID Type	None
+						S.M.A.R.T
+							S.M.A.R.T not supported
+						Partition 0
+							Partition ID	Disk #6, Partition #0
+							Disk Letter	J:
+							File System	NTFS
+							Volume Serial Number	E60D5C42
+							Size	931 GB
+							Used Space	911 GB (97%)
+							Free Space	19.8 GB (3%)
+				Samsung SSD 970 EVO Plus 2TB (SSD)
+					Manufacturer	SAMSUNG
+					Interface	Unknown
+					Capacity	1863 GB
+					Real size	2,000,398,934,016 bytes
+					RAID Type	None
+						S.M.A.R.T
+							S.M.A.R.T not supported
+						Partition 0
+							Partition ID	Disk #7, Partition #0
+							Disk Letter	K:
+							File System	NTFS
+							Volume Serial Number	CC1343B1
+							Size	1862 GB
+							Used Space	53 GB (2%)
+							Free Space	1809 GB (98%)
+		Flash drives
+				Generic Mass-Storage USB Device
+					Interface	USB
+					Capacity	28.9 GB
+					Real size	31,046,238,208 bytes
+					RAID Type	None
+						S.M.A.R.T
+							S.M.A.R.T not supported
+						Partition 0
+							Partition ID	Disk #10, Partition #0
+							Disk Letter	H:
+							File System	FAT32
+							Volume Serial Number	00000000
+							Size	28.9 GB
+							Used Space	3.73 GB (12%)
+							Free Space	25.2 GB (88%)
+
+
+
+********************************************************
+v1
 Naming and storage sizes
 https://twitter.com/rifaterdemsahin/status/1525052849465565184/photo/1
+
+
+
