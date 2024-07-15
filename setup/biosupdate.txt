@@ -1,0 +1,2 @@
+Drives map them correctly to start correctly
+remove all drives to start from scratch when installing a system
