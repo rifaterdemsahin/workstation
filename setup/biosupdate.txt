@@ -1,2 +1,22 @@
+ASUS Pro WS WRX80E-SAGE SE WIFI
+
 Drives map them correctly to start correctly
 remove all drives to start from scratch when installing a system
+
+BIOS
+Version
+0504
+Date
+6/2/2021
+
+
+
+PRO WS WRX80E-SAGE SE WIFI BIOS 1501
+Version 1501
+9.52 MB
+2024/06/25
+
+https://www.asus.com/uk/motherboards-components/motherboards/workstation/pro-ws-wrx80e-sage-se-wifi/helpdesk_bios?model2Name=Pro-WS-WRX80E-SAGE-SE-WIFI
+
+
+ASUS Pro WS WRX80E-SAGE SE WIFI
