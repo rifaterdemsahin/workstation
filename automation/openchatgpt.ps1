@@ -1,4 +1,4 @@
-# Define the URL
+# Define the URL >>> trigger >>> streamdeck open powershell.exe -Command "& {Start-Process powershell.exe -ArgumentList '-File ""C:\Users\Pexabo\Downloads\openchatgpt.ps1""'}"
 $url = "https://chatgpt.com/"
 
 # Define the path to Chrome
