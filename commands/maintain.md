@@ -1,6 +1,6 @@
-# PowerShell Script to Display Errors from Application and System Logs
+# PowerShell Script to Display Errors and Startup Events from Application and System Logs
 
-This script retrieves and displays errors from the Application and System logs for the last 8 hours. It outputs the errors in a table format, summarizes the most frequent errors, and highlights the longest duration tasks.
+This script retrieves and displays errors from the Application and System logs for the last 8 hours. It outputs the errors in a table format, summarizes the most frequent errors, highlights the longest duration tasks, and includes startup events.
 
 ## PowerShell Script
 
@@ -39,3 +39,21 @@ $longestTasks = $errors |
 
 Write-Host "Longest Duration Tasks (by TimeCreated):" -ForegroundColor Yellow
 $longestTasks | Select-Object TimeCreated, ProviderName, Id, Message | Format-Table -AutoSize
+
+# Fetch startup events from the System log
+$startupEvents = Get-WinEvent -FilterHashtable @{LogName='System'; Id=6005,6006,6008; StartTime=(Get-Date).AddHours(-8)}
+
+# Display startup events in a table format
+$startupEvents | 
+    Select-Object -Property TimeCreated, Id, Message |
+    Sort-Object TimeCreated |
+    Format-Table -AutoSize 
+
+Write-Host "Startup Events:" -ForegroundColor Yellow
+$startupEvents | ForEach-Object {
+    [PSCustomObject]@{
+        EventID      = $_.Id
+        TimeCreated  = $_.TimeCreated
+        Message      = $_.Message
+    }
+} | Format-Table -AutoSize
