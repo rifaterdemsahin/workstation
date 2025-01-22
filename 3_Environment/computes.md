@@ -1,0 +1,7 @@
+- Main Workstation
+- Mac Book Pro
+- Windows XPS
+- Surface Go
+- Ipad
+- Chromebook
+- Iphone 14 Pro Max
