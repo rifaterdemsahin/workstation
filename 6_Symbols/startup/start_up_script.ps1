@@ -21,5 +21,8 @@ foreach ($url in $urls) {
 }
 
 # Launch OBS Studio
+# Launch OBS Studio with administrative privileges
 $obsPath = "C:\Program Files\obs-studio\bin\64bit\obs64.exe"
-Start-Process $obsPath
+$obsWorkingDirectory = "C:\Program Files\obs-studio\bin\64bit"
+Start-Process -FilePath $obsPath -WorkingDirectory $obsWorkingDirectory -Verb RunAs
+
