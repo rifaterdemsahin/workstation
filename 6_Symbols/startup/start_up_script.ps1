@@ -1,3 +1,4 @@
+# Backup here > https://github.com/rifaterdemsahin/workstation/blob/master/6_Symbols/startup/start_up_script.ps1
 # Launch WhatsApp
 Start-Process "whatsapp:"
 
