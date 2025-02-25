@@ -18,6 +18,7 @@ $urls = @(
     "https://www.gmail.com/",     # Fixed missing comma
     "https://vdo.ninja/?director=rifaterdemsahin",
     "https://calendly.com/app/scheduled_events/user/me"
+    
 )
 
 # Launch each URL in a new Chrome window
@@ -49,3 +50,15 @@ if (Test-Path $anythingLLMPath) {
 } else {
     Write-Warning "AnythingLLM not found at specified path: $anythingLLMPath"
 }
+
+
+# Launch onsidian
+$obsidianPath = "C:\Users\Pexabo\AppData\Local\Programs\Obsidian\Obsidian.exe"
+if (Test-Path $obsidianPath) {
+    Start-Process -FilePath $anythingLLMPath
+} else {
+    Write-Warning "AnythingLLM not found at specified path: $obsidianPath"
+}
+
+open streamdeck
+"C:\Program Files\Elgato\StreamDeck\StreamDeck.exe"
