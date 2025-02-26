@@ -69,17 +69,17 @@ if (Test-Path $anythingLLMPath) {
     Write-Warning "📚 AnythingLLM not found at: $anythingLLMPath"
 }
 
-# ✍️ Launch Obsidian (fixed typo from 'onsidian')
+# ✍️ Launch Obsidian
 $obsidianPath = "C:\Users\Pexabo\AppData\Local\Programs\Obsidian\Obsidian.exe"
 Write-Debug "Checking Obsidian at: $obsidianPath"
 if (Test-Path $obsidianPath) {
     Write-Debug "Launching Obsidian"
-    Start-Process -FilePath $obsidianPath -ErrorAction Continue  # Fixed: was using wrong path variable
+    Start-Process -FilePath $obsidianPath -ErrorAction Continue
 } else {
     Write-Warning "✍️ Obsidian not found at: $obsidianPath"
 }
 
-# 🎮 Launch Stream Deck (fixed syntax)
+# 🎮 Launch Stream Deck
 $streamDeckPath = "C:\Program Files\Elgato\StreamDeck\StreamDeck.exe"
 Write-Debug "Checking Stream Deck at: $streamDeckPath"
 if (Test-Path $streamDeckPath) {
@@ -88,5 +88,39 @@ if (Test-Path $streamDeckPath) {
 } else {
     Write-Warning "🎮 Stream Deck not found at: $streamDeckPath"
 }
+
+# 🛠️ Launch Visual Studio Code
+$vscodePath = "C:\Users\Pexabo\AppData\Local\Programs\Microsoft VS Code\Code.exe"
+Write-Debug "Checking VS Code at: $vscodePath"
+if (Test-Path $vscodePath) {
+    Write-Debug "Launching Visual Studio Code"
+    Start-Process -FilePath $vscodePath -ErrorAction Continue
+} else {
+    Write-Warning "🛠️ Visual Studio Code not found at: $vscodePath"
+}
+
+# 🖥️ Open PowerShell to Update Chocolatey Packages
+$powershellPath = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
+Write-Debug "Checking PowerShell at: $powershellPath"
+if (Test-Path $powershellPath) {
+    Write-Debug "Launching PowerShell to update Chocolatey packages"
+    $chocoUpdateCommand = "Start-Process choco -ArgumentList 'upgrade all -y' -Verb RunAs"
+    Start-Process -FilePath $powershellPath -ArgumentList "-NoExit", "-Command", $chocoUpdateCommand -ErrorAction Continue
+} else {
+    Write-Warning "🖥️ PowerShell not found at: $powershellPath"
+}
+
+# ⚙️ Open Windows Update Settings
+Write-Debug "Opening Windows Update settings"
+Start-Process "ms-settings:windowsupdate" -ErrorAction Continue
+
+# Start Docker Desktop
+$dockerDesktopPath = "C:\Program Files\Docker\Docker\Docker Desktop.exe"
+if (Test-Path $dockerDesktopPath) {
+    Start-Process -FilePath $dockerDesktopPath
+} else {
+    Write-Warning "Docker Desktop not found at: $dockerDesktopPath"
+}
+
 
 Write-Debug "Script completed on $(Get-Date)"
