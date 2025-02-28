@@ -1,3 +1,45 @@
+# ASCII art for "start"
+$startAscii = @"
+  _,-._
+ / \_/ \
+>-(_)-<
+ \_/ \_/
+  `-'
+"@
+
+# ASCII art for "end"
+$endAscii = @"
+ _______
+<       >
+ -------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+"@
+
+
+# Function to display colored ASCII art
+function Write-ColoredAscii {
+    param(
+        [string]$Text,
+        [string]$ForegroundColor = "White",
+        [string]$BackgroundColor = "Black"
+    )
+
+    Write-Host $Text -ForegroundColor $ForegroundColor -BackgroundColor $BackgroundColor
+}
+
+# Display "start" message
+Write-ColoredAscii -Text $startAscii -ForegroundColor Green
+
+# Existing code (e.g., window positioning logic)
+#todo: Set windows to the correct monitors > whatsapp in the vertucal monitor, chrome in the first monitor and obs in the third monitor
+#todo: display the start with ascii of the workstation statupo
+
+Write-DebugWithColor "Workstation Automation Started"
+
 # Enable debugging output
 $DebugPreference = "Continue"
 
@@ -63,6 +105,8 @@ $urls = @(
     "https://vdo.ninja/?director=rifaterdemsahin",           # VDO Ninja
     "https://calendly.com/app/scheduled_events/user/me",     # Calendly
     "https://x.com/i/grok"                                   # Grok on X
+    "https://github.com/rifaterdemsahin/workstation/edit/master/6_Symbols/startup/start_up_script.ps1"                                  # Workstation Code Update
+    
 )
 
 # Launch default browser with URLs
@@ -160,3 +204,83 @@ if ($close -ne "stay") {
 } else {
     Write-DebugWithColor "Terminal will remain open as per user request." "Green"
 }
+
+Write-DebugWithColor "Pulling Second Brain Repo for obsidian to Use" "Green"
+# Change directory to the project path
+Set-Location "C:\projects\secondbrain"
+git pull
+
+# Open Twitter/X messages
+Start-Process "https://x.com/messages"
+
+# Open LinkedIn messages
+Start-Process "https://www.linkedin.com/messaging/"
+
+# Open local LinkedIn n8n
+Start-Process "http://localhost:5678/" # Replace with the actual URL if different
+
+# Get RAM information
+$RAM = Get-WmiObject Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory
+
+# Calculate RAM usage
+$RAMUsed = $RAM.TotalVisibleMemorySize - $RAM.FreePhysicalMemory
+$RAMPercentUsed = ($RAMUsed / $RAM.TotalVisibleMemorySize) * 100
+
+# Display RAM information
+Write-Host "Total RAM: $($RAM.TotalVisibleMemorySize/1GB) GB"
+Write-Host "Free RAM: $($RAM.FreePhysicalMemory/1GB) GB"
+Write-Host "RAM Usage: $([Math]::Round($RAMPercentUsed, 2))%"
+
+# Get disk usage information
+Get-WmiObject Win32_LogicalDisk | Where-Object {$_.DriveType -eq 3} | ForEach-Object { # DriveType 3 represents local disks
+    $DiskSize = $_.Size
+    $DiskFree = $_.FreeSpace
+    $DiskUsed = $DiskSize - $DiskFree
+    $DiskPercentUsed = ($DiskUsed / $DiskSize) * 100
+    Write-Host "Drive $($_.DeviceID):"
+    Write-Host "  Total Size: $($DiskSize/1GB) GB"
+    Write-Host "  Free Space: $($DiskFree/1GB) GB"
+    Write-Host "  Disk Usage: $([Math]::Round($DiskPercentUsed, 2))%"
+}
+
+
+# Set window positions
+Add-Type -AssemblyName System.Windows.Forms
+
+# Replace with your application titles and monitor indices
+$whatsapp = Get-Process | Where-Object {$_.MainWindowTitle -like "*WhatsApp*"}
+$chrome = Get-Process | Where-Object {$_.MainWindowTitle -like "*Chrome*"}
+$obs = Get-Process | Where-Object {$_.MainWindowTitle -like "*OBS*"}
+
+
+if ($whatsapp) {
+  $whatsapp.WaitForInputIdle()  # Ensure the window is ready
+  $whatsapp.MainWindowHandle | ForEach-Object {
+      [System.Windows.Forms.Control]::FromHandle($_).Location = New-Object System.Drawing.Point(0,0) #vertical monitor, assumed to be index 1 (0-indexed)
+      [System.Windows.Forms.Control]::FromHandle($_).WindowState = [System.Windows.Forms.FormWindowState]::Maximized
+     }
+}
+
+if ($chrome) {
+  $chrome.WaitForInputIdle()
+    $chrome.MainWindowHandle | ForEach-Object {
+      [System.Windows.Forms.Control]::FromHandle($_).Location = New-Object System.Drawing.Point(1920,0) #first monitor, assumed to be index 0 (0-indexed)
+      [System.Windows.Forms.Control]::FromHandle($_).WindowState = [System.Windows.Forms.FormWindowState]::Maximized
+    }
+}
+
+if ($obs) {
+  $obs.WaitForInputIdle()
+   $obs.MainWindowHandle | ForEach-Object {
+      [System.Windows.Forms.Control]::FromHandle($_).Location = New-Object System.Drawing.Point(3840,0) #third monitor, assumed to be index 2 (0-indexed)
+      [System.Windows.Forms.Control]::FromHandle($_).WindowState = [System.Windows.Forms.FormWindowState]::Maximized
+     }
+}
+
+
+
+
+# Display "end" message
+Write-ColoredAscii -Text $endAscii -ForegroundColor Cyan
+
+
