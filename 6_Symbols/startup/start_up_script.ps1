@@ -104,7 +104,8 @@ $urls = @(
     "https://www.gmail.com/",                                # Gmail
     "https://vdo.ninja/?director=rifaterdemsahin",           # VDO Ninja
     "https://calendly.com/app/scheduled_events/user/me",     # Calendly
-    "https://x.com/i/grok"                                   # Grok on X
+    "https://x.com/i/grok",                                # Grok on X
+    "https://gemini.google.com/app",
     "https://github.com/rifaterdemsahin/workstation/edit/master/6_Symbols/startup/start_up_script.ps1"                                  # Workstation Code Update
     
 )
