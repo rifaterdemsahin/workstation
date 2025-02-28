@@ -237,7 +237,11 @@ Get-WmiObject Win32_LogicalDisk | Where-Object {$_.DriveType -eq 3} | ForEach-Ob
     $DiskFree = $_.FreeSpace
     $DiskUsed = $DiskSize - $DiskFree
     $DiskPercentUsed = ($DiskUsed / $DiskSize) * 100
-    Write-Host "Drive $($_.DeviceID):"
+    if ($_.MediaType -ne $null) { # Check if MediaType property exists (it might be null for some drives)
+        Write-Host "Drive $($_.DeviceID): $($_.MediaType)"
+    } else {
+        Write-Host "Drive $($_.DeviceID):"
+    }
     Write-Host "  Total Size: $($DiskSize/1GB) GB"
     Write-Host "  Free Space: $($DiskFree/1GB) GB"
     Write-Host "  Disk Usage: $([Math]::Round($DiskPercentUsed, 2))%"
