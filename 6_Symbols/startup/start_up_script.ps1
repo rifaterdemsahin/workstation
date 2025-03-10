@@ -19,27 +19,6 @@ $endAscii = @"
                 ||     ||
 "@
 
-
-# Function to display colored ASCII art
-function Write-ColoredAscii {
-    param(
-        [string]$Text,
-        [string]$ForegroundColor = "White",
-        [string]$BackgroundColor = "Black"
-    )
-
-    Write-Host $Text -ForegroundColor $ForegroundColor -BackgroundColor $BackgroundColor
-}
-
-# Display "start" message
-Write-ColoredAscii -Text $startAscii -ForegroundColor Green
-
-# Existing code (e.g., window positioning logic)
-#todo: Set windows to the correct monitors > whatsapp in the vertucal monitor, chrome in the first monitor and obs in the third monitor
-#todo: display the start with ascii of the workstation statupo
-
-Write-DebugWithColor "Workstation Automation Started"
-
 # Enable debugging output
 $DebugPreference = "Continue"
 
@@ -55,7 +34,16 @@ function Write-DebugWithColor {
     Write-Host "[DEBUG] $Message" -ForegroundColor $Color
 }
 
-Write-DebugWithColor "Script started on $(Get-Date)" "Green"
+# Function to display colored ASCII art
+function Write-ColoredAscii {
+    param(
+        [string]$Text,
+        [string]$ForegroundColor = "White",
+        [string]$BackgroundColor = "Black"
+    )
+
+    Write-Host $Text -ForegroundColor $ForegroundColor -BackgroundColor $BackgroundColor
+}
 
 # Function to start a process with error handling
 function Start-ProcessWithCheck {
@@ -90,6 +78,12 @@ function Start-ProcessWithCheck {
     }
 }
 
+# Display "start" message
+Write-ColoredAscii -Text $startAscii -ForegroundColor Green
+
+Write-DebugWithColor "Workstation Automation Started" "Green"
+Write-DebugWithColor "Script started on $(Get-Date)" "Green"
+
 # Minimize all windows
 Write-DebugWithColor "Minimizing all windows" "Yellow"
 (New-Object -ComObject Shell.Application).MinimizeAll()
@@ -104,9 +98,13 @@ $urls = @(
     "https://www.gmail.com/",                                # Gmail
     "https://vdo.ninja/?director=rifaterdemsahin",           # VDO Ninja
     "https://calendly.com/app/scheduled_events/user/me",     # Calendly
-    "https://x.com/i/grok"                                   # Grok on X
-    "https://github.com/rifaterdemsahin/workstation/edit/master/6_Symbols/startup/start_up_script.ps1"                                  # Workstation Code Update
-    
+    "https://github.com/n8n-io/n8n",                         # n8n GitHub
+    "https://www.notion.so/",                                # Notion
+    "https://x.com/i/grok",                                  # Grok on X
+    "https://rifaterdemsahinblog.wordpress.com/wp-admin/post-new.php?post_type=post&calypsoify=1&block-editor=1&frame-nonce=3e1e1b7b1b&origin=https%3A%",    
+    "https://github.com/rifaterdemsahin/workstation/edit/master/6_Symbols/startup/start_up_script.ps1",
+    "https://mail.google.com/mail/u/0/#advanced-search/is_unread=true&query=label%3A1_borrow_followup&isrefinement=true",
+    "https://192-168-9-34.petersfieldmansions.direct.quickconnect.to:5001/"
 )
 
 # Launch default browser with URLs
@@ -120,54 +118,53 @@ foreach ($url in $urls) {
     }
 }
 
-# Define applications to launch
+# Define applications to launch with full paths
 $applications = @(
     @{
         Name = "OBS Studio"
-        Path = "obs64.exe"
+        Path = "C:\Program Files\obs-studio\bin\64bit\obs64.exe"  # Updated with full path
         RequiresAdmin = $true
     },
     @{
         Name = "LM Studio"
-        Path = "LM Studio.exe"
+        Path = "C:\Program Files\LM Studio\LM Studio.exe"  # Updated with full path
         RequiresAdmin = $true
     },
     @{
         Name = "AnythingLLM"
-        Path = "AnythingLLM.exe"
+        Path = "C:\Program Files\AnythingLLM\AnythingLLM.exe"  # Updated with full path
         RequiresAdmin = $false
     },
     @{
         Name = "Obsidian"
-        Path = "Obsidian.exe"
+        Path = "C:\Users\%USERNAME%\AppData\Local\Obsidian\Obsidian.exe"  # Updated with full path
         RequiresAdmin = $false
     },
     @{
         Name = "Stream Deck"
-        Path = "StreamDeck.exe"
+        Path = "C:\Program Files\Elgato\StreamDeck\StreamDeck.exe"  # Updated with full path
         RequiresAdmin = $false
     },
     @{
         Name = "Visual Studio Code"
-        Path = "Code.exe"
+        Path = "C:\Program Files\Microsoft VS Code\Code.exe"  # Updated with full path
         RequiresAdmin = $false
     },
     @{
         Name = "Docker Desktop"
-        Path = "Docker Desktop.exe"
+        Path = "C:\Program Files\Docker\Docker\Docker Desktop.exe"  # Updated with full path
         RequiresAdmin = $false
     }
 )
 
 # Launch applications
 foreach ($app in $applications) {
-    $appPath = (Get-Command $app.Path -ErrorAction SilentlyContinue)
-    if ($appPath) {
+    if (Test-Path $app.Path -ErrorAction SilentlyContinue) {
         $verb = if ($app.RequiresAdmin) { "RunAs" } else { "" }
         Write-DebugWithColor "Launching $($app.Name)" "Blue"
-        Start-ProcessWithCheck -ProcessPath $appPath -Verb $verb
+        Start-ProcessWithCheck -ProcessPath $app.Path -Verb $verb
     } else {
-        Write-Host "[WARNING] $($app.Name) not found in system PATH." -ForegroundColor Yellow
+        Write-Host "[WARNING] $($app.Name) not found at: $($app.Path)" -ForegroundColor Yellow
     }
 }
 
@@ -189,7 +186,115 @@ try {
     Write-Host "[ERROR] Failed to open Windows Update settings. Error: $_" -ForegroundColor Red
 }
 
+# Pull Second Brain Repo
+Write-DebugWithColor "Pulling Second Brain Repo for obsidian to Use" "Green"
+try {
+    # Change directory to the project path
+    if (Test-Path "C:\projects\secondbrain") {
+        Set-Location "C:\projects\secondbrain"
+        git pull
+        Write-DebugWithColor "Successfully pulled Second Brain repo" "Green"
+    } else {
+        Write-Host "[WARNING] Second Brain repository not found at C:\projects\secondbrain" -ForegroundColor Yellow
+    }
+} catch {
+    Write-Host "[ERROR] Failed to pull Second Brain repository. Error: $_" -ForegroundColor Red
+}
+
+# Open additional URLs
+Write-DebugWithColor "Opening communication channels" "Blue"
+Start-Process "https://x.com/messages"
+Start-Process "https://www.linkedin.com/messaging/"
+Start-Process "http://localhost:5678/" # n8n
+
+# Get RAM information
+$RAM = Get-WmiObject Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory
+
+# Calculate RAM usage
+$RAMUsed = $RAM.TotalVisibleMemorySize - $RAM.FreePhysicalMemory
+$RAMTotalGB = [math]::Round($RAM.TotalVisibleMemorySize/1MB, 2)
+$RAMFreeGB = [math]::Round($RAM.FreePhysicalMemory/1MB, 2)
+$RAMPercentUsed = [math]::Round(($RAMUsed / $RAM.TotalVisibleMemorySize) * 100, 2)
+
+# Display RAM information
+Write-Host "`n=======================================" -ForegroundColor Blue
+Write-Host "SYSTEM INFORMATION" -ForegroundColor Cyan
+Write-Host "=======================================" -ForegroundColor Blue
+Write-Host "Total RAM: $RAMTotalGB GB"
+Write-Host "Free RAM: $RAMFreeGB GB"
+Write-Host "RAM Usage: $RAMPercentUsed%" -ForegroundColor $(if ($RAMPercentUsed -gt 80) {"Red"} elseif ($RAMPercentUsed -gt 60) {"Yellow"} else {"Green"})
+
+# Get disk usage information
+Write-Host "`n=======================================" -ForegroundColor Blue
+Write-Host "DISK INFORMATION" -ForegroundColor Cyan
+Write-Host "=======================================" -ForegroundColor Blue
+Get-WmiObject Win32_LogicalDisk | Where-Object {$_.DriveType -eq 3} | ForEach-Object {
+    $DiskSize = $_.Size
+    $DiskFree = $_.FreeSpace
+    $DiskUsed = $DiskSize - $DiskFree
+    $DiskPercentUsed = [math]::Round(($DiskUsed / $DiskSize) * 100, 2)
+    $DiskSizeGB = [math]::Round($DiskSize/1GB, 2)
+    $DiskFreeGB = [math]::Round($DiskFree/1GB, 2)
+    
+    Write-Host "Drive $($_.DeviceID):" -ForegroundColor White
+    Write-Host "  Total Size: $DiskSizeGB GB"
+    Write-Host "  Free Space: $DiskFreeGB GB"
+    Write-Host "  Disk Usage: $DiskPercentUsed%" -ForegroundColor $(if ($DiskPercentUsed -gt 90) {"Red"} elseif ($DiskPercentUsed -gt 75) {"Yellow"} else {"Green"})
+}
+
+# Set window positions
+Write-DebugWithColor "Attempting to set window positions" "Magenta"
+try {
+    Add-Type -AssemblyName System.Windows.Forms
+
+    # Give windows time to open
+    Start-Sleep -Seconds 3
+
+    # Replace with your application titles and monitor indices
+    $whatsapp = Get-Process | Where-Object {$_.MainWindowTitle -like "*WhatsApp*"}
+    $chrome = Get-Process | Where-Object {$_.MainWindowTitle -like "*Chrome*"}
+    $obs = Get-Process | Where-Object {$_.MainWindowTitle -like "*OBS*"}
+
+    if ($whatsapp) {
+        $whatsapp.WaitForInputIdle()  # Ensure the window is ready
+        $whatsapp.MainWindowHandle | ForEach-Object {
+            [System.Windows.Forms.Control]::FromHandle($_).Location = New-Object System.Drawing.Point(0,0) #vertical monitor, assumed to be index 1 (0-indexed)
+            [System.Windows.Forms.Control]::FromHandle($_).WindowState = [System.Windows.Forms.FormWindowState]::Maximized
+        }
+        Write-DebugWithColor "WhatsApp window positioned" "Green"
+    } else {
+        Write-Host "[INFO] WhatsApp window not found" -ForegroundColor Yellow
+    }
+
+    if ($chrome) {
+        $chrome.WaitForInputIdle()
+        $chrome.MainWindowHandle | ForEach-Object {
+            [System.Windows.Forms.Control]::FromHandle($_).Location = New-Object System.Drawing.Point(1920,0) #first monitor, assumed to be index 0 (0-indexed)
+            [System.Windows.Forms.Control]::FromHandle($_).WindowState = [System.Windows.Forms.FormWindowState]::Maximized
+        }
+        Write-DebugWithColor "Chrome window positioned" "Green"
+    } else {
+        Write-Host "[INFO] Chrome window not found" -ForegroundColor Yellow
+    }
+
+    if ($obs) {
+        $obs.WaitForInputIdle()
+        $obs.MainWindowHandle | ForEach-Object {
+            [System.Windows.Forms.Control]::FromHandle($_).Location = New-Object System.Drawing.Point(3840,0) #third monitor, assumed to be index 2 (0-indexed)
+            [System.Windows.Forms.Control]::FromHandle($_).WindowState = [System.Windows.Forms.FormWindowState]::Maximized
+        }
+        Write-DebugWithColor "OBS window positioned" "Green"
+    } else {
+        Write-Host "[INFO] OBS window not found" -ForegroundColor Yellow
+    }
+} catch {
+    Write-Host "[ERROR] Failed to set window positions. Error: $_" -ForegroundColor Red
+}
+
 Write-DebugWithColor "Script completed on $(Get-Date)" "Green"
+
+# Display "end" message
+Write-ColoredAscii -Text $endAscii -ForegroundColor Cyan
 
 # Prompt to close terminal
 Write-Host "`n=======================================" -ForegroundColor Yellow
@@ -204,87 +309,3 @@ if ($close -ne "stay") {
 } else {
     Write-DebugWithColor "Terminal will remain open as per user request." "Green"
 }
-
-Write-DebugWithColor "Pulling Second Brain Repo for obsidian to Use" "Green"
-# Change directory to the project path
-Set-Location "C:\projects\secondbrain"
-git pull
-
-# Open Twitter/X messages
-Start-Process "https://x.com/messages"
-
-# Open LinkedIn messages
-Start-Process "https://www.linkedin.com/messaging/"
-
-# Open local LinkedIn n8n
-Start-Process "http://localhost:5678/" # Replace with the actual URL if different
-
-# Get RAM information
-$RAM = Get-WmiObject Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory
-
-# Calculate RAM usage
-$RAMUsed = $RAM.TotalVisibleMemorySize - $RAM.FreePhysicalMemory
-$RAMPercentUsed = ($RAMUsed / $RAM.TotalVisibleMemorySize) * 100
-
-# Display RAM information
-Write-Host "Total RAM: $($RAM.TotalVisibleMemorySize/1GB) GB"
-Write-Host "Free RAM: $($RAM.FreePhysicalMemory/1GB) GB"
-Write-Host "RAM Usage: $([Math]::Round($RAMPercentUsed, 2))%"
-
-# Get disk usage information
-Get-WmiObject Win32_LogicalDisk | Where-Object {$_.DriveType -eq 3} | ForEach-Object { # DriveType 3 represents local disks
-    $DiskSize = $_.Size
-    $DiskFree = $_.FreeSpace
-    $DiskUsed = $DiskSize - $DiskFree
-    $DiskPercentUsed = ($DiskUsed / $DiskSize) * 100
-    if ($_.MediaType -ne $null) { # Check if MediaType property exists (it might be null for some drives)
-        Write-Host "Drive $($_.DeviceID): $($_.MediaType)"
-    } else {
-        Write-Host "Drive $($_.DeviceID):"
-    }
-    Write-Host "  Total Size: $($DiskSize/1GB) GB"
-    Write-Host "  Free Space: $($DiskFree/1GB) GB"
-    Write-Host "  Disk Usage: $([Math]::Round($DiskPercentUsed, 2))%"
-}
-
-
-# Set window positions
-Add-Type -AssemblyName System.Windows.Forms
-
-# Replace with your application titles and monitor indices
-$whatsapp = Get-Process | Where-Object {$_.MainWindowTitle -like "*WhatsApp*"}
-$chrome = Get-Process | Where-Object {$_.MainWindowTitle -like "*Chrome*"}
-$obs = Get-Process | Where-Object {$_.MainWindowTitle -like "*OBS*"}
-
-
-if ($whatsapp) {
-  $whatsapp.WaitForInputIdle()  # Ensure the window is ready
-  $whatsapp.MainWindowHandle | ForEach-Object {
-      [System.Windows.Forms.Control]::FromHandle($_).Location = New-Object System.Drawing.Point(0,0) #vertical monitor, assumed to be index 1 (0-indexed)
-      [System.Windows.Forms.Control]::FromHandle($_).WindowState = [System.Windows.Forms.FormWindowState]::Maximized
-     }
-}
-
-if ($chrome) {
-  $chrome.WaitForInputIdle()
-    $chrome.MainWindowHandle | ForEach-Object {
-      [System.Windows.Forms.Control]::FromHandle($_).Location = New-Object System.Drawing.Point(1920,0) #first monitor, assumed to be index 0 (0-indexed)
-      [System.Windows.Forms.Control]::FromHandle($_).WindowState = [System.Windows.Forms.FormWindowState]::Maximized
-    }
-}
-
-if ($obs) {
-  $obs.WaitForInputIdle()
-   $obs.MainWindowHandle | ForEach-Object {
-      [System.Windows.Forms.Control]::FromHandle($_).Location = New-Object System.Drawing.Point(3840,0) #third monitor, assumed to be index 2 (0-indexed)
-      [System.Windows.Forms.Control]::FromHandle($_).WindowState = [System.Windows.Forms.FormWindowState]::Maximized
-     }
-}
-
-
-
-
-# Display "end" message
-Write-ColoredAscii -Text $endAscii -ForegroundColor Cyan
-
-
