@@ -59,6 +59,12 @@ $CommUrls = @(
 
 $DebugPreference = "Continue"
 
+# Ensure log directory exists
+$logDir = Split-Path -Parent $Config.LogFile
+if (-not (Test-Path $logDir)) {
+    New-Item -ItemType Directory -Path $logDir -Force | Out-Null
+}
+
 function Write-Log {
     param ([string]$Message)
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
@@ -132,16 +138,16 @@ function Launch-Applications {
     }
 }
 
-
 function Update-System {
     Write-Debug "Updating Chocolatey packages" "Yellow"
     try { Start-ProcessEx "cmd.exe" "/c choco upgrade all -y" -Verb "RunAs" }
-    catch { Write-Log "[ERROR] Chocolatey update failed: $_" -ForegroundColor Red }
+    catch { Write-Log "[ERROR] Chocolatey update failed: $_" }
 
     Write-Debug "Opening Windows Update settings" "Yellow"
     try { Start-ProcessEx "ms-settings:windowsupdate" }
-    catch { Write-Log "[ERROR] Failed to open Windows Update: $_" -ForegroundColor Red }
+    catch { Write-Log "[ERROR] Failed to open Windows Update: $_" }
 }
+
 function Sync-Repositories {
     Write-Debug "Pulling Second Brain Repo" "Green"
     if (Test-Path "C:\projects\secondbrain") {
@@ -149,26 +155,26 @@ function Sync-Repositories {
             Set-Location "C:\projects\secondbrain"
             git pull
             Write-Debug "Successfully pulled Second Brain repo" "Green"
-    } catch {
-            Write-Log "[ERROR] Second Brain pull failed: $_" -ForegroundColor Red
+        } catch {
+            Write-Host "[ERROR] Second Brain pull failed: $_" -ForegroundColor Red
+            Write-Log "[ERROR] Second Brain pull failed: $_"
+        }
+    } else {
+        Write-Host "[WARNING] Second Brain repo not found" -ForegroundColor Yellow
+        Write-Log "[WARNING] Second Brain repo not found"
     }
-} else {
-        Write-Log "[WARNING] Second Brain repo not found" -ForegroundColor Yellow
-}
 }
 
 function Test-Network {
     Write-Debug "Testing network latency to 1.1.1.1" "Yellow"
     $pingResults = Test-Connection -ComputerName "1.1.1.1" -Count 4
-    $avgPing    = ($pingResults | Measure-Object -Property ResponseTime -Average).Average
+    $avgPing = ($pingResults | Measure-Object -Property ResponseTime -Average).Average
     $color = if ($avgPing -gt 20) { "Red" } else { "Green" }
     Write-Host "Average ping to 1.1.1.1: $avgPing ms" -ForegroundColor $color
     Write-Log "Average ping to 1.1.1.1: $avgPing ms"
 }
 
-
 function Get-SystemInfo {
-
     Write-Host "`n=======================================" -ForegroundColor Blue
     Write-Host "SYSTEM INFORMATION" -ForegroundColor Cyan
     Write-Host "=======================================" -ForegroundColor Blue
@@ -181,10 +187,10 @@ function Get-SystemInfo {
 }
 
 function Get-RAMInfo {
-    $RAM       = Get-WmiObject Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory
-    $RAMUsed   = $RAM.TotalVisibleMemorySize - $RAM.FreePhysicalMemory
+    $RAM = Get-WmiObject Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory
+    $RAMUsed = $RAM.TotalVisibleMemorySize - $RAM.FreePhysicalMemory
     $RAMTotalGB = [math]::Round($RAM.TotalVisibleMemorySize / 1MB, 2)
-    $RAMFreeGB  = [math]::Round($RAM.FreePhysicalMemory / 1MB, 2)
+    $RAMFreeGB = [math]::Round($RAM.FreePhysicalMemory / 1MB, 2)
     $RAMPercentUsed = [math]::Round(($RAMUsed / $RAM.TotalVisibleMemorySize) * 100, 2)
     $color = if ($RAMPercentUsed -gt 80) { "Red" } elseif ($RAMPercentUsed -gt 60) { "Yellow" } else { "Green" }
 
@@ -227,188 +233,22 @@ function Position-Windows {
                 $proc.WaitForInputIdle()
                 $proc.MainWindowHandle | ForEach-Object {
                     $control = [System.Windows.Forms.Control]::FromHandle($_)
-                    $control.Location = New-Object System.Drawing.Point($_.X, $_.Y)
+                    $control.Location = New-Object System.Drawing.Point($window.X, $window.Y)
                     $control.WindowState = [System.Windows.Forms.FormWindowState]::Maximized
                 }
                 Write-Debug "$($_.Process) window positioned" "Green"
-        } else {
-                Write-Log "[INFO] $($_.Process) window not found" -ForegroundColor Yellow
-        }
-    }
-    } catch {
-        Write-Log "[ERROR] Failed to set window positions: $_" -ForegroundColor Red
-}
-}
-
-Initialize-Environment
-Launch-BrowserContent
-Launch-Applications
-Update-System
-Sync-Repositories
-Test-Network
-Get-SystemInfo
-Position-Windows
-
-Write-Debug "Script completed on $(Get-Date)" "Green"
-Write-Ascii $Config.EndAscii -ForegroundColor Cyan
-
-Write-Host "`n=======================================" -ForegroundColor Yellow
-Write-Host "✅ All startup applications launched!" -ForegroundColor Green
-Write-Host "=======================================" -ForegroundColor Yellow
-
-$close = Read-Host "Press Enter to close or type 'stay' to keep open"
-if ($close -ne "stay") {
-    Write-Debug "Closing terminal" "Green"
-    Stop-Process -Id $PID
-} else {
-    Write-Debug "Terminal remains open" "Green"
-}
+            } else {
+                Write-Host "[INFO] $($_.Process) window not found" -ForegroundColor Yellow
+                Write-Log "[INFO] $($_.Process) window not found"
             }
         }
-
-function Update-System {
-    Write-Debug "Updating Chocolatey packages" "Yellow"
-    try { Start-ProcessEx "cmd.exe" "/c choco upgrade all -y" -Verb "RunAs" }
-    catch { Write-Log "[ERROR] Chocolatey update failed: $_" -ForegroundColor Red }
-
-    Write-Debug "Opening Windows Update settings" "Yellow"
-    try { Start-ProcessEx "ms-settings:windowsupdate" }
-    catch { Write-Log "[ERROR] Failed to open Windows Update: $_" -ForegroundColor Red }
-}
-function Sync-Repositories {
-    Write-Debug "Pulling Second Brain Repo" "Green"
-    if (Test-Path "C:\projects\secondbrain") {
-        try {
-            Set-Location "C:\projects\secondbrain"
-            git pull
-            Write-Debug "Successfully pulled Second Brain repo" "Green"
     } catch {
         Write-Host "[ERROR] Failed to set window positions: $_" -ForegroundColor Red
         Write-Log "[ERROR] Failed to set window positions: $_"
-            Write-Log "[ERROR] Second Brain pull failed: $_" -ForegroundColor Red
     }
 }
 
 # Main Execution
-Initialize-Environment
-Launch-BrowserContent
-Launch-Applications
-Update-System
-Sync-Repositories
-Test-Network
-Get-SystemInfo
-Position-Windows
-
-Write-DebugWithColor "Script completed on $(Get-Date)" "Green"
-Write-ColoredAscii -Text $Config.EndAscii -ForegroundColor Cyan
-
-Write-Host "`n=======================================" -ForegroundColor Yellow
-Write-Host "✅ All startup applications launched!" -ForegroundColor Green
-Write-Host "=======================================" -ForegroundColor Yellow
-
-$close = Read-Host "Press Enter to close or type 'stay' to keep open"
-if ($close -ne "stay") {
-    Write-DebugWithColor "Closing terminal" "Green"
-    Stop-Process -Id $PID
-} else {
-    Write-DebugWithColor "Terminal remains open" "Green"
-        Write-Log "[WARNING] Second Brain repo not found" -ForegroundColor Yellow
-}
-
-# ... (rest of the script remains unchanged, except for the Launch-Applications function)
-
-function Launch-Applications {
-    foreach ($app in $Applications) {
-        $verb = if ($app.RequiresAdmin) { "RunAs" } else { "" }
-        Write-DebugWithColor "Launching $($app.Name)" "Blue"
-        if ($app.Name -eq "Visual Studio Code") {
-            # Launch VS Code with specific folders
-            Start-ProcessWithCheck -ProcessPath $app.Path -Arguments "C:\projects\workstation\"
-            Start-ProcessWithCheck -ProcessPath $app.Path -Arguments "C:\projects\secondbrain\"
-function Test-Network {
-    Write-Debug "Testing network latency to 1.1.1.1" "Yellow"
-    $pingResults = Test-Connection -ComputerName "1.1.1.1" -Count 4
-    $avgPing    = ($pingResults | Measure-Object -Property ResponseTime -Average).Average
-    $color = if ($avgPing -gt 20) { "Red" } else { "Green" }
-    Write-Host "Average ping to 1.1.1.1: $avgPing ms" -ForegroundColor $color
-    Write-Log "Average ping to 1.1.1.1: $avgPing ms"
-}
-
-
-function Get-SystemInfo {
-
-    Write-Host "`n=======================================" -ForegroundColor Blue
-    Write-Host "SYSTEM INFORMATION" -ForegroundColor Cyan
-    Write-Host "=======================================" -ForegroundColor Blue
-    Get-RAMInfo
-
-    Write-Host "`n=======================================" -ForegroundColor Blue
-    Write-Host "DISK INFORMATION" -ForegroundColor Cyan
-    Write-Host "=======================================" -ForegroundColor Blue
-    Get-DiskInfo
-}
-
-function Get-RAMInfo {
-    $RAM       = Get-WmiObject Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory
-    $RAMUsed   = $RAM.TotalVisibleMemorySize - $RAM.FreePhysicalMemory
-    $RAMTotalGB = [math]::Round($RAM.TotalVisibleMemorySize / 1MB, 2)
-    $RAMFreeGB  = [math]::Round($RAM.FreePhysicalMemory / 1MB, 2)
-    $RAMPercentUsed = [math]::Round(($RAMUsed / $RAM.TotalVisibleMemorySize) * 100, 2)
-    $color = if ($RAMPercentUsed -gt 80) { "Red" } elseif ($RAMPercentUsed -gt 60) { "Yellow" } else { "Green" }
-
-    Write-Host "Total RAM: $RAMTotalGB GB"
-    Write-Host "Free RAM: $RAMFreeGB GB"
-    Write-Host "RAM Usage: $RAMPercentUsed%" -ForegroundColor $color
-    Write-Log "RAM Info - Total: $RAMTotalGB GB, Free: $RAMFreeGB GB, Usage: $RAMPercentUsed%"
-}
-
-function Get-DiskInfo {
-    Get-WmiObject Win32_LogicalDisk | Where-Object { $_.DriveType -eq 3 } | ForEach-Object {
-        $DiskSizeGB = [math]::Round($_.Size / 1GB, 2)
-        $DiskFreeGB = [math]::Round($_.FreeSpace / 1GB, 2)
-        $DiskPercentUsed = [math]::Round((($_.Size - $_.FreeSpace) / $_.Size) * 100, 2)
-        $color = if ($DiskPercentUsed -gt 90) { "Red" } elseif ($DiskPercentUsed -gt 75) { "Yellow" } else { "Green" }
-
-        Write-Host "Drive $($_.DeviceID):" -ForegroundColor White
-        Write-Host "  Total Size: $DiskSizeGB GB"
-        Write-Host "  Free Space: $DiskFreeGB GB"
-        Write-Host "  Disk Usage: $DiskPercentUsed%" -ForegroundColor $color
-        Write-Log "Disk $($_.DeviceID) - Total: $DiskSizeGB GB, Free: $DiskFreeGB GB, Usage: $DiskPercentUsed%"
-    }
-}
-
-function Position-Windows {
-    Write-Debug "Attempting to set window positions" "Magenta"
-    try {
-        Add-Type -AssemblyName System.Windows.Forms
-        Start-Sleep -Seconds 3
-
-        $windows = @(
-            @{ Process = "WhatsApp"; X = 0;   Y = 0 }
-            @{ Process = "Chrome";  X = 1920; Y = 0 }
-            @{ Process = "OBS";     X = 3840; Y = 0 }
-        )
-
-        $windows | ForEach-Object {
-            $proc = Get-Process | Where-Object { $_.MainWindowTitle -like "*$($_.Process)*" }
-            if ($proc) {
-                $proc.WaitForInputIdle()
-                $proc.MainWindowHandle | ForEach-Object {
-                    $control = [System.Windows.Forms.Control]::FromHandle($_)
-                    $control.Location = New-Object System.Drawing.Point($_.X, $_.Y)
-                    $control.WindowState = [System.Windows.Forms.FormWindowState]::Maximized
-                }
-                Write-Debug "$($_.Process) window positioned" "Green"
-        } else {
-            # Launch other applications normally
-            Start-ProcessWithCheck -ProcessPath $app.Path -Verb $verb
-                Write-Log "[INFO] $($_.Process) window not found" -ForegroundColor Yellow
-        }
-    }
-}
-
-# ... (rest of the script remains unchanged)
-
 Initialize-Environment
 Launch-BrowserContent
 Launch-Applications
