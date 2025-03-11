@@ -1,0 +1,1 @@
+powershell.exe -ExecutionPolicy Bypass -File "C:\projects\workstation\6_Symbols\startup\start_up_agentsdevcript.ps1"
