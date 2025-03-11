@@ -155,8 +155,8 @@ function Start-ProcessEx {
         Write-Debug "Successfully launched: $ProcessPath" "Green"
         return $true
     } catch {
-        Write-Host "[ERROR] Failed to start $ProcessPath: $_" -ForegroundColor Red
-        Write-Log "[ERROR] Failed to start $ProcessPath: $_"
+        Write-Host "[ERROR] Failed to start $ProcessPath. Error: $_" -ForegroundColor Red
+        Write-Log "[ERROR] Failed to start $ProcessPath. Error: $_"
         return $false
     }
 }
