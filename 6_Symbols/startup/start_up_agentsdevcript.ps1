@@ -274,3 +274,7 @@ if ($close -ne "stay") {
 } else {
     Write-DebugWithColor "Terminal remains open" "Green"
 }
+
+todo : Open visual studio code  for this folder C:\projects\workstation\
+todo : Open visual studio code  for this folder C:\projects\secondbrain\
+todo: open gimp "C:\Program Files\GIMP 2\bin\gimp-2.10.exe"
