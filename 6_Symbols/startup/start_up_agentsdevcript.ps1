@@ -31,6 +31,7 @@ $Applications = @(
     @{ Name = "Stream Deck"; Path = "C:\Program Files\Elgato\StreamDeck\StreamDeck.exe"; RequiresAdmin = $false }
     @{ Name = "Visual Studio Code"; Path = "C:\Program Files\Microsoft VS Code\Code.exe"; RequiresAdmin = $false }
     @{ Name = "Docker Desktop"; Path = "C:\Program Files\Docker\Docker\Docker Desktop.exe"; RequiresAdmin = $false }
+    @{ Name = "GIMP"; Path = "C:\Program Files\GIMP 2\bin\gimp-2.10.exe"; RequiresAdmin = $false } # Added GIMP
 )
 
 # URL Definitions
@@ -49,7 +50,8 @@ $Urls = @(
     "https://rifaterdemsahinblog.wordpress.com/wp-admin/post-new.php?post_type=post&calypsoify=1&block-editor=1&frame-nonce=3e1e1b7b1b&origin=https%3A%",
     "https://github.com/rifaterdemsahin/workstation/edit/master/6_Symbols/startup/start_up_script.ps1",
     "https://mail.google.com/mail/u/0/#advanced-search/is_unread=true&query=label%3A1_borrow_followup&isrefinement=true",
-    "https://192-168-9-34.petersfieldmansions.direct.quickconnect.to:5001/"
+    "https://petersfieldmansions.direct.quickconnect.to:5001/",
+    "https://manusai.com/" # Added Manusai
 )
 
 $CommUrls = @(
@@ -275,7 +277,21 @@ if ($close -ne "stay") {
     Write-DebugWithColor "Terminal remains open" "Green"
 }
 
-todo : Open visual studio code  for this folder C:\projects\workstation\
-todo : Open visual studio code  for this folder C:\projects\secondbrain\
-todo: open gimp "C:\Program Files\GIMP 2\bin\gimp-2.10.exe"
-todo: open manusai web page
+# ... (rest of the script remains unchanged, except for the Launch-Applications function)
+
+function Launch-Applications {
+    foreach ($app in $Applications) {
+        $verb = if ($app.RequiresAdmin) { "RunAs" } else { "" }
+        Write-DebugWithColor "Launching $($app.Name)" "Blue"
+        if ($app.Name -eq "Visual Studio Code") {
+            # Launch VS Code with specific folders
+            Start-ProcessWithCheck -ProcessPath $app.Path -Arguments "C:\projects\workstation\"
+            Start-ProcessWithCheck -ProcessPath $app.Path -Arguments "C:\projects\secondbrain\"
+        } else {
+            # Launch other applications normally
+            Start-ProcessWithCheck -ProcessPath $app.Path -Verb $verb
+        }
+    }
+}
+
+# ... (rest of the script remains unchanged)
