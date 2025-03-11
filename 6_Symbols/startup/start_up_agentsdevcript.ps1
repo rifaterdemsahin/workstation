@@ -63,6 +63,61 @@ $CommUrls = @(
     "http://localhost:5678/"
 )
 
+
+# ... (rest of your script) ...
+
+$WorkProfileurls = @(
+    "https://teams.microsoft.com/v2/"
+    "https://outlook.office.com/calendar/view/week"
+    "https://outlook.office.com/mail/"
+)
+
+# ... (rest of your script) ...
+
+function Launch-BrowserContent {
+    try {
+        # First validate if Chrome exists
+        if (-not (Test-Path $Config.ChromePath)) {
+            # ... (existing code for finding Chrome or falling back to Edge) ...
+        }
+        
+        $chromeArgs = @()
+        if ($Config.ChromeProfile) {
+            $chromeArgs += $Config.ChromeProfile
+        }
+
+        # Define a new profile for the work urls
+        $workProfile = "--profile-directory=`"Profile 19`""
+        
+        # Launch main URLs with delay between each to avoid overwhelming system
+        Write-Debug "Opening URLs in browser" "DarkCyan"
+        foreach ($url in $Urls) {
+            Write-Debug "Opening URL: $url" "DarkCyan"
+            Start-ProcessEx $Config.ChromePath ($chromeArgs + $url)
+            Start-Sleep -Milliseconds 500  # Small delay between launches
+        }
+        
+        # Launch communication URLs
+        Write-Debug "Opening communication channels" "Blue"
+        foreach ($url in $CommUrls) {
+            Start-ProcessEx $Config.ChromePath ($chromeArgs + $url)
+            Start-Sleep -Milliseconds 500  # Small delay between launches
+        }
+
+        #Launch Work urls
+         Write-Debug "Opening Work Profile URLs" "Blue"
+        foreach ($url in $WorkProfileurls) {
+            Start-ProcessEx $Config.ChromePath ($workProfile + $url)
+            Start-Sleep -Milliseconds 500  # Small delay between launches
+        }
+
+    } catch {
+        # ... (rest of your error handling) ...
+    }
+}
+# ... (rest of your script) ...
+
+
 $DebugPreference = "Continue"
 
 # Ensure log directory exists
