@@ -1,3 +1,9 @@
+# Set strict mode off to avoid strict variable checking
+Set-StrictMode -Off
+# Enable verbose output for troubleshooting
+$VerbosePreference = "Continue"
+$ErrorActionPreference = "Continue"
+
 $Config = @{
     LogFile       = "$env:USERPROFILE\Desktop\StartupLog\Startup_Log_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt"
     ChromePath    = "C:\Program Files\Google\Chrome\Application\chrome.exe"
@@ -60,15 +66,27 @@ $CommUrls = @(
 $DebugPreference = "Continue"
 
 # Ensure log directory exists
-$logDir = Split-Path -Parent $Config.LogFile
-if (-not (Test-Path $logDir)) {
-    New-Item -ItemType Directory -Path $logDir -Force | Out-Null
+try {
+    $logDir = Split-Path -Parent $Config.LogFile
+    if (-not (Test-Path $logDir)) {
+        New-Item -ItemType Directory -Path $logDir -Force | Out-Null
+        Write-Host "Created log directory: $logDir" -ForegroundColor Green
+    }
+} catch {
+    Write-Host "Error creating log directory: $_" -ForegroundColor Red
+    # Fallback to a simpler log path if the desktop path fails
+    $Config.LogFile = "$env:TEMP\Startup_Log_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt"
+    Write-Host "Using alternative log file: $($Config.LogFile)" -ForegroundColor Yellow
 }
 
 function Write-Log {
     param ([string]$Message)
-    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    "$timestamp - $Message" | Out-File -FilePath $Config.LogFile -Append
+    try {
+        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        "$timestamp - $Message" | Out-File -FilePath $Config.LogFile -Append -ErrorAction SilentlyContinue
+    } catch {
+        Write-Host "Failed to write to log file: $_" -ForegroundColor Red
+    }
     Write-Host $Message
 }
 
@@ -85,190 +103,473 @@ function Write-Ascii {
 }
 
 function Start-ProcessEx {
-    param ([string]$ProcessPath, [string[]]$Arguments = @(), [string]$Verb = "", [string]$WorkingDirectory = "")
-    if (Test-Path $ProcessPath) {
-        try {
-            $startInfo = New-Object System.Diagnostics.ProcessStartInfo
-            $startInfo.FileName = $ProcessPath
-            $startInfo.Arguments = $Arguments -join " "
-            if ($Verb) { $startInfo.Verb = $Verb }
-            if ($WorkingDirectory) { $startInfo.WorkingDirectory = $WorkingDirectory }
-            [System.Diagnostics.Process]::Start($startInfo) | Out-Null
-            Write-Debug "Successfully launched: $ProcessPath" "Green"
-        } catch {
-            Write-Host "[ERROR] Failed to start $ProcessPath: $_" -ForegroundColor Red
-            Write-Log "[ERROR] Failed to start $ProcessPath: $_"
+    param (
+        [string]$ProcessPath, 
+        [string[]]$Arguments = @(), 
+        [string]$Verb = "", 
+        [string]$WorkingDirectory = ""
+    )
+    
+    try {
+        # Check if path exists with more detailed output
+        if (-not (Test-Path $ProcessPath)) {
+            Write-Host "[WARNING] Path not found: $ProcessPath" -ForegroundColor Yellow
+            Write-Log "[WARNING] Path not found: $ProcessPath"
+            return $false
         }
-    } else {
-        Write-Host "[WARNING] $ProcessPath not found" -ForegroundColor Yellow
-        Write-Log "[WARNING] $ProcessPath not found"
+        
+        # Create process start info
+        $startInfo = New-Object System.Diagnostics.ProcessStartInfo
+        $startInfo.FileName = $ProcessPath
+        $startInfo.Arguments = $Arguments -join " "
+        if ($Verb) { $startInfo.Verb = $Verb }
+        if ($WorkingDirectory -and (Test-Path $WorkingDirectory)) { 
+            $startInfo.WorkingDirectory = $WorkingDirectory 
+        }
+        
+        # Add more robust error handling for RunAs
+        if ($Verb -eq "RunAs") {
+            try {
+                # Try to launch with admin rights
+                [System.Diagnostics.Process]::Start($startInfo) | Out-Null
+            } catch {
+                Write-Host "[ERROR] Failed to start with admin rights: $ProcessPath. Error: $_" -ForegroundColor Red
+                Write-Log "[ERROR] Failed to start with admin rights: $ProcessPath. Error: $_"
+                
+                # Fallback to regular start without admin rights
+                Write-Host "[INFO] Attempting to start without admin rights: $ProcessPath" -ForegroundColor Yellow
+                $startInfo.Verb = ""
+                try {
+                    [System.Diagnostics.Process]::Start($startInfo) | Out-Null
+                } catch {
+                    Write-Host "[ERROR] Failed to start without admin rights: $ProcessPath. Error: $_" -ForegroundColor Red
+                    Write-Log "[ERROR] Failed to start without admin rights: $ProcessPath. Error: $_"
+                    return $false
+                }
+            }
+        } else {
+            # Regular start without admin rights
+            [System.Diagnostics.Process]::Start($startInfo) | Out-Null
+        }
+        
+        Write-Debug "Successfully launched: $ProcessPath" "Green"
+        return $true
+    } catch {
+        Write-Host "[ERROR] Failed to start $ProcessPath: $_" -ForegroundColor Red
+        Write-Log "[ERROR] Failed to start $ProcessPath: $_"
+        return $false
     }
 }
 
 function Initialize-Environment {
-    Write-Ascii $Config.StartAscii -ForegroundColor Green
-    Write-Debug "Workstation Automation Started" "Green"
-    Write-Debug "Script started on $(Get-Date)" "Green"
-    Write-Debug "Minimizing all windows" "Yellow"
-    (New-Object -ComObject Shell.Application).MinimizeAll()
+    try {
+        Write-Ascii $Config.StartAscii -ForegroundColor Green
+        Write-Debug "Workstation Automation Started" "Green"
+        Write-Debug "Script started on $(Get-Date)" "Green"
+        Write-Debug "Minimizing all windows" "Yellow"
+        
+        try {
+            $shell = New-Object -ComObject Shell.Application
+            $shell.MinimizeAll()
+        } catch {
+            Write-Host "[WARNING] Failed to minimize windows: $_" -ForegroundColor Yellow
+            Write-Log "[WARNING] Failed to minimize windows: $_"
+        }
+    } catch {
+        Write-Host "[ERROR] Failed to initialize environment: $_" -ForegroundColor Red
+        Write-Log "[ERROR] Failed to initialize environment: $_"
+    }
 }
 
 function Launch-BrowserContent {
-    $chromeArgs = @($Config.ChromeProfile)
-    $Urls | ForEach-Object {
-        Write-Debug "Opening URL: $_" "DarkCyan"
-        Start-ProcessEx $Config.ChromePath ($chromeArgs + $_)
-    }
-    Write-Debug "Opening communication channels" "Blue"
-    $CommUrls | ForEach-Object {
-        Start-ProcessEx $Config.ChromePath ($chromeArgs + $_)
+    try {
+        # First validate if Chrome exists
+        if (-not (Test-Path $Config.ChromePath)) {
+            Write-Host "[ERROR] Chrome not found at: $($Config.ChromePath)" -ForegroundColor Red
+            Write-Log "[ERROR] Chrome not found at: $($Config.ChromePath)"
+            
+            # Try to find Chrome in other common locations
+            $possiblePaths = @(
+                "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+                "${env:ProgramFiles}\Google\Chrome\Application\chrome.exe",
+                "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe"
+            )
+            
+            foreach ($path in $possiblePaths) {
+                if (Test-Path $path) {
+                    Write-Host "[INFO] Found Chrome at: $path" -ForegroundColor Green
+                    $Config.ChromePath = $path
+                    break
+                }
+            }
+            
+            # If still not found, try to use Edge as fallback
+            if (-not (Test-Path $Config.ChromePath)) {
+                $edgePath = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+                if (Test-Path $edgePath) {
+                    Write-Host "[INFO] Using Edge as fallback browser" -ForegroundColor Yellow
+                    $Config.ChromePath = $edgePath
+                    $Config.ChromeProfile = ""  # Reset profile as it's different for Edge
+                } else {
+                    Write-Host "[ERROR] No browser found. Skipping URL launches." -ForegroundColor Red
+                    Write-Log "[ERROR] No browser found. Skipping URL launches."
+                    return
+                }
+            }
+        }
+        
+        $chromeArgs = @()
+        if ($Config.ChromeProfile) {
+            $chromeArgs += $Config.ChromeProfile
+        }
+        
+        # Launch main URLs with delay between each to avoid overwhelming system
+        Write-Debug "Opening URLs in browser" "DarkCyan"
+        foreach ($url in $Urls) {
+            Write-Debug "Opening URL: $url" "DarkCyan"
+            Start-ProcessEx $Config.ChromePath ($chromeArgs + $url)
+            Start-Sleep -Milliseconds 500  # Small delay between launches
+        }
+        
+        # Launch communication URLs
+        Write-Debug "Opening communication channels" "Blue"
+        foreach ($url in $CommUrls) {
+            Start-ProcessEx $Config.ChromePath ($chromeArgs + $url)
+            Start-Sleep -Milliseconds 500  # Small delay between launches
+        }
+    } catch {
+        Write-Host "[ERROR] Failed to launch browser content: $_" -ForegroundColor Red
+        Write-Log "[ERROR] Failed to launch browser content: $_"
     }
 }
 
 function Launch-Applications {
-    $Applications | ForEach-Object {
-        $verb = if ($_.RequiresAdmin) { "RunAs" } else { "" }
-        Write-Debug "Launching $($_.Name)" "Blue"
-        if ($_.Name -eq "Visual Studio Code") {
-            Start-ProcessEx $_.Path "C:\projects\workstation\"
-            Start-ProcessEx $_.Path "C:\projects\secondbrain\"
-        } else {
-            Start-ProcessEx $_.Path -Verb $verb
+    try {
+        foreach ($app in $Applications) {
+            $verb = if ($app.RequiresAdmin) { "RunAs" } else { "" }
+            Write-Debug "Launching $($app.Name)" "Blue"
+            
+            if (-not (Test-Path $app.Path)) {
+                Write-Host "[WARNING] Application not found: $($app.Name) at $($app.Path)" -ForegroundColor Yellow
+                Write-Log "[WARNING] Application not found: $($app.Name) at $($app.Path)"
+                continue
+            }
+            
+            if ($app.Name -eq "Visual Studio Code") {
+                # Check if folders exist before opening
+                $workstationPath = "C:\projects\workstation\"
+                $secondbrainPath = "C:\projects\secondbrain\"
+                
+                if (Test-Path $workstationPath) {
+                    Start-ProcessEx $app.Path $workstationPath
+                } else {
+                    Write-Host "[WARNING] Path not found: $workstationPath" -ForegroundColor Yellow
+                }
+                
+                if (Test-Path $secondbrainPath) {
+                    Start-ProcessEx $app.Path $secondbrainPath
+                } else {
+                    Write-Host "[WARNING] Path not found: $secondbrainPath" -ForegroundColor Yellow
+                }
+            } else {
+                Start-ProcessEx $app.Path -Verb $verb
+            }
+            
+            # Add a small delay between application launches
+            Start-Sleep -Milliseconds 1000
         }
+    } catch {
+        Write-Host "[ERROR] Failed to launch applications: $_" -ForegroundColor Red
+        Write-Log "[ERROR] Failed to launch applications: $_"
     }
 }
 
 function Update-System {
-    Write-Debug "Updating Chocolatey packages" "Yellow"
-    try { Start-ProcessEx "cmd.exe" "/c choco upgrade all -y" -Verb "RunAs" }
-    catch { Write-Log "[ERROR] Chocolatey update failed: $_" }
+    try {
+        Write-Debug "Checking for Chocolatey" "Yellow"
+        $chocoExists = Get-Command choco -ErrorAction SilentlyContinue
+        
+        if ($chocoExists) {
+            Write-Debug "Updating Chocolatey packages" "Yellow"
+            try { 
+                Start-ProcessEx "cmd.exe" "/c choco upgrade all -y" -Verb "RunAs" 
+            } catch { 
+                Write-Host "[ERROR] Chocolatey update failed: $_" -ForegroundColor Red
+                Write-Log "[ERROR] Chocolatey update failed: $_" 
+            }
+        } else {
+            Write-Host "[INFO] Chocolatey not installed. Skipping package updates." -ForegroundColor Yellow
+            Write-Log "[INFO] Chocolatey not installed. Skipping package updates."
+        }
 
-    Write-Debug "Opening Windows Update settings" "Yellow"
-    try { Start-ProcessEx "ms-settings:windowsupdate" }
-    catch { Write-Log "[ERROR] Failed to open Windows Update: $_" }
+        Write-Debug "Opening Windows Update settings" "Yellow"
+        try { 
+            Start-Process "ms-settings:windowsupdate" -ErrorAction SilentlyContinue 
+        } catch { 
+            Write-Host "[ERROR] Failed to open Windows Update: $_" -ForegroundColor Red
+            Write-Log "[ERROR] Failed to open Windows Update: $_" 
+        }
+    } catch {
+        Write-Host "[ERROR] System update error: $_" -ForegroundColor Red
+        Write-Log "[ERROR] System update error: $_"
+    }
 }
 
 function Sync-Repositories {
-    Write-Debug "Pulling Second Brain Repo" "Green"
-    if (Test-Path "C:\projects\secondbrain") {
-        try {
-            Set-Location "C:\projects\secondbrain"
-            git pull
-            Write-Debug "Successfully pulled Second Brain repo" "Green"
-        } catch {
-            Write-Host "[ERROR] Second Brain pull failed: $_" -ForegroundColor Red
-            Write-Log "[ERROR] Second Brain pull failed: $_"
+    try {
+        Write-Debug "Pulling Second Brain Repo" "Green"
+        if (Test-Path "C:\projects\secondbrain") {
+            try {
+                # Check if git is installed
+                $gitExists = Get-Command git -ErrorAction SilentlyContinue
+                
+                if ($gitExists) {
+                    Set-Location "C:\projects\secondbrain"
+                    $output = git pull 2>&1
+                    Write-Debug "Git pull output: $output" "Green"
+                    Write-Debug "Successfully pulled Second Brain repo" "Green"
+                } else {
+                    Write-Host "[WARNING] Git not found. Cannot pull repository." -ForegroundColor Yellow
+                    Write-Log "[WARNING] Git not found. Cannot pull repository."
+                }
+            } catch {
+                Write-Host "[ERROR] Second Brain pull failed: $_" -ForegroundColor Red
+                Write-Log "[ERROR] Second Brain pull failed: $_"
+            }
+        } else {
+            Write-Host "[WARNING] Second Brain repo not found at C:\projects\secondbrain" -ForegroundColor Yellow
+            Write-Log "[WARNING] Second Brain repo not found at C:\projects\secondbrain"
         }
-    } else {
-        Write-Host "[WARNING] Second Brain repo not found" -ForegroundColor Yellow
-        Write-Log "[WARNING] Second Brain repo not found"
+    } catch {
+        Write-Host "[ERROR] Repository sync error: $_" -ForegroundColor Red
+        Write-Log "[ERROR] Repository sync error: $_"
     }
 }
 
 function Test-Network {
-    Write-Debug "Testing network latency to 1.1.1.1" "Yellow"
-    $pingResults = Test-Connection -ComputerName "1.1.1.1" -Count 4
-    $avgPing = ($pingResults | Measure-Object -Property ResponseTime -Average).Average
-    $color = if ($avgPing -gt 20) { "Red" } else { "Green" }
-    Write-Host "Average ping to 1.1.1.1: $avgPing ms" -ForegroundColor $color
-    Write-Log "Average ping to 1.1.1.1: $avgPing ms"
+    try {
+        Write-Debug "Testing network latency to 1.1.1.1" "Yellow"
+        
+        try {
+            $pingResults = Test-Connection -ComputerName "1.1.1.1" -Count 4 -ErrorAction Stop
+            $avgPing = ($pingResults | Measure-Object -Property ResponseTime -Average).Average
+            $color = if ($avgPing -gt 20) { "Red" } else { "Green" }
+            Write-Host "Average ping to 1.1.1.1: $avgPing ms" -ForegroundColor $color
+            Write-Log "Average ping to 1.1.1.1: $avgPing ms"
+        } catch {
+            Write-Host "[WARNING] Network test failed: $_" -ForegroundColor Yellow
+            Write-Log "[WARNING] Network test failed: $_"
+            
+            # Try using alternative ping method
+            try {
+                $ping = New-Object System.Net.NetworkInformation.Ping
+                $results = @()
+                for ($i = 0; $i -lt 4; $i++) {
+                    $results += $ping.Send("1.1.1.1")
+                    Start-Sleep -Milliseconds 500
+                }
+                
+                $successfulPings = $results | Where-Object { $_.Status -eq 'Success' }
+                if ($successfulPings.Count -gt 0) {
+                    $avgPing = ($successfulPings | Measure-Object -Property RoundtripTime -Average).Average
+                    $color = if ($avgPing -gt 20) { "Red" } else { "Green" }
+                    Write-Host "Average ping to 1.1.1.1: $avgPing ms" -ForegroundColor $color
+                    Write-Log "Average ping to 1.1.1.1: $avgPing ms"
+                } else {
+                    Write-Host "[WARNING] All ping attempts failed. Check network connection." -ForegroundColor Red
+                    Write-Log "[WARNING] All ping attempts failed. Check network connection."
+                }
+            } catch {
+                Write-Host "[ERROR] Alternate network test also failed: $_" -ForegroundColor Red
+                Write-Log "[ERROR] Alternate network test also failed: $_"
+            }
+        }
+    } catch {
+        Write-Host "[ERROR] Network test function error: $_" -ForegroundColor Red
+        Write-Log "[ERROR] Network test function error: $_"
+    }
 }
 
 function Get-SystemInfo {
-    Write-Host "`n=======================================" -ForegroundColor Blue
-    Write-Host "SYSTEM INFORMATION" -ForegroundColor Cyan
-    Write-Host "=======================================" -ForegroundColor Blue
-    Get-RAMInfo
+    try {
+        Write-Host "`n=======================================" -ForegroundColor Blue
+        Write-Host "SYSTEM INFORMATION" -ForegroundColor Cyan
+        Write-Host "=======================================" -ForegroundColor Blue
+        Get-RAMInfo
 
-    Write-Host "`n=======================================" -ForegroundColor Blue
-    Write-Host "DISK INFORMATION" -ForegroundColor Cyan
-    Write-Host "=======================================" -ForegroundColor Blue
-    Get-DiskInfo
+        Write-Host "`n=======================================" -ForegroundColor Blue
+        Write-Host "DISK INFORMATION" -ForegroundColor Cyan
+        Write-Host "=======================================" -ForegroundColor Blue
+        Get-DiskInfo
+    } catch {
+        Write-Host "[ERROR] Failed to get system information: $_" -ForegroundColor Red
+        Write-Log "[ERROR] Failed to get system information: $_"
+    }
 }
 
 function Get-RAMInfo {
-    $RAM = Get-WmiObject Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory
-    $RAMUsed = $RAM.TotalVisibleMemorySize - $RAM.FreePhysicalMemory
-    $RAMTotalGB = [math]::Round($RAM.TotalVisibleMemorySize / 1MB, 2)
-    $RAMFreeGB = [math]::Round($RAM.FreePhysicalMemory / 1MB, 2)
-    $RAMPercentUsed = [math]::Round(($RAMUsed / $RAM.TotalVisibleMemorySize) * 100, 2)
-    $color = if ($RAMPercentUsed -gt 80) { "Red" } elseif ($RAMPercentUsed -gt 60) { "Yellow" } else { "Green" }
+    try {
+        $RAM = Get-WmiObject Win32_OperatingSystem -ErrorAction Stop | 
+               Select-Object TotalVisibleMemorySize, FreePhysicalMemory
+        
+        $RAMUsed = $RAM.TotalVisibleMemorySize - $RAM.FreePhysicalMemory
+        $RAMTotalGB = [math]::Round($RAM.TotalVisibleMemorySize / 1MB, 2)
+        $RAMFreeGB = [math]::Round($RAM.FreePhysicalMemory / 1MB, 2)
+        $RAMPercentUsed = [math]::Round(($RAMUsed / $RAM.TotalVisibleMemorySize) * 100, 2)
+        $color = if ($RAMPercentUsed -gt 80) { "Red" } elseif ($RAMPercentUsed -gt 60) { "Yellow" } else { "Green" }
 
-    Write-Host "Total RAM: $RAMTotalGB GB"
-    Write-Host "Free RAM: $RAMFreeGB GB"
-    Write-Host "RAM Usage: $RAMPercentUsed%" -ForegroundColor $color
-    Write-Log "RAM Info - Total: $RAMTotalGB GB, Free: $RAMFreeGB GB, Usage: $RAMPercentUsed%"
+        Write-Host "Total RAM: $RAMTotalGB GB"
+        Write-Host "Free RAM: $RAMFreeGB GB"
+        Write-Host "RAM Usage: $RAMPercentUsed%" -ForegroundColor $color
+        Write-Log "RAM Info - Total: $RAMTotalGB GB, Free: $RAMFreeGB GB, Usage: $RAMPercentUsed%"
+    } catch {
+        # Try alternative method
+        try {
+            Write-Host "[WARNING] Standard RAM check failed, trying alternative method." -ForegroundColor Yellow
+            $computerSystem = Get-CimInstance CIM_ComputerSystem
+            $totalRAM = [math]::Round($computerSystem.TotalPhysicalMemory / 1GB, 2)
+            
+            Write-Host "Total RAM: $totalRAM GB"
+            Write-Host "Note: Detailed RAM usage information unavailable" -ForegroundColor Yellow
+            Write-Log "RAM Info - Total: $totalRAM GB (alternative method)"
+        } catch {
+            Write-Host "[ERROR] Failed to get RAM information: $_" -ForegroundColor Red
+            Write-Log "[ERROR] Failed to get RAM information: $_"
+        }
+    }
 }
 
 function Get-DiskInfo {
-    Get-WmiObject Win32_LogicalDisk | Where-Object { $_.DriveType -eq 3 } | ForEach-Object {
-        $DiskSizeGB = [math]::Round($_.Size / 1GB, 2)
-        $DiskFreeGB = [math]::Round($_.FreeSpace / 1GB, 2)
-        $DiskPercentUsed = [math]::Round((($_.Size - $_.FreeSpace) / $_.Size) * 100, 2)
-        $color = if ($DiskPercentUsed -gt 90) { "Red" } elseif ($DiskPercentUsed -gt 75) { "Yellow" } else { "Green" }
+    try {
+        Get-WmiObject Win32_LogicalDisk -ErrorAction Stop | 
+        Where-Object { $_.DriveType -eq 3 } | 
+        ForEach-Object {
+            $DiskSizeGB = [math]::Round($_.Size / 1GB, 2)
+            $DiskFreeGB = [math]::Round($_.FreeSpace / 1GB, 2)
+            $DiskPercentUsed = [math]::Round((($_.Size - $_.FreeSpace) / $_.Size) * 100, 2)
+            $color = if ($DiskPercentUsed -gt 90) { "Red" } elseif ($DiskPercentUsed -gt 75) { "Yellow" } else { "Green" }
 
-        Write-Host "Drive $($_.DeviceID):" -ForegroundColor White
-        Write-Host "  Total Size: $DiskSizeGB GB"
-        Write-Host "  Free Space: $DiskFreeGB GB"
-        Write-Host "  Disk Usage: $DiskPercentUsed%" -ForegroundColor $color
-        Write-Log "Disk $($_.DeviceID) - Total: $DiskSizeGB GB, Free: $DiskFreeGB GB, Usage: $DiskPercentUsed%"
+            Write-Host "Drive $($_.DeviceID):" -ForegroundColor White
+            Write-Host "  Total Size: $DiskSizeGB GB"
+            Write-Host "  Free Space: $DiskFreeGB GB"
+            Write-Host "  Disk Usage: $DiskPercentUsed%" -ForegroundColor $color
+            Write-Log "Disk $($_.DeviceID) - Total: $DiskSizeGB GB, Free: $DiskFreeGB GB, Usage: $DiskPercentUsed%"
+        }
+    } catch {
+        Write-Host "[ERROR] Failed to get disk information: $_" -ForegroundColor Red
+        Write-Log "[ERROR] Failed to get disk information: $_"
+        
+        # Try alternative method
+        try {
+            Write-Host "[WARNING] Standard disk check failed, trying alternative method." -ForegroundColor Yellow
+            Get-PSDrive -PSProvider FileSystem | ForEach-Object {
+                try {
+                    $driveName = $_.Name
+                    $driveRoot = $_.Root
+                    $totalSize = [math]::Round($_.Used / 1GB + $_.Free / 1GB, 2)
+                    $freeSpace = [math]::Round($_.Free / 1GB, 2)
+                    
+                    Write-Host "Drive ${driveName}:" -ForegroundColor White
+                    Write-Host "  Total Size: $totalSize GB (approximate)"
+                    Write-Host "  Free Space: $freeSpace GB"
+                    Write-Log "Disk ${driveName}: - Total: $totalSize GB, Free: $freeSpace GB (alternative method)"
+                } catch {
+                    Write-Host "[ERROR] Failed to get info for drive $($_.Name): $_" -ForegroundColor Red
+                }
+            }
+        } catch {
+            Write-Host "[ERROR] Alternative disk check also failed: $_" -ForegroundColor Red
+            Write-Log "[ERROR] Alternative disk check also failed: $_"
+        }
     }
 }
 
 function Position-Windows {
-    Write-Debug "Attempting to set window positions" "Magenta"
     try {
-        Add-Type -AssemblyName System.Windows.Forms
-        Start-Sleep -Seconds 3
+        Write-Debug "Attempting to set window positions" "Magenta"
+        
+        try {
+            # Check if we can load the Windows Forms assembly
+            Add-Type -AssemblyName System.Windows.Forms -ErrorAction Stop
+            Start-Sleep -Seconds 3
 
-        $windows = @(
-            @{ Process = "WhatsApp"; X = 0;   Y = 0 }
-            @{ Process = "Chrome";  X = 1920; Y = 0 }
-            @{ Process = "OBS";     X = 3840; Y = 0 }
-        )
+            $windows = @(
+                @{ Process = "WhatsApp"; X = 0;   Y = 0 }
+                @{ Process = "Chrome";  X = 1920; Y = 0 }
+                @{ Process = "OBS";     X = 3840; Y = 0 }
+            )
 
-        $windows | ForEach-Object {
-            $proc = Get-Process | Where-Object { $_.MainWindowTitle -like "*$($_.Process)*" }
-            if ($proc) {
-                $proc.WaitForInputIdle()
-                $proc.MainWindowHandle | ForEach-Object {
-                    $control = [System.Windows.Forms.Control]::FromHandle($_)
-                    $control.Location = New-Object System.Drawing.Point($window.X, $window.Y)
-                    $control.WindowState = [System.Windows.Forms.FormWindowState]::Maximized
+            foreach ($window in $windows) {
+                try {
+                    $proc = Get-Process | Where-Object { $_.MainWindowTitle -like "*$($window.Process)*" }
+                    if ($proc) {
+                        $proc | ForEach-Object {
+                            try {
+                                $_.WaitForInputIdle() | Out-Null
+                                if ($_.MainWindowHandle -ne 0) {
+                                    $control = [System.Windows.Forms.Control]::FromHandle($_.MainWindowHandle)
+                                    $control.Location = New-Object System.Drawing.Point($window.X, $window.Y)
+                                    $control.WindowState = [System.Windows.Forms.FormWindowState]::Maximized
+                                }
+                            } catch {
+                                Write-Host "[WARNING] Failed to position window for $($window.Process): $_" -ForegroundColor Yellow
+                            }
+                        }
+                        Write-Debug "$($window.Process) window positioned" "Green"
+                    } else {
+                        Write-Host "[INFO] $($window.Process) window not found" -ForegroundColor Yellow
+                        Write-Log "[INFO] $($window.Process) window not found"
+                    }
+                } catch {
+                    Write-Host "[WARNING] Error handling $($window.Process): $_" -ForegroundColor Yellow
+                    Write-Log "[WARNING] Error handling $($window.Process): $_"
                 }
-                Write-Debug "$($_.Process) window positioned" "Green"
-            } else {
-                Write-Host "[INFO] $($_.Process) window not found" -ForegroundColor Yellow
-                Write-Log "[INFO] $($_.Process) window not found"
             }
+        } catch {
+            Write-Host "[WARNING] Failed to load Windows Forms assembly: $_. Window positioning skipped." -ForegroundColor Yellow
+            Write-Log "[WARNING] Failed to load Windows Forms assembly: $_. Window positioning skipped."
         }
     } catch {
-        Write-Host "[ERROR] Failed to set window positions: $_" -ForegroundColor Red
-        Write-Log "[ERROR] Failed to set window positions: $_"
+        Write-Host "[ERROR] Window positioning function error: $_" -ForegroundColor Red
+        Write-Log "[ERROR] Window positioning function error: $_"
     }
 }
 
-# Main Execution
-Initialize-Environment
-Launch-BrowserContent
-Launch-Applications
-Update-System
-Sync-Repositories
-Test-Network
-Get-SystemInfo
-Position-Windows
+# Main Execution with error handling
+try {
+    Initialize-Environment
+    
+    # Each function call is wrapped with error handling in the function itself
+    Launch-BrowserContent
+    Launch-Applications
+    Update-System
+    Sync-Repositories
+    Test-Network
+    Get-SystemInfo
+    Position-Windows
 
-Write-Debug "Script completed on $(Get-Date)" "Green"
-Write-Ascii $Config.EndAscii -ForegroundColor Cyan
+    Write-Debug "Script completed on $(Get-Date)" "Green"
+    Write-Ascii $Config.EndAscii -ForegroundColor Cyan
 
-Write-Host "`n=======================================" -ForegroundColor Yellow
-Write-Host "✅ All startup applications launched!" -ForegroundColor Green
-Write-Host "=======================================" -ForegroundColor Yellow
+    Write-Host "`n=======================================" -ForegroundColor Yellow
+    Write-Host "✅ All startup tasks completed!" -ForegroundColor Green
+    Write-Host "=======================================" -ForegroundColor Yellow
 
-$close = Read-Host "Press Enter to close or type 'stay' to keep open"
-if ($close -ne "stay") {
-    Write-Debug "Closing terminal" "Green"
-    Stop-Process -Id $PID
-} else {
-    Write-Debug "Terminal remains open" "Green"
+    $close = Read-Host "Press Enter to close or type 'stay' to keep open"
+    if ($close -ne "stay") {
+        Write-Debug "Closing terminal" "Green"
+        Stop-Process -Id $PID
+    } else {
+        Write-Debug "Terminal remains open" "Green"
+    }
+} catch {
+    Write-Host "`n=======================================" -ForegroundColor Red
+    Write-Host "❌ Script encountered errors!" -ForegroundColor Red
+    Write-Host "Error: $_" -ForegroundColor Red
+    Write-Host "=======================================" -ForegroundColor Red
+    Write-Log "[CRITICAL] Main script execution error: $_"
+    
+    Write-Host "`nLog file location: $($Config.LogFile)" -ForegroundColor Yellow
+    Write-Host "Press Enter to close..." -ForegroundColor Yellow
+    Read-Host | Out-Null
 }
