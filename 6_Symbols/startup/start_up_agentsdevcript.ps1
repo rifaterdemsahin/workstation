@@ -628,3 +628,7 @@ try {
     Write-Host "Press Enter to close..." -ForegroundColor Yellow
     Read-Host | Out-Null
 }
+# fix error: obs opening with error failed to find locale/en-Us.ini and failed to load locale
+# fix second profile work not opening up the chrome 
+# add: "C:\Program Files\Paint.NET\paintdotnet.exe" and move it to monitor 4 on the right 
+
