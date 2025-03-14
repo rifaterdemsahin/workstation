@@ -631,4 +631,8 @@ try {
 # fix error: obs opening with error failed to find locale/en-Us.ini and failed to load locale
 # fix second profile work not opening up the chrome 
 # add: "C:\Program Files\Paint.NET\paintdotnet.exe" and move it to monitor 4 on the right 
+# FIX: instead of gimp turn on paint.net
+# FIX: make sure voicemeter bananA IS ON
+# OPEN : CALENDAR > https://calendar.google.com/calendar/u/0/r/agenda
+# add: open https://glasp.co/?ref=glasp_extension https://chatgpt4youtube.com/tr
 
