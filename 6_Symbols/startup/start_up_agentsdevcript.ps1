@@ -628,11 +628,63 @@ try {
     Write-Host "Press Enter to close..." -ForegroundColor Yellow
     Read-Host | Out-Null
 }
-# fix error: obs opening with error failed to find locale/en-Us.ini and failed to load locale
-# fix second profile work not opening up the chrome 
-# add: "C:\Program Files\Paint.NET\paintdotnet.exe" and move it to monitor 4 on the right 
-# FIX: instead of gimp turn on paint.net
-# FIX: make sure voicemeter bananA IS ON
-# OPEN : CALENDAR > https://calendar.google.com/calendar/u/0/r/agenda
-# add: open https://glasp.co/?ref=glasp_extension https://chatgpt4youtube.com/tr
 
+$WorkProfileurls = @(
+    "https://teams.microsoft.com/v2/"
+    "https://outlook.office.com/calendar/view/week"
+    "https://outlook.office.com/mail/"
+    "https://calendar.google.com/calendar/u/0/r/agenda"
+    "https://glasp.co/?ref=glasp_extension"
+    "https://chatgpt4youtube.com/tr"
+)
+
+# Add Paint.NET to the startup process list
+$ProcessesToStart = @(
+    @{ Path = "C:\Program Files\OBS-Studio\bin\64bit\obs64.exe"; Monitor = 1 },
+    @{ Path = "C:\Program Files\Google\Chrome\Application\chrome.exe"; Arguments = "--profile-directory=Profile 2 $WorkProfileurls"; Monitor = 2 },
+    @{ Path = "C:\Program Files\Google\Chrome\Application\chrome.exe"; Arguments = "--profile-directory=Profile 3"; Monitor = 3 }, # work profile
+    @{ Path = "C:\Program Files\Mozilla Firefox\firefox.exe"; Monitor = 1 }, # browser
+    @{ Path = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"; Monitor = 1 }, # voice search
+    @{ Path = "C:\WINDOWS\System32\notepad.exe"; Monitor = 4 }, # notepad
+    @{ Path = "C:\Program Files\Paint.NET\paintdotnet.exe"; Monitor = 4 } # Paint.NET
+)
+
+
+
+function Start-ProcessOnMonitor {
+    param(
+        [string]$ProcessPath,
+        [int]$Monitor = 0,
+        [string]$Arguments = ""
+    )
+
+    try {
+        $Process = Start-Process -FilePath $ProcessPath -ArgumentList $Arguments -PassThru
+
+
+        if ($Monitor -gt 0) {
+           # add some delay here to load the proccess first
+           Start-Sleep -Seconds 1
+            $Window = Get-Process | Where-Object {$_.Id -eq $Process.Id} | Select-Object MainWindowHandle -ExpandProperty MainWindowHandle
+           if ($Window -ne 0){
+               [void][System.Windows.Forms.Screen]::AllScreens | Where-Object {$_.DeviceName -eq "\\.\DISPLAY$Monitor"} | ForEach-Object {
+                   $Bounds = $_.Bounds
+                   [void][System.Windows.Forms.Control]::FromHandle($Window).Bounds = $Bounds
+               }
+           } else {
+                Write-Warning "Could not find window for $ProcessPath" -ForegroundColor Yellow
+                Write-Log "Could not find window for $ProcessPath" -ForegroundColor Yellow
+           }
+        }
+
+
+
+
+        return $true
+
+    } catch {
+        Write-Host "[ERROR] Failed to start $ProcessPath" -ForegroundColor Red
+        Write-Log "[ERROR] Failed to start $ProcessPath"
+        return $false
+    }
+}
