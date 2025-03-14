@@ -688,3 +688,6 @@ function Start-ProcessOnMonitor {
         return $false
     }
 }
+
+
+# add: run ahks under this folder > C:\projects\workstation\6_Symbols\ahk\
