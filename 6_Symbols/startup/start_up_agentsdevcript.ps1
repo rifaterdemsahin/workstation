@@ -691,3 +691,4 @@ function Start-ProcessOnMonitor {
 
 
 # add: run ahks under this folder > C:\projects\workstation\6_Symbols\ahk\
+# add:  open up as alternative > https://deepai.org/chat
