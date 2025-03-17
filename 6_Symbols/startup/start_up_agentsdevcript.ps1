@@ -661,24 +661,19 @@ function Start-ProcessOnMonitor {
     try {
         $Process = Start-Process -FilePath $ProcessPath -ArgumentList $Arguments -PassThru
 
-
         if ($Monitor -gt 0) {
-           # add some delay here to load the proccess first
-           Start-Sleep -Seconds 1
+            Start-Sleep -Seconds 1
             $Window = Get-Process | Where-Object {$_.Id -eq $Process.Id} | Select-Object MainWindowHandle -ExpandProperty MainWindowHandle
-           if ($Window -ne 0){
-               [void][System.Windows.Forms.Screen]::AllScreens | Where-Object {$_.DeviceName -eq "\\.\DISPLAY$Monitor"} | ForEach-Object {
-                   $Bounds = $_.Bounds
-                   [void][System.Windows.Forms.Control]::FromHandle($Window).Bounds = $Bounds
-               }
-           } else {
+            if ($Window -ne 0) {
+                [System.Windows.Forms.Screen]::AllScreens | Where-Object {$_.DeviceName -eq "\\.\DISPLAY$Monitor"} | ForEach-Object {
+                    $Bounds = $_.Bounds
+                    [System.Windows.Forms.Control]::FromHandle($Window).SetBounds($Bounds.X, $Bounds.Y, $Bounds.Width, $Bounds.Height)
+                }
+            } else {
                 Write-Warning "Could not find window for $ProcessPath" -ForegroundColor Yellow
-                Write-Log "Could not find window for $ProcessPath" -ForegroundColor Yellow
-           }
+                Write-Log "Could not find window for $ProcessPath"
+            }
         }
-
-
-
 
         return $true
 
