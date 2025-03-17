@@ -689,6 +689,219 @@ function Start-ProcessOnMonitor {
     }
 }
 
+# Add a section to run AHK scripts from a specified folder
+function Run-AHKScripts {
+    param (
+        [string]$AHKFolder = "C:\projects\workstation\6_Symbols\ahk\"
+    )
 
-# add: run ahks under this folder > C:\projects\workstation\6_Symbols\ahk\
-# add:  open up as alternative > https://deepai.org/chat
+    try {
+        $ahkFiles = Get-ChildItem -Path $AHKFolder -Filter *.ahk
+        foreach ($file in $ahkFiles) {
+            Write-Debug "Running AHK script: $($file.FullName)" "Magenta"
+            Start-Process "AutoHotkey.exe" -ArgumentList $file.FullName
+        }
+    } catch {
+        Write-Host "[ERROR] Failed to run AHK scripts from $AHKFolder. Error: $_" -ForegroundColor Red
+        Write-Log "[ERROR] Failed to run AHK scripts from $AHKFolder. Error: $_"
+    }
+}
+
+# Alternative browser launch
+function Launch-AlternativeBrowser {
+    try {
+        $url = "https://deepai.org/chat"
+        Write-Debug "Opening alternative URL: $url" "Magenta"
+        Start-Process "$Config.ChromePath" $url
+    } catch {
+        Write-Host "[ERROR] Failed to launch alternative browser for URL: $url. Error: $_" -ForegroundColor Red
+        Write-Log "[ERROR] Failed to launch alternative browser for URL: $url. Error: $_"
+    }
+}
+
+# Winget update process
+function Update-WingetPrograms {
+    try {
+        if (Get-Command winget -ErrorAction SilentlyContinue) {
+            Write-Debug "Updating Winget packages" "Magenta"
+            Start-ProcessEx "cmd.exe" "/c winget upgrade --all --silent" -Verb "RunAs"
+        } else {
+            Write-Host "[INFO] Winget not installed. Skipping Winget package updates." -ForegroundColor Yellow
+            Write-Log "[INFO] Winget not installed. Skipping Winget package updates."
+        }
+    } catch {
+        Write-Host "[ERROR] Failed to update Winget programs: $_" -ForegroundColor Red
+        Write-Log "[ERROR] Failed to update Winget programs: $_"
+    }
+}
+
+# List installed Chocolatey and Winget programs
+function List-InstalledPrograms {
+    try {
+        Write-Debug "Listing installed Chocolatey programs" "Magenta"
+        $chocoPrograms = choco list --local-only
+        Write-Log "Installed Chocolatey programs:`n$chocoPrograms"
+
+        if (Get-Command winget -ErrorAction SilentlyContinue) {
+            Write-Debug "Listing installed Winget programs" "Magenta"
+            $wingetPrograms = winget list
+            Write-Log "Installed Winget programs:`n$wingetPrograms"
+        } else {
+            Write-Log "[INFO] Winget not installed. Skipping listing Winget programs."
+        }
+    } catch {
+        Write-Host "[ERROR] Failed to list installed programs: $_" -ForegroundColor Red
+        Write-Log "[ERROR] Failed to list installed programs: $_"
+    }
+}
+
+# Call these functions in the main script execution block
+try {
+    Initialize-Environment
+
+    # Each function call is wrapped with error handling in the function itself
+    Launch-BrowserContent
+    Launch-Applications
+    Run-AHKScripts  # New: Run AHK scripts
+    Launch-AlternativeBrowser  # New: Open alternative URL
+    Update-System
+    Update-WingetPrograms  # New: Update Winget programs
+    List-InstalledPrograms  # New: List installed programs
+    Sync-Repositories
+    Test-Network
+    Get-SystemInfo
+    Position-Windows
+
+    Write-Debug "Script completed on $(Get-Date)" "Green"
+    Write-Ascii $Config.EndAscii -ForegroundColor Cyan
+
+    Write-Host "`n=======================================" -ForegroundColor Yellow
+    Write-Host "✅ All startup tasks completed!" -ForegroundColor Green
+    Write-Host "=======================================" -ForegroundColor Yellow
+
+    $close = Read-Host "Press Enter to close or type 'stay' to keep open"
+    if ($close -ne "stay") {
+        Write-Debug "Closing terminal" "Green"
+        Stop-Process -Id $PID
+    } else {
+        Write-Debug "Terminal remains open" "Green"
+    }
+} catch {
+    Write-Host "`n=======================================" -ForegroundColor Red
+    Write-Host "❌ Script encountered errors!" -ForegroundColor Red
+    Write-Host "Error: $_" -ForegroundColor Red
+    Write-Host "=======================================" -ForegroundColor Red
+    Write-Log "[CRITICAL] Main script execution error: $_"
+
+    Write-Host "`nLog file location: $($Config.LogFile)" -ForegroundColor Yellow
+    Write-Host "Press Enter to close..." -ForegroundColor Yellow
+    Read-Host | Out-Null
+}
+# Add a section to run AHK scripts from a specified folder
+function Run-AHKScripts {
+    param (
+        [string]$AHKFolder = "C:\projects\workstation\6_Symbols\ahk\"
+    )
+
+    try {
+        $ahkFiles = Get-ChildItem -Path $AHKFolder -Filter *.ahk
+        foreach ($file in $ahkFiles) {
+            Write-Debug "Running AHK script: $($file.FullName)" "Magenta"
+            Start-Process "AutoHotkey.exe" -ArgumentList $file.FullName
+        }
+    } catch {
+        Write-Host "[ERROR] Failed to run AHK scripts from $AHKFolder. Error: $_" -ForegroundColor Red
+        Write-Log "[ERROR] Failed to run AHK scripts from $AHKFolder. Error: $_"
+    }
+}
+
+# Alternative browser launch
+function Launch-AlternativeBrowser {
+    try {
+        $url = "https://deepai.org/chat"
+        Write-Debug "Opening alternative URL: $url" "Magenta"
+        Start-Process "$Config.ChromePath" $url
+    } catch {
+        Write-Host "[ERROR] Failed to launch alternative browser for URL: $url. Error: $_" -ForegroundColor Red
+        Write-Log "[ERROR] Failed to launch alternative browser for URL: $url. Error: $_"
+    }
+}
+
+# Winget update process
+function Update-WingetPrograms {
+    try {
+        if (Get-Command winget -ErrorAction SilentlyContinue) {
+            Write-Debug "Updating Winget packages" "Magenta"
+            Start-ProcessEx "cmd.exe" "/c winget upgrade --all --silent" -Verb "RunAs"
+        } else {
+            Write-Host "[INFO] Winget not installed. Skipping Winget package updates." -ForegroundColor Yellow
+            Write-Log "[INFO] Winget not installed. Skipping Winget package updates."
+        }
+    } catch {
+        Write-Host "[ERROR] Failed to update Winget programs: $_" -ForegroundColor Red
+        Write-Log "[ERROR] Failed to update Winget programs: $_"
+    }
+}
+
+# List installed Chocolatey and Winget programs
+function List-InstalledPrograms {
+    try {
+        Write-Debug "Listing installed Chocolatey programs" "Magenta"
+        $chocoPrograms = choco list --local-only
+        Write-Log "Installed Chocolatey programs:`n$chocoPrograms"
+
+        if (Get-Command winget -ErrorAction SilentlyContinue) {
+            Write-Debug "Listing installed Winget programs" "Magenta"
+            $wingetPrograms = winget list
+            Write-Log "Installed Winget programs:`n$wingetPrograms"
+        } else {
+            Write-Log "[INFO] Winget not installed. Skipping listing Winget programs."
+        }
+    } catch {
+        Write-Host "[ERROR] Failed to list installed programs: $_" -ForegroundColor Red
+        Write-Log "[ERROR] Failed to list installed programs: $_"
+    }
+}
+
+# Call these functions in the main script execution block
+try {
+    Initialize-Environment
+
+    # Each function call is wrapped with error handling in the function itself
+    Launch-BrowserContent
+    Launch-Applications
+    Run-AHKScripts  # New: Run AHK scripts
+    Launch-AlternativeBrowser  # New: Open alternative URL
+    Update-System
+    Update-WingetPrograms  # New: Update Winget programs
+    List-InstalledPrograms  # New: List installed programs
+    Sync-Repositories
+    Test-Network
+    Get-SystemInfo
+    Position-Windows
+
+    Write-Debug "Script completed on $(Get-Date)" "Green"
+    Write-Ascii $Config.EndAscii -ForegroundColor Cyan
+
+    Write-Host "`n=======================================" -ForegroundColor Yellow
+    Write-Host "✅ All startup tasks completed!" -ForegroundColor Green
+    Write-Host "=======================================" -ForegroundColor Yellow
+
+    $close = Read-Host "Press Enter to close or type 'stay' to keep open"
+    if ($close -ne "stay") {
+        Write-Debug "Closing terminal" "Green"
+        Stop-Process -Id $PID
+    } else {
+        Write-Debug "Terminal remains open" "Green"
+    }
+} catch {
+    Write-Host "`n=======================================" -ForegroundColor Red
+    Write-Host "❌ Script encountered errors!" -ForegroundColor Red
+    Write-Host "Error: $_" -ForegroundColor Red
+    Write-Host "=======================================" -ForegroundColor Red
+    Write-Log "[CRITICAL] Main script execution error: $_"
+
+    Write-Host "`nLog file location: $($Config.LogFile)" -ForegroundColor Yellow
+    Write-Host "Press Enter to close..." -ForegroundColor Yellow
+    Read-Host | Out-Null
+}
