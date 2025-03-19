@@ -27,8 +27,42 @@ $Config = @{
 "@
 }
 
+
+# Add the new startup entries
+
+# Run all AutoHotkey scripts in the specified directory
+Get-ChildItem -Path "C:\projects\workstation\6_Symbols\ahk\" -Filter "*.ahk" | ForEach-Object {
+    Start-Process -FilePath "C:\Program Files\AutoHotkey\AutoHotkey.exe" -ArgumentList $_.FullName
+}
+
+# Open alternative webpage
+Start-Process "https://deepai.org/chat"
+
+# Update Winget and Chocolatey packages
+winget upgrade --all
+choco upgrade all -y
+
+# List all Chocolatey and Winget packages
+choco list --localonly
+winget list
+
+# Add section to handle the locale error
+try {
+    $localeError = $false
+    # Code to start OBS and monitor goes here
+    @{ Path = "C:\Program Files\OBS-Studio\bin\64bit\obs64.exe"; Monitor = 1 },
+    
+} catch {
+    Write-Host "[ERROR] Locale issue detected" -ForegroundColor Red
+    $localeError = $true
+}
+
+# If locale error, open the directory for manual troubleshooting
+if ($localeError) {
+    Start-Process "explorer.exe" "C:\Program Files\OBS-Studio\bin\64bit"
+}
+
 $Applications = @(
-    @{ Name = "OBS Studio"; Path = "C:\Program Files\obs-studio\bin\64bit\obs64.exe"; RequiresAdmin = $true }
     @{ Name = "LM Studio"; Path = "C:\Users\Pexabo\AppData\Local\Programs\LM Studio\LM Studio.exe"; RequiresAdmin = $true }
     @{ Name = "AnythingLLM"; Path = "C:\Users\Pexabo\AppData\Local\Programs\AnythingLLM\AnythingLLM.exe"; RequiresAdmin = $false }
     @{ Name = "Obsidian"; Path = "C:\Users\Pexabo\AppData\Local\Programs\Obsidian\Obsidian.exe"; RequiresAdmin = $false }
@@ -900,3 +934,4 @@ try {
     Write-Host "Press Enter to close..." -ForegroundColor Yellow
     Read-Host | Out-Null
 }
+# instead of gimp open paint dotnet and move the monitor 4
