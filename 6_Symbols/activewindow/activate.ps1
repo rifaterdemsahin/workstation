@@ -41,5 +41,5 @@ function Activate-Window {
 
 # # Example usage:
 # # Prompt the user to enter a search pattern
-# $pattern = Read-Host "Enter the window title or process name pattern to search for"
-# Activate-Window -Pattern $pattern
+$pattern = Read-Host "March"
+Activate-Window -Pattern $pattern
