@@ -4,6 +4,32 @@ Set-StrictMode -Off
 $VerbosePreference = "Continue"
 $ErrorActionPreference = "Continue"
 
+
+$monitors = @(
+    @{
+        Name       = 'Monitor 1'
+        Orientation = 'Horizontal'
+        Brand      = 'LG'
+    },
+    @{
+        Name       = 'Monitor 2'
+        Orientation = 'Vertical'
+        Brand      = 'Asus'
+    },
+    @{
+        Name       = 'Monitor 3'
+        Orientation = 'Horizontal'
+        Brand      = 'Samsung'
+    },
+    @{
+        Name       = 'Monitor 4'
+        Orientation = 'Vertical'
+        Brand      = 'Hunion'
+    }
+)
+
+#todo: mention the monitor name in the debug  when moving the windows
+
 $Config = @{
     LogFile       = "$env:USERPROFILE\Desktop\StartupLog\Startup_Log_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt"
     ChromePath    = "C:\Program Files\Google\Chrome\Application\chrome.exe"
