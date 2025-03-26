@@ -50,7 +50,7 @@ winget list
 try {
     $localeError = $false
     # Code to start OBS and monitor goes here
-    @{ Path = "C:\Program Files\OBS-Studio\bin\64bit\obs64.exe"; Monitor = 1 },
+    @{ Path = "C:\Program Files\OBS-Studio\bin\64bit\obs64.exe"; Monitor = 1 }
     
 } catch {
     Write-Host "[ERROR] Locale issue detected" -ForegroundColor Red
