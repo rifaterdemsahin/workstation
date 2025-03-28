@@ -8,21 +8,25 @@ $ErrorActionPreference = "Continue"
 $monitors = @(
     @{
         Name       = 'Monitor 1'
+        Index       = '0'
         Orientation = 'Horizontal'
         Brand      = 'LG'
     },
     @{
         Name       = 'Monitor 2'
+        Index       = '1'
         Orientation = 'Vertical'
         Brand      = 'Asus'
     },
     @{
         Name       = 'Monitor 3'
+        Index       = '2'
         Orientation = 'Horizontal'
         Brand      = 'Samsung'
     },
     @{
         Name       = 'Monitor 4'
+        Index       = '3'
         Orientation = 'Vertical'
         Brand      = 'Hunion'
     }
@@ -95,7 +99,6 @@ $Applications = @(
     @{ Name = "Stream Deck"; Path = "C:\Program Files\Elgato\StreamDeck\StreamDeck.exe"; RequiresAdmin = $false }
     @{ Name = "Visual Studio Code"; Path = "C:\Program Files\Microsoft VS Code\Code.exe"; RequiresAdmin = $false }
     @{ Name = "Docker Desktop"; Path = "C:\Program Files\Docker\Docker\Docker Desktop.exe"; RequiresAdmin = $false }
-    @{ Name = "GIMP"; Path = "C:\Program Files\GIMP 2\bin\gimp-2.10.exe"; RequiresAdmin = $false }
 )
 
 $Urls = @(
@@ -114,7 +117,7 @@ $Urls = @(
     "https://github.com/rifaterdemsahin/workstation/edit/master/6_Symbols/startup/start_up_agentsdevcript.ps1"
     "https://mail.google.com/mail/u/0/#advanced-search/is_unread=true&query=label%3A1_borrow_followup&isrefinement=true"
     "https://petersfieldmansions.direct.quickconnect.to:5001/"
-    "https://manusai.com/"
+    "https://manus.im/"
 )
 
 $CommUrls = @(
@@ -960,4 +963,3 @@ try {
     Write-Host "Press Enter to close..." -ForegroundColor Yellow
     Read-Host | Out-Null
 }
-# instead of gimp open paint dotnet and move the monitor 4
