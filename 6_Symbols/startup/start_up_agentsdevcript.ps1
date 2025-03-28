@@ -716,8 +716,13 @@ $ProcessesToStart = @(
     @{ Path = "C:\Program Files\Mozilla Firefox\firefox.exe"; Monitor = 1 }, # browser
     @{ Path = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"; Monitor = 1 }, # voice search
     @{ Path = "C:\WINDOWS\System32\notepad.exe"; Monitor = 4 }, # notepad
-    @{ Path = "C:\Program Files\Paint.NET\paintdotnet.exe"; Monitor = 4 } # Paint.NET
+    @{ Path = "C:\Program Files\Paint.NET\paintdotnet.exe"; Monitor = 4 }, # Paint.NET
+    @{ Path = "C:\Program Files\WindowsApps\MSTeams_25044.2208.3471.2155_x64__8wekyb3d8bbwe\ms-teams.exe"; Monitor = 4 } # Teams
 )
+
+foreach ($process in $ProcessesToStart) {
+    Start-ProcessOnMonitor -ProcessPath $process.Path -Monitor $process.Monitor -Arguments $process.Arguments
+}
 
 
 
