@@ -403,33 +403,40 @@ function Launch-Applications {
 }
 
 function Update-System {
+    # Check if the script is running with administrative privileges
+    $currentUser = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $principal = New-Object Security.Principal.WindowsPrincipal($currentUser)
+    $isAdmin = $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+
+    if (-not $isAdmin) {
+        # Relaunch the script with elevated privileges
+        Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+        return
+    }
+
     try {
-        Write-Debug "Checking for Chocolatey" "Yellow"
+        Write-Debug "Checking for Chocolatey"
         $chocoExists = Get-Command choco -ErrorAction SilentlyContinue
-        
+
         if ($chocoExists) {
-            Write-Debug "Updating Chocolatey packages" "Yellow"
-            try { 
-                Start-ProcessEx "cmd.exe" "/c choco upgrade all -y" -Verb "RunAs" 
-            } catch { 
+            Write-Debug "Updating Chocolatey packages"
+            try {
+                Start-Process "cmd.exe" -ArgumentList "/c choco upgrade all -y" -Verb RunAs -Wait
+            } catch {
                 Write-Host "[ERROR] Chocolatey update failed: $_" -ForegroundColor Red
-                Write-Log "[ERROR] Chocolatey update failed: $_" 
             }
         } else {
             Write-Host "[INFO] Chocolatey not installed. Skipping package updates." -ForegroundColor Yellow
-            Write-Log "[INFO] Chocolatey not installed. Skipping package updates."
         }
 
-        Write-Debug "Opening Windows Update settings" "Yellow"
-        try { 
-            Start-Process "ms-settings:windowsupdate" -ErrorAction SilentlyContinue 
-        } catch { 
+        Write-Debug "Opening Windows Update settings"
+        try {
+            Start-Process "ms-settings:windowsupdate" -ErrorAction SilentlyContinue
+        } catch {
             Write-Host "[ERROR] Failed to open Windows Update: $_" -ForegroundColor Red
-            Write-Log "[ERROR] Failed to open Windows Update: $_" 
         }
     } catch {
         Write-Host "[ERROR] System update error: $_" -ForegroundColor Red
-        Write-Log "[ERROR] System update error: $_"
     }
 }
 
