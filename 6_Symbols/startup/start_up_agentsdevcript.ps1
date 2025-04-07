@@ -118,6 +118,7 @@ $Urls = @(
     "https://mail.google.com/mail/u/0/#advanced-search/is_unread=true&query=label%3A1_borrow_followup&isrefinement=true"
     "https://petersfieldmansions.direct.quickconnect.to:5001/"
     "https://manus.im/"
+    "https://go.starweaver.com/profile/instructor-dashboard/opportunity-management/details/679cd2b8941c837fde759519/comments"
 )
 
 $CommUrls = @(
