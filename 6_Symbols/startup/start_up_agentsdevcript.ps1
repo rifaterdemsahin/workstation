@@ -116,7 +116,7 @@ $Urls = @(
     "https://rifaterdemsahinblog.wordpress.com/wp-admin/post-new.php?post_type=post&calypsoify=1&block-editor=1&frame-nonce=3e1e1b7b1b&origin=https%3A%"
     "https://github.com/rifaterdemsahin/workstation/edit/master/6_Symbols/startup/start_up_agentsdevcript.ps1"
     "https://mail.google.com/mail/u/0/#advanced-search/is_unread=true&query=label%3A1_borrow_followup&isrefinement=true"
-    "https://petersfieldmansions.direct.quickconnect.to:5001/"
+    "https://192.168.3.38:5001/"
     "https://manus.im/"
     "https://go.starweaver.com/profile/instructor-dashboard/opportunity-management/details/679cd2b8941c837fde759519/comments"
     "https://aistudio.google.com/live"
