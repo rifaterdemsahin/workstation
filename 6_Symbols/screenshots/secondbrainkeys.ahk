@@ -187,7 +187,7 @@
         Run, % "obsidian://advanced-uri?vault=secondbrain&commandname=Open%20settings"
         Return
 
-    ; Special keys
+    ; Special keys  
     ` & Space::
         Run, % "obsidian://advanced-uri?vault=secondbrain&commandname=Quick%20switcher"
         Return
@@ -201,7 +201,7 @@
         Run, % "obsidian://advanced-uri?vault=secondbrain&commandname=Navigate%20back"
         Return
     ` & Delete::
-        Run, % "obsidian://open?vault=secondbrain&file=secondbrain/4 _Archieve"
+        Run, % "obsidian://open?vault=secondbrain&file=secondbrain%2F1_Projects%2F1_Family%2F1%20citizenship%20Arya"
         Return
     ` & Insert::
         Run, % "obsidian://advanced-uri?vault=secondbrain&commandname=Insert%20template"
@@ -210,13 +210,13 @@
         Run, % "obsidian://open?vault=secondbrain"  ; Open vault home
         Return
     ` & End::
-        Run, % "obsidian://advanced-uri?vault=secondbrain&commandname=Daily%20notes%3A%20Open%20today%27s%20daily%20note"
+        Run, % "obsidian://open?vault=secondbrain&file=secondbrain%2F1_Projects%2F1_Family%2F2%20mira%20speech%20therapy"
         Return
     ` & PgUp::
         Run, % "obsidian://advanced-uri?vault=secondbrain&commandname=Go%20forward%20in%20document"
         Return
     ` & PgDn::
-        Run, % "obsidian://advanced-uri?vault=secondbrain&commandname=Go%20back%20in%20document"
+        Run, % "obsidian://open?vault=secondbrain&file=secondbrain%2F1_Projects%2F1_Family%2F3%20followup%20ilr%20Ece"
         Return
     ` & CapsLock::
         Run, % "obsidian://open?vault=secondbrain&file=secondbrain/Index"
@@ -225,7 +225,7 @@
         Run, % "obsidian://advanced-uri?vault=secondbrain&commandname=Capture%20screenshot"
         Return
     ` & Pause::
-        Run, % "obsidian://advanced-uri?vault=secondbrain&commandname=Toggle%20pause%20recording"
+        Run, % "obsidian://open?vault=secondbrain&file=secondbrain%2F4%20_Archieve%2F2.1.SreLaptopModuleDeployments%2FNationalGrid"
         Return
     ` & ScrollLock::
         Run, % "obsidian://advanced-uri?vault=secondbrain&commandname=Scroll%20to%20top"
