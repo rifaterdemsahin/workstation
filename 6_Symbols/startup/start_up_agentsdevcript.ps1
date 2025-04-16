@@ -103,6 +103,7 @@ $Applications = @(
 
 $Urls = @(
     "https://chatgpt.com/?hints=search&ref=ext&model=auto"
+    "https://docs.google.com/spreadsheets/d/11JwqlGcDO0Retl_qbVQSMyYUIYHcXSlJs3z67nDOq8s/edit?gid=0#gid=0"
     "https://claude.ai/new"
     "https://to-do.office.com/tasks/"
     "https://www.perplexity.ai/"
