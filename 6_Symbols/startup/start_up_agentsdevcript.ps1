@@ -69,7 +69,7 @@ Get-ChildItem -Path "C:\projects\workstation\6_Symbols\ahk\" -Filter "*.ahk" | F
 Start-Process "https://deepai.org/chat"
 
 # Update Winget and Chocolatey packages
-winget upgrade --all
+winget upgrade --all --silent
 choco upgrade all -y
 
 # List all Chocolatey and Winget packages
