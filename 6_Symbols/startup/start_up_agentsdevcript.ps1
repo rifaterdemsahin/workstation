@@ -70,7 +70,7 @@ Start-Process "https://deepai.org/chat"
 
 # Update Winget and Chocolatey packages
 winget upgrade --all --silent
-choco upgrade all -y
+Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"choco upgrade all -y --no-progress`"" -Verb RunAs
 
 # List all Chocolatey and Winget packages
 choco list --localonly
