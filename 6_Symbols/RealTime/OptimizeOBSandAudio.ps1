@@ -1,7 +1,7 @@
-# PowerShell Script to Optimize OBS, Audio, Voicemeeter, VB-Audio Cable A, and Focusrite Scarlett 2i2 on Ryzen 128-Thread CPU
-# Purpose: Set CPU affinity and priority to reduce audio cracking and improve multi-scene OBS performance with Scarlett 2i2
-# Target CPU: AMD Ryzen Threadripper (e.g., 3990X, 64 cores/128 threads)
-# Audio Interface: Focusrite Scarlett 2i2 (3rd or 4th Gen)
+# PowerShell Script to Optimize Audio and Streaming Processes on Ryzen CPU
+# Purpose: Set CPU affinity and priority to reduce audio cracking and improve streaming performance
+# Target CPU: AMD Ryzen Threadripper or other multi-core CPU
+# Audio Interfaces: Voicemeeter and Windows Audio
 # Date: May 09, 2025
 
 # Requires Administrator privileges
@@ -40,9 +40,14 @@ function Set-ProcessOptimization {
     }
 }
 
+# Get system information
+$cpuInfo = Get-WmiObject -Class Win32_Processor
+Write-Host "CPU: $($cpuInfo.Name)" -ForegroundColor Cyan
+Write-Host "Number of logical processors: $($cpuInfo.NumberOfLogicalProcessors)" -ForegroundColor Cyan
+
 # List all running processes before optimization for debugging
 Write-Host "Listing target processes before optimization..." -ForegroundColor Cyan
-$targetProcesses = @("obs64", "audiodg", "voicemeeter8", "voicemeeter", "audiorepeater", "FocusriteUSBAudio", "Discord", "chrome")
+$targetProcesses = @("obs64", "audiodg", "voicemeeter8", "voicemeeter", "audiorepeater", "VBCable_ControlPanel", "Discord", "chrome")
 foreach ($procName in $targetProcesses) {
     try {
         $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
@@ -59,47 +64,78 @@ foreach ($procName in $targetProcesses) {
 }
 Write-Host "Process listing complete. Starting optimizations..." -ForegroundColor Cyan
 
-# Core assignments for Ryzen Threadripper (128 threads, 64 physical cores)
-# 8 CCXs, 8 cores per CCX. Physical cores only (avoid SMT).
-# OBS: CCX2, cores 8,10,12,14
-$obsAffinity = 0x5500  # Decimal 21760
+# Automatically detect number of logical processors
+$cpuCount = $cpuInfo.NumberOfLogicalProcessors
+
+# Calculate appropriate affinity masks based on system configuration
+function Calculate-OptimalAffinityMasks {
+    param (
+        [int]$TotalProcessors
+    )
+    
+    # For systems with fewer cores, use a different allocation strategy
+    if ($TotalProcessors -lt 16) {
+        # Small system (4-8 cores)
+        $script:obsAffinity = 0x3        # Cores 0-1
+        $script:audioAffinity = 0xC      # Cores 2-3
+        $script:voicemeeterAffinity = 0x30 # Cores 4-5
+        $script:gameAffinity = 0xF0      # Cores 4-7
+        $script:backgroundAffinity = 0xF  # Cores 0-3
+    }
+    elseif ($TotalProcessors -lt 32) {
+        # Mid-size system (16-24 cores)
+        $script:obsAffinity = 0xF        # Cores 0-3
+        $script:audioAffinity = 0xF0     # Cores 4-7
+        $script:voicemeeterAffinity = 0xF00 # Cores 8-11
+        $script:gameAffinity = 0xF000    # Cores 12-15
+        $script:backgroundAffinity = 0xFF0000 # Cores 16-23
+    }
+    else {
+        # Large system (32+ cores, like Threadripper)
+        # OBS: CCX1, cores 0-3
+        $script:obsAffinity = 0xF  
+        
+        # Windows Audio (audiodg): CCX2, cores 4-7
+        $script:audioAffinity = 0xF0
+        
+        # Voicemeeter: CCX3, cores 8-11
+        $script:voicemeeterAffinity = 0xF00
+        
+        # Game (optional): CCX4, cores 12-15
+        $script:gameAffinity = 0xF000
+        
+        # Background apps (e.g., Discord, Chrome): remaining cores
+        $script:backgroundAffinity = [Math]::Pow(2, $TotalProcessors) - 1 - 0xFFFF
+    }
+    
+    Write-Host "Affinity masks calculated for $TotalProcessors logical processors" -ForegroundColor Yellow
+}
+
+# Calculate affinity masks based on system configuration
+Calculate-OptimalAffinityMasks -TotalProcessors $cpuCount
+
+# Set priority levels
 $obsPriority = "High"
-
-# Windows Audio (audiodg): CCX3, cores 16,18,20,22
-$audioAffinity = 0x550000  # Decimal 5570560
 $audioPriority = "High"
-
-# Voicemeeter: CCX4, cores 24,26,28,30
-$voicemeeterAffinity = 0x55000000  # Decimal 1426063360
 $voicemeeterPriority = "High"
-
-# VB-Audio Cable A/AudioRepeater: CCX5, cores 32,34,36,38
-$cableAffinity = 0x5500000000  # Decimal 364071344128
-$cablePriority = "High"
-
-# Focusrite Scarlett 2i2: CCX6, cores 40,42,44,46
-$scarlettAffinity = 0x550000000000  # Decimal 93057365057536
-$scarlettPriority = "High"
-
-# Game (optional): CCX1, cores 0,2,4,6
-$gameAffinity = 0x55  # Decimal 85
 $gamePriority = "Normal"
-
-# Background apps (e.g., Discord, Chrome): CCX7, cores 48-55
-$backgroundAffinity = 0xFF000000000000  # Decimal 280375465082880
 $backgroundPriority = "BelowNormal"
 
 # Optimize processes
 Write-Host "Applying initial optimizations..." -ForegroundColor Cyan
-Set-ProcessOptimization -ProcessName "obs64" -AffinityMask $obsAffinity -Priority $obsPriority
+
+# Audio processes - critical for preventing audio crackling
 Set-ProcessOptimization -ProcessName "audiodg" -AffinityMask $audioAffinity -Priority $audioPriority
 Set-ProcessOptimization -ProcessName "voicemeeter8" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
 Set-ProcessOptimization -ProcessName "voicemeeter" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
-Set-ProcessOptimization -ProcessName "audiorepeater" -AffinityMask $cableAffinity -Priority $cablePriority
-Set-ProcessOptimization -ProcessName "FocusriteUSBAudio" -AffinityMask $scarlettAffinity -Priority $scarlettPriority
+Set-ProcessOptimization -ProcessName "audiorepeater" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
+Set-ProcessOptimization -ProcessName "VBCable_ControlPanel" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
+
+# Streaming/Recording
+Set-ProcessOptimization -ProcessName "obs64" -AffinityMask $obsAffinity -Priority $obsPriority
 
 # Define and optimize background apps
-$backgroundApps = @("Discord", "chrome")
+$backgroundApps = @("Discord", "chrome", "msedge", "firefox", "brave")
 foreach ($app in $backgroundApps) {
     Set-ProcessOptimization -ProcessName $app -AffinityMask $backgroundAffinity -Priority $backgroundPriority
 }
@@ -116,22 +152,42 @@ Write-Host "Initial optimization complete! Monitoring and reapplying every 30 se
 Write-Host "Press Ctrl+C to stop." -ForegroundColor Yellow
 
 try {
+    $intervalSeconds = 30
+    $iteration = 0
     while ($true) {
-        Start-Sleep -Seconds 30
-        Write-Host "Reapplying optimizations..." -ForegroundColor Yellow
-        Set-ProcessOptimization -ProcessName "obs64" -AffinityMask $obsAffinity -Priority $obsPriority
+        Start-Sleep -Seconds $intervalSeconds
+        $iteration++
+        Write-Host "Reapplying optimizations... (Iteration $iteration)" -ForegroundColor Yellow
+        
+        # Audio processes - highest priority
         Set-ProcessOptimization -ProcessName "audiodg" -AffinityMask $audioAffinity -Priority $audioPriority
         Set-ProcessOptimization -ProcessName "voicemeeter8" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
         Set-ProcessOptimization -ProcessName "voicemeeter" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
-        Set-ProcessOptimization -ProcessName "audiorepeater" -AffinityMask $cableAffinity -Priority $cablePriority
-        Set-ProcessOptimization -ProcessName "FocusriteUSBAudio" -AffinityMask $scarlettAffinity -Priority $scarlettPriority
+        Set-ProcessOptimization -ProcessName "audiorepeater" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
+        Set-ProcessOptimization -ProcessName "VBCable_ControlPanel" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
         
+        # Streaming/Recording
+        Set-ProcessOptimization -ProcessName "obs64" -AffinityMask $obsAffinity -Priority $obsPriority
+        
+        # Background apps
         foreach ($app in $backgroundApps) {
             Set-ProcessOptimization -ProcessName $app -AffinityMask $backgroundAffinity -Priority $backgroundPriority
         }
         
+        # Game process if specified
         if ($gameName) {
             Set-ProcessOptimization -ProcessName $gameName -AffinityMask $gameAffinity -Priority $gamePriority
+        }
+        
+        # Check for newly launched target processes every 5 iterations
+        if ($iteration % 5 -eq 0) {
+            Write-Host "Checking for newly launched processes..." -ForegroundColor Cyan
+            foreach ($procName in $targetProcesses) {
+                $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
+                if ($process -and -not $processedBefore.Contains($procName)) {
+                    Write-Host "Found new process: $procName" -ForegroundColor Green
+                }
+            }
         }
     }
 } catch {
