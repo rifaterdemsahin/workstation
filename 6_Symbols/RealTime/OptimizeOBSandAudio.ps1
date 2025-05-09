@@ -1,4 +1,6 @@
-# PowerShell Script to Optimize Audio and Streaming Processes on Ryzen CPU
+# Monitor and reapply every 30 seconds
+Write-Host "Initial optimization complete! Monitoring and reapplying every 30 seconds..." -ForegroundColor Green
+Write-Host "Press Ctrl+C to stop." -ForegroundColor Yellow# PowerShell Script to Optimize Audio and Streaming Processes on Ryzen CPU
 # Purpose: Set CPU affinity and priority to reduce audio cracking and improve streaming performance
 # Target CPU: AMD Ryzen Threadripper or other multi-core CPU
 # Audio Interfaces: Voicemeeter and Windows Audio
@@ -73,8 +75,27 @@ function Calculate-OptimalAffinityMasks {
         [int]$TotalProcessors
     )
     
-    # For systems with fewer cores, use a different allocation strategy
-    if ($TotalProcessors -lt 16) {
+    # For large systems like yours with 128 threads, we need to be careful with affinity mask calculations
+    # PowerShell's Int64 can't handle extremely large bitmasks for 128+ threads
+    
+    if ($TotalProcessors -gt 64) {
+        # For very large systems (>64 cores), use smaller segments
+        # OBS: Cores 0-3
+        $script:obsAffinity = 0xF
+        
+        # Windows Audio (audiodg): Cores 4-7
+        $script:audioAffinity = 0xF0
+        
+        # Voicemeeter: Cores 8-11
+        $script:voicemeeterAffinity = 0xF00
+        
+        # Game (optional): Cores 12-15
+        $script:gameAffinity = 0xF000
+        
+        # Background apps: Cores 16-23 (avoid using all cores to prevent overflow)
+        $script:backgroundAffinity = 0xFF0000
+    }
+    elseif ($TotalProcessors -lt 16) {
         # Small system (4-8 cores)
         $script:obsAffinity = 0x3        # Cores 0-1
         $script:audioAffinity = 0xC      # Cores 2-3
@@ -82,30 +103,13 @@ function Calculate-OptimalAffinityMasks {
         $script:gameAffinity = 0xF0      # Cores 4-7
         $script:backgroundAffinity = 0xF  # Cores 0-3
     }
-    elseif ($TotalProcessors -lt 32) {
-        # Mid-size system (16-24 cores)
+    else {
+        # Mid-size system (16-64 cores)
         $script:obsAffinity = 0xF        # Cores 0-3
         $script:audioAffinity = 0xF0     # Cores 4-7
         $script:voicemeeterAffinity = 0xF00 # Cores 8-11
         $script:gameAffinity = 0xF000    # Cores 12-15
         $script:backgroundAffinity = 0xFF0000 # Cores 16-23
-    }
-    else {
-        # Large system (32+ cores, like Threadripper)
-        # OBS: CCX1, cores 0-3
-        $script:obsAffinity = 0xF  
-        
-        # Windows Audio (audiodg): CCX2, cores 4-7
-        $script:audioAffinity = 0xF0
-        
-        # Voicemeeter: CCX3, cores 8-11
-        $script:voicemeeterAffinity = 0xF00
-        
-        # Game (optional): CCX4, cores 12-15
-        $script:gameAffinity = 0xF000
-        
-        # Background apps (e.g., Discord, Chrome): remaining cores
-        $script:backgroundAffinity = [Math]::Pow(2, $TotalProcessors) - 1 - 0xFFFF
     }
     
     Write-Host "Affinity masks calculated for $TotalProcessors logical processors" -ForegroundColor Yellow
@@ -140,16 +144,21 @@ foreach ($app in $backgroundApps) {
     Set-ProcessOptimization -ProcessName $app -AffinityMask $backgroundAffinity -Priority $backgroundPriority
 }
 
+# Initialize tracking for newly detected processes
+$processedBefore = New-Object System.Collections.Generic.HashSet[string]
+foreach ($procName in $targetProcesses) {
+    $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
+    if ($process) {
+        [void]$processedBefore.Add($procName)
+    }
+}
+
 # Check if game process name was provided and optimize if it exists
 $gameName = $null
 if ($args.Count -gt 0) {
     $gameName = $args[0]
     Set-ProcessOptimization -ProcessName $gameName -AffinityMask $gameAffinity -Priority $gamePriority
 }
-
-# Monitor and reapply every 30 seconds
-Write-Host "Initial optimization complete! Monitoring and reapplying every 30 seconds..." -ForegroundColor Green
-Write-Host "Press Ctrl+C to stop." -ForegroundColor Yellow
 
 try {
     $intervalSeconds = 30
