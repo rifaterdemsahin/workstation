@@ -1,6 +1,4 @@
-# Monitor and reapply every 30 seconds
-Write-Host "Initial optimization complete! Monitoring and reapplying every 30 seconds..." -ForegroundColor Green
-Write-Host "Press Ctrl+C to stop." -ForegroundColor Yellow# PowerShell Script to Optimize Audio and Streaming Processes on Ryzen CPU
+# PowerShell Script to Optimize Audio and Streaming Processes on Ryzen CPU
 # Purpose: Set CPU affinity and priority to reduce audio cracking and improve streaming performance
 # Target CPU: AMD Ryzen Threadripper or other multi-core CPU
 # Audio Interfaces: Voicemeeter and Windows Audio
@@ -125,6 +123,15 @@ $voicemeeterPriority = "High"
 $gamePriority = "Normal"
 $backgroundPriority = "BelowNormal"
 
+# Initialize tracking for newly detected processes
+$processedBefore = New-Object System.Collections.Generic.HashSet[string]
+foreach ($procName in $targetProcesses) {
+    $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
+    if ($process) {
+        [void]$processedBefore.Add($procName)
+    }
+}
+
 # Optimize processes
 Write-Host "Applying initial optimizations..." -ForegroundColor Cyan
 
@@ -144,21 +151,16 @@ foreach ($app in $backgroundApps) {
     Set-ProcessOptimization -ProcessName $app -AffinityMask $backgroundAffinity -Priority $backgroundPriority
 }
 
-# Initialize tracking for newly detected processes
-$processedBefore = New-Object System.Collections.Generic.HashSet[string]
-foreach ($procName in $targetProcesses) {
-    $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
-    if ($process) {
-        [void]$processedBefore.Add($procName)
-    }
-}
-
 # Check if game process name was provided and optimize if it exists
 $gameName = $null
 if ($args.Count -gt 0) {
     $gameName = $args[0]
     Set-ProcessOptimization -ProcessName $gameName -AffinityMask $gameAffinity -Priority $gamePriority
 }
+
+# Monitor and reapply every 30 seconds
+Write-Host "Initial optimization complete! Monitoring and reapplying every 30 seconds..." -ForegroundColor Green
+Write-Host "Press Ctrl+C to stop." -ForegroundColor Yellow
 
 try {
     $intervalSeconds = 30
@@ -195,6 +197,7 @@ try {
                 $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
                 if ($process -and -not $processedBefore.Contains($procName)) {
                     Write-Host "Found new process: $procName" -ForegroundColor Green
+                    [void]$processedBefore.Add($procName)
                 }
             }
         }
