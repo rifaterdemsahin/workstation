@@ -32,36 +32,26 @@ function Set-ProcessOptimization {
                 Write-Host "Optimized $ProcessName (PID: $($proc.Id)) - Affinity: $AffinityMask, Priority: $Priority" -ForegroundColor Green ✅
             }
         } else {
-            } else {
-                Write-Host "Process $ProcessName not found." -ForegroundColor Red 🔴
-            }
-        }
-        Write-Host "Error optimizing ${ProcessName}: $_" -ForegroundColor Red ⚠️
-    }
-}
-
-    try {
-        $process = Get-Process -Name $ProcessName -ErrorAction SilentlyContinue
-        if ($process) {
-            foreach ($proc in $process) {
-foreach ($procName in $targetProcesses) {
-    $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
-    if ($process) {
-        foreach ($p in $process) {
-            Write-Host "Found: $procName (PID: $($p.Id))" -ForegroundColor Green ✅
-        }
-    } else {
-        Write-Host "Not Found: $procName" -ForegroundColor Red 🔴
-    }
-}
-                }
-                Write-Host "Optimized $ProcessName (PID: $($proc.Id)) - Affinity: $AffinityMask, Priority: $Priority" -ForegroundColor Green ✅
-            }
-        } else {
             Write-Host "Process $ProcessName not found." -ForegroundColor Red 🔴
         }
     } catch {
         Write-Host "Error optimizing ${ProcessName}: $_" -ForegroundColor Red ⚠️
+    }
+}
+
+$targetProcesses = @("obs64", "audiodg", "voicemeeter8", "VBCable_A", "FocusriteUSBAudio", "Discord", "chrome")
+foreach ($procName in $targetProcesses) {
+    try {
+        $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
+        if ($process) {
+            foreach ($p in $process) {
+                Write-Host "Found: $procName (PID: $($p.Id))" -ForegroundColor Green ✅
+            }
+        } else {
+            Write-Host "Not Found: $procName" -ForegroundColor Red 🔴
+        }
+    } catch {
+        Write-Host "Error occurred while processing $procName: ${_}" -ForegroundColor Red ⚠️
     }
 }
 
