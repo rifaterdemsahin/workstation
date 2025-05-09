@@ -15,7 +15,6 @@ function Set-ProcessOptimization {
         [int64]$AffinityMask,
         [string]$Priority
     )
-
     try {
         $process = Get-Process -Name $ProcessName -ErrorAction SilentlyContinue
         if ($process) {
@@ -29,6 +28,32 @@ function Set-ProcessOptimization {
                     "BelowNormal" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::BelowNormal }
                     "Idle" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::Idle }
                     default { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::Normal }
+                }
+                Write-Host "Optimized $ProcessName (PID: $($proc.Id)) - Affinity: $AffinityMask, Priority: $Priority" -ForegroundColor Green ✅
+            }
+        } else {
+            } else {
+                Write-Host "Process $ProcessName not found." -ForegroundColor Red 🔴
+            }
+        }
+        Write-Host "Error optimizing ${ProcessName}: $_" -ForegroundColor Red ⚠️
+    }
+}
+
+    try {
+        $process = Get-Process -Name $ProcessName -ErrorAction SilentlyContinue
+        if ($process) {
+            foreach ($proc in $process) {
+foreach ($procName in $targetProcesses) {
+    $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
+    if ($process) {
+        foreach ($p in $process) {
+            Write-Host "Found: $procName (PID: $($p.Id))" -ForegroundColor Green ✅
+        }
+    } else {
+        Write-Host "Not Found: $procName" -ForegroundColor Red 🔴
+    }
+}
                 }
                 Write-Host "Optimized $ProcessName (PID: $($proc.Id)) - Affinity: $AffinityMask, Priority: $Priority" -ForegroundColor Green ✅
             }
@@ -94,10 +119,13 @@ Set-ProcessOptimization -ProcessName "VBCable_A" -AffinityMask $cableAffinity -P
 Set-ProcessOptimization -ProcessName "FocusriteUSBAudio" -AffinityMask $scarlettAffinity -Priority $scarlettPriority
 
 # Optimize background apps
-$backgroundApps = @("Discord", "chrome")
+Write-Host "Optimization complete! 🎉 Press Ctrl+C to stop." -ForegroundColor Green
 foreach ($app in $backgroundApps) {
     Set-ProcessOptimization -ProcessName $app -AffinityMask $backgroundAffinity -Priority $backgroundPriority
 }
+
+# Optimize game process (if applicable)
+Set-ProcessOptimization -ProcessName "Game" -AffinityMask $gameAffinity -Priority $gamePriority
 
 # Monitor and reapply every 30 seconds
 $runContinuously = $true
