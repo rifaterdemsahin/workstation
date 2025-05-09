@@ -51,7 +51,7 @@ foreach ($procName in $targetProcesses) {
             Write-Host "Not Found: $procName" -ForegroundColor Red 🔴
         }
     } catch {
-        Write-Host "Error occurred while processing $procName: ${_}" -ForegroundColor Red ⚠️
+        Write-Host "Error occurred while processing $procName" -ForegroundColor Red ⚠️
     }
 }
 
@@ -69,7 +69,7 @@ foreach ($procName in $targetProcesses) {
         Write-Host "Not Found: $procName" -ForegroundColor Red 🔴
     }
 }
-Write-Host "Process listing complete. Starting optimizations... 🚀" -ForegroundColor Cyan
+ Write-Host "Process listing complete. Starting optimizations... 🚀" -ForegroundColor Cyan
 
 # Core assignments for Ryzen Threadripper (128 threads, 64 physical cores)
 # 8 CCXs, 8 cores per CCX. Physical cores only (avoid SMT).
@@ -110,6 +110,7 @@ Set-ProcessOptimization -ProcessName "FocusriteUSBAudio" -AffinityMask $scarlett
 
 # Optimize background apps
 Write-Host "Optimization complete! 🎉 Press Ctrl+C to stop." -ForegroundColor Green
+$backgroundApps = @("Discord", "chrome") # Define background apps
 foreach ($app in $backgroundApps) {
     Set-ProcessOptimization -ProcessName $app -AffinityMask $backgroundAffinity -Priority $backgroundPriority
 }
