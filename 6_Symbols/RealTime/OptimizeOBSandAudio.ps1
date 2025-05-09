@@ -3,7 +3,6 @@
 # Target CPU: AMD Ryzen Threadripper (e.g., 3990X, 64 cores/128 threads)
 # Audio Interface: Focusrite Scarlett 2i2 (3rd or 4th Gen)
 # Date: May 09, 2025
-# Fixed: Mismatched braces, incomplete try block, added process listing 🟢🔴
 
 # Requires Administrator privileges
 #Requires -RunAsAdministrator
@@ -23,53 +22,42 @@ function Set-ProcessOptimization {
                 $proc.ProcessorAffinity = $AffinityMask
                 # Set priority
                 switch ($Priority) {
+                    "RealTime" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::RealTime }
                     "High" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::High }
+                    "AboveNormal" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::AboveNormal }
                     "Normal" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::Normal }
                     "BelowNormal" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::BelowNormal }
                     "Idle" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::Idle }
                     default { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::Normal }
                 }
-                Write-Host "Optimized $ProcessName (PID: $($proc.Id)) - Affinity: $AffinityMask, Priority: $Priority" -ForegroundColor Green ✅
+                Write-Host "Optimized $ProcessName (PID: $($proc.Id)) - Affinity: $AffinityMask, Priority: $Priority" -ForegroundColor Green
             }
         } else {
-            Write-Host "Process $ProcessName not found." -ForegroundColor Red 🔴
+            Write-Host "Process $ProcessName not found." -ForegroundColor Red
         }
     } catch {
-        Write-Host "Error optimizing ${ProcessName}: $_" -ForegroundColor Red ⚠️
+        Write-Host "Error optimizing ${ProcessName}: $_" -ForegroundColor Red
     }
 }
 
-$targetProcesses = @("obs64", "audiodg", "voicemeeter8", "VBCable_A", "FocusriteUSBAudio", "Discord", "chrome")
+# List all running processes before optimization for debugging
+Write-Host "Listing target processes before optimization..." -ForegroundColor Cyan
+$targetProcesses = @("obs64", "audiodg", "voicemeeter8", "voicemeeter", "audiorepeater", "FocusriteUSBAudio", "Discord", "chrome")
 foreach ($procName in $targetProcesses) {
     try {
         $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
         if ($process) {
             foreach ($p in $process) {
-                Write-Host "Found: $procName (PID: $($p.Id))" -ForegroundColor Green ✅
+                Write-Host "Found: $procName (PID: $($p.Id))" -ForegroundColor Green
             }
         } else {
-            Write-Host "Not Found: $procName" -ForegroundColor Red 🔴
+            Write-Host "Not Found: $procName" -ForegroundColor Red
         }
     } catch {
-        Write-Host "Error occurred while processing $procName" -ForegroundColor Red ⚠️
+        Write-Host "Error occurred while checking $procName" -ForegroundColor Red
     }
 }
-
-# List all running processes before optimization for debugging
-Write-Host "Listing running processes before optimization... 🔍" -ForegroundColor Cyan
-$targetProcesses = @("obs64", "audiodg", "voicemeeter8", "VBCable_A", "FocusriteUSBAudio", "Discord", "chrome")
-Write-Host "Checking target processes:" -ForegroundColor Cyan
-foreach ($procName in $targetProcesses) {
-    $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
-    if ($process) {
-        foreach ($p in $process) {
-            Write-Host "Found: $procName (PID: $($p.Id))" -ForegroundColor Green ✅
-        }
-    } else {
-        Write-Host "Not Found: $procName" -ForegroundColor Red 🔴
-    }
-}
- Write-Host "Process listing complete. Starting optimizations... 🚀" -ForegroundColor Cyan
+Write-Host "Process listing complete. Starting optimizations..." -ForegroundColor Cyan
 
 # Core assignments for Ryzen Threadripper (128 threads, 64 physical cores)
 # 8 CCXs, 8 cores per CCX. Physical cores only (avoid SMT).
@@ -85,7 +73,7 @@ $audioPriority = "High"
 $voicemeeterAffinity = 0x55000000  # Decimal 1426063360
 $voicemeeterPriority = "High"
 
-# VB-Audio Cable A: CCX5, cores 32,34,36,38
+# VB-Audio Cable A/AudioRepeater: CCX5, cores 32,34,36,38
 $cableAffinity = 0x5500000000  # Decimal 364071344128
 $cablePriority = "High"
 
@@ -102,37 +90,52 @@ $backgroundAffinity = 0xFF000000000000  # Decimal 280375465082880
 $backgroundPriority = "BelowNormal"
 
 # Optimize processes
+Write-Host "Applying initial optimizations..." -ForegroundColor Cyan
 Set-ProcessOptimization -ProcessName "obs64" -AffinityMask $obsAffinity -Priority $obsPriority
 Set-ProcessOptimization -ProcessName "audiodg" -AffinityMask $audioAffinity -Priority $audioPriority
 Set-ProcessOptimization -ProcessName "voicemeeter8" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
-Set-ProcessOptimization -ProcessName "VBCable_A" -AffinityMask $cableAffinity -Priority $cablePriority
+Set-ProcessOptimization -ProcessName "voicemeeter" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
+Set-ProcessOptimization -ProcessName "audiorepeater" -AffinityMask $cableAffinity -Priority $cablePriority
 Set-ProcessOptimization -ProcessName "FocusriteUSBAudio" -AffinityMask $scarlettAffinity -Priority $scarlettPriority
 
-# Optimize background apps
-Write-Host "Optimization complete! 🎉 Press Ctrl+C to stop." -ForegroundColor Green
-$backgroundApps = @("Discord", "chrome") # Define background apps
+# Define and optimize background apps
+$backgroundApps = @("Discord", "chrome")
 foreach ($app in $backgroundApps) {
     Set-ProcessOptimization -ProcessName $app -AffinityMask $backgroundAffinity -Priority $backgroundPriority
 }
 
-# Optimize game process (if applicable)
-Set-ProcessOptimization -ProcessName "Game" -AffinityMask $gameAffinity -Priority $gamePriority
+# Check if game process name was provided and optimize if it exists
+$gameName = $null
+if ($args.Count -gt 0) {
+    $gameName = $args[0]
+    Set-ProcessOptimization -ProcessName $gameName -AffinityMask $gameAffinity -Priority $gamePriority
+}
 
 # Monitor and reapply every 30 seconds
-$runContinuously = $true
-if ($runContinuously) {
+Write-Host "Initial optimization complete! Monitoring and reapplying every 30 seconds..." -ForegroundColor Green
+Write-Host "Press Ctrl+C to stop." -ForegroundColor Yellow
+
+try {
     while ($true) {
-        Write-Host "Reapplying optimizations... 🔄" -ForegroundColor Yellow
+        Start-Sleep -Seconds 30
+        Write-Host "Reapplying optimizations..." -ForegroundColor Yellow
         Set-ProcessOptimization -ProcessName "obs64" -AffinityMask $obsAffinity -Priority $obsPriority
         Set-ProcessOptimization -ProcessName "audiodg" -AffinityMask $audioAffinity -Priority $audioPriority
         Set-ProcessOptimization -ProcessName "voicemeeter8" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
-        Set-ProcessOptimization -ProcessName "VBCable_A" -AffinityMask $cableAffinity -Priority $cablePriority
+        Set-ProcessOptimization -ProcessName "voicemeeter" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
+        Set-ProcessOptimization -ProcessName "audiorepeater" -AffinityMask $cableAffinity -Priority $cablePriority
         Set-ProcessOptimization -ProcessName "FocusriteUSBAudio" -AffinityMask $scarlettAffinity -Priority $scarlettPriority
+        
         foreach ($app in $backgroundApps) {
             Set-ProcessOptimization -ProcessName $app -AffinityMask $backgroundAffinity -Priority $backgroundPriority
         }
-        Start-Sleep -Seconds 30
+        
+        if ($gameName) {
+            Set-ProcessOptimization -ProcessName $gameName -AffinityMask $gameAffinity -Priority $gamePriority
+        }
     }
+} catch {
+    Write-Host "Script stopped: $_" -ForegroundColor Red
+} finally {
+    Write-Host "Optimization monitoring ended." -ForegroundColor Cyan
 }
-
-Write-Host "Optimization complete! 🎉 Press Ctrl+C to stop." -ForegroundColor Green
