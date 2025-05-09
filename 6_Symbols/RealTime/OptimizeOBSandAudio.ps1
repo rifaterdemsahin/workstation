@@ -3,7 +3,7 @@
 # Target CPU: AMD Ryzen Threadripper (e.g., 3990X, 64 cores/128 threads)
 # Audio Interface: Focusrite Scarlett 2i2 (3rd or 4th Gen)
 # Date: May 09, 2025
-# Added: Colorful process listing before optimization for debugging 🟢🔴
+# Fixed: Mismatched braces, incomplete try block, added process listing 🟢🔴
 
 # Requires Administrator privileges
 #Requires -RunAsAdministrator
@@ -20,7 +20,9 @@ function Set-ProcessOptimization {
         $process = Get-Process -Name $ProcessName -ErrorAction SilentlyContinue
         if ($process) {
             foreach ($proc in $process) {
+                # Set CPU affinity
                 $proc.ProcessorAffinity = $AffinityMask
+                # Set priority
                 switch ($Priority) {
                     "High" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::High }
                     "Normal" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::Normal }
