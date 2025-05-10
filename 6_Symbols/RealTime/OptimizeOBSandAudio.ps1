@@ -472,165 +472,165 @@ $null = Register-EngineEvent -SourceIdentifier PowerShell.Exiting -Action {
     Write-Log "=== Script terminated by user ===" -ForegroundColor Red
 }
 
-# Get system information
-$cpuInfo = Get-WmiObject -Class Win32_Processor
-Write-Log "CPU: $($cpuInfo.Name)" -ForegroundColor Cyan
-Write-Log "Number of logical processors: $($cpuInfo.NumberOfLogicalProcessors)" -ForegroundColor Cyan
-
-# Try to get GPU information
 try {
-    $gpuInfo = Get-WmiObject -Class Win32_VideoController
-    foreach ($gpu in $gpuInfo) {
-        Write-Log "GPU: $($gpu.Name) - $($gpu.VideoModeDescription)" -ForegroundColor Cyan
-    }
-} catch {
-    Write-Log "Could not retrieve GPU information: $_" -ForegroundColor Red
-}
+    # Get system information
+    $cpuInfo = Get-WmiObject -Class Win32_Processor
+    Write-Log "CPU: $($cpuInfo.Name)" -ForegroundColor Cyan
+    Write-Log "Number of logical processors: $($cpuInfo.NumberOfLogicalProcessors)" -ForegroundColor Cyan
 
-# List all running processes before optimization for debugging
-Write-Log "Listing target processes before optimization..." -ForegroundColor Cyan
-$targetProcesses = @("obs64", "audiodg", "voicemeeter8", "voicemeeter", "audiorepeater", "VBCable_ControlPanel", "Discord", "chrome")
-foreach ($procName in $targetProcesses) {
+    # Try to get GPU information
     try {
-        $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
-        if ($process) {
-            foreach ($p in $process) {
-                Write-Log "Found: $procName (PID: $($p.Id))" -ForegroundColor Green
-            }
-        } else {
-            Write-Log "Not Found: $procName" -ForegroundColor Red
+        $gpuInfo = Get-WmiObject -Class Win32_VideoController
+        foreach ($gpu in $gpuInfo) {
+            Write-Log "GPU: $($gpu.Name) - $($gpu.VideoModeDescription)" -ForegroundColor Cyan
         }
     } catch {
-        Write-Log "Error occurred while checking $procName" -ForegroundColor Red
-    }
-}
-Write-Log "Process listing complete. Starting optimizations..." -ForegroundColor Cyan
-
-# Log initial system performance
-$initialPerf = Get-SystemPerformance
-if ($initialPerf) {
-    Write-Log "Initial System State:" -ForegroundColor Yellow
-
-    # Check if values are numeric or error strings
-    $cpuDisplay = if ($initialPerf.CPUUsage -is [double] -or $initialPerf.CPUUsage -is [int]) { "$($initialPerf.CPUUsage)%" } else { $initialPerf.CPUUsage }
-    $memDisplay = if ($initialPerf.MemoryUsage -is [double] -or $initialPerf.MemoryUsage -is [int]) { "$($initialPerf.MemoryUsage)%" } else { $initialPerf.MemoryUsage }
-    $gpuDisplay = if ($initialPerf.GPUUsage -is [double] -or $initialPerf.GPUUsage -is [int]) { "$($initialPerf.GPUUsage)%" } else { $initialPerf.GPUUsage }
-
-    Write-Log "   CPU Usage: $cpuDisplay" -ForegroundColor Yellow
-    Write-Log "   Memory Usage: $memDisplay" -ForegroundColor Yellow
-    Write-Log "   GPU Usage: $gpuDisplay" -ForegroundColor Yellow
-    Write-Log "   System Responsiveness: $($initialPerf.Responsiveness)" -ForegroundColor Yellow
-
-    # Additional hardware info
-    Write-Log "   Number of Chrome instances: $((Get-Process chrome -ErrorAction SilentlyContinue).Count)" -ForegroundColor Yellow
-    Write-Log "   Number of Firefox instances: $((Get-Process firefox -ErrorAction SilentlyContinue).Count)" -ForegroundColor Yellow
-}
-
-# Automatically detect number of logical processors
-$cpuCount = $cpuInfo.NumberOfLogicalProcessors
-
-# Calculate appropriate affinity masks based on system configuration
-function Calculate-OptimalAffinityMasks {
-    param (
-        [int]$TotalProcessors
-    )
-
-    # For large systems like yours with 128 threads, we need to be careful with affinity mask calculations
-    # PowerShell's Int64 can't handle extremely large bitmasks for 128+ threads
-
-    if ($TotalProcessors -gt 64) {
-        # For very large systems (>64 cores), use smaller segments
-        # OBS: Cores 0-3
-        $script:obsAffinity = 0xF
-
-        # Windows Audio (audiodg): Cores 4-7
-        $script:audioAffinity = 0xF0
-
-        # Voicemeeter: Cores 8-11
-        $script:voicemeeterAffinity = 0xF00
-
-        # Game (optional): Cores 12-15
-        $script:gameAffinity = 0xF000
-
-        # Background apps: Cores 16-23 (avoid using all cores to prevent overflow)
-        $script:backgroundAffinity = 0xFF0000
-    }
-    elseif ($TotalProcessors -lt 16) {
-        # Small system (4-8 cores)
-        $script:obsAffinity = 0x3       # Cores 0-1
-        $script:audioAffinity = 0xC     # Cores 2-3
-        $script:voicemeeterAffinity = 0x30 # Cores 4-5
-        $script:gameAffinity = 0xF0     # Cores 4-7
-        $script:backgroundAffinity = 0xF  # Cores 0-3
-    }
-    else {
-        # Mid-size system (16-64 cores)
-        $script:obsAffinity = 0xF       # Cores 0-3
-        $script:audioAffinity = 0xF0     # Cores 4-7
-        $script:voicemeeterAffinity = 0xF00 # Cores 8-11
-        $script:gameAffinity = 0xF000    # Cores 12-15
-        $script:backgroundAffinity = 0xFF0000 # Cores 16-23
+        Write-Log "Could not retrieve GPU information: $_" -ForegroundColor Red
     }
 
-    Write-Log "Affinity masks calculated for $TotalProcessors logical processors" -ForegroundColor Yellow
-}
-
-# Calculate affinity masks based on system configuration
-Calculate-OptimalAffinityMasks -TotalProcessors $cpuCount
-
-# Set priority levels
-$obsPriority = "High"
-$audioPriority = "High"
-$voicemeeterPriority = "High"
-$gamePriority = "Normal"
-$backgroundPriority = "BelowNormal"
-
-# Initialize tracking for newly detected processes
-$processedBefore = New-Object System.Collections.Generic.HashSet[string]
-foreach ($procName in $targetProcesses) {
-    $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
-    if ($process) {
-        [void]$processedBefore.Add($procName)
+    # List all running processes before optimization for debugging
+    Write-Log "Listing target processes before optimization..." -ForegroundColor Cyan
+    $targetProcesses = @("obs64", "audiodg", "voicemeeter8", "voicemeeter", "audiorepeater", "VBCable_ControlPanel", "Discord", "chrome")
+    foreach ($procName in $targetProcesses) {
+        try {
+            $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
+            if ($process) {
+                foreach ($p in $process) {
+                    Write-Log "Found: $procName (PID: $($p.Id))" -ForegroundColor Green
+                }
+            } else {
+                Write-Log "Not Found: $procName" -ForegroundColor Red
+            }
+        } catch {
+            Write-Log "Error occurred while checking $procName: $_" -ForegroundColor Red
+        }
     }
-}
+    Write-Log "Process listing complete. Starting optimizations..." -ForegroundColor Cyan
 
-# Optimize processes
-Write-Log "Applying initial optimizations..." -ForegroundColor Cyan
+    # Log initial system performance
+    $initialPerf = Get-SystemPerformance
+    if ($initialPerf) {
+        Write-Log "Initial System State:" -ForegroundColor Yellow
 
-# Audio processes - critical for preventing audio crackling
-Set-ProcessOptimization -ProcessName "audiodg" -AffinityMask $audioAffinity -Priority $audioPriority
-Set-ProcessOptimization -ProcessName "voicemeeter" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
-Set-ProcessOptimization -ProcessName "audiorepeater" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
+        # Check if values are numeric or error strings
+        $cpuDisplay = if ($initialPerf.CPUUsage -is [double] -or $initialPerf.CPUUsage -is [int]) { "$($initialPerf.CPUUsage)%" } else { $initialPerf.CPUUsage }
+        $memDisplay = if ($initialPerf.MemoryUsage -is [double] -or $initialPerf.MemoryUsage -is [int]) { "$($initialPerf.MemoryUsage)%" } else { $initialPerf.MemoryUsage }
+        $gpuDisplay = if ($initialPerf.GPUUsage -is [double] -or $initialPerf.GPUUsage -is [int]) { "$($initialPerf.GPUUsage)%" } else { $initialPerf.GPUUsage }
 
-# OBS and streaming
-Set-ProcessOptimization -ProcessName "obs64" -AffinityMask $obsAffinity -Priority $obsPriority
+        Write-Log "   CPU Usage: $cpuDisplay" -ForegroundColor Yellow
+        Write-Log "   Memory Usage: $memDisplay" -ForegroundColor Yellow
+        Write-Log "   GPU Usage: $gpuDisplay" -ForegroundColor Yellow
+        Write-Log "   System Responsiveness: $($initialPerf.Responsiveness)" -ForegroundColor Yellow
 
-# Optional game process (if running)
-# Add your game's process name here
-# Set-ProcessOptimization -ProcessName "YourGameProcess" -AffinityMask $gameAffinity -Priority $gamePriority
+        # Additional hardware info
+        Write-Log "   Number of Chrome instances: $((Get-Process chrome -ErrorAction SilentlyContinue).Count)" -ForegroundColor Yellow
+        Write-Log "   Number of Firefox instances: $((Get-Process firefox -ErrorAction SilentlyContinue).Count)" -ForegroundColor Yellow
+    }
 
-# Background applications
-Set-ProcessOptimization -ProcessName "Discord" -AffinityMask $backgroundAffinity -Priority $backgroundPriority
-Set-ProcessOptimization -ProcessName "chrome" -AffinityMask $backgroundAffinity -Priority $backgroundPriority
+    # Automatically detect number of logical processors
+    $cpuCount = $cpuInfo.NumberOfLogicalProcessors
 
-# Start performance tracking
-$startTime = Get-Date
-$perfHistory = @()
-$perfHistory += $initialPerf
+    # Calculate appropriate affinity masks based on system configuration
+    function Calculate-OptimalAffinityMasks {
+        param (
+            [int]$TotalProcessors
+        )
 
-# Start the UI with the break button in a separate thread
-$breakButtonPressed = $false
-$uiThread = New-Object System.Threading.Thread([System.Threading.ThreadStart]{
-    $breakButtonPressed = Show-BreakButton
-})
-$uiThread.SetApartmentState([System.Threading.ApartmentState]::STA)
-$uiThread.Start()
+        # For large systems like yours with 128 threads, we need to be careful with affinity mask calculations
+        # PowerShell's Int64 can't handle extremely large bitmasks for 128+ threads
 
-# Start the monitoring loop
-Write-Log "Starting continuous optimization and monitoring loop..." -ForegroundColor Cyan
-$iteration = 0
+        if ($TotalProcessors -gt 64) {
+            # For very large systems (>64 cores), use smaller segments
+            # OBS: Cores 0-3
+            $script:obsAffinity = 0xF
 
-try {
+            # Windows Audio (audiodg): Cores 4-7
+            $script:audioAffinity = 0xF0
+
+            # Voicemeeter: Cores 8-11
+            $script:voicemeeterAffinity = 0xF00
+
+            # Game (optional): Cores 12-15
+            $script:gameAffinity = 0xF000
+
+            # Background apps: Cores 16-23 (avoid using all cores to prevent overflow)
+            $script:backgroundAffinity = 0xFF0000
+        }
+        elseif ($TotalProcessors -lt 16) {
+            # Small system (4-8 cores)
+            $script:obsAffinity = 0x3       # Cores 0-1
+            $script:audioAffinity = 0xC     # Cores 2-3
+            $script:voicemeeterAffinity = 0x30 # Cores 4-5
+            $script:gameAffinity = 0xF0     # Cores 4-7
+            $script:backgroundAffinity = 0xF  # Cores 0-3
+        }
+        else {
+            # Mid-size system (16-64 cores)
+            $script:obsAffinity = 0xF       # Cores 0-3
+            $script:audioAffinity = 0xF0     # Cores 4-7
+            $script:voicemeeterAffinity = 0xF00 # Cores 8-11
+            $script:gameAffinity = 0xF000    # Cores 12-15
+            $script:backgroundAffinity = 0xFF0000 # Cores 16-23
+        }
+
+        Write-Log "Affinity masks calculated for $TotalProcessors logical processors" -ForegroundColor Yellow
+    }
+
+    # Calculate affinity masks based on system configuration
+    Calculate-OptimalAffinityMasks -TotalProcessors $cpuCount
+
+    # Set priority levels
+    $obsPriority = "High"
+    $audioPriority = "High"
+    $voicemeeterPriority = "High"
+    $gamePriority = "Normal"
+    $backgroundPriority = "BelowNormal"
+
+    # Initialize tracking for newly detected processes
+    $processedBefore = New-Object System.Collections.Generic.HashSet[string]
+    foreach ($procName in $targetProcesses) {
+        $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
+        if ($process) {
+            [void]$processedBefore.Add($procName)
+        }
+    }
+
+    # Optimize processes
+    Write-Log "Applying initial optimizations..." -ForegroundColor Cyan
+
+    # Audio processes - critical for preventing audio crackling
+    Set-ProcessOptimization -ProcessName "audiodg" -AffinityMask $audioAffinity -Priority $audioPriority
+    Set-ProcessOptimization -ProcessName "voicemeeter" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
+    Set-ProcessOptimization -ProcessName "audiorepeater" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
+
+    # OBS and streaming
+    Set-ProcessOptimization -ProcessName "obs64" -AffinityMask $obsAffinity -Priority $obsPriority
+
+    # Optional game process (if running)
+    # Add your game's process name here
+    # Set-ProcessOptimization -ProcessName "YourGameProcess" -AffinityMask $gameAffinity -Priority $gamePriority
+
+    # Background applications
+    Set-ProcessOptimization -ProcessName "Discord" -AffinityMask $backgroundAffinity -Priority $backgroundPriority
+    Set-ProcessOptimization -ProcessName "chrome" -AffinityMask $backgroundAffinity -Priority $backgroundPriority
+
+    # Start performance tracking
+    $startTime = Get-Date
+    $perfHistory = @()
+    $perfHistory += $initialPerf
+
+    # Start the UI with the break button in a separate thread
+    $breakButtonPressed = $false
+    $uiThread = New-Object System.Threading.Thread([System.Threading.ThreadStart]{
+        $breakButtonPressed = Show-BreakButton
+    })
+    $uiThread.SetApartmentState([System.Threading.ApartmentState]::STA)
+    $uiThread.Start()
+
+    # Start the monitoring loop
+    Write-Log "Starting continuous optimization and monitoring loop..." -ForegroundColor Cyan
+    $iteration = 0
+
     while (-not $breakButtonPressed) {
         $iteration++
 
@@ -697,7 +697,22 @@ try {
         $breakButtonPressed = $uiThread.Join(0)
     }
 } catch {
-    Write-Log "Error in monitoring loop: $_" -ForegroundColor Red
+    $errorMessage = "CRITICAL ERROR: $_`nStack Trace: $($_.ScriptStackTrace)"
+    Write-Log $errorMessage -ForegroundColor Red
+    
+    # Try to generate a final report even on error
+    try {
+        Write-Log "Attempting to generate error report..." -ForegroundColor Yellow
+        $report = Save-PerformanceReport -PerformanceHistory $perfHistory -StartTime $startTime -ReportFolder $reportFolder -Final
+        if ($report) {
+            Write-Log "Error report saved to: $($report.Path)" -ForegroundColor Green
+        }
+    } catch {
+        Write-Log "Failed to generate error report: $_" -ForegroundColor Red
+    }
+    
+    Write-Log "=== Script terminated due to error ===" -ForegroundColor Red
+    throw $_  # Re-throw the error to ensure proper exit code
 } finally {
     Write-Log "Optimization loop ended." -ForegroundColor Cyan
 
