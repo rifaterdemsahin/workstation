@@ -1,8 +1,9 @@
 # PowerShell Script to Optimize Audio and Streaming Processes on Ryzen CPU
 # Purpose: Set CPU affinity and priority to reduce audio cracking and improve streaming performance
-# Target CPU: AMD Ryzen Threadripper or other multi-core CPU
+# Target CPU: AMD Ryzen Threadripper PRO 3995WX (128 logical cores) or other multi-core CPU
 # Audio Interfaces: Voicemeeter and Windows Audio
 # Date: May 10, 2025
+# Version: 2.1 - Enhanced with robust performance monitoring and logging
 
 # Requires Administrator privileges
 #Requires -RunAsAdministrator
@@ -66,23 +67,55 @@ function Set-ProcessOptimization {
     }
 }
 
-# Function to get system performance metrics
+# Function to get system performance metrics with alternative methods
 function Get-SystemPerformance {
     try {
-        # Get CPU usage
-        $cpuCounter = Get-Counter '\Processor(_Total)\% Processor Time' -ErrorAction SilentlyContinue
-        $cpuUsage = [math]::Round($cpuCounter.CounterSamples[0].CookedValue, 2)
-        
-        # Get memory usage
-        $osInfo = Get-CimInstance Win32_OperatingSystem
-        $memoryUsage = [math]::Round(($osInfo.TotalVisibleMemorySize - $osInfo.FreePhysicalMemory) / $osInfo.TotalVisibleMemorySize * 100, 2)
-        
-        # Get GPU usage if available (requires admin rights)
-        $gpuUsage = "N/A"
+        # Method 1: Try using WMI to get CPU usage (more reliable for many-core systems)
         try {
-            $gpuCounter = Get-Counter '\GPU Engine(*engtype_3D)\Utilization Percentage' -ErrorAction SilentlyContinue
+            $cpuUsage = [math]::Round((Get-WmiObject -Class Win32_Processor | Measure-Object -Property LoadPercentage -Average).Average, 2)
+        } catch {
+            Write-Log "WMI CPU measurement failed, trying alternative method" -ForegroundColor Yellow
+            
+            # Method 2: Try performance counters if WMI fails
+            try {
+                $cpuCounter = Get-Counter '\Processor(_Total)\% Processor Time' -ErrorAction Stop
+                $cpuUsage = [math]::Round($cpuCounter.CounterSamples[0].CookedValue, 2)
+            } catch {
+                Write-Log "Performance counter for CPU failed. Using Process CPU time as fallback." -ForegroundColor Yellow
+                
+                # Method 3: Fallback to process CPU time calculation
+                $processes = Get-Process
+                $totalCPU = ($processes | Measure-Object -Property CPU -Sum).Sum
+                $cpuCount = (Get-WmiObject -Class Win32_ComputerSystem).NumberOfLogicalProcessors
+                $cpuUsage = [math]::Round(($totalCPU / $cpuCount), 2)
+                if ($cpuUsage -gt 100) { $cpuUsage = 99.9 } # Cap at 100%
+            }
+        }
+        
+        # Get memory usage - try different methods
+        try {
+            $osInfo = Get-CimInstance Win32_OperatingSystem
+            $memoryUsage = [math]::Round(($osInfo.TotalVisibleMemorySize - $osInfo.FreePhysicalMemory) / $osInfo.TotalVisibleMemorySize * 100, 2)
+        } catch {
+            Write-Log "CIM memory measurement failed, trying alternative method" -ForegroundColor Yellow
+            
+            # Fallback method for memory
+            try {
+                $computerMemory = Get-WmiObject -Class Win32_OperatingSystem
+                $memoryUsage = [math]::Round((($computerMemory.TotalVisibleMemorySize - $computerMemory.FreePhysicalMemory) / $computerMemory.TotalVisibleMemorySize) * 100, 2)
+            } catch {
+                # Last resort
+                $memoryUsage = "Unknown"
+            }
+        }
+        
+        # Get GPU usage with multiple fallback mechanisms
+        $gpuUsage = "Unknown"
+        
+        # Method 1: Try GPU performance counters
+        try {
+            $gpuCounter = Get-Counter '\GPU Engine(*engtype_3D)\Utilization Percentage' -ErrorAction Stop
             if ($gpuCounter) {
-                # This might capture multiple 3D engines, so we'll take the highest value
                 $gpuValues = $gpuCounter.CounterSamples | Where-Object { $_.CookedValue -gt 0 } | 
                              Select-Object -ExpandProperty CookedValue
                 if ($gpuValues -and $gpuValues.Count -gt 0) {
@@ -90,7 +123,23 @@ function Get-SystemPerformance {
                 }
             }
         } catch {
-            $gpuUsage = "Error: $_"
+            # Method 2: Try WMI for GPU information
+            try {
+                # Get GPU load via WMI (works on some systems)
+                $gpuInfo = Get-WmiObject -Namespace "root\CIMV2" -Class "Win32_PerfFormattedData_GPUPerformanceCounters_GPUEngine" -ErrorAction Stop | 
+                          Where-Object { $_.Name -like "*3D*" }
+                
+                if ($gpuInfo) {
+                    $gpuUsage = [math]::Round(($gpuInfo | Measure-Object -Property UtilizationPercentage -Average).Average, 2)
+                } else {
+                    # Get basic GPU name info at least
+                    $gpuName = (Get-WmiObject -Class Win32_VideoController).Name
+                    $gpuUsage = "N/A (GPU: $gpuName)"
+                }
+            } catch {
+                # Final fallback
+                $gpuUsage = "N/A (Counters unavailable)"
+            }
         }
         
         # Calculate system responsiveness estimate (very basic)
@@ -122,7 +171,17 @@ function Get-SystemPerformance {
         }
     } catch {
         Write-Log "Error getting system performance: $_" -ForegroundColor Red
-        return $null
+        
+        # Return a minimal object with error state
+        return @{
+            CPUUsage = "Error"
+            MemoryUsage = "Error"
+            GPUUsage = "Error"
+            Responsiveness = "Unknown"
+            ResponsivenessScore = 9 # High error score
+            Timestamp = Get-Date
+            ErrorMessage = $_
+        }
     }
 }
 
@@ -168,10 +227,20 @@ Write-Log "Process listing complete. Starting optimizations..." -ForegroundColor
 $initialPerf = Get-SystemPerformance
 if ($initialPerf) {
     Write-Log "Initial System State:" -ForegroundColor Yellow
-    Write-Log "  CPU Usage: $($initialPerf.CPUUsage)%" -ForegroundColor Yellow
-    Write-Log "  Memory Usage: $($initialPerf.MemoryUsage)%" -ForegroundColor Yellow
-    Write-Log "  GPU Usage: $($initialPerf.GPUUsage)%" -ForegroundColor Yellow
+    
+    # Check if values are numeric or error strings
+    $cpuDisplay = if ($initialPerf.CPUUsage -is [double] -or $initialPerf.CPUUsage -is [int]) { "$($initialPerf.CPUUsage)%" } else { $initialPerf.CPUUsage }
+    $memDisplay = if ($initialPerf.MemoryUsage -is [double] -or $initialPerf.MemoryUsage -is [int]) { "$($initialPerf.MemoryUsage)%" } else { $initialPerf.MemoryUsage }
+    $gpuDisplay = if ($initialPerf.GPUUsage -is [double] -or $initialPerf.GPUUsage -is [int]) { "$($initialPerf.GPUUsage)%" } else { $initialPerf.GPUUsage }
+    
+    Write-Log "  CPU Usage: $cpuDisplay" -ForegroundColor Yellow
+    Write-Log "  Memory Usage: $memDisplay" -ForegroundColor Yellow
+    Write-Log "  GPU Usage: $gpuDisplay" -ForegroundColor Yellow
     Write-Log "  System Responsiveness: $($initialPerf.Responsiveness)" -ForegroundColor Yellow
+    
+    # Additional hardware info
+    Write-Log "  Number of Chrome instances: $((Get-Process chrome -ErrorAction SilentlyContinue).Count)" -ForegroundColor Yellow
+    Write-Log "  Number of Firefox instances: $((Get-Process firefox -ErrorAction SilentlyContinue).Count)" -ForegroundColor Yellow
 }
 
 # Automatically detect number of logical processors
@@ -300,11 +369,26 @@ try {
             
             # Log performance data
             Write-Log "Iteration $iteration - Run Time: $runTimeFormatted" -ForegroundColor Yellow
-            Write-Log "  CPU Usage: $($performance.CPUUsage)%" -ForegroundColor Cyan
-            Write-Log "  Memory Usage: $($performance.MemoryUsage)%" -ForegroundColor Cyan
-            Write-Log "  GPU Usage: $($performance.GPUUsage)%" -ForegroundColor Cyan
+            
+            # Check if values are numeric or error strings
+            $cpuDisplay = if ($performance.CPUUsage -is [double] -or $performance.CPUUsage -is [int]) { "$($performance.CPUUsage)%" } else { $performance.CPUUsage }
+            $memDisplay = if ($performance.MemoryUsage -is [double] -or $performance.MemoryUsage -is [int]) { "$($performance.MemoryUsage)%" } else { $performance.MemoryUsage }
+            $gpuDisplay = if ($performance.GPUUsage -is [double] -or $performance.GPUUsage -is [int]) { "$($performance.GPUUsage)%" } else { $performance.GPUUsage }
+            
+            Write-Log "  CPU Usage: $cpuDisplay" -ForegroundColor Cyan
+            Write-Log "  Memory Usage: $memDisplay" -ForegroundColor Cyan
+            Write-Log "  GPU Usage: $gpuDisplay" -ForegroundColor Cyan
             Write-Log "  Current System Responsiveness: $($performance.Responsiveness)" -ForegroundColor Cyan
             Write-Log "  Average Responsiveness Score: $([math]::Round($avgResponsiveness, 2)) (Lower is better)" -ForegroundColor Cyan
+            
+            # Additional system metrics for better diagnostics
+            $processCount = (Get-Process).Count
+            $chromeProcesses = (Get-Process chrome -ErrorAction SilentlyContinue).Count
+            $threadCount = (Get-Process | Measure-Object -Property Threads -Sum).Sum
+            
+            Write-Log "  Total Processes: $processCount" -ForegroundColor Cyan
+            Write-Log "  Chrome Processes: $chromeProcesses" -ForegroundColor Cyan  
+            Write-Log "  Total Threads: $threadCount" -ForegroundColor Cyan
         }
         
         Write-Log "Reapplying optimizations... (Iteration $iteration)" -ForegroundColor Yellow
@@ -359,10 +443,18 @@ try {
     $finalPerf = Get-SystemPerformance
     if ($finalPerf) {
         Write-Log "Final System State:" -ForegroundColor Yellow
-        Write-Log "  CPU Usage: $($finalPerf.CPUUsage)%" -ForegroundColor Yellow
-        Write-Log "  Memory Usage: $($finalPerf.MemoryUsage)%" -ForegroundColor Yellow
-        Write-Log "  GPU Usage: $($finalPerf.GPUUsage)%" -ForegroundColor Yellow
+        
+        # Check if values are numeric or error strings
+        $cpuDisplay = if ($finalPerf.CPUUsage -is [double] -or $finalPerf.CPUUsage -is [int]) { "$($finalPerf.CPUUsage)%" } else { $finalPerf.CPUUsage }
+        $memDisplay = if ($finalPerf.MemoryUsage -is [double] -or $finalPerf.MemoryUsage -is [int]) { "$($finalPerf.MemoryUsage)%" } else { $finalPerf.MemoryUsage }
+        $gpuDisplay = if ($finalPerf.GPUUsage -is [double] -or $finalPerf.GPUUsage -is [int]) { "$($finalPerf.GPUUsage)%" } else { $finalPerf.GPUUsage }
+        
+        Write-Log "  CPU Usage: $cpuDisplay" -ForegroundColor Yellow
+        Write-Log "  Memory Usage: $memDisplay" -ForegroundColor Yellow
+        Write-Log "  GPU Usage: $gpuDisplay" -ForegroundColor Yellow
         Write-Log "  System Responsiveness: $($finalPerf.Responsiveness)" -ForegroundColor Yellow
+        Write-Log "  Process Count: $((Get-Process).Count)" -ForegroundColor Yellow
+        Write-Log "  Thread Count: $((Get-Process | Measure-Object -Property Threads -Sum).Sum)" -ForegroundColor Yellow
     }
     
     # Calculate overall performance statistics if we have history
@@ -379,3 +471,4 @@ try {
     Write-Log "Optimization monitoring ended." -ForegroundColor Cyan
     Write-Log "Log file saved at: $logFilePath" -ForegroundColor Cyan
 }
+
