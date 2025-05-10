@@ -460,6 +460,17 @@ function Show-BreakButton {
 # Start the log file with system information
 Write-Log "=== Starting Audio and Streaming Optimization Script ===" -ForegroundColor Cyan
 Write-Log "Log File: $logFilePath" -ForegroundColor Cyan
+Write-Log "Press Ctrl+C to exit the script at any time" -ForegroundColor Yellow
+
+# Set up Ctrl+C handler
+$null = Register-EngineEvent -SourceIdentifier PowerShell.Exiting -Action {
+    Write-Log "Script interrupted by user (Ctrl+C)" -ForegroundColor Yellow
+    Write-Log "Generating final report before exit..." -ForegroundColor Yellow
+    if ($report) {
+        Write-Log "Report saved to: $($report.Path)" -ForegroundColor Green
+    }
+    Write-Log "=== Script terminated by user ===" -ForegroundColor Red
+}
 
 # Get system information
 $cpuInfo = Get-WmiObject -Class Win32_Processor
