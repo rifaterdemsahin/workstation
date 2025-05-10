@@ -22,21 +22,57 @@ if (!(Test-Path -Path $reportFolder)) {
     New-Item -ItemType Directory -Path $reportFolder -Force | Out-Null
 }
 
-# Function to write to log file and console
+# Function to write to log file and console with error handling
 function Write-Log {
     param (
         [string]$Message,
-        [string]$ForegroundColor = "White"
+        [string]$ForegroundColor = "White",
+        [string]$LogLevel = "INFO"
     )
 
-    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    $logMessage = "[$timestamp] $Message"
+    try {
+        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        $logMessage = "[$timestamp] [$LogLevel] $Message"
 
-    # Write to console with color
-    Write-Host $logMessage -ForegroundColor $ForegroundColor
+        # Write to console with color
+        Write-Host $logMessage -ForegroundColor $ForegroundColor
 
-    # Write to log file
-    Add-Content -Path $logFilePath -Value $logMessage
+        # Write to log file with error handling
+        try {
+            Add-Content -Path $logFilePath -Value $logMessage -ErrorAction Stop
+        } catch {
+            # If we can't write to the log file, try to write to a backup location
+            $backupLogPath = Join-Path -Path $env:TEMP -ChildPath "OptimizeOBSandAudio_backup.log"
+            Add-Content -Path $backupLogPath -Value "[$timestamp] ERROR: Failed to write to main log file. Error: $_" -ErrorAction SilentlyContinue
+            Add-Content -Path $backupLogPath -Value $logMessage -ErrorAction SilentlyContinue
+        }
+    } catch {
+        # Last resort error handling
+        Write-Host "[$timestamp] CRITICAL: Failed to log message. Error: $_" -ForegroundColor Red
+    }
+}
+
+# Function to log errors with full details
+function Write-ErrorLog {
+    param (
+        [System.Management.Automation.ErrorRecord]$ErrorRecord,
+        [string]$Context = "Unknown"
+    )
+
+    try {
+        $errorDetails = @"
+ERROR DETAILS:
+Context: $Context
+Message: $($ErrorRecord.Exception.Message)
+Type: $($ErrorRecord.Exception.GetType().FullName)
+Script Stack Trace: $($ErrorRecord.ScriptStackTrace)
+Line: $($ErrorRecord.InvocationInfo.Line)
+Position: $($ErrorRecord.InvocationInfo.PositionMessage)
+"@
+        Write-Log $errorDetails -ForegroundColor Red -LogLevel "ERROR"
+    } catch {
+        Write-Host "CRITICAL: Failed to log error details. Error: $_" -ForegroundColor Red
+    }
 }
 
 # Function to set CPU affinity and priority for a process
@@ -457,74 +493,82 @@ function Show-BreakButton {
     return $result -eq [System.Windows.Forms.DialogResult]::OK
 }
 
-# Start the log file with system information
-Write-Log "=== Starting Audio and Streaming Optimization Script ===" -ForegroundColor Cyan
-Write-Log "Log File: $logFilePath" -ForegroundColor Cyan
-Write-Log "Press Ctrl+C to exit the script at any time" -ForegroundColor Yellow
+# Set up error handling
+$ErrorActionPreference = "Stop"
+$Error.Clear()
 
-# Set up Ctrl+C handler
+# Set up Ctrl+C handler with error logging
 $null = Register-EngineEvent -SourceIdentifier PowerShell.Exiting -Action {
-    Write-Log "Script interrupted by user (Ctrl+C)" -ForegroundColor Yellow
-    Write-Log "Generating final report before exit..." -ForegroundColor Yellow
-    if ($report) {
-        Write-Log "Report saved to: $($report.Path)" -ForegroundColor Green
+    try {
+        Write-Log "Script interrupted by user (Ctrl+C)" -ForegroundColor Yellow -LogLevel "WARNING"
+        Write-Log "Generating final report before exit..." -ForegroundColor Yellow -LogLevel "INFO"
+        if ($report) {
+            Write-Log "Report saved to: $($report.Path)" -ForegroundColor Green -LogLevel "INFO"
+        }
+        Write-Log "=== Script terminated by user ===" -ForegroundColor Red -LogLevel "WARNING"
+    } catch {
+        Write-Host "CRITICAL: Failed to handle script exit. Error: $_" -ForegroundColor Red
     }
-    Write-Log "=== Script terminated by user ===" -ForegroundColor Red
 }
+
+# Start the log file with system information
+Write-Log "=== Starting Audio and Streaming Optimization Script ===" -ForegroundColor Cyan -LogLevel "INFO"
+Write-Log "Log File: $logFilePath" -ForegroundColor Cyan -LogLevel "INFO"
+Write-Log "Press Ctrl+C to exit the script at any time" -ForegroundColor Yellow -LogLevel "INFO"
 
 try {
     # Get system information
     $cpuInfo = Get-WmiObject -Class Win32_Processor
-    Write-Log "CPU: $($cpuInfo.Name)" -ForegroundColor Cyan
-    Write-Log "Number of logical processors: $($cpuInfo.NumberOfLogicalProcessors)" -ForegroundColor Cyan
+    Write-Log "CPU: $($cpuInfo.Name)" -ForegroundColor Cyan -LogLevel "INFO"
+    Write-Log "Number of logical processors: $($cpuInfo.NumberOfLogicalProcessors)" -ForegroundColor Cyan -LogLevel "INFO"
 
     # Try to get GPU information
     try {
         $gpuInfo = Get-WmiObject -Class Win32_VideoController
         foreach ($gpu in $gpuInfo) {
-            Write-Log "GPU: $($gpu.Name) - $($gpu.VideoModeDescription)" -ForegroundColor Cyan
+            Write-Log "GPU: $($gpu.Name) - $($gpu.VideoModeDescription)" -ForegroundColor Cyan -LogLevel "INFO"
         }
     } catch {
         Write-Log "Could not retrieve GPU information: $_" -ForegroundColor Red
     }
 
     # List all running processes before optimization for debugging
-    Write-Log "Listing target processes before optimization..." -ForegroundColor Cyan
+    Write-Log "Listing target processes before optimization..." -ForegroundColor Cyan -LogLevel "INFO"
     $targetProcesses = @("obs64", "audiodg", "voicemeeter8", "voicemeeter", "audiorepeater", "VBCable_ControlPanel", "Discord", "chrome")
     foreach ($procName in $targetProcesses) {
         try {
             $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
             if ($process) {
                 foreach ($p in $process) {
-                    Write-Log "Found: $procName (PID: $($p.Id))" -ForegroundColor Green
+                    Write-Log "Found: $procName (PID: $($p.Id))" -ForegroundColor Green -LogLevel "INFO"
                 }
             } else {
-                Write-Log "Not Found: $procName" -ForegroundColor Red
+                Write-Log "Not Found: $procName" -ForegroundColor Red -LogLevel "WARNING"
             }
         } catch {
-            Write-Log "Error occurred while checking $procName: $_" -ForegroundColor Red
+            Write-Log ("Error occurred while checking {0}: {1}" -f $procName, $_) -ForegroundColor Red -LogLevel "ERROR"
         }
     }
-    Write-Log "Process listing complete. Starting optimizations..." -ForegroundColor Cyan
+    Write-Log "Process listing complete. Starting optimizations..." -ForegroundColor Cyan -LogLevel "INFO"
 
     # Log initial system performance
     $initialPerf = Get-SystemPerformance
     if ($initialPerf) {
-        Write-Log "Initial System State:" -ForegroundColor Yellow
+        Write-Log "Initial System State:" -ForegroundColor Yellow -LogLevel "INFO"
 
         # Check if values are numeric or error strings
         $cpuDisplay = if ($initialPerf.CPUUsage -is [double] -or $initialPerf.CPUUsage -is [int]) { "$($initialPerf.CPUUsage)%" } else { $initialPerf.CPUUsage }
         $memDisplay = if ($initialPerf.MemoryUsage -is [double] -or $initialPerf.MemoryUsage -is [int]) { "$($initialPerf.MemoryUsage)%" } else { $initialPerf.MemoryUsage }
         $gpuDisplay = if ($initialPerf.GPUUsage -is [double] -or $initialPerf.GPUUsage -is [int]) { "$($initialPerf.GPUUsage)%" } else { $initialPerf.GPUUsage }
 
-        Write-Log "   CPU Usage: $cpuDisplay" -ForegroundColor Yellow
-        Write-Log "   Memory Usage: $memDisplay" -ForegroundColor Yellow
-        Write-Log "   GPU Usage: $gpuDisplay" -ForegroundColor Yellow
-        Write-Log "   System Responsiveness: $($initialPerf.Responsiveness)" -ForegroundColor Yellow
+        Write-Log "   CPU Usage: $cpuDisplay" -ForegroundColor Yellow -LogLevel "INFO"
+        Write-Log "   Memory Usage: $memDisplay" -ForegroundColor Yellow -LogLevel "INFO"
+        Write-Log "   GPU Usage: $gpuDisplay" -ForegroundColor Yellow -LogLevel "INFO"
+        Write-Log "   System Responsiveness: $($initialPerf.Responsiveness)" -ForegroundColor Yellow -LogLevel "INFO"
 
         # Additional hardware info
-        Write-Log "   Number of Chrome instances: $((Get-Process chrome -ErrorAction SilentlyContinue).Count)" -ForegroundColor Yellow
-        Write-Log "   Number of Firefox instances: $((Get-Process firefox -ErrorAction SilentlyContinue).Count)" -ForegroundColor Yellow
+        Write-Log "   Number of Chrome instances: $((Get-Process chrome -ErrorAction SilentlyContinue).Count)" -ForegroundColor Yellow -LogLevel "INFO"
+        Write-Log "   Number of Firefox instances: $((Get-Process firefox -ErrorAction SilentlyContinue).Count)" -ForegroundColor Yellow -LogLevel "INFO"
     }
 
     # Automatically detect number of logical processors
@@ -573,7 +617,7 @@ try {
             $script:backgroundAffinity = 0xFF0000 # Cores 16-23
         }
 
-        Write-Log "Affinity masks calculated for $TotalProcessors logical processors" -ForegroundColor Yellow
+        Write-Log "Affinity masks calculated for $TotalProcessors logical processors" -ForegroundColor Yellow -LogLevel "INFO"
     }
 
     # Calculate affinity masks based on system configuration
@@ -596,7 +640,7 @@ try {
     }
 
     # Optimize processes
-    Write-Log "Applying initial optimizations..." -ForegroundColor Cyan
+    Write-Log "Applying initial optimizations..." -ForegroundColor Cyan -LogLevel "INFO"
 
     # Audio processes - critical for preventing audio crackling
     Set-ProcessOptimization -ProcessName "audiodg" -AffinityMask $audioAffinity -Priority $audioPriority
@@ -628,7 +672,7 @@ try {
     $uiThread.Start()
 
     # Start the monitoring loop
-    Write-Log "Starting continuous optimization and monitoring loop..." -ForegroundColor Cyan
+    Write-Log "Starting continuous optimization and monitoring loop..." -ForegroundColor Cyan -LogLevel "INFO"
     $iteration = 0
 
     while (-not $breakButtonPressed) {
@@ -641,7 +685,7 @@ try {
 
                 # If process exists and we haven't processed it before in this session
                 if ($process -and -not $processedBefore.Contains($procName)) {
-                    Write-Log "Detected new process: $procName" -ForegroundColor Yellow
+                    Write-Log "Detected new process: $procName" -ForegroundColor Yellow -LogLevel "INFO"
 
                     # Apply appropriate optimization based on process type
                     switch ($procName) {
@@ -686,9 +730,9 @@ try {
                 $memDisplay = if ($currentPerf.MemoryUsage -is [double] -or $currentPerf.MemoryUsage -is [int]) { "$($currentPerf.MemoryUsage)%" } else { $currentPerf.MemoryUsage }
                 $gpuDisplay = if ($currentPerf.GPUUsage -is [double] -or $currentPerf.GPUUsage -is [int]) { "$($currentPerf.GPUUsage)%" } else { $currentPerf.GPUUsage }
 
-                Write-Log "Current Performance:" -ForegroundColor Green
-                Write-Log "   CPU: $cpuDisplay | Memory: $memDisplay | GPU: $gpuDisplay | Responsiveness: $($currentPerf.Responsiveness)" -ForegroundColor Green
-                Write-Log "Running for: $((Get-Date) - $startTime)" -ForegroundColor Green
+                Write-Log "Current Performance:" -ForegroundColor Green -LogLevel "INFO"
+                Write-Log "   CPU: $cpuDisplay | Memory: $memDisplay | GPU: $gpuDisplay | Responsiveness: $($currentPerf.Responsiveness)" -ForegroundColor Green -LogLevel "INFO"
+                Write-Log "Running for: $((Get-Date) - $startTime)" -ForegroundColor Green -LogLevel "INFO"
             }
         }
 
@@ -697,60 +741,63 @@ try {
         $breakButtonPressed = $uiThread.Join(0)
     }
 } catch {
-    $errorMessage = "CRITICAL ERROR: $_`nStack Trace: $($_.ScriptStackTrace)"
-    Write-Log $errorMessage -ForegroundColor Red
+    Write-ErrorLog -ErrorRecord $_ -Context "Main Script Execution"
     
     # Try to generate a final report even on error
     try {
-        Write-Log "Attempting to generate error report..." -ForegroundColor Yellow
+        Write-Log "Attempting to generate error report..." -ForegroundColor Yellow -LogLevel "WARNING"
         $report = Save-PerformanceReport -PerformanceHistory $perfHistory -StartTime $startTime -ReportFolder $reportFolder -Final
         if ($report) {
-            Write-Log "Error report saved to: $($report.Path)" -ForegroundColor Green
+            Write-Log "Error report saved to: $($report.Path)" -ForegroundColor Green -LogLevel "INFO"
         }
     } catch {
-        Write-Log "Failed to generate error report: $_" -ForegroundColor Red
+        Write-ErrorLog -ErrorRecord $_ -Context "Error Report Generation"
     }
     
-    Write-Log "=== Script terminated due to error ===" -ForegroundColor Red
+    Write-Log "=== Script terminated due to error ===" -ForegroundColor Red -LogLevel "ERROR"
     throw $_  # Re-throw the error to ensure proper exit code
 } finally {
-    Write-Log "Optimization loop ended." -ForegroundColor Cyan
+    Write-Log "Optimization loop ended." -ForegroundColor Cyan -LogLevel "INFO"
 
     # Generate final performance report
-    Write-Log "Generating performance report..." -ForegroundColor Cyan
-    $report = Save-PerformanceReport -PerformanceHistory $perfHistory -StartTime $startTime -ReportFolder $reportFolder -Final
+    Write-Log "Generating performance report..." -ForegroundColor Cyan -LogLevel "INFO"
+    try {
+        $report = Save-PerformanceReport -PerformanceHistory $perfHistory -StartTime $startTime -ReportFolder $reportFolder -Final
 
-    if ($report) {
-        Write-Log "Report saved to: $($report.Path)" -ForegroundColor Green
+        if ($report) {
+            Write-Log "Report saved to: $($report.Path)" -ForegroundColor Green -LogLevel "INFO"
 
-        # Display summary from report
-        Write-Log "===== PERFORMANCE SUMMARY =====" -ForegroundColor Yellow
-        Write-Log "Session Duration: $(((Get-Date) - $startTime).ToString('hh\:mm\:ss'))" -ForegroundColor Yellow
+            # Display summary from report
+            Write-Log "===== PERFORMANCE SUMMARY =====" -ForegroundColor Yellow -LogLevel "INFO"
+            Write-Log "Session Duration: $(((Get-Date) - $startTime).ToString('hh\:mm\:ss'))" -ForegroundColor Yellow -LogLevel "INFO"
 
-        # Calculate summary stats
-        $validCpuMeasurements = $perfHistory | Where-Object { $_.CPUUsage -is [double] -or $_.CPUUsage -is [int] }
-        if ($validCpuMeasurements.Count -gt 0) {
-            $avgCPU = ($validCpuMeasurements | Measure-Object -Property CPUUsage -Average).Average
-            $maxCPU = ($validCpuMeasurements | Measure-Object -Property CPUUsage -Maximum).Maximum
-            Write-Log "Average CPU Usage: $([math]::Round($avgCPU, 2))%" -ForegroundColor Yellow
-            Write-Log "Maximum CPU Usage: $([math]::Round($maxCPU, 2))%" -ForegroundColor Yellow
-        }
+            # Calculate summary stats
+            $validCpuMeasurements = $perfHistory | Where-Object { $_.CPUUsage -is [double] -or $_.CPUUsage -is [int] }
+            if ($validCpuMeasurements.Count -gt 0) {
+                $avgCPU = ($validCpuMeasurements | Measure-Object -Property CPUUsage -Average).Average
+                $maxCPU = ($validCpuMeasurements | Measure-Object -Property CPUUsage -Maximum).Maximum
+                Write-Log "Average CPU Usage: $([math]::Round($avgCPU, 2))%" -ForegroundColor Yellow -LogLevel "INFO"
+                Write-Log "Maximum CPU Usage: $([math]::Round($maxCPU, 2))%" -ForegroundColor Yellow -LogLevel "INFO"
+            }
 
-        # Try to restore original priority levels
-        Write-Log "Attempting to restore original priority levels..." -ForegroundColor Cyan
-        $originalPriority = Get-Process -Name "obs64" -ErrorAction SilentlyContinue | Select-Object -ExpandProperty PriorityClass
-        if ($originalPriority) {
-            Write-Log "Original priority: $originalPriority" -ForegroundColor Yellow
+            # Try to restore original priority levels
+            Write-Log "Attempting to restore original priority levels..." -ForegroundColor Cyan -LogLevel "INFO"
+            $originalPriority = Get-Process -Name "obs64" -ErrorAction SilentlyContinue | Select-Object -ExpandProperty PriorityClass
+            if ($originalPriority) {
+                Write-Log "Original priority: $originalPriority" -ForegroundColor Yellow -LogLevel "INFO"
 
-            # Restore original priority for all processes
-            foreach ($procName in $targetProcesses) {
-                Set-ProcessOptimization -ProcessName $procName -AffinityMask $backgroundAffinity -Priority $backgroundPriority
+                # Restore original priority for all processes
+                foreach ($procName in $targetProcesses) {
+                    Set-ProcessOptimization -ProcessName $procName -AffinityMask $backgroundAffinity -Priority $backgroundPriority
+                }
+            } else {
+                Write-Log "Failed to restore original priority levels." -ForegroundColor Red -LogLevel "WARNING"
             }
         } else {
-            Write-Log "Failed to restore original priority levels." -ForegroundColor Red
+            Write-Log "Failed to generate performance report." -ForegroundColor Red -LogLevel "ERROR"
         }
-    } else {
-        Write-Log "Failed to generate performance report." -ForegroundColor Red
+    } catch {
+        Write-ErrorLog -ErrorRecord $_ -Context "Final Report Generation"
     }
 }
 
