@@ -9,7 +9,8 @@
 #Requires -RunAsAdministrator
 
 # Set up logging
-$logFilePath = "C:\projects\workstation\6_Symbols\Logs\OptimizeOBSandAudio.log"
+$timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+$logFilePath = "C:\projects\workstation\6_Symbols\Logs\OptimizeOBSandAudio_$timestamp.log"
 $logFolder = Split-Path -Path $logFilePath -Parent
 $reportFolder = Join-Path -Path $logFolder -ChildPath "Reports"
 
