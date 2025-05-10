@@ -672,7 +672,11 @@ try {
     # Start the UI with the break button in a separate thread
     $breakButtonPressed = $false
     $uiThread = New-Object System.Threading.Thread([System.Threading.ThreadStart]{
-        $breakButtonPressed = Show-BreakButton
+        try {
+            $breakButtonPressed = Show-BreakButton
+        } catch {
+            Write-Log ("UI Thread Error: {0}" -f $_) -ForegroundColor Red -LogLevel "ERROR"
+        }
     })
     $uiThread.SetApartmentState([System.Threading.ApartmentState]::STA)
     $uiThread.Start()
@@ -681,70 +685,149 @@ try {
     Write-Log "Starting continuous optimization and monitoring loop..." -ForegroundColor Cyan -LogLevel "INFO"
     $iteration = 0
 
-    while (-not $breakButtonPressed) {
-        $iteration++
+    try {
+        while (-not $breakButtonPressed) {
+            $iteration++
 
-        # Check for new instances of target processes every 5 iterations
-        if ($iteration % 5 -eq 0) {
-            foreach ($procName in $targetProcesses) {
-                $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
+            # Check for new instances of target processes every 5 iterations
+            if ($iteration % 5 -eq 0) {
+                foreach ($procName in $targetProcesses) {
+                    try {
+                        $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
 
-                # If process exists and we haven't processed it before in this session
-                if ($process -and -not $processedBefore.Contains($procName)) {
-                    Write-Log "Detected new process: $procName" -ForegroundColor Yellow -LogLevel "INFO"
+                        # If process exists and we haven't processed it before in this session
+                        if ($process -and -not $processedBefore.Contains($procName)) {
+                            Write-Log "Detected new process: $procName" -ForegroundColor Yellow -LogLevel "INFO"
 
-                    # Apply appropriate optimization based on process type
-                    switch ($procName) {
-                        "audiodg" {
-                            Set-ProcessOptimization -ProcessName $procName -AffinityMask $audioAffinity -Priority $audioPriority
+                            # Apply appropriate optimization based on process type
+                            switch ($procName) {
+                                "audiodg" {
+                                    Set-ProcessOptimization -ProcessName $procName -AffinityMask $audioAffinity -Priority $audioPriority
+                                }
+                                "voicemeeter8" {
+                                    Set-ProcessOptimization -ProcessName $procName -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
+                                }
+                                "voicemeeter" {
+                                    Set-ProcessOptimization -ProcessName $procName -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
+                                }
+                                "audiorepeater" {
+                                    Set-ProcessOptimization -ProcessName $procName -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
+                                }
+                                "VBCable_ControlPanel" {
+                                    Set-ProcessOptimization -ProcessName $procName -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
+                                }
+                                "obs64" {
+                                    Set-ProcessOptimization -ProcessName $procName -AffinityMask $obsAffinity -Priority $obsPriority
+                                }
+                                default {
+                                    Set-ProcessOptimization -ProcessName $procName -AffinityMask $backgroundAffinity -Priority $backgroundPriority
+                                }
+                            }
+
+                            # Mark as processed
+                            [void]$processedBefore.Add($procName)
                         }
-                        "voicemeeter8" {
-                            Set-ProcessOptimization -ProcessName $procName -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
-                        }
-                        "voicemeeter" {
-                            Set-ProcessOptimization -ProcessName $procName -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
-                        }
-                        "audiorepeater" {
-                            Set-ProcessOptimization -ProcessName $procName -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
-                        }
-                        "VBCable_ControlPanel" {
-                            Set-ProcessOptimization -ProcessName $procName -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
-                        }
-                        "obs64" {
-                            Set-ProcessOptimization -ProcessName $procName -AffinityMask $obsAffinity -Priority $obsPriority
-                        }
-                        default {
-                            Set-ProcessOptimization -ProcessName $procName -AffinityMask $backgroundAffinity -Priority $backgroundPriority
-                        }
+                    } catch {
+                        Write-Log ("Error processing {0}: {1}" -f $procName, $_) -ForegroundColor Red -LogLevel "ERROR"
                     }
-
-                    # Mark as processed
-                    [void]$processedBefore.Add($procName)
                 }
             }
+
+            # Get current performance metrics
+            try {
+                $currentPerf = Get-SystemPerformance
+                if ($currentPerf) {
+                    # Add to history
+                    $perfHistory += $currentPerf
+
+                    # Display current performance every 10 iterations
+                    if ($iteration % 10 -eq 0) {
+                        $cpuDisplay = if ($currentPerf.CPUUsage -is [double] -or $currentPerf.CPUUsage -is [int]) { "$($currentPerf.CPUUsage)%" } else { $currentPerf.CPUUsage }
+                        $memDisplay = if ($currentPerf.MemoryUsage -is [double] -or $currentPerf.MemoryUsage -is [int]) { "$($currentPerf.MemoryUsage)%" } else { $currentPerf.MemoryUsage }
+                        $gpuDisplay = if ($currentPerf.GPUUsage -is [double] -or $currentPerf.GPUUsage -is [int]) { "$($currentPerf.GPUUsage)%" } else { $currentPerf.GPUUsage }
+
+                        Write-Log "Current Performance:" -ForegroundColor Green -LogLevel "INFO"
+                        Write-Log "   CPU: $cpuDisplay | Memory: $memDisplay | GPU: $gpuDisplay | Responsiveness: $($currentPerf.Responsiveness)" -ForegroundColor Green -LogLevel "INFO"
+                        Write-Log "Running for: $((Get-Date) - $startTime)" -ForegroundColor Green -LogLevel "INFO"
+                    }
+                }
+            } catch {
+                Write-Log ("Error getting performance metrics: {0}" -f $_) -ForegroundColor Red -LogLevel "ERROR"
+            }
+
+            # Check every second if the UI thread signals to stop
+            Start-Sleep -Seconds 1
+            
+            # Check if UI thread is still alive
+            if (-not $uiThread.IsAlive) {
+                Write-Log "UI thread has terminated unexpectedly" -ForegroundColor Red -LogLevel "ERROR"
+                break
+            }
+            
+            # Check if break button was pressed
+            $breakButtonPressed = $uiThread.Join(0)
         }
-
-        # Get current performance metrics
-        $currentPerf = Get-SystemPerformance
-        if ($currentPerf) {
-            # Add to history
-            $perfHistory += $currentPerf
-
-            # Display current performance every 10 iterations
-            if ($iteration % 10 -eq 0) {
-                $cpuDisplay = if ($currentPerf.CPUUsage -is [double] -or $currentPerf.CPUUsage -is [int]) { "$($currentPerf.CPUUsage)%" } else { $currentPerf.CPUUsage }
-                $memDisplay = if ($currentPerf.MemoryUsage -is [double] -or $currentPerf.MemoryUsage -is [int]) { "$($currentPerf.MemoryUsage)%" } else { $currentPerf.MemoryUsage }
-                $gpuDisplay = if ($currentPerf.GPUUsage -is [double] -or $currentPerf.GPUUsage -is [int]) { "$($currentPerf.GPUUsage)%" } else { $currentPerf.GPUUsage }
-
-                Write-Log "Current Performance:" -ForegroundColor Green -LogLevel "INFO"
-                Write-Log "   CPU: $cpuDisplay | Memory: $memDisplay | GPU: $gpuDisplay | Responsiveness: $($currentPerf.Responsiveness)" -ForegroundColor Green -LogLevel "INFO"
-                Write-Log "Running for: $((Get-Date) - $startTime)" -ForegroundColor Green -LogLevel "INFO"
+    } catch {
+        Write-ErrorLog -ErrorRecord $_ -Context "Monitoring Loop"
+        Write-Host "`nAn error occurred in the monitoring loop. Check the log file for details." -ForegroundColor Red
+        Write-Host "Log file: $logFilePath" -ForegroundColor Yellow
+    } finally {
+        # Ensure UI thread is properly cleaned up
+        if ($uiThread -and $uiThread.IsAlive) {
+            try {
+                $uiThread.Abort()
+            } catch {
+                Write-Log ("Error cleaning up UI thread: {0}" -f $_) -ForegroundColor Red -LogLevel "ERROR"
             }
         }
+        
+        Write-Log "Optimization loop ended." -ForegroundColor Cyan -LogLevel "INFO"
 
-        # Check every second if the UI thread signals to stop
-        Start-Sleep -Seconds 1
-        $breakButtonPressed = $uiThread.Join(0)
+        # Generate final performance report
+        Write-Log "Generating performance report..." -ForegroundColor Cyan -LogLevel "INFO"
+        try {
+            $report = Save-PerformanceReport -PerformanceHistory $perfHistory -StartTime $startTime -ReportFolder $reportFolder -Final
+
+            if ($report) {
+                Write-Log "Report saved to: $($report.Path)" -ForegroundColor Green -LogLevel "INFO"
+
+                # Display summary from report
+                Write-Log "===== PERFORMANCE SUMMARY =====" -ForegroundColor Yellow -LogLevel "INFO"
+                Write-Log "Session Duration: $(((Get-Date) - $startTime).ToString('hh\:mm\:ss'))" -ForegroundColor Yellow -LogLevel "INFO"
+
+                # Calculate summary stats
+                $validCpuMeasurements = $perfHistory | Where-Object { $_.CPUUsage -is [double] -or $_.CPUUsage -is [int] }
+                if ($validCpuMeasurements.Count -gt 0) {
+                    $avgCPU = ($validCpuMeasurements | Measure-Object -Property CPUUsage -Average).Average
+                    $maxCPU = ($validCpuMeasurements | Measure-Object -Property CPUUsage -Maximum).Maximum
+                    Write-Log "Average CPU Usage: $([math]::Round($avgCPU, 2))%" -ForegroundColor Yellow -LogLevel "INFO"
+                    Write-Log "Maximum CPU Usage: $([math]::Round($maxCPU, 2))%" -ForegroundColor Yellow -LogLevel "INFO"
+                }
+
+                # Try to restore original priority levels
+                Write-Log "Attempting to restore original priority levels..." -ForegroundColor Cyan -LogLevel "INFO"
+                $originalPriority = Get-Process -Name "obs64" -ErrorAction SilentlyContinue | Select-Object -ExpandProperty PriorityClass
+                if ($originalPriority) {
+                    Write-Log "Original priority: $originalPriority" -ForegroundColor Yellow -LogLevel "INFO"
+
+                    # Restore original priority for all processes
+                    foreach ($procName in $targetProcesses) {
+                        Set-ProcessOptimization -ProcessName $procName -AffinityMask $backgroundAffinity -Priority $backgroundPriority
+                    }
+                } else {
+                    Write-Log "Failed to restore original priority levels." -ForegroundColor Red -LogLevel "WARNING"
+                }
+            } else {
+                Write-Log "Failed to generate performance report." -ForegroundColor Red -LogLevel "ERROR"
+            }
+        } catch {
+            Write-ErrorLog -ErrorRecord $_ -Context "Final Report Generation"
+        }
+
+        # Keep PowerShell window open at the end
+        Write-Host "`nScript completed. Check the log file for details." -ForegroundColor Green
+        Write-Host "Log file: $logFilePath" -ForegroundColor Yellow
+        Keep-PowerShellOpen
     }
 } catch {
     Write-ErrorLog -ErrorRecord $_ -Context "Main Script Execution"
@@ -762,55 +845,6 @@ try {
     
     Write-Log "=== Script terminated due to error ===" -ForegroundColor Red -LogLevel "ERROR"
     Write-Host "`nAn error occurred. Check the log file for details." -ForegroundColor Red
-    Write-Host "Log file: $logFilePath" -ForegroundColor Yellow
-    Keep-PowerShellOpen
-    exit 1
-} finally {
-    Write-Log "Optimization loop ended." -ForegroundColor Cyan -LogLevel "INFO"
-
-    # Generate final performance report
-    Write-Log "Generating performance report..." -ForegroundColor Cyan -LogLevel "INFO"
-    try {
-        $report = Save-PerformanceReport -PerformanceHistory $perfHistory -StartTime $startTime -ReportFolder $reportFolder -Final
-
-        if ($report) {
-            Write-Log "Report saved to: $($report.Path)" -ForegroundColor Green -LogLevel "INFO"
-
-            # Display summary from report
-            Write-Log "===== PERFORMANCE SUMMARY =====" -ForegroundColor Yellow -LogLevel "INFO"
-            Write-Log "Session Duration: $(((Get-Date) - $startTime).ToString('hh\:mm\:ss'))" -ForegroundColor Yellow -LogLevel "INFO"
-
-            # Calculate summary stats
-            $validCpuMeasurements = $perfHistory | Where-Object { $_.CPUUsage -is [double] -or $_.CPUUsage -is [int] }
-            if ($validCpuMeasurements.Count -gt 0) {
-                $avgCPU = ($validCpuMeasurements | Measure-Object -Property CPUUsage -Average).Average
-                $maxCPU = ($validCpuMeasurements | Measure-Object -Property CPUUsage -Maximum).Maximum
-                Write-Log "Average CPU Usage: $([math]::Round($avgCPU, 2))%" -ForegroundColor Yellow -LogLevel "INFO"
-                Write-Log "Maximum CPU Usage: $([math]::Round($maxCPU, 2))%" -ForegroundColor Yellow -LogLevel "INFO"
-            }
-
-            # Try to restore original priority levels
-            Write-Log "Attempting to restore original priority levels..." -ForegroundColor Cyan -LogLevel "INFO"
-            $originalPriority = Get-Process -Name "obs64" -ErrorAction SilentlyContinue | Select-Object -ExpandProperty PriorityClass
-            if ($originalPriority) {
-                Write-Log "Original priority: $originalPriority" -ForegroundColor Yellow -LogLevel "INFO"
-
-                # Restore original priority for all processes
-                foreach ($procName in $targetProcesses) {
-                    Set-ProcessOptimization -ProcessName $procName -AffinityMask $backgroundAffinity -Priority $backgroundPriority
-                }
-            } else {
-                Write-Log "Failed to restore original priority levels." -ForegroundColor Red -LogLevel "WARNING"
-            }
-        } else {
-            Write-Log "Failed to generate performance report." -ForegroundColor Red -LogLevel "ERROR"
-        }
-    } catch {
-        Write-ErrorLog -ErrorRecord $_ -Context "Final Report Generation"
-    }
-
-    # Keep PowerShell window open at the end
-    Write-Host "`nScript completed. Check the log file for details." -ForegroundColor Green
     Write-Host "Log file: $logFilePath" -ForegroundColor Yellow
     Keep-PowerShellOpen
 }

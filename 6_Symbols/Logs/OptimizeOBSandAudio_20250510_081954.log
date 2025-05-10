@@ -43,3 +43,45 @@
 [2025-05-10 08:19:55] [INFO] Found: chrome (PID: 215640)
 [2025-05-10 08:19:55] [INFO] Found: chrome (PID: 217856)
 [2025-05-10 08:19:55] [INFO] Process listing complete. Starting optimizations...
+[2025-05-10 08:20:05] [INFO] Initial System State:
+[2025-05-10 08:20:05] [INFO]    CPU Usage: 4%
+[2025-05-10 08:20:05] [INFO]    Memory Usage: 51.72%
+[2025-05-10 08:20:05] [INFO]    GPU Usage: 5.7%
+[2025-05-10 08:20:05] [INFO]    System Responsiveness: Excellent
+[2025-05-10 08:20:05] [INFO]    Number of Chrome instances: 28
+[2025-05-10 08:20:05] [INFO]    Number of Firefox instances: 12
+[2025-05-10 08:20:05] [INFO] Applying initial optimizations...
+[2025-05-10 08:20:05] [INFO] Optimized audiodg (PID: 12892) - Affinity: 240, Priority: High
+[2025-05-10 08:20:05] [INFO] Optimized voicemeeter (PID: 84784) - Affinity: 3840, Priority: High
+[2025-05-10 08:20:05] [INFO] Process audiorepeater not found.
+[2025-05-10 08:20:05] [INFO] Optimized obs64 (PID: 166840) - Affinity: 15, Priority: High
+[2025-05-10 08:20:05] [INFO] Process Discord not found.
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 12264) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 48788) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 82268) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 93164) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 95216) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 99012) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 107316) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 108460) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 111544) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 112128) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 112940) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 113824) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 114332) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 114416) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 114924) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 115004) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 115132) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 116132) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 135992) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 148640) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 158332) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 161368) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 170248) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 198208) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 207268) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 212116) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 215640) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Optimized chrome (PID: 217856) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:20:05] [INFO] Starting continuous optimization and monitoring loop...
