@@ -2,3 +2,143 @@ OptimizeOBSandAudio.log[2025-05-09 22:22:36] [INFO] Script started.
 [2025-05-09 22:22:36] [INFO] CPU: 
 [2025-05-09 22:22:36] [INFO] Number of logical processors: 
 [2025-05-09 22:22:36] [INFO] Optimized audiodg with AffinityMask  and Priority 
+[2025-05-10 07:32:13] === Starting Audio and Streaming Optimization Script ===
+[2025-05-10 07:32:13] Log File: C:\projects\workstation\6_Symbols\Logs\OptimizeOBSandAudio.log
+[2025-05-10 07:32:14] CPU: AMD Ryzen Threadripper PRO 3995WX 64-Cores     
+[2025-05-10 07:32:14] Number of logical processors: 128
+[2025-05-10 07:32:14] GPU: AMD Radeon RX 6900 XT - 3840 x 2160 x 4294967296 colors
+[2025-05-10 07:32:14] GPU: DisplayLink USB Device - 1024 x 600 x 4294967296 colors
+[2025-05-10 07:32:14] GPU: DisplayLink USB Device - 3840 x 2160 x 4294967296 colors
+[2025-05-10 07:32:14] Listing target processes before optimization...
+[2025-05-10 07:32:14] Found: obs64 (PID: 166840)
+[2025-05-10 07:32:14] Found: audiodg (PID: 12892)
+[2025-05-10 07:32:14] Not Found: voicemeeter8
+[2025-05-10 07:32:14] Found: voicemeeter (PID: 84784)
+[2025-05-10 07:32:14] Not Found: audiorepeater
+[2025-05-10 07:32:14] Not Found: VBCable_ControlPanel
+[2025-05-10 07:32:14] Not Found: Discord
+[2025-05-10 07:32:14] Found: chrome (PID: 12264)
+[2025-05-10 07:32:14] Found: chrome (PID: 48788)
+[2025-05-10 07:32:14] Found: chrome (PID: 82268)
+[2025-05-10 07:32:14] Found: chrome (PID: 93164)
+[2025-05-10 07:32:14] Found: chrome (PID: 95216)
+[2025-05-10 07:32:14] Found: chrome (PID: 99012)
+[2025-05-10 07:32:14] Found: chrome (PID: 107316)
+[2025-05-10 07:32:14] Found: chrome (PID: 108460)
+[2025-05-10 07:32:14] Found: chrome (PID: 111544)
+[2025-05-10 07:32:14] Found: chrome (PID: 112128)
+[2025-05-10 07:32:14] Found: chrome (PID: 112940)
+[2025-05-10 07:32:14] Found: chrome (PID: 113824)
+[2025-05-10 07:32:14] Found: chrome (PID: 114332)
+[2025-05-10 07:32:14] Found: chrome (PID: 114416)
+[2025-05-10 07:32:14] Found: chrome (PID: 114924)
+[2025-05-10 07:32:14] Found: chrome (PID: 115004)
+[2025-05-10 07:32:14] Found: chrome (PID: 115132)
+[2025-05-10 07:32:15] Found: chrome (PID: 116132)
+[2025-05-10 07:32:15] Found: chrome (PID: 135992)
+[2025-05-10 07:32:15] Found: chrome (PID: 148640)
+[2025-05-10 07:32:15] Found: chrome (PID: 161368)
+[2025-05-10 07:32:15] Found: chrome (PID: 170248)
+[2025-05-10 07:32:15] Found: chrome (PID: 191516)
+[2025-05-10 07:32:15] Found: chrome (PID: 198208)
+[2025-05-10 07:32:15] Process listing complete. Starting optimizations...
+[2025-05-10 07:32:17] Error getting system performance: Internal performance counter API call failed. Error: 800007d6.
+[2025-05-10 07:32:17] Affinity masks calculated for 128 logical processors
+[2025-05-10 07:32:17] Applying initial optimizations...
+[2025-05-10 07:32:17] Optimized audiodg (PID: 12892) - Affinity: 240, Priority: High
+[2025-05-10 07:32:17] Process voicemeeter8 not found.
+[2025-05-10 07:32:17] Optimized voicemeeter (PID: 84784) - Affinity: 3840, Priority: High
+[2025-05-10 07:32:17] Process audiorepeater not found.
+[2025-05-10 07:32:17] Process VBCable_ControlPanel not found.
+[2025-05-10 07:32:17] Optimized obs64 (PID: 166840) - Affinity: 15, Priority: High
+[2025-05-10 07:32:17] Process Discord not found.
+[2025-05-10 07:32:17] Optimized chrome (PID: 12264) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 48788) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 82268) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 93164) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 95216) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 99012) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 107316) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 108460) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 111544) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 112128) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 112940) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 113824) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 114332) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 114416) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 114924) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 115004) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 115132) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 116132) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 135992) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 148640) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 161368) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 170248) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 191516) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized chrome (PID: 198208) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Process msedge not found.
+[2025-05-10 07:32:17] Optimized firefox (PID: 23048) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized firefox (PID: 24980) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized firefox (PID: 27492) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized firefox (PID: 39108) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized firefox (PID: 51832) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized firefox (PID: 62324) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized firefox (PID: 85824) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized firefox (PID: 92016) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized firefox (PID: 93052) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized firefox (PID: 93132) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Optimized firefox (PID: 94624) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:17] Process brave not found.
+[2025-05-10 07:32:17] Initial optimization complete! Monitoring and reapplying every 30 seconds...
+[2025-05-10 07:32:17] Press Ctrl+C to stop.
+[2025-05-10 07:32:57] Iteration 1 - Run Time: 00:00:39
+[2025-05-10 07:32:57]   CPU Usage: 0%
+[2025-05-10 07:32:57]   Memory Usage: 50.99%
+[2025-05-10 07:32:57]   GPU Usage: 5.13%
+[2025-05-10 07:32:57]   Current System Responsiveness: Excellent
+[2025-05-10 07:32:57]   Average Responsiveness Score: 0 (Lower is better)
+[2025-05-10 07:32:57] Reapplying optimizations... (Iteration 1)
+[2025-05-10 07:32:57] Optimized audiodg (PID: 12892) - Affinity: 240, Priority: High
+[2025-05-10 07:32:57] Optimized voicemeeter (PID: 84784) - Affinity: 3840, Priority: High
+[2025-05-10 07:32:57] Process audiorepeater not found.
+[2025-05-10 07:32:57] Process VBCable_ControlPanel not found.
+[2025-05-10 07:32:57] Optimized obs64 (PID: 166840) - Affinity: 15, Priority: High
+[2025-05-10 07:32:57] Process Discord not found.
+[2025-05-10 07:32:57] Optimized chrome (PID: 12264) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 48788) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 82268) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 93164) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 95216) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 99012) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 107316) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 108460) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 111544) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 112128) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 112940) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 113824) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 114332) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 114416) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 114924) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 115004) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 115132) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 116132) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 135992) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 148640) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 161368) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 170248) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 191516) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized chrome (PID: 198208) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Process msedge not found.
+[2025-05-10 07:32:57] Optimized firefox (PID: 23048) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized firefox (PID: 24980) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized firefox (PID: 27492) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized firefox (PID: 39108) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized firefox (PID: 51832) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized firefox (PID: 62324) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized firefox (PID: 81224) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized firefox (PID: 85824) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized firefox (PID: 92016) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized firefox (PID: 93052) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized firefox (PID: 93132) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Optimized firefox (PID: 94624) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 07:32:57] Process brave not found.
