@@ -609,7 +609,7 @@ $perfHistory += $initialPerf
 
 # Start the UI with the break button in a separate thread
 $breakButtonPressed = $false
-$uiThread = [System.Threading.Thread]::new({
+$uiThread = New-Object System.Threading.Thread([System.Threading.ThreadStart]{
     $breakButtonPressed = Show-BreakButton
 })
 $uiThread.SetApartmentState([System.Threading.ApartmentState]::STA)

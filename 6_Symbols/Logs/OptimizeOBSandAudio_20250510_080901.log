@@ -1,0 +1,138 @@
+[2025-05-10 08:09:02] === Starting Audio and Streaming Optimization Script ===
+[2025-05-10 08:09:02] Log File: C:\projects\workstation\6_Symbols\Logs\OptimizeOBSandAudio_20250510_080901.log
+[2025-05-10 08:09:03] CPU: AMD Ryzen Threadripper PRO 3995WX 64-Cores     
+[2025-05-10 08:09:03] Number of logical processors: 128
+[2025-05-10 08:09:03] GPU: AMD Radeon RX 6900 XT - 3840 x 2160 x 4294967296 colors
+[2025-05-10 08:09:03] GPU: DisplayLink USB Device - 1024 x 600 x 4294967296 colors
+[2025-05-10 08:09:03] GPU: DisplayLink USB Device - 3840 x 2160 x 4294967296 colors
+[2025-05-10 08:09:03] Listing target processes before optimization...
+[2025-05-10 08:09:03] Found: audiodg (PID: 12892)
+[2025-05-10 08:09:03] Not Found: voicemeeter8
+[2025-05-10 08:09:03] Found: voicemeeter (PID: 84784)
+[2025-05-10 08:09:03] Not Found: audiorepeater
+[2025-05-10 08:09:03] Not Found: VBCable_ControlPanel
+[2025-05-10 08:09:03] Not Found: Discord
+[2025-05-10 08:09:03] Found: chrome (PID: 12264)
+[2025-05-10 08:09:03] Found: chrome (PID: 48788)
+[2025-05-10 08:09:03] Found: chrome (PID: 82268)
+[2025-05-10 08:09:03] Found: chrome (PID: 93164)
+[2025-05-10 08:09:03] Found: chrome (PID: 95216)
+[2025-05-10 08:09:03] Found: chrome (PID: 99012)
+[2025-05-10 08:09:03] Found: chrome (PID: 107316)
+[2025-05-10 08:09:03] Found: chrome (PID: 108460)
+[2025-05-10 08:09:03] Found: chrome (PID: 111544)
+[2025-05-10 08:09:03] Found: chrome (PID: 112128)
+[2025-05-10 08:09:03] Found: chrome (PID: 112940)
+[2025-05-10 08:09:03] Found: chrome (PID: 113824)
+[2025-05-10 08:09:03] Found: chrome (PID: 114332)
+[2025-05-10 08:09:03] Found: chrome (PID: 114416)
+[2025-05-10 08:09:03] Found: chrome (PID: 114924)
+[2025-05-10 08:09:03] Found: chrome (PID: 115004)
+[2025-05-10 08:09:03] Found: chrome (PID: 115132)
+[2025-05-10 08:09:03] Found: chrome (PID: 116132)
+[2025-05-10 08:09:03] Found: chrome (PID: 135992)
+[2025-05-10 08:09:03] Found: chrome (PID: 148640)
+[2025-05-10 08:09:03] Found: chrome (PID: 158332)
+[2025-05-10 08:09:03] Found: chrome (PID: 161368)
+[2025-05-10 08:09:03] Found: chrome (PID: 170248)
+[2025-05-10 08:09:03] Found: chrome (PID: 198208)
+[2025-05-10 08:09:03] Found: chrome (PID: 207268)
+[2025-05-10 08:09:03] Found: chrome (PID: 212116)
+[2025-05-10 08:09:03] Found: chrome (PID: 215640)
+[2025-05-10 08:09:03] Found: chrome (PID: 217856)
+[2025-05-10 08:09:03] Process listing complete. Starting optimizations...
+[2025-05-10 08:09:20] Initial System State:
+[2025-05-10 08:09:20]    CPU Usage: 7%
+[2025-05-10 08:09:20]    Memory Usage: 52.39%
+[2025-05-10 08:09:20]    GPU Usage: 5.56%
+[2025-05-10 08:09:20]    System Responsiveness: Excellent
+[2025-05-10 08:09:20]    Number of Chrome instances: 28
+[2025-05-10 08:09:20] Affinity masks calculated for 128 logical processors
+[2025-05-10 08:09:20] Applying initial optimizations...
+[2025-05-10 08:09:21] Optimized audiodg (PID: 12892) - Affinity: 240, Priority: High
+[2025-05-10 08:09:21] Optimized voicemeeter (PID: 84784) - Affinity: 3840, Priority: High
+[2025-05-10 08:09:21] Process audiorepeater not found.
+[2025-05-10 08:09:21] Optimized obs64 (PID: 166840) - Affinity: 15, Priority: High
+[2025-05-10 08:09:21] Process Discord not found.
+[2025-05-10 08:09:21] Optimized chrome (PID: 12264) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 48788) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 82268) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 93164) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 95216) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 99012) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 107316) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 108460) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 111544) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 112128) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 112940) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 113824) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 114332) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 114416) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 114924) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 115004) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 115132) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 116132) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 135992) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 148640) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 158332) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 161368) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 170248) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 198208) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 207268) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 212116) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 215640) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Optimized chrome (PID: 217856) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:09:21] Starting continuous optimization and monitoring loop...
+[2025-05-10 08:09:32] Error in monitoring loop: You cannot call a method on a null-valued expression.
+[2025-05-10 08:09:32] Optimization loop ended.
+[2025-05-10 08:09:32] Generating performance report...
+[2025-05-10 08:09:43] Optimization loop ended.
+[2025-05-10 08:09:43] Generating performance report...
+[2025-05-10 08:09:47] Optimization loop ended.
+[2025-05-10 08:09:47] Generating performance report...
+[2025-05-10 08:09:48] Optimization loop ended.
+[2025-05-10 08:09:48] Generating performance report...
+[2025-05-10 08:09:49] Optimization loop ended.
+[2025-05-10 08:09:49] Generating performance report...
+[2025-05-10 08:09:50] Optimization loop ended.
+[2025-05-10 08:09:50] Generating performance report...
+[2025-05-10 08:09:51] Optimization loop ended.
+[2025-05-10 08:09:51] Generating performance report...
+[2025-05-10 08:09:52] Optimization loop ended.
+[2025-05-10 08:09:52] Generating performance report...
+[2025-05-10 08:09:53] Optimization loop ended.
+[2025-05-10 08:09:53] Generating performance report...
+[2025-05-10 08:09:54] Optimization loop ended.
+[2025-05-10 08:09:54] Generating performance report...
+[2025-05-10 08:09:56] Optimization loop ended.
+[2025-05-10 08:09:56] Generating performance report...
+[2025-05-10 08:09:57] Optimization loop ended.
+[2025-05-10 08:09:57] Generating performance report...
+[2025-05-10 08:09:58] Optimization loop ended.
+[2025-05-10 08:09:58] Generating performance report...
+[2025-05-10 08:09:59] Optimization loop ended.
+[2025-05-10 08:09:59] Generating performance report...
+[2025-05-10 08:10:00] Optimization loop ended.
+[2025-05-10 08:10:00] Generating performance report...
+[2025-05-10 08:10:01] Optimization loop ended.
+[2025-05-10 08:10:01] Generating performance report...
+[2025-05-10 08:10:02] Optimization loop ended.
+[2025-05-10 08:10:02] Generating performance report...
+[2025-05-10 08:10:03] Optimization loop ended.
+[2025-05-10 08:10:03] Generating performance report...
+[2025-05-10 08:10:04] Optimization loop ended.
+[2025-05-10 08:10:04] Generating performance report...
+[2025-05-10 08:10:05] Optimization loop ended.
+[2025-05-10 08:10:05] Generating performance report...
+[2025-05-10 08:10:06] Optimization loop ended.
+[2025-05-10 08:10:06] Generating performance report...
+[2025-05-10 08:10:08] Optimization loop ended.
+[2025-05-10 08:10:08] Generating performance report...
+[2025-05-10 08:10:09] Optimization loop ended.
+[2025-05-10 08:10:09] Generating performance report...
+[2025-05-10 08:10:10] Optimization loop ended.
+[2025-05-10 08:10:10] Generating performance report...
+[2025-05-10 08:10:11] Optimization loop ended.
+[2025-05-10 08:10:11] Generating performance report...
+[2025-05-10 08:10:12] Optimization loop ended.
+[2025-05-10 08:10:12] Generating performance report...

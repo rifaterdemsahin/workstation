@@ -982,3 +982,71 @@ OptimizeOBSandAudio.log[2025-05-09 22:22:36] [INFO] Script started.
 [2025-05-10 08:05:53] Found: chrome (PID: 215640)
 [2025-05-10 08:05:53] Found: chrome (PID: 217856)
 [2025-05-10 08:05:53] Process listing complete. Starting optimizations...
+[2025-05-10 08:06:38] Initial System State:
+[2025-05-10 08:08:03]    CPU Usage: 4%
+[2025-05-10 08:08:03]    Memory Usage: 52.03%
+[2025-05-10 08:08:03]    GPU Usage: 5.33%
+[2025-05-10 08:08:03]    Number of Chrome instances: 28
+[2025-05-10 08:08:03]    Number of Firefox instances: 12
+[2025-05-10 08:08:03] Affinity masks calculated for 128 logical processors
+[2025-05-10 08:08:03] Applying initial optimizations...
+[2025-05-10 08:08:03] Optimized audiodg (PID: 12892) - Affinity: 240, Priority: High
+[2025-05-10 08:08:03] Optimized voicemeeter (PID: 84784) - Affinity: 3840, Priority: High
+[2025-05-10 08:08:03] Process audiorepeater not found.
+[2025-05-10 08:08:03] Optimized obs64 (PID: 166840) - Affinity: 15, Priority: High
+[2025-05-10 08:08:03] Process Discord not found.
+[2025-05-10 08:08:03] Optimized chrome (PID: 12264) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 48788) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 82268) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 93164) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 95216) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 99012) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 107316) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 108460) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 111544) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 112128) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 112940) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 113824) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 114332) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 114416) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 114924) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 115004) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 115132) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 116132) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 135992) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 148640) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 158332) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 161368) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 170248) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 198208) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 207268) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 212116) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 215640) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Optimized chrome (PID: 217856) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-10 08:08:03] Starting continuous optimization and monitoring loop...
+[2025-05-10 08:08:18] Optimization loop ended.
+[2025-05-10 08:08:18] Generating performance report...
+[2025-05-10 08:08:19] Optimization loop ended.
+[2025-05-10 08:08:19] Generating performance report...
+[2025-05-10 08:08:20] Optimization loop ended.
+[2025-05-10 08:08:20] Generating performance report...
+[2025-05-10 08:08:21] Optimization loop ended.
+[2025-05-10 08:08:21] Generating performance report...
+[2025-05-10 08:08:22] Optimization loop ended.
+[2025-05-10 08:08:22] Generating performance report...
+[2025-05-10 08:08:23] Optimization loop ended.
+[2025-05-10 08:08:23] Generating performance report...
+[2025-05-10 08:08:24] Optimization loop ended.
+[2025-05-10 08:08:24] Generating performance report...
+[2025-05-10 08:08:25] Optimization loop ended.
+[2025-05-10 08:08:25] Generating performance report...
+[2025-05-10 08:08:26] Optimization loop ended.
+[2025-05-10 08:08:26] Generating performance report...
+[2025-05-10 08:08:28] Optimization loop ended.
+[2025-05-10 08:08:28] Generating performance report...
+[2025-05-10 08:08:29] Optimization loop ended.
+[2025-05-10 08:08:29] Generating performance report...
+[2025-05-10 08:08:30] Optimization loop ended.
+[2025-05-10 08:08:30] Generating performance report...
+[2025-05-10 08:08:31] Optimization loop ended.
+[2025-05-10 08:08:31] Generating performance report...
