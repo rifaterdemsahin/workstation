@@ -497,6 +497,12 @@ function Show-BreakButton {
 $ErrorActionPreference = "Stop"
 $Error.Clear()
 
+# Function to keep PowerShell window open
+function Keep-PowerShellOpen {
+    Write-Host "`nPress any key to exit..." -ForegroundColor Yellow
+    $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+}
+
 # Set up Ctrl+C handler with error logging
 $null = Register-EngineEvent -SourceIdentifier PowerShell.Exiting -Action {
     try {
@@ -755,7 +761,10 @@ try {
     }
     
     Write-Log "=== Script terminated due to error ===" -ForegroundColor Red -LogLevel "ERROR"
-    throw $_  # Re-throw the error to ensure proper exit code
+    Write-Host "`nAn error occurred. Check the log file for details." -ForegroundColor Red
+    Write-Host "Log file: $logFilePath" -ForegroundColor Yellow
+    Keep-PowerShellOpen
+    exit 1
 } finally {
     Write-Log "Optimization loop ended." -ForegroundColor Cyan -LogLevel "INFO"
 
@@ -799,5 +808,10 @@ try {
     } catch {
         Write-ErrorLog -ErrorRecord $_ -Context "Final Report Generation"
     }
+
+    # Keep PowerShell window open at the end
+    Write-Host "`nScript completed. Check the log file for details." -ForegroundColor Green
+    Write-Host "Log file: $logFilePath" -ForegroundColor Yellow
+    Keep-PowerShellOpen
 }
 
