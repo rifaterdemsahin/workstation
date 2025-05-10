@@ -3,7 +3,7 @@
 # Target CPU: AMD Ryzen Threadripper PRO 3995WX (128 logical cores) or other multi-core CPU
 # Audio Interfaces: Voicemeeter and Windows Audio
 # Date: May 10, 2025
-# Version: 2.1 - Enhanced with robust performance monitoring and logging
+# Version: 2.2 - Enhanced with break button, final reporting, and timestamped report files
 
 # Requires Administrator privileges
 #Requires -RunAsAdministrator
@@ -11,10 +11,14 @@
 # Set up logging
 $logFilePath = "C:\projects\workstation\6_Symbols\Logs\OptimizeOBSandAudio.log"
 $logFolder = Split-Path -Path $logFilePath -Parent
+$reportFolder = Join-Path -Path $logFolder -ChildPath "Reports"
 
-# Create log directory if it doesn't exist
+# Create log and report directories if they don't exist
 if (!(Test-Path -Path $logFolder)) {
     New-Item -ItemType Directory -Path $logFolder -Force | Out-Null
+}
+if (!(Test-Path -Path $reportFolder)) {
+    New-Item -ItemType Directory -Path $reportFolder -Force | Out-Null
 }
 
 # Function to write to log file and console
@@ -185,6 +189,234 @@ function Get-SystemPerformance {
     }
 }
 
+# Function to generate and save a final performance report
+function Save-PerformanceReport {
+    param (
+        [array]$PerformanceHistory,
+        [datetime]$StartTime,
+        [string]$ReportFolder,
+        [switch]$Final = $false
+    )
+    
+    try {
+        # Create a timestamp for the report filename
+        $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+        $reportFilePath = Join-Path -Path $ReportFolder -ChildPath "PerformanceReport_$timestamp.txt"
+        
+        # Create report content
+        $reportContent = New-Object System.Text.StringBuilder
+        
+        # Add header
+        [void]$reportContent.AppendLine("======================================================")
+        [void]$reportContent.AppendLine("   SYSTEM OPTIMIZATION PERFORMANCE REPORT")
+        [void]$reportContent.AppendLine("======================================================")
+        [void]$reportContent.AppendLine("Generated: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')")
+        [void]$reportContent.AppendLine("Session Duration: $(((Get-Date) - $StartTime).ToString('hh\:mm\:ss'))")
+        [void]$reportContent.AppendLine("Report Type: $(if ($Final) { 'Final Report' } else { 'Break Button Report' })")
+        [void]$reportContent.AppendLine("======================================================")
+        [void]$reportContent.AppendLine("")
+        
+        # Add system information
+        [void]$reportContent.AppendLine("SYSTEM INFORMATION:")
+        [void]$reportContent.AppendLine("------------------")
+        
+        # Get CPU info
+        $cpuInfo = Get-WmiObject -Class Win32_Processor
+        [void]$reportContent.AppendLine("CPU: $($cpuInfo.Name)")
+        [void]$reportContent.AppendLine("Logical Processors: $($cpuInfo.NumberOfLogicalProcessors)")
+        
+        # Try to get memory info
+        try {
+            $memoryInfo = Get-WmiObject -Class Win32_ComputerSystem
+            $totalMemoryGB = [math]::Round($memoryInfo.TotalPhysicalMemory / 1GB, 2)
+            [void]$reportContent.AppendLine("Total Memory: $totalMemoryGB GB")
+        } catch {
+            [void]$reportContent.AppendLine("Total Memory: Unable to retrieve")
+        }
+        
+        # Try to get GPU info
+        try {
+            $gpuInfo = Get-WmiObject -Class Win32_VideoController
+            [void]$reportContent.AppendLine("GPU(s):")
+            foreach ($gpu in $gpuInfo) {
+                [void]$reportContent.AppendLine("  - $($gpu.Name)")
+            }
+        } catch {
+            [void]$reportContent.AppendLine("GPU: Unable to retrieve")
+        }
+        
+        [void]$reportContent.AppendLine("")
+        
+        # Performance metrics summary
+        if ($PerformanceHistory.Count -gt 0) {
+            # Calculate performance metrics
+            $validCpuMeasurements = $PerformanceHistory | Where-Object { $_.CPUUsage -is [double] -or $_.CPUUsage -is [int] }
+            $validMemoryMeasurements = $PerformanceHistory | Where-Object { $_.MemoryUsage -is [double] -or $_.MemoryUsage -is [int] }
+            $validGpuMeasurements = $PerformanceHistory | Where-Object { $_.GPUUsage -is [double] -or $_.GPUUsage -is [int] }
+            
+            $avgCPU = if ($validCpuMeasurements.Count -gt 0) { ($validCpuMeasurements | Measure-Object -Property CPUUsage -Average).Average } else { "N/A" }
+            $maxCPU = if ($validCpuMeasurements.Count -gt 0) { ($validCpuMeasurements | Measure-Object -Property CPUUsage -Maximum).Maximum } else { "N/A" }
+            $minCPU = if ($validCpuMeasurements.Count -gt 0) { ($validCpuMeasurements | Measure-Object -Property CPUUsage -Minimum).Minimum } else { "N/A" }
+            
+            $avgMem = if ($validMemoryMeasurements.Count -gt 0) { ($validMemoryMeasurements | Measure-Object -Property MemoryUsage -Average).Average } else { "N/A" }
+            $maxMem = if ($validMemoryMeasurements.Count -gt 0) { ($validMemoryMeasurements | Measure-Object -Property MemoryUsage -Maximum).Maximum } else { "N/A" }
+            
+            $avgGPU = if ($validGpuMeasurements.Count -gt 0) { ($validGpuMeasurements | Measure-Object -Property GPUUsage -Average).Average } else { "N/A" }
+            
+            $avgResponsiveness = ($PerformanceHistory | Measure-Object -Property ResponsivenessScore -Average).Average
+            
+            [void]$reportContent.AppendLine("PERFORMANCE SUMMARY:")
+            [void]$reportContent.AppendLine("--------------------")
+            [void]$reportContent.AppendLine("Total Measurements: $($PerformanceHistory.Count)")
+            [void]$reportContent.AppendLine("")
+            
+            # Format numeric values with proper percentage signs
+            $avgCPUDisplay = if ($avgCPU -is [double] -or $avgCPU -is [int]) { "$([math]::Round($avgCPU, 2))%" } else { $avgCPU }
+            $maxCPUDisplay = if ($maxCPU -is [double] -or $maxCPU -is [int]) { "$([math]::Round($maxCPU, 2))%" } else { $maxCPU }
+            $minCPUDisplay = if ($minCPU -is [double] -or $minCPU -is [int]) { "$([math]::Round($minCPU, 2))%" } else { $minCPU }
+            $avgMemDisplay = if ($avgMem -is [double] -or $avgMem -is [int]) { "$([math]::Round($avgMem, 2))%" } else { $avgMem }
+            $maxMemDisplay = if ($maxMem -is [double] -or $maxMem -is [int]) { "$([math]::Round($maxMem, 2))%" } else { $maxMem }
+            $avgGPUDisplay = if ($avgGPU -is [double] -or $avgGPU -is [int]) { "$([math]::Round($avgGPU, 2))%" } else { $avgGPU }
+            
+            [void]$reportContent.AppendLine("CPU Performance:")
+            [void]$reportContent.AppendLine("  Average CPU Usage: $avgCPUDisplay")
+            [void]$reportContent.AppendLine("  Maximum CPU Usage: $maxCPUDisplay")
+            [void]$reportContent.AppendLine("  Minimum CPU Usage: $minCPUDisplay")
+            [void]$reportContent.AppendLine("")
+            
+            [void]$reportContent.AppendLine("Memory Performance:")
+            [void]$reportContent.AppendLine("  Average Memory Usage: $avgMemDisplay")
+            [void]$reportContent.AppendLine("  Maximum Memory Usage: $maxMemDisplay")
+            [void]$reportContent.AppendLine("")
+            
+            [void]$reportContent.AppendLine("GPU Performance:")
+            [void]$reportContent.AppendLine("  Average GPU Usage: $avgGPUDisplay")
+            [void]$reportContent.AppendLine("")
+            
+            [void]$reportContent.AppendLine("System Responsiveness:")
+            [void]$reportContent.AppendLine("  Average Responsiveness Score: $([math]::Round($avgResponsiveness, 2)) (Lower is better)")
+            
+            # Get current state
+            $currentPerf = $PerformanceHistory | Select-Object -Last 1
+            if ($currentPerf) {
+                [void]$reportContent.AppendLine("")
+                [void]$reportContent.AppendLine("CURRENT SYSTEM STATE:")
+                [void]$reportContent.AppendLine("--------------------")
+                
+                $cpuDisplay = if ($currentPerf.CPUUsage -is [double] -or $currentPerf.CPUUsage -is [int]) { "$($currentPerf.CPUUsage)%" } else { $currentPerf.CPUUsage }
+                $memDisplay = if ($currentPerf.MemoryUsage -is [double] -or $currentPerf.MemoryUsage -is [int]) { "$($currentPerf.MemoryUsage)%" } else { $currentPerf.MemoryUsage }
+                $gpuDisplay = if ($currentPerf.GPUUsage -is [double] -or $currentPerf.GPUUsage -is [int]) { "$($currentPerf.GPUUsage)%" } else { $currentPerf.GPUUsage }
+                
+                [void]$reportContent.AppendLine("Current CPU Usage: $cpuDisplay")
+                [void]$reportContent.AppendLine("Current Memory Usage: $memDisplay")
+                [void]$reportContent.AppendLine("Current GPU Usage: $gpuDisplay")
+                [void]$reportContent.AppendLine("Current System Responsiveness: $($currentPerf.Responsiveness)")
+            }
+            
+            # Add process information
+            [void]$reportContent.AppendLine("")
+            [void]$reportContent.AppendLine("CURRENT PROCESS INFORMATION:")
+            [void]$reportContent.AppendLine("--------------------------")
+            [void]$reportContent.AppendLine("Total Process Count: $((Get-Process).Count)")
+            [void]$reportContent.AppendLine("Total Thread Count: $((Get-Process | Measure-Object -Property Threads -Sum).Sum)")
+            
+            # Get info about key processes
+            $targetProcesses = @("obs64", "audiodg", "voicemeeter8", "voicemeeter", "audiorepeater", "VBCable_ControlPanel", "Discord", "chrome")
+            [void]$reportContent.AppendLine("")
+            [void]$reportContent.AppendLine("KEY MONITORED PROCESSES:")
+            [void]$reportContent.AppendLine("----------------------")
+            
+            foreach ($procName in $targetProcesses) {
+                $processes = Get-Process -Name $procName -ErrorAction SilentlyContinue
+                if ($processes) {
+                    foreach ($proc in $processes) {
+                        [void]$reportContent.AppendLine("$($proc.ProcessName) (PID: $($proc.Id))")
+                        [void]$reportContent.AppendLine("  CPU Usage: $([math]::Round($proc.CPU, 2)) seconds")
+                        [void]$reportContent.AppendLine("  Memory: $([math]::Round($proc.WorkingSet / 1MB, 2)) MB")
+                        [void]$reportContent.AppendLine("  Threads: $($proc.Threads.Count)")
+                        [void]$reportContent.AppendLine("  Priority: $($proc.PriorityClass)")
+                        [void]$reportContent.AppendLine("")
+                    }
+                }
+            }
+        } else {
+            [void]$reportContent.AppendLine("No performance history available.")
+        }
+        
+        # Save report to file
+        $reportContent.ToString() | Out-File -FilePath $reportFilePath -Force
+        
+        # Return the report path and content
+        return @{
+            Path = $reportFilePath
+            Content = $reportContent.ToString()
+        }
+    } catch {
+        Write-Log "Error generating performance report: $_" -ForegroundColor Red
+        return $null
+    }
+}
+
+# Function to display a form with a break button
+function Show-BreakButton {
+    Add-Type -AssemblyName System.Windows.Forms
+    Add-Type -AssemblyName System.Drawing
+    
+    $form = New-Object System.Windows.Forms.Form
+    $form.Text = "Audio and Streaming Optimization"
+    $form.Size = New-Object System.Drawing.Size(400, 200)
+    $form.StartPosition = "CenterScreen"
+    $form.TopMost = $true
+    $form.FormBorderStyle = [System.Windows.Forms.FormBorderStyle]::FixedSingle
+    $form.MaximizeBox = $false
+    
+    $label = New-Object System.Windows.Forms.Label
+    $label.Location = New-Object System.Drawing.Point(20, 20)
+    $label.Size = New-Object System.Drawing.Size(350, 40)
+    $label.Text = "Optimization is running in the background.`nPress the button below to stop and generate a report."
+    $form.Controls.Add($label)
+    
+    $button = New-Object System.Windows.Forms.Button
+    $button.Location = New-Object System.Drawing.Point(100, 80)
+    $button.Size = New-Object System.Drawing.Size(200, 50)
+    $button.Text = "Break and Show Report"
+    $button.BackColor = [System.Drawing.Color]::FromArgb(192, 0, 0)
+    $button.ForeColor = [System.Drawing.Color]::White
+    $button.Font = New-Object System.Drawing.Font("Arial", 10, [System.Drawing.FontStyle]::Bold)
+    $button.Add_Click({
+        $form.DialogResult = [System.Windows.Forms.DialogResult]::OK
+        $form.Close()
+    })
+    $form.Controls.Add($button)
+    
+    # Create a status label that will update
+    $statusLabel = New-Object System.Windows.Forms.Label
+    $statusLabel.Location = New-Object System.Drawing.Point(20, 140)
+    $statusLabel.Size = New-Object System.Drawing.Size(350, 20)
+    $statusLabel.Text = "Running for: 00:00:00"
+    $form.Controls.Add($statusLabel)
+    
+    # Create a timer to update the status
+    $timer = New-Object System.Windows.Forms.Timer
+    $timer.Interval = 1000 # Update every second
+    $startTime = Get-Date
+    $timer.Add_Tick({
+        $runTime = (Get-Date) - $startTime
+        $statusLabel.Text = "Running for: " + $runTime.ToString("hh\:mm\:ss")
+    })
+    $timer.Start()
+    
+    # Show the form as a dialog (blocking until closed)
+    $result = $form.ShowDialog()
+    
+    # Clean up
+    $timer.Stop()
+    $timer.Dispose()
+    $form.Dispose()
+    
+    return $result -eq [System.Windows.Forms.DialogResult]::OK
+}
+
 # Start the log file with system information
 Write-Log "=== Starting Audio and Streaming Optimization Script ===" -ForegroundColor Cyan
 Write-Log "Log File: $logFilePath" -ForegroundColor Cyan
@@ -317,158 +549,4 @@ Write-Log "Applying initial optimizations..." -ForegroundColor Cyan
 # Audio processes - critical for preventing audio crackling
 Set-ProcessOptimization -ProcessName "audiodg" -AffinityMask $audioAffinity -Priority $audioPriority
 Set-ProcessOptimization -ProcessName "voicemeeter8" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
-Set-ProcessOptimization -ProcessName "voicemeeter" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
-Set-ProcessOptimization -ProcessName "audiorepeater" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
-Set-ProcessOptimization -ProcessName "VBCable_ControlPanel" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
-
-# Streaming/Recording
-Set-ProcessOptimization -ProcessName "obs64" -AffinityMask $obsAffinity -Priority $obsPriority
-
-# Define and optimize background apps
-$backgroundApps = @("Discord", "chrome", "msedge", "firefox", "brave")
-foreach ($app in $backgroundApps) {
-    Set-ProcessOptimization -ProcessName $app -AffinityMask $backgroundAffinity -Priority $backgroundPriority
-}
-
-# Check if game process name was provided and optimize if it exists
-$gameName = $null
-if ($args.Count -gt 0) {
-    $gameName = $args[0]
-    Set-ProcessOptimization -ProcessName $gameName -AffinityMask $gameAffinity -Priority $gamePriority
-}
-
-# Store performance metrics history
-$performanceHistory = @()
-
-# Monitor and reapply every 30 seconds
-Write-Log "Initial optimization complete! Monitoring and reapplying every 30 seconds..." -ForegroundColor Green
-Write-Log "Press Ctrl+C to stop." -ForegroundColor Yellow
-
-try {
-    $intervalSeconds = 30
-    $iteration = 0
-    $startTime = Get-Date
-    
-    while ($true) {
-        Start-Sleep -Seconds $intervalSeconds
-        $iteration++
-        
-        # Get performance metrics
-        $performance = Get-SystemPerformance
-        if ($performance) {
-            # Store metrics history (keep last 10)
-            $performanceHistory += $performance
-            if ($performanceHistory.Count -gt 10) {
-                $performanceHistory = $performanceHistory | Select-Object -Last 10
-            }
-            
-            # Calculate average responsiveness
-            $avgResponsiveness = ($performanceHistory | Measure-Object -Property ResponsivenessScore -Average).Average
-            $runTime = (Get-Date) - $startTime
-            $runTimeFormatted = "{0:D2}:{1:D2}:{2:D2}" -f $runTime.Hours, $runTime.Minutes, $runTime.Seconds
-            
-            # Log performance data
-            Write-Log "Iteration $iteration - Run Time: $runTimeFormatted" -ForegroundColor Yellow
-            
-            # Check if values are numeric or error strings
-            $cpuDisplay = if ($performance.CPUUsage -is [double] -or $performance.CPUUsage -is [int]) { "$($performance.CPUUsage)%" } else { $performance.CPUUsage }
-            $memDisplay = if ($performance.MemoryUsage -is [double] -or $performance.MemoryUsage -is [int]) { "$($performance.MemoryUsage)%" } else { $performance.MemoryUsage }
-            $gpuDisplay = if ($performance.GPUUsage -is [double] -or $performance.GPUUsage -is [int]) { "$($performance.GPUUsage)%" } else { $performance.GPUUsage }
-            
-            Write-Log "  CPU Usage: $cpuDisplay" -ForegroundColor Cyan
-            Write-Log "  Memory Usage: $memDisplay" -ForegroundColor Cyan
-            Write-Log "  GPU Usage: $gpuDisplay" -ForegroundColor Cyan
-            Write-Log "  Current System Responsiveness: $($performance.Responsiveness)" -ForegroundColor Cyan
-            Write-Log "  Average Responsiveness Score: $([math]::Round($avgResponsiveness, 2)) (Lower is better)" -ForegroundColor Cyan
-            
-            # Additional system metrics for better diagnostics
-            $processCount = (Get-Process).Count
-            $chromeProcesses = (Get-Process chrome -ErrorAction SilentlyContinue).Count
-            $threadCount = (Get-Process | Measure-Object -Property Threads -Sum).Sum
-            
-            Write-Log "  Total Processes: $processCount" -ForegroundColor Cyan
-            Write-Log "  Chrome Processes: $chromeProcesses" -ForegroundColor Cyan  
-            Write-Log "  Total Threads: $threadCount" -ForegroundColor Cyan
-        }
-        
-        Write-Log "Reapplying optimizations... (Iteration $iteration)" -ForegroundColor Yellow
-        
-        # Audio processes - highest priority
-        Set-ProcessOptimization -ProcessName "audiodg" -AffinityMask $audioAffinity -Priority $audioPriority
-        Set-ProcessOptimization -ProcessName "voicemeeter8" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
-        Set-ProcessOptimization -ProcessName "voicemeeter" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
-        Set-ProcessOptimization -ProcessName "audiorepeater" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
-        Set-ProcessOptimization -ProcessName "VBCable_ControlPanel" -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
-        
-        # Streaming/Recording
-        Set-ProcessOptimization -ProcessName "obs64" -AffinityMask $obsAffinity -Priority $obsPriority
-        
-        # Background apps
-        foreach ($app in $backgroundApps) {
-            Set-ProcessOptimization -ProcessName $app -AffinityMask $backgroundAffinity -Priority $backgroundPriority
-        }
-        
-        # Game process if specified
-        if ($gameName) {
-            Set-ProcessOptimization -ProcessName $gameName -AffinityMask $gameAffinity -Priority $gamePriority
-        }
-        
-        # Check for newly launched target processes every 5 iterations
-        if ($iteration % 5 -eq 0) {
-            Write-Log "Checking for newly launched processes..." -ForegroundColor Cyan
-            foreach ($procName in $targetProcesses) {
-                $process = Get-Process -Name $procName -ErrorAction SilentlyContinue
-                if ($process -and -not $processedBefore.Contains($procName)) {
-                    Write-Log "Found new process: $procName" -ForegroundColor Green
-                    [void]$processedBefore.Add($procName)
-                    
-                    # Apply appropriate optimization based on process type
-                    if ($procName -eq "obs64") {
-                        Set-ProcessOptimization -ProcessName $procName -AffinityMask $obsAffinity -Priority $obsPriority
-                    } elseif ($procName -in @("audiodg")) {
-                        Set-ProcessOptimization -ProcessName $procName -AffinityMask $audioAffinity -Priority $audioPriority
-                    } elseif ($procName -in @("voicemeeter8", "voicemeeter", "audiorepeater", "VBCable_ControlPanel")) {
-                        Set-ProcessOptimization -ProcessName $procName -AffinityMask $voicemeeterAffinity -Priority $voicemeeterPriority
-                    } elseif ($procName -in $backgroundApps) {
-                        Set-ProcessOptimization -ProcessName $procName -AffinityMask $backgroundAffinity -Priority $backgroundPriority
-                    }
-                }
-            }
-        }
-    }
-} catch {
-    Write-Log "Script stopped: $_" -ForegroundColor Red
-} finally {
-    # Get final performance metrics
-    $finalPerf = Get-SystemPerformance
-    if ($finalPerf) {
-        Write-Log "Final System State:" -ForegroundColor Yellow
-        
-        # Check if values are numeric or error strings
-        $cpuDisplay = if ($finalPerf.CPUUsage -is [double] -or $finalPerf.CPUUsage -is [int]) { "$($finalPerf.CPUUsage)%" } else { $finalPerf.CPUUsage }
-        $memDisplay = if ($finalPerf.MemoryUsage -is [double] -or $finalPerf.MemoryUsage -is [int]) { "$($finalPerf.MemoryUsage)%" } else { $finalPerf.MemoryUsage }
-        $gpuDisplay = if ($finalPerf.GPUUsage -is [double] -or $finalPerf.GPUUsage -is [int]) { "$($finalPerf.GPUUsage)%" } else { $finalPerf.GPUUsage }
-        
-        Write-Log "  CPU Usage: $cpuDisplay" -ForegroundColor Yellow
-        Write-Log "  Memory Usage: $memDisplay" -ForegroundColor Yellow
-        Write-Log "  GPU Usage: $gpuDisplay" -ForegroundColor Yellow
-        Write-Log "  System Responsiveness: $($finalPerf.Responsiveness)" -ForegroundColor Yellow
-        Write-Log "  Process Count: $((Get-Process).Count)" -ForegroundColor Yellow
-        Write-Log "  Thread Count: $((Get-Process | Measure-Object -Property Threads -Sum).Sum)" -ForegroundColor Yellow
-    }
-    
-    # Calculate overall performance statistics if we have history
-    if ($performanceHistory.Count -gt 0) {
-        $avgCPU = ($performanceHistory | Measure-Object -Property CPUUsage -Average).Average
-        $avgResponsiveness = ($performanceHistory | Measure-Object -Property ResponsivenessScore -Average).Average
-        
-        Write-Log "Performance Summary:" -ForegroundColor Green
-        Write-Log "  Average CPU Usage: $([math]::Round($avgCPU, 2))%" -ForegroundColor Green
-        Write-Log "  Average Responsiveness Score: $([math]::Round($avgResponsiveness, 2)) (Lower is better)" -ForegroundColor Green
-        Write-Log "  Session Duration: $(((Get-Date) - $startTime).ToString("hh\:mm\:ss"))" -ForegroundColor Green
-    }
-    
-    Write-Log "Optimization monitoring ended." -ForegroundColor Cyan
-    Write-Log "Log file saved at: $logFilePath" -ForegroundColor Cyan
-}
-
+Set-ProcessOptimization -ProcessName "voicemeeter" -AffinityMask $voicemeeterAffinity -Priority

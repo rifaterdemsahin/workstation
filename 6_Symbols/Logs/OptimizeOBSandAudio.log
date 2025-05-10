@@ -753,3 +753,107 @@ OptimizeOBSandAudio.log[2025-05-09 22:22:36] [INFO] Script started.
 [2025-05-10 07:41:10]   Memory Usage: 50.93%
 [2025-05-10 07:41:10]   GPU Usage: 5.7%
 [2025-05-10 07:41:10]   System Responsiveness: Excellent
+[2025-05-10 07:50:59] === Starting Audio and Streaming Optimization Script ===
+[2025-05-10 07:50:59] Log File: C:\projects\workstation\6_Symbols\Logs\OptimizeOBSandAudio.log
+[2025-05-10 07:51:00] CPU: AMD Ryzen Threadripper PRO 3995WX 64-Cores     
+[2025-05-10 07:51:00] Number of logical processors: 128
+[2025-05-10 07:51:00] GPU: AMD Radeon RX 6900 XT - 3840 x 2160 x 4294967296 colors
+[2025-05-10 07:51:00] GPU: DisplayLink USB Device - 1024 x 600 x 4294967296 colors
+[2025-05-10 07:51:00] GPU: DisplayLink USB Device - 3840 x 2160 x 4294967296 colors
+[2025-05-10 07:51:00] Listing target processes before optimization...
+[2025-05-10 07:51:00] Found: obs64 (PID: 166840)
+[2025-05-10 07:51:00] Found: audiodg (PID: 12892)
+[2025-05-10 07:51:00] Not Found: voicemeeter8
+[2025-05-10 07:51:00] Found: voicemeeter (PID: 84784)
+[2025-05-10 07:51:00] Not Found: audiorepeater
+[2025-05-10 07:51:00] Not Found: VBCable_ControlPanel
+[2025-05-10 07:51:00] Not Found: Discord
+[2025-05-10 07:51:00] Found: chrome (PID: 12264)
+[2025-05-10 07:51:00] Found: chrome (PID: 48788)
+[2025-05-10 07:51:00] Found: chrome (PID: 82268)
+[2025-05-10 07:51:00] Found: chrome (PID: 93164)
+[2025-05-10 07:51:00] Found: chrome (PID: 95216)
+[2025-05-10 07:51:00] Found: chrome (PID: 99012)
+[2025-05-10 07:51:00] Found: chrome (PID: 107316)
+[2025-05-10 07:51:00] Found: chrome (PID: 108460)
+[2025-05-10 07:51:00] Found: chrome (PID: 111544)
+[2025-05-10 07:51:00] Found: chrome (PID: 112128)
+[2025-05-10 07:51:00] Found: chrome (PID: 112940)
+[2025-05-10 07:51:00] Found: chrome (PID: 113824)
+[2025-05-10 07:51:01] Found: chrome (PID: 114332)
+[2025-05-10 07:51:01] Found: chrome (PID: 114416)
+[2025-05-10 07:51:01] Found: chrome (PID: 114924)
+[2025-05-10 07:51:01] Found: chrome (PID: 115004)
+[2025-05-10 07:51:01] Found: chrome (PID: 115132)
+[2025-05-10 07:51:01] Found: chrome (PID: 116132)
+[2025-05-10 07:51:01] Found: chrome (PID: 135992)
+[2025-05-10 07:51:01] Found: chrome (PID: 148640)
+[2025-05-10 07:51:01] Found: chrome (PID: 161368)
+[2025-05-10 07:51:01] Found: chrome (PID: 170248)
+[2025-05-10 07:51:01] Found: chrome (PID: 198208)
+[2025-05-10 07:51:01] Found: chrome (PID: 206168)
+[2025-05-10 07:51:01] Found: chrome (PID: 207268)
+[2025-05-10 07:51:01] Process listing complete. Starting optimizations...
+[2025-05-10 07:51:12] Initial System State:
+[2025-05-10 07:51:12]   CPU Usage: 41%
+[2025-05-10 07:51:12]   Memory Usage: 52.38%
+[2025-05-10 07:51:12]   GPU Usage: 4.85%
+[2025-05-10 07:51:12]   System Responsiveness: Good
+[2025-05-10 07:51:12]   Number of Chrome instances: 25
+[2025-05-10 07:51:12]   Number of Firefox instances: 12
+[2025-05-10 07:51:12] Affinity masks calculated for 128 logical processors
+[2025-05-10 07:51:13] Applying initial optimizations...
+[2025-05-10 07:51:13] Optimized audiodg (PID: 12892) - Affinity: 240, Priority: High
+[2025-05-10 07:51:13] Process voicemeeter8 not found.
+[2025-05-10 07:51:37] === Starting Audio and Streaming Optimization Script ===
+[2025-05-10 07:51:37] Log File: C:\projects\workstation\6_Symbols\Logs\OptimizeOBSandAudio.log
+[2025-05-10 07:51:38] CPU: AMD Ryzen Threadripper PRO 3995WX 64-Cores     
+[2025-05-10 07:51:38] Number of logical processors: 128
+[2025-05-10 07:51:38] GPU: AMD Radeon RX 6900 XT - 3840 x 2160 x 4294967296 colors
+[2025-05-10 07:51:38] GPU: DisplayLink USB Device - 1024 x 600 x 4294967296 colors
+[2025-05-10 07:51:38] GPU: DisplayLink USB Device - 3840 x 2160 x 4294967296 colors
+[2025-05-10 07:51:38] Listing target processes before optimization...
+[2025-05-10 07:51:38] Found: obs64 (PID: 166840)
+[2025-05-10 07:51:38] Found: audiodg (PID: 12892)
+[2025-05-10 07:51:38] Not Found: voicemeeter8
+[2025-05-10 07:51:38] Found: voicemeeter (PID: 84784)
+[2025-05-10 07:51:38] Not Found: audiorepeater
+[2025-05-10 07:51:38] Not Found: VBCable_ControlPanel
+[2025-05-10 07:51:39] Not Found: Discord
+[2025-05-10 07:51:39] Found: chrome (PID: 12264)
+[2025-05-10 07:51:39] Found: chrome (PID: 48788)
+[2025-05-10 07:51:39] Found: chrome (PID: 82268)
+[2025-05-10 07:51:39] Found: chrome (PID: 93164)
+[2025-05-10 07:51:39] Found: chrome (PID: 95216)
+[2025-05-10 07:51:39] Found: chrome (PID: 99012)
+[2025-05-10 07:51:39] Found: chrome (PID: 107316)
+[2025-05-10 07:51:39] Found: chrome (PID: 108460)
+[2025-05-10 07:51:39] Found: chrome (PID: 111544)
+[2025-05-10 07:51:39] Found: chrome (PID: 112128)
+[2025-05-10 07:51:39] Found: chrome (PID: 112940)
+[2025-05-10 07:51:39] Found: chrome (PID: 113824)
+[2025-05-10 07:51:39] Found: chrome (PID: 114332)
+[2025-05-10 07:51:39] Found: chrome (PID: 114416)
+[2025-05-10 07:51:39] Found: chrome (PID: 114924)
+[2025-05-10 07:51:39] Found: chrome (PID: 115004)
+[2025-05-10 07:51:39] Found: chrome (PID: 115132)
+[2025-05-10 07:51:39] Found: chrome (PID: 116132)
+[2025-05-10 07:51:39] Found: chrome (PID: 135992)
+[2025-05-10 07:51:39] Found: chrome (PID: 148640)
+[2025-05-10 07:51:39] Found: chrome (PID: 161368)
+[2025-05-10 07:51:39] Found: chrome (PID: 170248)
+[2025-05-10 07:51:39] Found: chrome (PID: 198208)
+[2025-05-10 07:51:39] Found: chrome (PID: 206168)
+[2025-05-10 07:51:39] Found: chrome (PID: 207268)
+[2025-05-10 07:51:39] Process listing complete. Starting optimizations...
+[2025-05-10 07:52:02] Initial System State:
+[2025-05-10 07:52:02]   CPU Usage: 15%
+[2025-05-10 07:52:02]   Memory Usage: 52.39%
+[2025-05-10 07:52:02]   GPU Usage: 5.81%
+[2025-05-10 07:52:02]   System Responsiveness: Excellent
+[2025-05-10 07:52:02]   Number of Chrome instances: 25
+[2025-05-10 07:52:02]   Number of Firefox instances: 12
+[2025-05-10 07:52:02] Affinity masks calculated for 128 logical processors
+[2025-05-10 07:52:02] Applying initial optimizations...
+[2025-05-10 07:52:02] Optimized audiodg (PID: 12892) - Affinity: 240, Priority: High
+[2025-05-10 07:52:02] Process voicemeeter8 not found.
