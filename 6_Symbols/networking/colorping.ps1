@@ -23,11 +23,11 @@ while ($true) {
         # Determine the color based on response time
         if ($reply.Status -eq "Success") {
             if ($time -lt 50) {
-                Write-Host "Reply from $Target: time=${time}ms (Avg: ${average}ms)" -ForegroundColor Green
+                Write-Host "Reply from ${Target}: time=${time}ms (Avg: ${average}ms)" -ForegroundColor Green
             } elseif ($time -lt 100) {
-                Write-Host "Reply from $Target: time=${time}ms (Avg: ${average}ms)" -ForegroundColor Yellow
+                Write-Host "Reply from ${Target}: time=${time}ms (Avg: ${average}ms)" -ForegroundColor Yellow
             } else {
-                Write-Host "Reply from $Target: time=${time}ms (Avg: ${average}ms)" -ForegroundColor Red
+                Write-Host "Reply from ${Target}: time=${time}ms (Avg: ${average}ms)" -ForegroundColor Red
             }
         } else {
             Write-Host "Ping failed: $($reply.Status)" -ForegroundColor DarkRed
