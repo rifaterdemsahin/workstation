@@ -1,0 +1,73 @@
+[2025-05-12 09:49:56] [INFO] === Starting Audio and Streaming Optimization Script ===
+[2025-05-12 09:49:56] [INFO] Log File: C:\projects\workstation\6_Symbols\Logs\OptimizeOBSandAudio_20250512_094956.log
+[2025-05-12 09:49:56] [INFO] Press Ctrl+C to exit the script at any time
+[2025-05-12 09:49:57] [INFO] CPU: AMD Ryzen Threadripper PRO 3995WX 64-Cores     
+[2025-05-12 09:49:57] [INFO] Number of logical processors: 128
+[2025-05-12 09:49:57] [INFO] GPU: AMD Radeon RX 6900 XT - 3840 x 2160 x 4294967296 colors
+[2025-05-12 09:49:57] [INFO] GPU: DisplayLink USB Device - 1024 x 600 x 4294967296 colors
+[2025-05-12 09:49:57] [INFO] GPU: DisplayLink USB Device - 3840 x 2160 x 4294967296 colors
+[2025-05-12 09:49:57] [INFO] Listing target processes before optimization...
+[2025-05-12 09:49:57] [WARNING] Not Found: obs64
+[2025-05-12 09:49:57] [INFO] Found: audiodg (PID: 12892)
+[2025-05-12 09:49:57] [WARNING] Not Found: voicemeeter8
+[2025-05-12 09:49:57] [INFO] Found: voicemeeter (PID: 351336)
+[2025-05-12 09:49:57] [WARNING] Not Found: audiorepeater
+[2025-05-12 09:49:57] [WARNING] Not Found: VBCable_ControlPanel
+[2025-05-12 09:49:57] [WARNING] Not Found: Discord
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 22832)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 24228)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 36356)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 78356)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 92908)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 129744)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 130164)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 133768)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 151596)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 180152)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 180704)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 191936)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 224316)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 260564)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 265000)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 285684)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 343864)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 351880)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 352852)
+[2025-05-12 09:49:57] [INFO] Found: chrome (PID: 355852)
+[2025-05-12 09:49:57] [INFO] Process listing complete. Starting optimizations...
+[2025-05-12 09:50:15] [INFO] Initial System State:
+[2025-05-12 09:50:15] [INFO]    CPU Usage: 1%
+[2025-05-12 09:50:15] [INFO]    Memory Usage: 49.39%
+[2025-05-12 09:50:15] [INFO]    GPU Usage: 5.41%
+[2025-05-12 09:50:15] [INFO]    System Responsiveness: Excellent
+[2025-05-12 09:50:15] [INFO]    Number of Chrome instances: 21
+[2025-05-12 09:50:15] [INFO]    Number of Firefox instances: 0
+[2025-05-12 09:50:15] [INFO] Affinity masks calculated for 128 logical processors
+[2025-05-12 09:50:15] [INFO] Applying initial optimizations...
+[2025-05-12 09:50:15] [INFO] Optimized audiodg (PID: 12892) - Affinity: 240, Priority: High
+[2025-05-12 09:50:15] [INFO] Optimized voicemeeter (PID: 351336) - Affinity: 3840, Priority: High
+[2025-05-12 09:50:15] [INFO] Process audiorepeater not found.
+[2025-05-12 09:50:15] [INFO] Process obs64 not found.
+[2025-05-12 09:50:15] [INFO] Process Discord not found.
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 22832) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 24228) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 36356) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 78356) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 92908) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 129744) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 130164) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 133768) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 151596) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 180152) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 180704) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 191936) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 197384) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 224316) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 260564) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 265000) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 285684) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 343864) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 351880) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 352852) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Optimized chrome (PID: 355852) - Affinity: 16711680, Priority: BelowNormal
+[2025-05-12 09:50:15] [INFO] Starting continuous optimization and monitoring loop...
