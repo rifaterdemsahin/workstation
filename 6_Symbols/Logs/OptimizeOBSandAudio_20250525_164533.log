@@ -453,3 +453,43 @@ The compound file GameInput Service was produced with a newer version of storage
 [2025-05-25 16:49:44] [INFO] CPU Usage: 0%
 [2025-05-25 16:49:44] [INFO] Memory Usage: 33.55%
 [2025-05-25 16:49:44] [INFO] GPU Usage: 1.22%
+[2025-05-25 16:49:48] [INFO] Latency Metrics: DPC Queue: 1918.21/sec, Interrupts: 13973.1/sec, Interrupt Time: 0%, Page Faults: 77087.98/sec
+[2025-05-25 16:49:48] [INFO] Debugging high latency issues...
+[2025-05-25 16:49:48] [INFO] Analyzing high-resource processes...
+[2025-05-25 16:49:48] [INFO] High-resource processes detected:
+[2025-05-25 16:49:48] [INFO] Process: Discord (PID: 3980), CPU: 4.03125, Memory: 398.55 MB, Page Faults: 896919154
+[2025-05-25 16:49:48] [INFO] Process: Discord (PID: 29384), CPU: 1.640625, Memory: 142.65 MB, Page Faults: 895636357
+[2025-05-25 16:49:48] [INFO] Process: Code (PID: 40488), CPU: 5.984375, Memory: 281.29 MB, Page Faults: 842314850
+[2025-05-25 16:49:48] [INFO] Process: Code (PID: 35884), CPU: 0.453125, Memory: 113.98 MB, Page Faults: 842241598
+[2025-05-25 16:49:48] [INFO] Process: Code (PID: 32940), CPU: 14.03125, Memory: 1071.79 MB, Page Faults: 841812391
+[2025-05-25 16:49:48] [INFO] Process: Code (PID: 22860), CPU: 3.15625, Memory: 295.01 MB, Page Faults: 841799622
+[2025-05-25 16:49:48] [INFO] Process: Code (PID: 26116), CPU: 0.328125, Memory: 136.73 MB, Page Faults: 841550301
+[2025-05-25 16:49:48] [INFO] Process: Code (PID: 5360), CPU: 0.328125, Memory: 110.57 MB, Page Faults: 841386388
+[2025-05-25 16:49:48] [INFO] Process: Code (PID: 5344), CPU: 0.96875, Memory: 110.54 MB, Page Faults: 841383095
+[2025-05-25 16:49:48] [INFO] Process: Code (PID: 7440), CPU: 0.09375, Memory: 94.65 MB, Page Faults: 840931968
+[2025-05-25 16:49:48] [INFO] Listing loaded drivers...
+[2025-05-25 16:49:48] [INFO] No common latency-causing drivers detected.
+[2025-05-25 16:49:48] [INFO] Checking system event logs for errors...
+[2025-05-25 16:49:48] [INFO] System errors detected in the last hour:
+[2025-05-25 16:49:48] [INFO] Event ID: 1796, Source: Microsoft-Windows-TPM-WMI, Time: 05/25/2025 16:45:10, Message: The Secure Boot update failed to update a Secure Boot variable with error Secure Boot is not enabled on this machine.. For more information, please see https://go.microsoft.com/fwlink/?linkid=2169931
+[2025-05-25 16:49:48] [INFO] Event ID: 2, Source: googledrivefs31626, Time: 05/25/2025 16:41:58, Message: The driver version of the disk does not match.
+[2025-05-25 16:49:48] [INFO] Event ID: 11, Source: Microsoft-Windows-Security-Kerberos, Time: 05/25/2025 16:41:17, Message: The Distinguished Name in the subject field of your smart card logon certificate does not contain enough information to identify the appropriate domain on an non-domain joined computer. Contact your system administrator.
+[2025-05-25 16:49:48] [INFO] Event ID: 7034, Source: Service Control Manager, Time: 05/25/2025 16:40:17, Message: The GameInput Service service terminated unexpectedly. It has done this 6 time(s).
+[2025-05-25 16:49:48] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:17, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:49:48] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:16, Message: The GameInput Service service terminated unexpectedly. It has done this 5 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:49:48] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:16, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:49:48] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:15, Message: The GameInput Service service terminated unexpectedly. It has done this 4 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:49:48] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:15, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:49:48] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:14, Message: The GameInput Service service terminated unexpectedly. It has done this 3 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:49:48] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:14, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:49:48] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:13, Message: The GameInput Service service terminated unexpectedly. It has done this 2 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:49:48] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:13, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:49:48] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:12, Message: The GameInput Service service terminated unexpectedly. It has done this 1 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:49:48] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:12, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:49:48] [INFO] Running xperf to capture DPC/ISR data (30 seconds)...
