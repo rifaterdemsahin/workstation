@@ -143,3 +143,85 @@
 [2025-05-25 16:35:33] [INFO] CPU Usage: 0%
 [2025-05-25 16:35:33] [INFO] Memory Usage: 41.73%
 [2025-05-25 16:35:33] [INFO] GPU Usage: 1.96%
+[2025-05-25 16:35:36] [WARNING] Failed to get interrupt time: Internal performance counter API call failed. Error: 800007d8.
+[2025-05-25 16:35:55] [INFO] Latency Metrics: DPC Queue: 16478140.6/sec, Interrupts: 24232245.53/sec, Interrupt Time: Unknown%, Page Faults: 21304.17/sec
+[2025-05-25 16:35:55] [INFO] Debugging high latency issues...
+[2025-05-25 16:35:55] [INFO] Analyzing high-resource processes...
+[2025-05-25 16:35:55] [INFO] High-resource processes detected:
+[2025-05-25 16:35:55] [INFO] Process: msedgewebview2 (PID: 57280), CPU: 0.359375, Memory: 20.53 MB, Page Faults: 918634740
+[2025-05-25 16:35:55] [INFO] Process: Discord (PID: 33736), CPU: 11.796875, Memory: 347.84 MB, Page Faults: 896911287
+[2025-05-25 16:35:55] [INFO] Process: Discord (PID: 3392), CPU: 1.25, Memory: 145.42 MB, Page Faults: 895640813
+[2025-05-25 16:35:55] [INFO] Process: Code (PID: 35904), CPU: 34.640625, Memory: 405.23 MB, Page Faults: 844029230
+[2025-05-25 16:35:55] [INFO] Process: Code (PID: 46576), CPU: 1.34375, Memory: 116.66 MB, Page Faults: 842239550
+[2025-05-25 16:35:55] [INFO] Process: Obsidian (PID: 16660), CPU: 73.875, Memory: 1727.8 MB, Page Faults: 841952454
+[2025-05-25 16:35:55] [INFO] Process: Code (PID: 47804), CPU: 5.703125, Memory: 306.45 MB, Page Faults: 841795526
+[2025-05-25 16:35:55] [INFO] Process: Code (PID: 27408), CPU: 2.46875, Memory: 142.67 MB, Page Faults: 841529031
+[2025-05-25 16:35:55] [INFO] Process: Code (PID: 46608), CPU: 28.0625, Memory: 879.3 MB, Page Faults: 841386919
+[2025-05-25 16:35:55] [INFO] Process: Code (PID: 46788), CPU: 0.640625, Memory: 106.54 MB, Page Faults: 841382284
+[2025-05-25 16:35:55] [INFO] Listing loaded drivers...
+[2025-05-25 16:35:56] [INFO] No common latency-causing drivers detected.
+[2025-05-25 16:35:56] [INFO] Checking system event logs for errors...
+[2025-05-25 16:35:56] [INFO] System errors detected in the last hour:
+[2025-05-25 16:35:56] [INFO] Event ID: 1796, Source: Microsoft-Windows-TPM-WMI, Time: 05/25/2025 15:41:03, Message: The Secure Boot update failed to update a Secure Boot variable with error Secure Boot is not enabled on this machine.. For more information, please see https://go.microsoft.com/fwlink/?linkid=2169931
+[2025-05-25 16:35:56] [INFO] Event ID: 2, Source: googledrivefs31626, Time: 05/25/2025 15:38:43, Message: The driver version of the disk does not match.
+[2025-05-25 16:35:56] [WARNING] xperf not found. Install Windows Performance Toolkit for detailed DPC/ISR analysis.
+[2025-05-25 16:35:56] [INFO] Latency debug report saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyDebug_20250525_163527.json
+[2025-05-25 16:35:56] [INFO] Debug Recommendations:
+[2025-05-25 16:35:56] [INFO] - Review high-resource processes (e.g., msedgewebview2) for excessive CPU/memory usage or page faults.
+[2025-05-25 16:35:56] [INFO] - Review system event logs for errors related to drivers or hardware.
+[2025-05-25 16:35:56] [INFO] - Install Windows Performance Toolkit (xperf) for detailed latency analysis: https://learn.microsoft.com/en-us/windows-hardware/test/wpt/
+[2025-05-25 16:35:56] [INFO] Latency Evaluation: Overall: Bad
+[2025-05-25 16:35:56] [INFO] DPC Queue Rate: Bad (16478140.6/sec)
+[2025-05-25 16:35:56] [INFO] Interrupt Rate: Bad (24232245.53/sec)
+[2025-05-25 16:35:56] [INFO] Interrupt Time: Unknown (Unknown%)
+[2025-05-25 16:35:56] [INFO] Page Faults: Bad (21304.17/sec)
+[2025-05-25 16:35:56] [INFO] Recommendations:
+[2025-05-25 16:35:56] [INFO] - High DPC queue rate detected. Run LatencyMon to identify problematic drivers (e.g., ndis.sys, ACPI.sys).
+[2025-05-25 16:35:56] [INFO] - High interrupt rate detected. Check for outdated network/GPU drivers or excessive hardware interrupts.
+[2025-05-25 16:35:56] [INFO] - High page faults detected. Check for memory-intensive applications or insufficient RAM.
+[2025-05-25 16:35:56] [INFO] - System is not suitable for real-time audio/streaming without optimization.
+[2025-05-25 16:35:56] [INFO] Latency evaluation saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyEvaluation_20250525_163527.json
+[2025-05-25 16:35:56] [INFO] Latency Report Saved: C:\projects\workstation\6_Symbols\Logs\Reports\LatencyReport_20250525_163527.json
+[2025-05-25 16:36:11] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_163527.json
+[2025-05-25 16:36:11] [INFO] System Performance Metrics:
+[2025-05-25 16:36:11] [INFO] CPU Usage: 2%
+[2025-05-25 16:36:11] [INFO] Memory Usage: 41.89%
+[2025-05-25 16:36:11] [INFO] GPU Usage: 1.96%
+[2025-05-25 16:36:15] [INFO] Latency Metrics: DPC Queue: 1369.79/sec, Interrupts: 24298458.53/sec, Interrupt Time: 0%, Page Faults: 33534.21/sec
+[2025-05-25 16:36:15] [INFO] Debugging high latency issues...
+[2025-05-25 16:36:15] [INFO] Analyzing high-resource processes...
+[2025-05-25 16:36:15] [INFO] High-resource processes detected:
+[2025-05-25 16:36:15] [INFO] Process: msedgewebview2 (PID: 57280), CPU: 0.359375, Memory: 6.86 MB, Page Faults: 918634740
+[2025-05-25 16:36:15] [INFO] Process: Discord (PID: 33736), CPU: 11.828125, Memory: 347.84 MB, Page Faults: 896911287
+[2025-05-25 16:36:15] [INFO] Process: Discord (PID: 3392), CPU: 1.25, Memory: 145.45 MB, Page Faults: 895642861
+[2025-05-25 16:36:15] [INFO] Process: Code (PID: 35904), CPU: 34.640625, Memory: 405.85 MB, Page Faults: 844029230
+[2025-05-25 16:36:15] [INFO] Process: Code (PID: 46576), CPU: 1.34375, Memory: 116.66 MB, Page Faults: 842239550
+[2025-05-25 16:36:15] [INFO] Process: Obsidian (PID: 16660), CPU: 73.875, Memory: 1720.76 MB, Page Faults: 841948603
+[2025-05-25 16:36:15] [INFO] Process: Code (PID: 47804), CPU: 5.703125, Memory: 306.46 MB, Page Faults: 841795526
+[2025-05-25 16:36:15] [INFO] Process: Code (PID: 27408), CPU: 2.46875, Memory: 142.72 MB, Page Faults: 841476832
+[2025-05-25 16:36:15] [INFO] Process: Code (PID: 46608), CPU: 28.0625, Memory: 879.43 MB, Page Faults: 841386919
+[2025-05-25 16:36:15] [INFO] Process: Code (PID: 46788), CPU: 0.640625, Memory: 106.5 MB, Page Faults: 841382284
+[2025-05-25 16:36:15] [INFO] Listing loaded drivers...
+[2025-05-25 16:36:15] [INFO] No common latency-causing drivers detected.
+[2025-05-25 16:36:15] [INFO] Checking system event logs for errors...
+[2025-05-25 16:36:16] [INFO] System errors detected in the last hour:
+[2025-05-25 16:36:16] [INFO] Event ID: 1796, Source: Microsoft-Windows-TPM-WMI, Time: 05/25/2025 15:41:03, Message: The Secure Boot update failed to update a Secure Boot variable with error Secure Boot is not enabled on this machine.. For more information, please see https://go.microsoft.com/fwlink/?linkid=2169931
+[2025-05-25 16:36:16] [INFO] Event ID: 2, Source: googledrivefs31626, Time: 05/25/2025 15:38:43, Message: The driver version of the disk does not match.
+[2025-05-25 16:36:16] [WARNING] xperf not found. Install Windows Performance Toolkit for detailed DPC/ISR analysis.
+[2025-05-25 16:36:16] [INFO] Latency debug report saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyDebug_20250525_163527.json
+[2025-05-25 16:36:16] [INFO] Debug Recommendations:
+[2025-05-25 16:36:16] [INFO] - Review high-resource processes (e.g., msedgewebview2) for excessive CPU/memory usage or page faults.
+[2025-05-25 16:36:16] [INFO] - Review system event logs for errors related to drivers or hardware.
+[2025-05-25 16:36:16] [INFO] - Install Windows Performance Toolkit (xperf) for detailed latency analysis: https://learn.microsoft.com/en-us/windows-hardware/test/wpt/
+[2025-05-25 16:36:16] [INFO] Latency Evaluation: Overall: Bad
+[2025-05-25 16:36:16] [INFO] DPC Queue Rate: Bad (1369.79/sec)
+[2025-05-25 16:36:16] [INFO] Interrupt Rate: Bad (24298458.53/sec)
+[2025-05-25 16:36:16] [INFO] Interrupt Time: Good (0%)
+[2025-05-25 16:36:16] [INFO] Page Faults: Bad (33534.21/sec)
+[2025-05-25 16:36:16] [INFO] Recommendations:
+[2025-05-25 16:36:16] [INFO] - High DPC queue rate detected. Run LatencyMon to identify problematic drivers (e.g., ndis.sys, ACPI.sys).
+[2025-05-25 16:36:16] [INFO] - High interrupt rate detected. Check for outdated network/GPU drivers or excessive hardware interrupts.
+[2025-05-25 16:36:16] [INFO] - High page faults detected. Check for memory-intensive applications or insufficient RAM.
+[2025-05-25 16:36:16] [INFO] - System is not suitable for real-time audio/streaming without optimization.
+[2025-05-25 16:36:16] [INFO] Latency evaluation saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyEvaluation_20250525_163527.json
+[2025-05-25 16:36:16] [INFO] Latency Report Saved: C:\projects\workstation\6_Symbols\Logs\Reports\LatencyReport_20250525_163527.json
