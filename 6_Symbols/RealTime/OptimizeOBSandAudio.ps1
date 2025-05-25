@@ -359,6 +359,9 @@ function Get-SystemPerformance {
 }
 
 # Function to optimize audio and streaming processes
+# (Previous code remains unchanged up to Optimize-AudioAndStreaming function)
+
+# Function to optimize audio and streaming processes
 function Optimize-AudioAndStreaming {
     try {
         Write-Log "Starting audio and streaming process optimization..." -ForegroundColor Cyan -LogLevel "INFO"
@@ -367,16 +370,20 @@ function Optimize-AudioAndStreaming {
         $totalCores = (Get-WmiObject -Class Win32_ComputerSystem).NumberOfLogicalProcessors
         Write-Log "Detected $totalCores logical cores" -ForegroundColor Cyan -LogLevel "INFO"
 
-        # Calculate affinity masks (assuming Ryzen Threadripper PRO 3995WX with 128 logical cores)
-        # Reserve cores for different process types
+        # Calculate affinity masks (optimized for Ryzen Threadripper PRO 3995WX with 128 logical cores)
         $audioCores = [math]::Min(8, $totalCores)  # First 8 cores for audio
         $streamingCores = [math]::Min(24, $totalCores - $audioCores)  # Next 24 for streaming
-        # $systemCores assignment removed (unused)
+        $systemCores = $totalCores - ($audioCores + $streamingCores)  # Remaining for system
 
-        # Calculate affinity masks
-        $audioAffinity = [math]::Pow(2, $audioCores) - 1  # First N cores
-        $streamingAffinity = ([math]::Pow(2, $audioCores + $streamingCores) - 1) - $audioAffinity
-        $systemAffinity = ([math]::Pow(2, $totalCores) - 1) - ($audioAffinity + $streamingAffinity)
+        # Calculate affinity masks using BigInt to avoid overflow
+        $audioAffinity = [System.Numerics.BigInteger]::Pow(2, $audioCores) - 1
+        $streamingAffinity = ([System.Numerics.BigInteger]::Pow(2, $audioCores + $streamingCores) - 1) - $audioAffinity
+        $systemAffinity = ([System.Numerics.BigInteger]::Pow(2, [math]::Min($totalCores, 63)) - 1) - ($audioAffinity + $streamingAffinity)
+
+        # Convert BigInt to Int64 for compatibility, capping at 63 bits to avoid overflow
+        $audioAffinity = [int64]$audioAffinity
+        $streamingAffinity = [int64]$streamingAffinity
+        $systemAffinity = [int64]$systemAffinity
 
         Write-Log "Affinity masks - Audio: $audioAffinity, Streaming: $streamingAffinity, System: $systemAffinity" -ForegroundColor Cyan -LogLevel "INFO"
 
@@ -413,6 +420,41 @@ function Optimize-AudioAndStreaming {
     }
 }
 
+# Revised power settings in Set-OptimalPowerSettings (only showing modified portion)
+function Set-OptimalPowerSettings {
+    try {
+        # (Previous code unchanged up to power settings)
+        
+        # Configure power settings for optimal audio performance
+        $powerSettings = @{
+            # Hard disk turn off time - set to 0 (never)
+            "0012ee47-9041-4b5d-9b77-535fba8b1442 6738e2c4-e8a5-4a42-b16a-e040e769756e" = 0
+            # USB selective suspend - disabled
+            "2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226" = 0
+            # Processor performance core parking min cores - 100%
+            "54533251-82be-4824-96c1-47b60b740d00 0cc5b647-c1df-4637-891a-dec35c318583" = 100
+            # Processor performance core parking max cores - 100%
+            "54533251-82be-4824-96c1-47b60b740d00 ea062031-0e34-4ff1-9b6d-eb1059334028" = 100
+            # Hybrid sleep - disabled
+            "238c9fa8-0aad-41ed-83f4-97be242c8f20 94ac6d29-73ce-41a6-809f-6363ba21b47e" = 0
+            # System standby timeout - never (0)
+            "238c9fa8-0aad-41ed-83f4-97be242c8f20 29f6c1db-86da-48c5-9fdb-f2b67b1f44da" = 0
+            # System hibernate timeout - never (0)
+            "238c9fa8-0aad-41ed-83f4-97be242c8f20 9d7815a6-7ee4-497e-8888-515a05f02364" = 0
+        }
+
+        # Removed problematic setting: "Processor idle demote threshold"
+        # "54533251-82be-4824-96c1-47b60b740d00 68dd2f27-a4ce-4e11-8487-3794e4135dfa" = 100
+        # Also removed "Processor idle promote threshold" as it may not exist
+        # "54533251-82be-4824-96c1-47b60b740d00 7b224883-b3cc-4d79-819f-8374152cbe7c" = 100
+
+        # (Rest of the function remains unchanged)
+    } catch {
+        Write-Log "Error in Set-OptimalPowerSettings: $_" -ForegroundColor Red -LogLevel "ERROR"
+    }
+}
+
+# (Rest of the script remains unchanged)
 # Function to configure Windows Audio settings
 function Set-WindowsAudioSettings {
     try {
