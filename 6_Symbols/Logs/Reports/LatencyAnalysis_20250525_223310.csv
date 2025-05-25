@@ -1,0 +1,26 @@
+﻿xperf.exe : xperf: error: dpcisr: argument -detail unexpected.
+At C:\projects\workstation\6_Symbols\RealTime\analyse_etl.ps1:58 char:14
++ $csvOutput = & $xperfPath -i $etlFilePath -a dpcisr -detail -csv 2>&1
++              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (xperf: error: d...ail unexpected.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+    Action invocation:
+
+        xperf -i <trace file> ... [-o <output>] -a dpcisr ...
+
+    Action help:
+
+        dpcisr [-dpc -isr -summary -interval [n] -bucket [n] -range T1 T2]
+
+        -dpc          Show statistics for DPC only
+        -isr          Show statistics for ISR only
+        -summary      Show summary report
+        -interval [dt] Show usage report for intervals of dt, default is 1 sec.
+        -bucket [dt]  Show histgogram for intervals of dt, default is 2 sec.
+        -range T1 T2  Show delays between T1 and T2.
+
+        If no data type is specified, default is to show report for both dpc and isr.
+        If no report type is specified, default is to print all three kinds of report.
+

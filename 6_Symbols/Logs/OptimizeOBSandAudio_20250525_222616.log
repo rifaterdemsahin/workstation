@@ -1,0 +1,463 @@
+[2025-05-25 22:26:16] [INFO] Starting Audio and Streaming Optimization Script
+[2025-05-25 22:26:16] [INFO] Configuring optimal power plan settings for audio performance...
+[2025-05-25 22:26:16] [INFO] Setting up High Performance power plan...
+[2025-05-25 22:26:16] [INFO] High Performance power plan duplicated successfully
+[2025-05-25 22:26:16] [INFO] Activating High Performance power plan...
+[2025-05-25 22:26:16] [INFO] High Performance power plan activated successfully
+[2025-05-25 22:26:16] [INFO] Applying power configuration settings...
+[2025-05-25 22:26:16] [INFO] AC setting applied: 0cc5b647-c1df-4637-891a-dec35c318583 = 100
+[2025-05-25 22:26:16] [INFO] DC setting applied: 0cc5b647-c1df-4637-891a-dec35c318583 = 100
+[2025-05-25 22:26:16] [INFO] AC setting applied: 94ac6d29-73ce-41a6-809f-6363ba21b47e = 0
+[2025-05-25 22:26:16] [INFO] DC setting applied: 94ac6d29-73ce-41a6-809f-6363ba21b47e = 0
+[2025-05-25 22:26:16] [INFO] AC setting applied: ea062031-0e34-4ff1-9b6d-eb1059334028 = 100
+[2025-05-25 22:26:16] [INFO] DC setting applied: ea062031-0e34-4ff1-9b6d-eb1059334028 = 100
+[2025-05-25 22:26:16] [INFO] AC setting applied: 9d7815a6-7ee4-497e-8888-515a05f02364 = 0
+[2025-05-25 22:26:16] [INFO] DC setting applied: 9d7815a6-7ee4-497e-8888-515a05f02364 = 0
+[2025-05-25 22:26:16] [INFO] AC setting applied: 6738e2c4-e8a5-4a42-b16a-e040e769756e = 0
+[2025-05-25 22:26:16] [INFO] DC setting applied: 6738e2c4-e8a5-4a42-b16a-e040e769756e = 0
+[2025-05-25 22:26:16] [INFO] AC setting applied: 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 = 0
+[2025-05-25 22:26:16] [INFO] DC setting applied: 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 = 0
+[2025-05-25 22:26:16] [INFO] AC setting applied: 29f6c1db-86da-48c5-9fdb-f2b67b1f44da = 0
+[2025-05-25 22:26:16] [INFO] DC setting applied: 29f6c1db-86da-48c5-9fdb-f2b67b1f44da = 0
+[2025-05-25 22:26:16] [INFO] Applying power plan changes...
+[2025-05-25 22:26:17] [INFO] Power plan settings applied successfully
+[2025-05-25 22:26:17] [INFO] Verifying processor core parking configuration...
+[2025-05-25 22:26:17] [INFO] Core parking min cores setting verified
+[2025-05-25 22:26:17] [INFO] Core parking max cores setting verified
+[2025-05-25 22:26:17] [INFO] Configuring additional CPU performance settings...
+[2025-05-25 22:26:17] [INFO] Processor performance boost mode enabled
+[2025-05-25 22:26:17] [INFO] Processor performance increase policy set to ideal
+[2025-05-25 22:26:17] [INFO] Power settings configuration completed
+[2025-05-25 22:26:17] [INFO] Starting audio and streaming process optimization...
+[2025-05-25 22:26:17] [INFO] Detected 128 logical cores
+[2025-05-25 22:26:17] [INFO] Affinity masks - Audio: 255, Streaming: 4294967040, System: 9223372032559808512
+[2025-05-25 22:26:17] [INFO] Optimized voicemeeter (PID: 38760) - Affinity: 255, Priority: RealTime
+[2025-05-25 22:26:17] [INFO] Optimized audiodg (PID: 13288) - Affinity: 255, Priority: High
+[2025-05-25 22:26:17] [INFO] Optimized obs64 (PID: 6020) - Affinity: 4294967040, Priority: High
+[2025-05-25 22:26:17] [INFO] Process obs not found.
+[2025-05-25 22:26:17] [INFO] Process Streamlabs not found.
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 2984) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 3416) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 3544) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 3604) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 3624) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 3652) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 3812) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 3820) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 3828) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 3836) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 3844) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 3948) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 4032) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 4040) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 4048) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 4116) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 4208) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 4240) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 4424) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 4484) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 4520) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 4596) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 4600) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 4772) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 4784) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 4868) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 5212) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 5280) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 5288) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 5308) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 5328) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 5432) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 5444) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 5728) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 5820) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 5876) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 5988) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 6000) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 6148) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 6192) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 6200) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 6264) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 6372) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 6380) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 7092) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 7272) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 7296) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 7540) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 7604) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 8280) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 8612) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 8748) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 8904) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 8908) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 8936) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 9028) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 9076) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 9676) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 10156) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 10208) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 10256) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 10340) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 10428) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 10484) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 10572) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 11296) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 12496) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 12680) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 14408) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 14644) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 15004) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 15080) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 18444) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 18544) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 18824) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 19416) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 19432) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 19856) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 21296) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 22588) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 28580) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 40120) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Error optimizing svchost (PID: 40880): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 22:26:17] [INFO] Error optimizing svchost (PID: 46932): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 22:26:17] [INFO] Error optimizing svchost (PID: 61704): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 22:26:17] [INFO] Error optimizing svchost (PID: 68176): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 68180) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 71388) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 72368) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 72680) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Optimized svchost (PID: 74352) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 22:26:17] [INFO] Error optimizing csrss (PID: 3008): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 22:26:17] [INFO] Error optimizing csrss (PID: 3108): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 22:26:17] [INFO] Error optimizing smss (PID: 2160): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 22:26:17] [INFO] Process optimization completed
+[2025-05-25 22:26:17] [INFO] Configuring Windows Audio settings...
+[2025-05-25 22:26:17] [INFO] Audio service set to Automatic
+[2025-05-25 22:26:17] [INFO] Audio quality settings configured
+[2025-05-25 22:26:17] [INFO] Entering continuous latency monitoring mode. Press Ctrl+C to stop.
+[2025-05-25 22:26:22] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_222616.json
+[2025-05-25 22:26:22] [INFO] System Performance Metrics:
+[2025-05-25 22:26:22] [INFO] CPU Usage: 1%
+[2025-05-25 22:26:22] [INFO] Memory Usage: 44.2%
+[2025-05-25 22:26:22] [INFO] GPU Usage: 0.9%
+[2025-05-25 22:26:27] [INFO] Latency Metrics: DPC Queue: 2887.02/sec, Interrupts: 292229.27/sec, Interrupt Time: 29.15%, Page Faults: 108837.62/sec
+[2025-05-25 22:26:27] [INFO] Debugging high latency issues...
+[2025-05-25 22:26:27] [INFO] Analyzing high-resource processes...
+[2025-05-25 22:26:27] [INFO] High-resource processes detected:
+[2025-05-25 22:26:27] [INFO] Process: chrome (PID: 46016), CPU: 35.28125, Memory: 342.5 MB, Page Faults: 920403705
+[2025-05-25 22:26:27] [INFO] Process: chrome (PID: 15704), CPU: 57.046875, Memory: 805.5 MB, Page Faults: 919600569
+[2025-05-25 22:26:27] [INFO] Process: chrome (PID: 20388), CPU: 32.984375, Memory: 623.49 MB, Page Faults: 919141966
+[2025-05-25 22:26:27] [INFO] Process: chrome (PID: 69492), CPU: 4.09375, Memory: 170.25 MB, Page Faults: 919094530
+[2025-05-25 22:26:27] [INFO] Process: chrome (PID: 68300), CPU: 0.625, Memory: 158.22 MB, Page Faults: 919057908
+[2025-05-25 22:26:27] [INFO] Process: chrome (PID: 42940), CPU: 34.0625, Memory: 149.96 MB, Page Faults: 919050539
+[2025-05-25 22:26:27] [INFO] Process: chrome (PID: 30240), CPU: 2.65625, Memory: 113.14 MB, Page Faults: 919034556
+[2025-05-25 22:26:27] [INFO] Process: chrome (PID: 70448), CPU: 0.265625, Memory: 87.57 MB, Page Faults: 919011142
+[2025-05-25 22:26:27] [INFO] Process: chrome (PID: 65492), CPU: 0.34375, Memory: 161.98 MB, Page Faults: 918653641
+[2025-05-25 22:26:27] [INFO] Process: chrome (PID: 67200), CPU: 0.40625, Memory: 101.9 MB, Page Faults: 918613725
+[2025-05-25 22:26:27] [INFO] Listing loaded drivers...
+[2025-05-25 22:26:27] [INFO] No common latency-causing drivers detected.
+[2025-05-25 22:26:27] [INFO] Checking system event logs for errors...
+[2025-05-25 22:26:27] [INFO] System errors detected in the last hour:
+[2025-05-25 22:26:27] [INFO] Event ID: 11, Source: Microsoft-Windows-Security-Kerberos, Time: 05/25/2025 22:09:42, Message: The Distinguished Name in the subject field of your smart card logon certificate does not contain enough information to identify the appropriate domain on an non-domain joined computer. Contact your system administrator.
+[2025-05-25 22:26:27] [INFO] Running xperf to capture DPC/ISR data (30 seconds)...
+[2025-05-25 22:26:59] [INFO] xperf trace captured to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_222616.etl. Analyze with Windows Performance Analyzer.
+[2025-05-25 22:26:59] [INFO] Latency debug report saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyDebug_20250525_222616.json
+[2025-05-25 22:26:59] [INFO] Debug Recommendations:
+[2025-05-25 22:26:59] [INFO] - Review high-resource processes (e.g., chrome) for excessive CPU/memory usage or page faults.
+[2025-05-25 22:26:59] [INFO] - Review system event logs for errors related to drivers or hardware.
+[2025-05-25 22:26:59] [INFO] - Analyze C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_222616.etl with Windows Performance Analyzer to identify DPC/ISR sources.
+[2025-05-25 22:26:59] [INFO] Latency Evaluation: Overall: Bad
+[2025-05-25 22:26:59] [INFO] DPC Queue Rate: Bad (2887.02/sec)
+[2025-05-25 22:26:59] [INFO] Interrupt Rate: Bad (292229.27/sec)
+[2025-05-25 22:26:59] [INFO] Interrupt Time: Bad (29.15%)
+[2025-05-25 22:26:59] [INFO] Page Faults: Bad (108837.62/sec)
+[2025-05-25 22:26:59] [INFO] Recommendations:
+[2025-05-25 22:26:59] [INFO] - High DPC queue rate detected. Run LatencyMon to identify problematic drivers (e.g., ndis.sys, ACPI.sys).
+[2025-05-25 22:26:59] [INFO] - High interrupt rate detected. Check for outdated network/GPU drivers or excessive hardware interrupts.
+[2025-05-25 22:26:59] [INFO] - High interrupt time detected. Investigate interrupt-heavy drivers using LatencyMon or xperf.
+[2025-05-25 22:26:59] [INFO] - High page faults detected. Check for memory-intensive applications or insufficient RAM.
+[2025-05-25 22:26:59] [INFO] - System is not suitable for real-time audio/streaming without optimization.
+[2025-05-25 22:26:59] [INFO] Latency evaluation saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyEvaluation_20250525_222616.json
+[2025-05-25 22:26:59] [INFO] Latency Report Saved: C:\projects\workstation\6_Symbols\Logs\Reports\LatencyReport_20250525_222616.json
+[2025-05-25 22:27:16] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_222616.json
+[2025-05-25 22:27:21] [INFO] System Performance Metrics:
+[2025-05-25 22:27:21] [INFO] CPU Usage: 1%
+[2025-05-25 22:27:21] [INFO] Memory Usage: 44.7%
+[2025-05-25 22:27:21] [INFO] GPU Usage: 0.95%
+[2025-05-25 22:27:25] [INFO] Latency Metrics: DPC Queue: 771.13/sec, Interrupts: 83319.99/sec, Interrupt Time: 0%, Page Faults: 68514.6/sec
+[2025-05-25 22:27:25] [INFO] Debugging high latency issues...
+[2025-05-25 22:27:25] [INFO] Analyzing high-resource processes...
+[2025-05-25 22:27:25] [INFO] High-resource processes detected:
+[2025-05-25 22:27:25] [INFO] Process: chrome (PID: 46016), CPU: 35.296875, Memory: 343.39 MB, Page Faults: 920403705
+[2025-05-25 22:27:25] [INFO] Process: chrome (PID: 15704), CPU: 57.0625, Memory: 807.13 MB, Page Faults: 919600569
+[2025-05-25 22:27:25] [INFO] Process: chrome (PID: 20388), CPU: 32.984375, Memory: 625.52 MB, Page Faults: 919569998
+[2025-05-25 22:27:25] [INFO] Process: chrome (PID: 69492), CPU: 4.09375, Memory: 170.31 MB, Page Faults: 919094530
+[2025-05-25 22:27:25] [INFO] Process: chrome (PID: 68300), CPU: 0.625, Memory: 158.34 MB, Page Faults: 919057908
+[2025-05-25 22:27:25] [INFO] Process: chrome (PID: 42940), CPU: 34.171875, Memory: 149.92 MB, Page Faults: 919050539
+[2025-05-25 22:27:25] [INFO] Process: chrome (PID: 30240), CPU: 2.65625, Memory: 119.38 MB, Page Faults: 919034684
+[2025-05-25 22:27:25] [INFO] Process: chrome (PID: 66976), CPU: 0.125, Memory: 88.15 MB, Page Faults: 919010886
+[2025-05-25 22:27:25] [INFO] Process: chrome (PID: 65492), CPU: 0.34375, Memory: 162.59 MB, Page Faults: 918653641
+[2025-05-25 22:27:25] [INFO] Process: chrome (PID: 67200), CPU: 0.40625, Memory: 102.04 MB, Page Faults: 918613725
+[2025-05-25 22:27:25] [INFO] Listing loaded drivers...
+[2025-05-25 22:27:26] [INFO] No common latency-causing drivers detected.
+[2025-05-25 22:27:26] [INFO] Checking system event logs for errors...
+[2025-05-25 22:27:26] [INFO] System errors detected in the last hour:
+[2025-05-25 22:27:26] [INFO] Event ID: 11, Source: Microsoft-Windows-Security-Kerberos, Time: 05/25/2025 22:09:42, Message: The Distinguished Name in the subject field of your smart card logon certificate does not contain enough information to identify the appropriate domain on an non-domain joined computer. Contact your system administrator.
+[2025-05-25 22:27:26] [INFO] Running xperf to capture DPC/ISR data (30 seconds)...
+[2025-05-25 22:27:58] [INFO] xperf trace captured to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_222616.etl. Analyze with Windows Performance Analyzer.
+[2025-05-25 22:27:58] [INFO] Latency debug report saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyDebug_20250525_222616.json
+[2025-05-25 22:27:58] [INFO] Debug Recommendations:
+[2025-05-25 22:27:58] [INFO] - Review high-resource processes (e.g., chrome) for excessive CPU/memory usage or page faults.
+[2025-05-25 22:27:58] [INFO] - Review system event logs for errors related to drivers or hardware.
+[2025-05-25 22:27:58] [INFO] - Analyze C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_222616.etl with Windows Performance Analyzer to identify DPC/ISR sources.
+[2025-05-25 22:27:58] [INFO] Latency Evaluation: Overall: Bad
+[2025-05-25 22:27:58] [INFO] DPC Queue Rate: Acceptable (771.13/sec)
+[2025-05-25 22:27:58] [INFO] Interrupt Rate: Bad (83319.99/sec)
+[2025-05-25 22:27:58] [INFO] Interrupt Time: Good (0%)
+[2025-05-25 22:27:58] [INFO] Page Faults: Bad (68514.6/sec)
+[2025-05-25 22:27:58] [INFO] Recommendations:
+[2025-05-25 22:27:58] [INFO] - High interrupt rate detected. Check for outdated network/GPU drivers or excessive hardware interrupts.
+[2025-05-25 22:27:58] [INFO] - High page faults detected. Check for memory-intensive applications or insufficient RAM.
+[2025-05-25 22:27:58] [INFO] - System is not suitable for real-time audio/streaming without optimization.
+[2025-05-25 22:27:58] [INFO] Latency evaluation saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyEvaluation_20250525_222616.json
+[2025-05-25 22:27:58] [INFO] Latency Report Saved: C:\projects\workstation\6_Symbols\Logs\Reports\LatencyReport_20250525_222616.json
+[2025-05-25 22:28:13] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_222616.json
+[2025-05-25 22:28:13] [INFO] System Performance Metrics:
+[2025-05-25 22:28:13] [INFO] CPU Usage: 13%
+[2025-05-25 22:28:13] [INFO] Memory Usage: 45.4%
+[2025-05-25 22:28:13] [INFO] GPU Usage: 1.27%
+[2025-05-25 22:28:17] [INFO] Latency Metrics: DPC Queue: 623.76/sec, Interrupts: 20629.14/sec, Interrupt Time: 29.45%, Page Faults: 20996.34/sec
+[2025-05-25 22:28:17] [INFO] Debugging high latency issues...
+[2025-05-25 22:28:17] [INFO] Analyzing high-resource processes...
+[2025-05-25 22:28:17] [INFO] High-resource processes detected:
+[2025-05-25 22:28:17] [INFO] Process: chrome (PID: 46016), CPU: 35.34375, Memory: 343.83 MB, Page Faults: 920403705
+[2025-05-25 22:28:17] [INFO] Process: chrome (PID: 15704), CPU: 57.0625, Memory: 810.22 MB, Page Faults: 920028601
+[2025-05-25 22:28:17] [INFO] Process: chrome (PID: 20388), CPU: 32.984375, Memory: 623.64 MB, Page Faults: 919141966
+[2025-05-25 22:28:17] [INFO] Process: chrome (PID: 74188), CPU: 2.671875, Memory: 407.21 MB, Page Faults: 919094649
+[2025-05-25 22:28:17] [INFO] Process: chrome (PID: 69492), CPU: 4.09375, Memory: 170.46 MB, Page Faults: 919094530
+[2025-05-25 22:28:17] [INFO] Process: chrome (PID: 68300), CPU: 0.625, Memory: 158.49 MB, Page Faults: 919057972
+[2025-05-25 22:28:17] [INFO] Process: chrome (PID: 42940), CPU: 34.28125, Memory: 149.98 MB, Page Faults: 919050539
+[2025-05-25 22:28:17] [INFO] Process: chrome (PID: 30240), CPU: 2.71875, Memory: 124.87 MB, Page Faults: 919038524
+[2025-05-25 22:28:17] [INFO] Process: chrome (PID: 66976), CPU: 0.125, Memory: 88.97 MB, Page Faults: 919011142
+[2025-05-25 22:28:17] [INFO] Process: chrome (PID: 75604), CPU: 0, Memory: 38.91 MB, Page Faults: 918997797
+[2025-05-25 22:28:17] [INFO] Listing loaded drivers...
+[2025-05-25 22:28:18] [INFO] No common latency-causing drivers detected.
+[2025-05-25 22:28:18] [INFO] Checking system event logs for errors...
+[2025-05-25 22:28:18] [INFO] System errors detected in the last hour:
+[2025-05-25 22:28:18] [INFO] Event ID: 11, Source: Microsoft-Windows-Security-Kerberos, Time: 05/25/2025 22:09:42, Message: The Distinguished Name in the subject field of your smart card logon certificate does not contain enough information to identify the appropriate domain on an non-domain joined computer. Contact your system administrator.
+[2025-05-25 22:28:18] [INFO] Running xperf to capture DPC/ISR data (30 seconds)...
+[2025-05-25 22:28:49] [INFO] xperf trace captured to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_222616.etl. Analyze with Windows Performance Analyzer.
+[2025-05-25 22:28:49] [INFO] Latency debug report saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyDebug_20250525_222616.json
+[2025-05-25 22:28:49] [INFO] Debug Recommendations:
+[2025-05-25 22:28:49] [INFO] - Review high-resource processes (e.g., chrome) for excessive CPU/memory usage or page faults.
+[2025-05-25 22:28:49] [INFO] - Review system event logs for errors related to drivers or hardware.
+[2025-05-25 22:28:49] [INFO] - Analyze C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_222616.etl with Windows Performance Analyzer to identify DPC/ISR sources.
+[2025-05-25 22:28:49] [INFO] Latency Evaluation: Overall: Bad
+[2025-05-25 22:28:49] [INFO] DPC Queue Rate: Acceptable (623.76/sec)
+[2025-05-25 22:28:49] [INFO] Interrupt Rate: Bad (20629.14/sec)
+[2025-05-25 22:28:49] [INFO] Interrupt Time: Bad (29.45%)
+[2025-05-25 22:28:49] [INFO] Page Faults: Bad (20996.34/sec)
+[2025-05-25 22:28:49] [INFO] Recommendations:
+[2025-05-25 22:28:49] [INFO] - High interrupt rate detected. Check for outdated network/GPU drivers or excessive hardware interrupts.
+[2025-05-25 22:28:49] [INFO] - High interrupt time detected. Investigate interrupt-heavy drivers using LatencyMon or xperf.
+[2025-05-25 22:28:49] [INFO] - High page faults detected. Check for memory-intensive applications or insufficient RAM.
+[2025-05-25 22:28:49] [INFO] - System is not suitable for real-time audio/streaming without optimization.
+[2025-05-25 22:28:49] [INFO] Latency evaluation saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyEvaluation_20250525_222616.json
+[2025-05-25 22:28:49] [INFO] Latency Report Saved: C:\projects\workstation\6_Symbols\Logs\Reports\LatencyReport_20250525_222616.json
+[2025-05-25 22:29:04] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_222616.json
+[2025-05-25 22:29:04] [INFO] System Performance Metrics:
+[2025-05-25 22:29:04] [INFO] CPU Usage: 21%
+[2025-05-25 22:29:04] [INFO] Memory Usage: 45.5%
+[2025-05-25 22:29:04] [INFO] GPU Usage: 0.82%
+[2025-05-25 22:29:08] [INFO] Latency Metrics: DPC Queue: 691.56/sec, Interrupts: 23056.14/sec, Interrupt Time: 0%, Page Faults: 37201.37/sec
+[2025-05-25 22:29:08] [INFO] Debugging high latency issues...
+[2025-05-25 22:29:08] [INFO] Analyzing high-resource processes...
+[2025-05-25 22:29:08] [INFO] High-resource processes detected:
+[2025-05-25 22:29:08] [INFO] Process: chrome (PID: 46016), CPU: 35.359375, Memory: 348.27 MB, Page Faults: 920403705
+[2025-05-25 22:29:08] [INFO] Process: chrome (PID: 15704), CPU: 57.0625, Memory: 823.89 MB, Page Faults: 920028665
+[2025-05-25 22:29:08] [INFO] Process: chrome (PID: 20388), CPU: 33, Memory: 638.57 MB, Page Faults: 919142030
+[2025-05-25 22:29:08] [INFO] Process: chrome (PID: 74188), CPU: 6.5625, Memory: 447.62 MB, Page Faults: 919111271
+[2025-05-25 22:29:08] [INFO] Process: chrome (PID: 69492), CPU: 4.09375, Memory: 170.5 MB, Page Faults: 919094530
+[2025-05-25 22:29:08] [INFO] Process: chrome (PID: 68300), CPU: 0.625, Memory: 159.24 MB, Page Faults: 919057972
+[2025-05-25 22:29:08] [INFO] Process: chrome (PID: 42940), CPU: 34.390625, Memory: 150.21 MB, Page Faults: 919050539
+[2025-05-25 22:29:08] [INFO] Process: chrome (PID: 30240), CPU: 2.71875, Memory: 125.6 MB, Page Faults: 919038524
+[2025-05-25 22:29:08] [INFO] Process: chrome (PID: 66976), CPU: 0.125, Memory: 88.97 MB, Page Faults: 919011142
+[2025-05-25 22:29:08] [INFO] Process: chrome (PID: 65492), CPU: 0.34375, Memory: 147.24 MB, Page Faults: 918652616
+[2025-05-25 22:29:08] [INFO] Listing loaded drivers...
+[2025-05-25 22:29:08] [INFO] No common latency-causing drivers detected.
+[2025-05-25 22:29:08] [INFO] Checking system event logs for errors...
+[2025-05-25 22:29:08] [INFO] System errors detected in the last hour:
+[2025-05-25 22:29:08] [INFO] Event ID: 11, Source: Microsoft-Windows-Security-Kerberos, Time: 05/25/2025 22:09:42, Message: The Distinguished Name in the subject field of your smart card logon certificate does not contain enough information to identify the appropriate domain on an non-domain joined computer. Contact your system administrator.
+[2025-05-25 22:29:08] [INFO] Running xperf to capture DPC/ISR data (30 seconds)...
+[2025-05-25 22:29:40] [INFO] xperf trace captured to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_222616.etl. Analyze with Windows Performance Analyzer.
+[2025-05-25 22:29:40] [INFO] Latency debug report saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyDebug_20250525_222616.json
+[2025-05-25 22:29:40] [INFO] Debug Recommendations:
+[2025-05-25 22:29:40] [INFO] - Review high-resource processes (e.g., chrome) for excessive CPU/memory usage or page faults.
+[2025-05-25 22:29:40] [INFO] - Review system event logs for errors related to drivers or hardware.
+[2025-05-25 22:29:40] [INFO] - Analyze C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_222616.etl with Windows Performance Analyzer to identify DPC/ISR sources.
+[2025-05-25 22:29:40] [INFO] Latency Evaluation: Overall: Bad
+[2025-05-25 22:29:40] [INFO] DPC Queue Rate: Acceptable (691.56/sec)
+[2025-05-25 22:29:40] [INFO] Interrupt Rate: Bad (23056.14/sec)
+[2025-05-25 22:29:40] [INFO] Interrupt Time: Good (0%)
+[2025-05-25 22:29:40] [INFO] Page Faults: Bad (37201.37/sec)
+[2025-05-25 22:29:40] [INFO] Recommendations:
+[2025-05-25 22:29:40] [INFO] - High interrupt rate detected. Check for outdated network/GPU drivers or excessive hardware interrupts.
+[2025-05-25 22:29:40] [INFO] - High page faults detected. Check for memory-intensive applications or insufficient RAM.
+[2025-05-25 22:29:40] [INFO] - System is not suitable for real-time audio/streaming without optimization.
+[2025-05-25 22:29:40] [INFO] Latency evaluation saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyEvaluation_20250525_222616.json
+[2025-05-25 22:29:40] [INFO] Latency Report Saved: C:\projects\workstation\6_Symbols\Logs\Reports\LatencyReport_20250525_222616.json
+[2025-05-25 22:29:54] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_222616.json
+[2025-05-25 22:29:54] [INFO] System Performance Metrics:
+[2025-05-25 22:29:54] [INFO] CPU Usage: 0%
+[2025-05-25 22:29:54] [INFO] Memory Usage: 45.02%
+[2025-05-25 22:29:54] [INFO] GPU Usage: 1.37%
+[2025-05-25 22:29:58] [INFO] Latency Metrics: DPC Queue: 84426381.94/sec, Interrupts: 19545.43/sec, Interrupt Time: 0%, Page Faults: 124156.48/sec
+[2025-05-25 22:29:58] [INFO] Debugging high latency issues...
+[2025-05-25 22:29:58] [INFO] Analyzing high-resource processes...
+[2025-05-25 22:29:58] [INFO] High-resource processes detected:
+[2025-05-25 22:29:58] [INFO] Process: chrome (PID: 46016), CPU: 35.359375, Memory: 371.84 MB, Page Faults: 920831737
+[2025-05-25 22:29:58] [INFO] Process: chrome (PID: 15704), CPU: 57.40625, Memory: 810.41 MB, Page Faults: 920028601
+[2025-05-25 22:29:58] [INFO] Process: chrome (PID: 20388), CPU: 33, Memory: 626.08 MB, Page Faults: 919142030
+[2025-05-25 22:29:58] [INFO] Process: chrome (PID: 74188), CPU: 7.59375, Memory: 326.27 MB, Page Faults: 919105110
+[2025-05-25 22:29:58] [INFO] Process: chrome (PID: 69492), CPU: 4.09375, Memory: 170.58 MB, Page Faults: 919094530
+[2025-05-25 22:29:58] [INFO] Process: chrome (PID: 68300), CPU: 0.625, Memory: 159.26 MB, Page Faults: 919057972
+[2025-05-25 22:29:58] [INFO] Process: chrome (PID: 30240), CPU: 2.71875, Memory: 125.64 MB, Page Faults: 919038524
+[2025-05-25 22:29:58] [INFO] Process: chrome (PID: 66976), CPU: 0.125, Memory: 89.05 MB, Page Faults: 919011142
+[2025-05-25 22:29:58] [INFO] Process: chrome (PID: 65492), CPU: 0.34375, Memory: 147.5 MB, Page Faults: 918652616
+[2025-05-25 22:29:58] [INFO] Process: msedgewebview2 (PID: 69892), CPU: 0.484375, Memory: 103.77 MB, Page Faults: 918630102
+[2025-05-25 22:29:58] [INFO] Listing loaded drivers...
+[2025-05-25 22:29:59] [INFO] No common latency-causing drivers detected.
+[2025-05-25 22:29:59] [INFO] Checking system event logs for errors...
+[2025-05-25 22:29:59] [INFO] System errors detected in the last hour:
+[2025-05-25 22:29:59] [INFO] Event ID: 11, Source: Microsoft-Windows-Security-Kerberos, Time: 05/25/2025 22:09:42, Message: The Distinguished Name in the subject field of your smart card logon certificate does not contain enough information to identify the appropriate domain on an non-domain joined computer. Contact your system administrator.
+[2025-05-25 22:29:59] [INFO] Running xperf to capture DPC/ISR data (30 seconds)...
+[2025-05-25 22:30:30] [INFO] xperf trace captured to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_222616.etl. Analyze with Windows Performance Analyzer.
+[2025-05-25 22:30:30] [INFO] Latency debug report saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyDebug_20250525_222616.json
+[2025-05-25 22:30:30] [INFO] Debug Recommendations:
+[2025-05-25 22:30:30] [INFO] - Review high-resource processes (e.g., chrome) for excessive CPU/memory usage or page faults.
+[2025-05-25 22:30:30] [INFO] - Review system event logs for errors related to drivers or hardware.
+[2025-05-25 22:30:30] [INFO] - Analyze C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_222616.etl with Windows Performance Analyzer to identify DPC/ISR sources.
+[2025-05-25 22:30:30] [INFO] Latency Evaluation: Overall: Bad
+[2025-05-25 22:30:30] [INFO] DPC Queue Rate: Bad (84426381.94/sec)
+[2025-05-25 22:30:30] [INFO] Interrupt Rate: Bad (19545.43/sec)
+[2025-05-25 22:30:30] [INFO] Interrupt Time: Good (0%)
+[2025-05-25 22:30:30] [INFO] Page Faults: Bad (124156.48/sec)
+[2025-05-25 22:30:30] [INFO] Recommendations:
+[2025-05-25 22:30:30] [INFO] - High DPC queue rate detected. Run LatencyMon to identify problematic drivers (e.g., ndis.sys, ACPI.sys).
+[2025-05-25 22:30:30] [INFO] - High interrupt rate detected. Check for outdated network/GPU drivers or excessive hardware interrupts.
+[2025-05-25 22:30:30] [INFO] - High page faults detected. Check for memory-intensive applications or insufficient RAM.
+[2025-05-25 22:30:30] [INFO] - System is not suitable for real-time audio/streaming without optimization.
+[2025-05-25 22:30:30] [INFO] Latency evaluation saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyEvaluation_20250525_222616.json
+[2025-05-25 22:30:30] [INFO] Latency Report Saved: C:\projects\workstation\6_Symbols\Logs\Reports\LatencyReport_20250525_222616.json
+[2025-05-25 22:30:44] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_222616.json
+[2025-05-25 22:30:44] [INFO] System Performance Metrics:
+[2025-05-25 22:30:44] [INFO] CPU Usage: 0%
+[2025-05-25 22:30:44] [INFO] Memory Usage: 45.07%
+[2025-05-25 22:30:44] [INFO] GPU Usage: 0.97%
+[2025-05-25 22:30:48] [INFO] Latency Metrics: DPC Queue: 84579312.32/sec, Interrupts: 18944.79/sec, Interrupt Time: 29.97%, Page Faults: 21043.87/sec
+[2025-05-25 22:30:49] [INFO] Debugging high latency issues...
+[2025-05-25 22:30:49] [INFO] Analyzing high-resource processes...
+[2025-05-25 22:30:49] [INFO] High-resource processes detected:
+[2025-05-25 22:30:49] [INFO] Process: chrome (PID: 46016), CPU: 35.375, Memory: 355.89 MB, Page Faults: 920831737
+[2025-05-25 22:30:49] [INFO] Process: chrome (PID: 15704), CPU: 57.40625, Memory: 812.18 MB, Page Faults: 920028601
+[2025-05-25 22:30:49] [INFO] Process: chrome (PID: 20388), CPU: 33, Memory: 626.19 MB, Page Faults: 919142030
+[2025-05-25 22:30:49] [INFO] Process: chrome (PID: 74188), CPU: 9.3125, Memory: 402.46 MB, Page Faults: 919110246
+[2025-05-25 22:30:49] [INFO] Process: chrome (PID: 69492), CPU: 4.09375, Memory: 170.63 MB, Page Faults: 919094530
+[2025-05-25 22:30:49] [INFO] Process: chrome (PID: 68300), CPU: 0.625, Memory: 158.27 MB, Page Faults: 919057972
+[2025-05-25 22:30:49] [INFO] Process: chrome (PID: 42940), CPU: 34.5625, Memory: 123.03 MB, Page Faults: 919050539
+[2025-05-25 22:30:49] [INFO] Process: chrome (PID: 30240), CPU: 2.734375, Memory: 111.95 MB, Page Faults: 919038524
+[2025-05-25 22:30:49] [INFO] Process: chrome (PID: 66976), CPU: 0.140625, Memory: 89.05 MB, Page Faults: 919011142
+[2025-05-25 22:30:49] [INFO] Process: chrome (PID: 65492), CPU: 0.34375, Memory: 147.19 MB, Page Faults: 918652616
+[2025-05-25 22:30:49] [INFO] Listing loaded drivers...
+[2025-05-25 22:30:49] [INFO] No common latency-causing drivers detected.
+[2025-05-25 22:30:49] [INFO] Checking system event logs for errors...
+[2025-05-25 22:30:49] [INFO] System errors detected in the last hour:
+[2025-05-25 22:30:49] [INFO] Event ID: 11, Source: Microsoft-Windows-Security-Kerberos, Time: 05/25/2025 22:09:42, Message: The Distinguished Name in the subject field of your smart card logon certificate does not contain enough information to identify the appropriate domain on an non-domain joined computer. Contact your system administrator.
+[2025-05-25 22:30:49] [INFO] Running xperf to capture DPC/ISR data (30 seconds)...
+[2025-05-25 22:31:20] [INFO] xperf trace captured to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_222616.etl. Analyze with Windows Performance Analyzer.
+[2025-05-25 22:31:20] [INFO] Latency debug report saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyDebug_20250525_222616.json
+[2025-05-25 22:31:20] [INFO] Debug Recommendations:
+[2025-05-25 22:31:20] [INFO] - Review high-resource processes (e.g., chrome) for excessive CPU/memory usage or page faults.
+[2025-05-25 22:31:20] [INFO] - Review system event logs for errors related to drivers or hardware.
+[2025-05-25 22:31:20] [INFO] - Analyze C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_222616.etl with Windows Performance Analyzer to identify DPC/ISR sources.
+[2025-05-25 22:31:20] [INFO] Latency Evaluation: Overall: Bad
+[2025-05-25 22:31:20] [INFO] DPC Queue Rate: Bad (84579312.32/sec)
+[2025-05-25 22:31:20] [INFO] Interrupt Rate: Bad (18944.79/sec)
+[2025-05-25 22:31:20] [INFO] Interrupt Time: Bad (29.97%)
+[2025-05-25 22:31:20] [INFO] Page Faults: Bad (21043.87/sec)
+[2025-05-25 22:31:20] [INFO] Recommendations:
+[2025-05-25 22:31:20] [INFO] - High DPC queue rate detected. Run LatencyMon to identify problematic drivers (e.g., ndis.sys, ACPI.sys).
+[2025-05-25 22:31:20] [INFO] - High interrupt rate detected. Check for outdated network/GPU drivers or excessive hardware interrupts.
+[2025-05-25 22:31:20] [INFO] - High interrupt time detected. Investigate interrupt-heavy drivers using LatencyMon or xperf.
+[2025-05-25 22:31:20] [INFO] - High page faults detected. Check for memory-intensive applications or insufficient RAM.
+[2025-05-25 22:31:20] [INFO] - System is not suitable for real-time audio/streaming without optimization.
+[2025-05-25 22:31:20] [INFO] Latency evaluation saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyEvaluation_20250525_222616.json
+[2025-05-25 22:31:20] [INFO] Latency Report Saved: C:\projects\workstation\6_Symbols\Logs\Reports\LatencyReport_20250525_222616.json
+[2025-05-25 22:31:35] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_222616.json
+[2025-05-25 22:31:35] [INFO] System Performance Metrics:
+[2025-05-25 22:31:35] [INFO] CPU Usage: 1%
+[2025-05-25 22:31:35] [INFO] Memory Usage: 45.15%
+[2025-05-25 22:31:35] [INFO] GPU Usage: 0.88%
+[2025-05-25 22:31:39] [INFO] Latency Metrics: DPC Queue: 639.76/sec, Interrupts: 17478.09/sec, Interrupt Time: 30.03%, Page Faults: 19942.34/sec
+[2025-05-25 22:31:39] [INFO] Debugging high latency issues...
+[2025-05-25 22:31:39] [INFO] Analyzing high-resource processes...
+[2025-05-25 22:31:39] [INFO] High-resource processes detected:
+[2025-05-25 22:31:39] [INFO] Process: chrome (PID: 46016), CPU: 35.40625, Memory: 357.43 MB, Page Faults: 920831737
+[2025-05-25 22:31:39] [INFO] Process: chrome (PID: 15704), CPU: 57.40625, Memory: 809.9 MB, Page Faults: 919600569
+[2025-05-25 22:31:39] [INFO] Process: chrome (PID: 20388), CPU: 33, Memory: 628.34 MB, Page Faults: 919570062
+[2025-05-25 22:31:39] [INFO] Process: chrome (PID: 74188), CPU: 20.96875, Memory: 484.6 MB, Page Faults: 919105110
+[2025-05-25 22:31:39] [INFO] Process: chrome (PID: 69492), CPU: 4.09375, Memory: 170.67 MB, Page Faults: 919094530
+[2025-05-25 22:31:39] [INFO] Process: chrome (PID: 68300), CPU: 0.625, Memory: 158.28 MB, Page Faults: 919057972
+[2025-05-25 22:31:39] [INFO] Process: chrome (PID: 30240), CPU: 2.84375, Memory: 120.27 MB, Page Faults: 919034444
+[2025-05-25 22:31:39] [INFO] Process: chrome (PID: 66976), CPU: 0.140625, Memory: 89.28 MB, Page Faults: 919015238
+[2025-05-25 22:31:39] [INFO] Process: chrome (PID: 65492), CPU: 0.34375, Memory: 147.28 MB, Page Faults: 918652616
+[2025-05-25 22:31:39] [INFO] Process: msedgewebview2 (PID: 69892), CPU: 0.484375, Memory: 101.64 MB, Page Faults: 918630102
+[2025-05-25 22:31:39] [INFO] Listing loaded drivers...
+[2025-05-25 22:31:39] [INFO] No common latency-causing drivers detected.
+[2025-05-25 22:31:39] [INFO] Checking system event logs for errors...
+[2025-05-25 22:31:39] [INFO] System errors detected in the last hour:
+[2025-05-25 22:31:39] [INFO] Event ID: 11, Source: Microsoft-Windows-Security-Kerberos, Time: 05/25/2025 22:09:42, Message: The Distinguished Name in the subject field of your smart card logon certificate does not contain enough information to identify the appropriate domain on an non-domain joined computer. Contact your system administrator.
+[2025-05-25 22:31:39] [INFO] Running xperf to capture DPC/ISR data (30 seconds)...
+[2025-05-25 22:32:11] [INFO] xperf trace captured to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_222616.etl. Analyze with Windows Performance Analyzer.
+[2025-05-25 22:32:11] [INFO] Latency debug report saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyDebug_20250525_222616.json
+[2025-05-25 22:32:11] [INFO] Debug Recommendations:
+[2025-05-25 22:32:11] [INFO] - Review high-resource processes (e.g., chrome) for excessive CPU/memory usage or page faults.
+[2025-05-25 22:32:11] [INFO] - Review system event logs for errors related to drivers or hardware.
+[2025-05-25 22:32:11] [INFO] - Analyze C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_222616.etl with Windows Performance Analyzer to identify DPC/ISR sources.
+[2025-05-25 22:32:11] [INFO] Latency Evaluation: Overall: Bad
+[2025-05-25 22:32:11] [INFO] DPC Queue Rate: Acceptable (639.76/sec)
+[2025-05-25 22:32:11] [INFO] Interrupt Rate: Bad (17478.09/sec)
+[2025-05-25 22:32:11] [INFO] Interrupt Time: Bad (30.03%)
+[2025-05-25 22:32:11] [INFO] Page Faults: Bad (19942.34/sec)
+[2025-05-25 22:32:11] [INFO] Recommendations:
+[2025-05-25 22:32:11] [INFO] - High interrupt rate detected. Check for outdated network/GPU drivers or excessive hardware interrupts.
+[2025-05-25 22:32:11] [INFO] - High interrupt time detected. Investigate interrupt-heavy drivers using LatencyMon or xperf.
+[2025-05-25 22:32:11] [INFO] - High page faults detected. Check for memory-intensive applications or insufficient RAM.
+[2025-05-25 22:32:11] [INFO] - System is not suitable for real-time audio/streaming without optimization.
+[2025-05-25 22:32:11] [INFO] Latency evaluation saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyEvaluation_20250525_222616.json
+[2025-05-25 22:32:11] [INFO] Latency Report Saved: C:\projects\workstation\6_Symbols\Logs\Reports\LatencyReport_20250525_222616.json
+[2025-05-25 22:32:25] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_222616.json
+[2025-05-25 22:32:25] [INFO] System Performance Metrics:
+[2025-05-25 22:32:25] [INFO] CPU Usage: 1%
+[2025-05-25 22:32:25] [INFO] Memory Usage: 45.41%
+[2025-05-25 22:32:25] [INFO] GPU Usage: 0.82%
+[2025-05-25 22:32:29] [INFO] Latency Metrics: DPC Queue: 85058543.03/sec, Interrupts: 20646.12/sec, Interrupt Time: 0%, Page Faults: 52520.28/sec
+[2025-05-25 22:32:29] [INFO] Debugging high latency issues...
+[2025-05-25 22:32:29] [INFO] Analyzing high-resource processes...
+[2025-05-25 22:32:29] [INFO] High-resource processes detected:
+[2025-05-25 22:32:29] [INFO] Process: chrome (PID: 46016), CPU: 35.40625, Memory: 343.05 MB, Page Faults: 920403705
+[2025-05-25 22:32:29] [INFO] Process: chrome (PID: 15704), CPU: 57.40625, Memory: 810.16 MB, Page Faults: 919600569
+[2025-05-25 22:32:29] [INFO] Process: chrome (PID: 20388), CPU: 33, Memory: 627.5 MB, Page Faults: 919570062
+[2025-05-25 22:32:29] [INFO] Process: chrome (PID: 74188), CPU: 21.640625, Memory: 363.78 MB, Page Faults: 919105110
+[2025-05-25 22:32:29] [INFO] Process: chrome (PID: 69492), CPU: 4.09375, Memory: 170.67 MB, Page Faults: 919094530
+[2025-05-25 22:32:29] [INFO] Process: chrome (PID: 68300), CPU: 0.625, Memory: 158.28 MB, Page Faults: 919057972
+[2025-05-25 22:32:29] [INFO] Process: chrome (PID: 42940), CPU: 34.765625, Memory: 149.32 MB, Page Faults: 919050539
+[2025-05-25 22:32:29] [INFO] Process: chrome (PID: 30240), CPU: 2.859375, Memory: 103.8 MB, Page Faults: 919034444
+[2025-05-25 22:32:29] [INFO] Process: chrome (PID: 66976), CPU: 0.140625, Memory: 89.29 MB, Page Faults: 919015238
+[2025-05-25 22:32:29] [INFO] Process: chrome (PID: 65492), CPU: 0.34375, Memory: 147.43 MB, Page Faults: 918652616
+[2025-05-25 22:32:29] [INFO] Listing loaded drivers...
+[2025-05-25 22:32:29] [INFO] No common latency-causing drivers detected.
+[2025-05-25 22:32:29] [INFO] Checking system event logs for errors...
+[2025-05-25 22:32:30] [INFO] System errors detected in the last hour:
+[2025-05-25 22:32:30] [INFO] Event ID: 11, Source: Microsoft-Windows-Security-Kerberos, Time: 05/25/2025 22:09:42, Message: The Distinguished Name in the subject field of your smart card logon certificate does not contain enough information to identify the appropriate domain on an non-domain joined computer. Contact your system administrator.
+[2025-05-25 22:32:30] [INFO] Running xperf to capture DPC/ISR data (30 seconds)...
