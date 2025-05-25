@@ -1,9 +1,9 @@
 # PowerShell Script to Optimize Audio and Streaming Processes on Ryzen CPU
-# Purpose: Set CPU affinity, priority, monitor latency metrics, and evaluate performance
+# Purpose: Set CPU affinity, priority, monitor latency metrics, evaluate performance, and debug latency issues
 # Target CPU: AMD Ryzen Threadripper PRO 3995WX (128 logical cores) or other multi-core CPU
 # Audio Interfaces: Voicemeeter and Windows Audio
 # Date: May 25, 2025
-# Version: 2.5 - Added latency metric evaluation and recommendations
+# Version: 2.6 - Added latency debugging for bad metrics
 
 # Requires Administrator privileges
 #Requires -RunAsAdministrator
@@ -321,7 +321,7 @@ function Get-SystemPerformance {
     }
 }
 
-# New Function to monitor latency metrics
+# Function to monitor latency metrics
 function Get-LatencyMetrics {
     try {
         $latencyMetrics = @{}
@@ -375,7 +375,127 @@ function Get-LatencyMetrics {
     }
 }
 
-# New Function to evaluate latency metrics
+# New Function to debug latency issues
+function Debug-LatencyIssues {
+    param (
+        [hashtable]$LatencyMetrics
+    )
+
+    try {
+        $debugReport = @{
+            Timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+            HighResourceProcesses = @()
+            LoadedDrivers = @()
+            SystemEvents = @()
+            XperfStatus = "Not Run"
+            Recommendations = @()
+        }
+
+        Write-Log "Debugging high latency issues..." -ForegroundColor Yellow -LogLevel "INFO"
+
+        # 1. Identify high-resource processes (CPU, memory, page faults)
+        try {
+            Write-Log "Analyzing high-resource processes..." -ForegroundColor Cyan -LogLevel "INFO"
+            $processes = Get-Process | Select-Object Name, Id, CPU, WorkingSet64, @{Name="PageFaults";Expression={$_.VM / 4096}} |
+                        Where-Object { $_.CPU -gt 100 -or $_.WorkingSet64 -gt 1GB -or $_.PageFaults -gt 1000 } |
+                        Sort-Object PageFaults -Descending | Select-Object -First 10
+            $debugReport.HighResourceProcesses = $processes
+            if ($processes) {
+                Write-Log "High-resource processes detected:" -ForegroundColor Cyan -LogLevel "INFO"
+                foreach ($proc in $processes) {
+                    Write-Log "Process: $($proc.Name) (PID: $($proc.Id)), CPU: $($proc.CPU), Memory: $([math]::Round($proc.WorkingSet64 / 1MB, 2)) MB, Page Faults: $($proc.PageFaults)" -ForegroundColor Cyan -LogLevel "INFO"
+                }
+                $debugReport.Recommendations += "Review high-resource processes (e.g., $($processes[0].Name)) for excessive CPU/memory usage or page faults."
+            } else {
+                Write-Log "No high-resource processes detected." -ForegroundColor Green -LogLevel "INFO"
+            }
+        } catch {
+            Write-Log "Failed to analyze processes: $_" -ForegroundColor Red -LogLevel "ERROR"
+        }
+
+        # 2. List loaded drivers
+        try {
+            Write-Log "Listing loaded drivers..." -ForegroundColor Cyan -LogLevel "INFO"
+            $drivers = Get-WmiObject Win32_SystemDriver | Select-Object DisplayName, Name, PathName | 
+                       Where-Object { $_.State -eq "Running" } | Sort-Object DisplayName
+            $debugReport.LoadedDrivers = $drivers
+            $commonLatencyDrivers = @("ndis.sys", "tcpip.sys", "ACPI.sys", "dxgkrnl.sys", "nvlddmkm.sys", "atikmdag.sys")
+            $problemDrivers = $drivers | Where-Object { $commonLatencyDrivers -contains $_.Name }
+            if ($problemDrivers) {
+                Write-Log "Potential latency-causing drivers detected:" -ForegroundColor Yellow -LogLevel "INFO"
+                foreach ($driver in $problemDrivers) {
+                    Write-Log "Driver: $($driver.DisplayName) ($($driver.Name)) at $($driver.PathName)" -ForegroundColor Yellow -LogLevel "INFO"
+                }
+                $debugReport.Recommendations += "Update drivers that may cause latency: $($problemDrivers.Name -join ', '). Check manufacturer websites."
+            } else {
+                Write-Log "No common latency-causing drivers detected." -ForegroundColor Green -LogLevel "INFO"
+            }
+        } catch {
+            Write-Log "Failed to list drivers: $_" -ForegroundColor Red -LogLevel "ERROR"
+        }
+
+        # 3. Check system event logs for driver/hardware errors
+        try {
+            Write-Log "Checking system event logs for errors..." -ForegroundColor Cyan -LogLevel "INFO"
+            $events = Get-WinEvent -LogName "System" -MaxEvents 100 -ErrorAction SilentlyContinue |
+                      Where-Object { $_.LevelDisplayName -eq "Error" -and $_.TimeCreated -gt (Get-Date).AddHours(-1) } |
+                      Select-Object TimeCreated, Id, ProviderName, Message
+            $debugReport.SystemEvents = $events
+            if ($events) {
+                Write-Log "System errors detected in the last hour:" -ForegroundColor Yellow -LogLevel "INFO"
+                foreach ($event in $events) {
+                    Write-Log "Event ID: $($event.Id), Source: $($event.ProviderName), Time: $($event.TimeCreated), Message: $($event.Message)" -ForegroundColor Yellow -LogLevel "INFO"
+                }
+                $debugReport.Recommendations += "Review system event logs for errors related to drivers or hardware."
+            } else {
+                Write-Log "No recent system errors detected." -ForegroundColor Green -LogLevel "INFO"
+            }
+        } catch {
+            Write-Log "Failed to check event logs: $_" -ForegroundColor Red -LogLevel "ERROR"
+        }
+
+        # 4. Attempt xperf analysis if available
+        try {
+            if (Get-Command "xperf" -ErrorAction SilentlyContinue) {
+                Write-Log "Running xperf to capture DPC/ISR data (30 seconds)..." -ForegroundColor Cyan -LogLevel "INFO"
+                $xperfOutput = Join-Path -Path $reportFolder -ChildPath "LatencyTrace_$($timestamp).etl"
+                & xperf -on Latency -stackwalk Profile -f $xperfOutput
+                Start-Sleep -Seconds 30
+                & xperf -stop
+                $debugReport.XperfStatus = "Captured to $xperfOutput"
+                Write-Log "xperf trace captured to $xperfOutput. Analyze with Windows Performance Analyzer." -ForegroundColor Green -LogLevel "INFO"
+                $debugReport.Recommendations += "Analyze $xperfOutput with Windows Performance Analyzer to identify DPC/ISR sources."
+            } else {
+                Write-Log "xperf not found. Install Windows Performance Toolkit for detailed DPC/ISR analysis." -ForegroundColor Yellow -LogLevel "WARNING"
+                $debugReport.XperfStatus = "xperf not available"
+                $debugReport.Recommendations += "Install Windows Performance Toolkit (xperf) for detailed latency analysis: https://learn.microsoft.com/en-us/windows-hardware/test/wpt/"
+            }
+        } catch {
+            Write-Log "Failed to run xperf: $_" -ForegroundColor Red -LogLevel "ERROR"
+            $debugReport.XperfStatus = "Failed: $_"
+        }
+
+        # Save debug report
+        $debugReportFile = Join-Path -Path $reportFolder -ChildPath "LatencyDebug_$($timestamp).json"
+        $debugReport | ConvertTo-Json -Depth 4 | Out-File -FilePath $debugReportFile -ErrorAction SilentlyContinue
+        Write-Log "Latency debug report saved to $debugReportFile" -ForegroundColor Green -LogLevel "INFO"
+
+        # Log recommendations
+        if ($debugReport.Recommendations) {
+            Write-Log "Debug Recommendations:" -ForegroundColor Yellow -LogLevel "INFO"
+            foreach ($rec in $debugReport.Recommendations) {
+                Write-Log "- $rec" -ForegroundColor Yellow -LogLevel "INFO"
+            }
+        }
+
+        return $debugReport
+    } catch {
+        Write-ErrorLog -ErrorRecord $_ -Context "Debug-LatencyIssues"
+        return $null
+    }
+}
+
+# Function to evaluate latency metrics
 function Evaluate-LatencyMetrics {
     param (
         [hashtable]$LatencyMetrics
@@ -444,6 +564,8 @@ function Evaluate-LatencyMetrics {
         if ($ratings -contains "Bad") {
             $evaluation.Overall = "Bad"
             $evaluation.Recommendations += "System is not suitable for real-time audio/streaming without optimization."
+            # Trigger latency debugging
+            $debugReport = Debug-LatencyIssues -LatencyMetrics $LatencyMetrics
         } elseif ($ratings -contains "Acceptable") {
             $evaluation.Overall = "Acceptable"
             $evaluation.Recommendations += "System is marginally suitable for real-time audio/streaming. Consider optimizations for better performance."
