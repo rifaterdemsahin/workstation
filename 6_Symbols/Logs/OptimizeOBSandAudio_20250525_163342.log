@@ -1,0 +1,183 @@
+[2025-05-25 16:33:42] [INFO] Starting Audio and Streaming Optimization Script
+[2025-05-25 16:33:42] [INFO] Configuring optimal power plan settings for audio performance...
+[2025-05-25 16:33:42] [INFO] Setting up High Performance power plan...
+[2025-05-25 16:33:42] [INFO] High Performance power plan duplicated successfully
+[2025-05-25 16:33:42] [INFO] Activating High Performance power plan...
+[2025-05-25 16:33:42] [INFO] High Performance power plan activated successfully
+[2025-05-25 16:33:42] [INFO] Applying power configuration settings...
+[2025-05-25 16:33:42] [INFO] AC setting applied: 0cc5b647-c1df-4637-891a-dec35c318583 = 100
+[2025-05-25 16:33:42] [INFO] DC setting applied: 0cc5b647-c1df-4637-891a-dec35c318583 = 100
+[2025-05-25 16:33:42] [INFO] AC setting applied: 94ac6d29-73ce-41a6-809f-6363ba21b47e = 0
+[2025-05-25 16:33:42] [INFO] DC setting applied: 94ac6d29-73ce-41a6-809f-6363ba21b47e = 0
+[2025-05-25 16:33:42] [INFO] AC setting applied: ea062031-0e34-4ff1-9b6d-eb1059334028 = 100
+[2025-05-25 16:33:42] [INFO] DC setting applied: ea062031-0e34-4ff1-9b6d-eb1059334028 = 100
+[2025-05-25 16:33:42] [INFO] AC setting applied: 9d7815a6-7ee4-497e-8888-515a05f02364 = 0
+[2025-05-25 16:33:42] [INFO] DC setting applied: 9d7815a6-7ee4-497e-8888-515a05f02364 = 0
+[2025-05-25 16:33:42] [INFO] AC setting applied: 6738e2c4-e8a5-4a42-b16a-e040e769756e = 0
+[2025-05-25 16:33:42] [INFO] DC setting applied: 6738e2c4-e8a5-4a42-b16a-e040e769756e = 0
+[2025-05-25 16:33:42] [INFO] AC setting applied: 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 = 0
+[2025-05-25 16:33:42] [INFO] DC setting applied: 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 = 0
+[2025-05-25 16:33:42] [INFO] AC setting applied: 29f6c1db-86da-48c5-9fdb-f2b67b1f44da = 0
+[2025-05-25 16:33:42] [INFO] DC setting applied: 29f6c1db-86da-48c5-9fdb-f2b67b1f44da = 0
+[2025-05-25 16:33:42] [INFO] Applying power plan changes...
+[2025-05-25 16:33:43] [INFO] Power plan settings applied successfully
+[2025-05-25 16:33:43] [INFO] Verifying processor core parking configuration...
+[2025-05-25 16:33:43] [INFO] Core parking min cores setting verified
+[2025-05-25 16:33:43] [INFO] Core parking max cores setting verified
+[2025-05-25 16:33:43] [INFO] Configuring additional CPU performance settings...
+[2025-05-25 16:33:43] [INFO] Processor performance boost mode enabled
+[2025-05-25 16:33:43] [INFO] Processor performance increase policy set to ideal
+[2025-05-25 16:33:43] [INFO] Power settings configuration completed
+[2025-05-25 16:33:43] [INFO] Starting audio and streaming process optimization...
+[2025-05-25 16:33:43] [INFO] Detected 128 logical cores
+[2025-05-25 16:33:43] [INFO] Affinity masks - Audio: 255, Streaming: 4294967040, System: 9223372032559808512
+[2025-05-25 16:33:43] [INFO] Optimized voicemeeter (PID: 42540) - Affinity: 255, Priority: RealTime
+[2025-05-25 16:33:43] [INFO] Optimized audiodg (PID: 12780) - Affinity: 255, Priority: High
+[2025-05-25 16:33:43] [INFO] Process obs64 not found.
+[2025-05-25 16:33:43] [INFO] Process obs not found.
+[2025-05-25 16:33:43] [INFO] Process Streamlabs not found.
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 3100) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 3120) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 3164) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 3224) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 3436) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 3616) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 3660) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 3748) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 3796) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 3824) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 3836) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 3852) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 3860) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 3952) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 4008) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 4044) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 4052) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 4144) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 4164) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 4204) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 4248) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 4448) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 4476) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 4608) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 4768) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 4812) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 4876) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 4960) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 5184) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 5248) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 5372) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 5416) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 5528) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 5728) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 5788) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 5848) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 5960) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 6004) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 6072) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 6148) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 6360) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 6408) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 6416) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 7224) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 7380) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 7508) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 7544) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 7552) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 7608) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 8000) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 8052) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 8060) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 8232) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 8348) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 8368) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 8416) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 8504) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 8988) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Error optimizing svchost (PID: 9800): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 9816) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 10248) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 10256) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 10272) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 10448) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 10536) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 10560) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 11996) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 13412) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 14452) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Error optimizing svchost (PID: 14828): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 14984) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 18384) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 18724) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 18940) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 19560) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 20360) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 20384) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 21392) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 25488) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 25976) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 28784) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 29372) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Error optimizing svchost (PID: 30492): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 31596) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 33768) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 36176) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 37476) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 37792) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 37860) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 45132) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 54288) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 55952) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Optimized svchost (PID: 58204) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:33:43] [INFO] Error optimizing svchost (PID: 59436): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:33:43] [INFO] Error optimizing csrss (PID: 3004): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:33:43] [INFO] Error optimizing csrss (PID: 3108): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:33:43] [INFO] Error optimizing smss (PID: 2156): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:33:43] [INFO] Process optimization completed
+[2025-05-25 16:33:43] [INFO] Configuring Windows Audio settings...
+[2025-05-25 16:33:43] [INFO] Audio service set to Automatic
+[2025-05-25 16:33:43] [INFO] Audio quality settings configured
+[2025-05-25 16:33:43] [INFO] Entering continuous latency monitoring mode. Press Ctrl+C to stop.
+[2025-05-25 16:33:47] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_163342.json
+[2025-05-25 16:33:47] [INFO] System Performance Metrics:
+[2025-05-25 16:33:47] [INFO] CPU Usage: 1%
+[2025-05-25 16:33:47] [INFO] Memory Usage: 41.15%
+[2025-05-25 16:33:47] [INFO] GPU Usage: 0.52%
+[2025-05-25 16:33:51] [INFO] Latency Metrics: DPC Queue: 3767.49/sec, Interrupts: 17459.57/sec, Interrupt Time: 0%, Page Faults: 77122.91/sec
+[2025-05-25 16:33:51] [INFO] Debugging high latency issues...
+[2025-05-25 16:33:51] [INFO] Analyzing high-resource processes...
+[2025-05-25 16:33:51] [INFO] High-resource processes detected:
+[2025-05-25 16:33:51] [INFO] Process: msedgewebview2 (PID: 57280), CPU: 0.359375, Memory: 100.62 MB, Page Faults: 918632740
+[2025-05-25 16:33:51] [INFO] Process: Discord (PID: 33736), CPU: 11.53125, Memory: 347.82 MB, Page Faults: 896911287
+[2025-05-25 16:33:51] [INFO] Process: Discord (PID: 3392), CPU: 1.25, Memory: 145.3 MB, Page Faults: 895640813
+[2025-05-25 16:33:51] [INFO] Process: Code (PID: 35904), CPU: 33.875, Memory: 398.02 MB, Page Faults: 844029230
+[2025-05-25 16:33:51] [INFO] Process: Code (PID: 46576), CPU: 1.34375, Memory: 116.62 MB, Page Faults: 842239550
+[2025-05-25 16:33:51] [INFO] Process: Obsidian (PID: 16660), CPU: 73.65625, Memory: 1727.61 MB, Page Faults: 841950406
+[2025-05-25 16:33:51] [INFO] Process: Code (PID: 47804), CPU: 5.703125, Memory: 306.4 MB, Page Faults: 841795526
+[2025-05-25 16:33:51] [INFO] Process: Code (PID: 27408), CPU: 2.421875, Memory: 142.98 MB, Page Faults: 841476832
+[2025-05-25 16:33:51] [INFO] Process: Code (PID: 46608), CPU: 28.046875, Memory: 877.07 MB, Page Faults: 841382823
+[2025-05-25 16:33:51] [INFO] Process: Code (PID: 46788), CPU: 0.640625, Memory: 106.61 MB, Page Faults: 841382284
+[2025-05-25 16:33:51] [INFO] Listing loaded drivers...
+[2025-05-25 16:33:51] [INFO] No common latency-causing drivers detected.
+[2025-05-25 16:33:51] [INFO] Checking system event logs for errors...
+[2025-05-25 16:33:51] [INFO] System errors detected in the last hour:
+[2025-05-25 16:33:51] [INFO] Event ID: 1796, Source: Microsoft-Windows-TPM-WMI, Time: 05/25/2025 15:41:03, Message: The Secure Boot update failed to update a Secure Boot variable with error Secure Boot is not enabled on this machine.. For more information, please see https://go.microsoft.com/fwlink/?linkid=2169931
+[2025-05-25 16:33:51] [INFO] Event ID: 2, Source: googledrivefs31626, Time: 05/25/2025 15:38:43, Message: The driver version of the disk does not match.
+[2025-05-25 16:33:52] [WARNING] xperf not found. Install Windows Performance Toolkit for detailed DPC/ISR analysis.
+[2025-05-25 16:33:52] [INFO] Latency debug report saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyDebug_20250525_163342.json
+[2025-05-25 16:33:52] [INFO] Debug Recommendations:
+[2025-05-25 16:33:52] [INFO] - Review high-resource processes (e.g., msedgewebview2) for excessive CPU/memory usage or page faults.
+[2025-05-25 16:33:52] [INFO] - Review system event logs for errors related to drivers or hardware.
+[2025-05-25 16:33:52] [INFO] - Install Windows Performance Toolkit (xperf) for detailed latency analysis: https://learn.microsoft.com/en-us/windows-hardware/test/wpt/
+[2025-05-25 16:33:52] [INFO] Latency Evaluation: Overall: Bad
+[2025-05-25 16:33:52] [INFO] DPC Queue Rate: Bad (3767.49/sec)
+[2025-05-25 16:33:52] [INFO] Interrupt Rate: Bad (17459.57/sec)
+[2025-05-25 16:33:52] [INFO] Interrupt Time: Good (0%)
+[2025-05-25 16:33:52] [INFO] Page Faults: Bad (77122.91/sec)
+[2025-05-25 16:33:52] [INFO] Recommendations:
+[2025-05-25 16:33:52] [INFO] - High DPC queue rate detected. Run LatencyMon to identify problematic drivers (e.g., ndis.sys, ACPI.sys).
+[2025-05-25 16:33:52] [INFO] - High interrupt rate detected. Check for outdated network/GPU drivers or excessive hardware interrupts.
+[2025-05-25 16:33:52] [INFO] - High page faults detected. Check for memory-intensive applications or insufficient RAM.
+[2025-05-25 16:33:52] [INFO] - System is not suitable for real-time audio/streaming without optimization.
+[2025-05-25 16:33:52] [INFO] Latency evaluation saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyEvaluation_20250525_163342.json
+[2025-05-25 16:33:52] [INFO] Latency Report Saved: C:\projects\workstation\6_Symbols\Logs\Reports\LatencyReport_20250525_163342.json

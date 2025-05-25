@@ -169,3 +169,8 @@
 [2025-05-25 16:15:10] [INFO] - System is not suitable for real-time audio/streaming without optimization.
 [2025-05-25 16:15:10] [INFO] Latency evaluation saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyEvaluation_20250525_161420.json
 [2025-05-25 16:15:10] [INFO] Latency Report Saved: C:\projects\workstation\6_Symbols\Logs\Reports\LatencyReport_20250525_161420.json
+[2025-05-25 16:15:23] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_161420.json
+[2025-05-25 16:19:41] [INFO] System Performance Metrics:
+[2025-05-25 16:19:41] [INFO] CPU Usage: 1%
+[2025-05-25 16:19:41] [INFO] Memory Usage: 45.31%
+[2025-05-25 16:19:41] [INFO] GPU Usage: 0.72%
