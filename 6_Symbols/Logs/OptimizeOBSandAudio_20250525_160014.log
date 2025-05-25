@@ -1,0 +1,63 @@
+[2025-05-25 16:00:14] [INFO] Starting Audio and Streaming Optimization Script
+[2025-05-25 16:00:14] [INFO] Configuring optimal power plan settings for audio performance...
+[2025-05-25 16:00:14] [INFO] Setting up High Performance power plan...
+[2025-05-25 16:00:14] [INFO] High Performance power plan duplicated successfully
+[2025-05-25 16:00:14] [INFO] Activating High Performance power plan...
+[2025-05-25 16:00:14] [INFO] High Performance power plan activated successfully
+[2025-05-25 16:00:14] [INFO] Applying power configuration settings...
+[2025-05-25 16:00:14] [INFO] AC setting applied: 7b224883-b3cc-4d79-819f-8374152cbe7c = 100
+[2025-05-25 16:00:14] [INFO] DC setting applied: 7b224883-b3cc-4d79-819f-8374152cbe7c = 100
+[2025-05-25 16:00:14] [INFO] AC setting applied: 0cc5b647-c1df-4637-891a-dec35c318583 = 100
+[2025-05-25 16:00:14] [INFO] DC setting applied: 0cc5b647-c1df-4637-891a-dec35c318583 = 100
+[2025-05-25 16:00:14] [INFO] AC setting applied: 94ac6d29-73ce-41a6-809f-6363ba21b47e = 0
+[2025-05-25 16:00:14] [INFO] DC setting applied: 94ac6d29-73ce-41a6-809f-6363ba21b47e = 0
+[2025-05-25 16:00:14] [INFO] AC setting applied: 29f6c1db-86da-48c5-9fdb-f2b67b1f44da = 0
+[2025-05-25 16:00:14] [INFO] DC setting applied: 29f6c1db-86da-48c5-9fdb-f2b67b1f44da = 0
+[2025-05-25 16:00:14] [INFO] AC setting applied: 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 = 0
+[2025-05-25 16:00:14] [INFO] DC setting applied: 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 = 0
+[2025-05-25 16:00:14] [INFO] AC setting applied: 6738e2c4-e8a5-4a42-b16a-e040e769756e = 0
+[2025-05-25 16:00:14] [INFO] DC setting applied: 6738e2c4-e8a5-4a42-b16a-e040e769756e = 0
+[2025-05-25 16:00:14] [INFO] AC setting applied: ea062031-0e34-4ff1-9b6d-eb1059334028 = 100
+[2025-05-25 16:00:14] [INFO] DC setting applied: ea062031-0e34-4ff1-9b6d-eb1059334028 = 100
+[2025-05-25 16:00:14] [INFO] AC setting applied: 9d7815a6-7ee4-497e-8888-515a05f02364 = 0
+[2025-05-25 16:00:14] [INFO] DC setting applied: 9d7815a6-7ee4-497e-8888-515a05f02364 = 0
+[2025-05-25 16:00:14] [ERROR] Failed to apply AC setting 68dd2f27-a4ce-4e11-8487-3794e4135dfa : The power scheme, subgroup or setting specified does not exist.
+[2025-05-25 16:00:14] [ERROR] Failed to apply DC setting 68dd2f27-a4ce-4e11-8487-3794e4135dfa : The power scheme, subgroup or setting specified does not exist.
+[2025-05-25 16:00:14] [INFO] Applying power plan changes...
+[2025-05-25 16:00:14] [INFO] Power plan settings applied successfully
+[2025-05-25 16:00:14] [INFO] Verifying processor core parking configuration...
+[2025-05-25 16:00:14] [INFO] Core parking min cores setting verified
+[2025-05-25 16:00:14] [INFO] Core parking max cores setting verified
+[2025-05-25 16:00:14] [INFO] Configuring additional CPU performance settings...
+[2025-05-25 16:00:14] [INFO] Processor performance boost mode enabled
+[2025-05-25 16:00:14] [INFO] Processor performance increase policy set to ideal
+[2025-05-25 16:00:14] [INFO] Power settings configuration completed
+[2025-05-25 16:00:14] [INFO] Starting audio and streaming process optimization...
+[2025-05-25 16:00:14] [INFO] Detected 128 logical cores
+[2025-05-25 16:00:14] [INFO] Affinity masks - Audio: 255, Streaming: 4294967040, System: 3.40282366920938E+38
+[2025-05-25 16:00:14] [INFO] Optimized voicemeeter (PID: 42540) - Affinity: 255, Priority: RealTime
+[2025-05-25 16:00:15] [INFO] Optimized audiodg (PID: 12780) - Affinity: 255, Priority: High
+[2025-05-25 16:00:15] [INFO] Process obs64 not found.
+[2025-05-25 16:00:15] [INFO] Process obs not found.
+[2025-05-25 16:00:15] [INFO] Process Streamlabs not found.
+[2025-05-25 16:00:15] [ERROR] ERROR DETAILS:
+Context: Optimize-AudioAndStreaming
+Message: Cannot process argument transformation on parameter 'AffinityMask'. Cannot convert value "3.40282366920938E+38" to type "System.Int64". Error: "Arithmetic operation resulted in an overflow."
+Type: System.Management.Automation.ParameterBindingArgumentTransformationException
+Script Stack Trace: at Optimize-AudioAndStreaming, C:\projects\workstation\6_Symbols\RealTime\OptimizeOBSandAudio.ps1: line 407
+at <ScriptBlock>, C:\projects\workstation\6_Symbols\RealTime\OptimizeOBSandAudio.ps1: line 448
+at <ScriptBlock>, <No file>: line 1
+Line:             Set-ProcessOptimization -ProcessName $proc -AffinityMask $systemAffinity -Priority "Normal"
+
+Position: At C:\projects\workstation\6_Symbols\RealTime\OptimizeOBSandAudio.ps1:407 char:70
++ ... Optimization -ProcessName $proc -AffinityMask $systemAffinity -Priori ...
++                                                   ~~~~~~~~~~~~~~~
+[2025-05-25 16:00:15] [INFO] Configuring Windows Audio settings...
+[2025-05-25 16:00:15] [INFO] Audio service set to Automatic
+[2025-05-25 16:00:15] [INFO] Audio quality settings configured
+[2025-05-25 16:00:18] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_160014.json
+[2025-05-25 16:00:22] [INFO] System Performance Metrics:
+[2025-05-25 16:00:22] [INFO] CPU Usage: 0%
+[2025-05-25 16:00:22] [INFO] Memory Usage: 43.53%
+[2025-05-25 16:00:22] [INFO] GPU Usage: 0.38%
+[2025-05-25 16:00:22] [INFO] Optimization completed successfully. Check C:\projects\workstation\6_Symbols\Logs\OptimizeOBSandAudio_20250525_160014.log for details.
