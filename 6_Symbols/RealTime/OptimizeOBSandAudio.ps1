@@ -1,9 +1,9 @@
 # PowerShell Script to Optimize Audio and Streaming Processes on Ryzen CPU
-# Purpose: Set CPU affinity and priority to reduce audio cracking and improve streaming performance
+# Purpose: Set CPU affinity, priority, and monitor latency metrics in the background
 # Target CPU: AMD Ryzen Threadripper PRO 3995WX (128 logical cores) or other multi-core CPU
 # Audio Interfaces: Voicemeeter and Windows Audio
 # Date: May 25, 2025
-# Version: 2.3 - Enhanced with power plan optimization, improved error handling, and better UI
+# Version: 2.4 - Added continuous latency monitoring like LatencyMon
 
 # Requires Administrator privileges
 #Requires -RunAsAdministrator
@@ -17,7 +17,7 @@ trap {
 
 # Set up logging with improved path handling
 $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
-# $scriptPath assignment removed (unused)
+$scriptPath = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Path }
 $baseLogPath = if (Test-Path "C:\projects\workstation\6_Symbols\Logs") { 
     "C:\projects\workstation\6_Symbols\Logs" 
 } else { 
@@ -54,13 +54,11 @@ function Write-Log {
         try {
             Add-Content -Path $logFilePath -Value $logMessage -ErrorAction Stop
         } catch {
-            # If we can't write to the log file, try to write to a backup location
             $backupLogPath = Join-Path -Path $env:TEMP -ChildPath "OptimizeOBSandAudio_backup.log"
             Add-Content -Path $backupLogPath -Value "[$timestamp] ERROR: Failed to write to main log file. Error: $_" -ErrorAction SilentlyContinue
             Add-Content -Path $backupLogPath -Value $logMessage -ErrorAction SilentlyContinue
         }
     } catch {
-        # Last resort error handling
         Write-Host "[$timestamp] CRITICAL: Failed to log message. Error: $_" -ForegroundColor Red
     }
 }
@@ -100,28 +98,16 @@ function Set-OptimalPowerSettings {
         $powerSettings = @{
             # Hard disk turn off time - set to 0 (never)
             "0012ee47-9041-4b5d-9b77-535fba8b1442 6738e2c4-e8a5-4a42-b16a-e040e769756e" = 0
-            
             # USB selective suspend - disabled
             "2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226" = 0
-            
-            # Processor idle demote threshold - 100%
-            "54533251-82be-4824-96c1-47b60b740d00 68dd2f27-a4ce-4e11-8487-3794e4135dfa" = 100
-            
-            # Processor idle promote threshold - 100%  
-            "54533251-82be-4824-96c1-47b60b740d00 7b224883-b3cc-4d79-819f-8374152cbe7c" = 100
-            
             # Processor performance core parking min cores - 100%
             "54533251-82be-4824-96c1-47b60b740d00 0cc5b647-c1df-4637-891a-dec35c318583" = 100
-            
             # Processor performance core parking max cores - 100%
             "54533251-82be-4824-96c1-47b60b740d00 ea062031-0e34-4ff1-9b6d-eb1059334028" = 100
-            
             # Hybrid sleep - disabled
             "238c9fa8-0aad-41ed-83f4-97be242c8f20 94ac6d29-73ce-41a6-809f-6363ba21b47e" = 0
-            
             # System standby timeout - never (0)
             "238c9fa8-0aad-41ed-83f4-97be242c8f20 29f6c1db-86da-48c5-9fdb-f2b67b1f44da" = 0
-            
             # System hibernate timeout - never (0)
             "238c9fa8-0aad-41ed-83f4-97be242c8f20 9d7815a6-7ee4-497e-8888-515a05f02364" = 0
         }
@@ -167,11 +153,10 @@ function Set-OptimalPowerSettings {
         # Verify core parking settings
         Write-Log "Verifying processor core parking configuration..." -ForegroundColor Yellow -LogLevel "INFO"
         try {
-            # Get current core parking settings
-            powercfg -query SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 0cc5b647-c1df-4637-891a-dec35c318583 2>&1 | Out-Null
+            $coreCountResult = powercfg -query SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 0cc5b647-c1df-4637-891a-dec35c318583 2>&1
             Write-Log "Core parking min cores setting verified" -ForegroundColor Cyan -LogLevel "INFO"
             
-            powercfg -query SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 ea062031-0e34-4ff1-9b6d-eb1059334028 2>&1 | Out-Null
+            $maxCoreResult = powercfg -query SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 ea062031-0e34-4ff1-9b6d-eb1059334028 2>&1
             Write-Log "Core parking max cores setting verified" -ForegroundColor Cyan -LogLevel "INFO"
         } catch {
             Write-Log "Error verifying core parking settings: $_" -ForegroundColor Red -LogLevel "ERROR"
@@ -180,7 +165,6 @@ function Set-OptimalPowerSettings {
         # Additional CPU performance settings
         Write-Log "Configuring additional CPU performance settings..." -ForegroundColor Yellow -LogLevel "INFO"
         
-        # Set processor performance boost mode to enabled
         try {
             powercfg -setacvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 be337238-0d82-4146-a960-4f3749d470c7 2
             powercfg -setdcvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 be337238-0d82-4146-a960-4f3749d470c7 2
@@ -189,7 +173,6 @@ function Set-OptimalPowerSettings {
             Write-Log "Error setting processor boost mode: $_" -ForegroundColor Red -LogLevel "ERROR"
         }
 
-        # Set processor performance increase policy to ideal
         try {
             powercfg -setacvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 465e1f50-b610-473a-ab58-00d1077dc418 2
             powercfg -setdcvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 465e1f50-b610-473a-ab58-00d1077dc418 2
@@ -199,7 +182,6 @@ function Set-OptimalPowerSettings {
         }
 
         Write-Log "Power settings configuration completed" -ForegroundColor Cyan -LogLevel "INFO"
-        
     } catch {
         Write-Log "Error in Set-OptimalPowerSettings: $_" -ForegroundColor Red -LogLevel "ERROR"
     }
@@ -239,9 +221,7 @@ function Set-ProcessOptimization {
         $process = Get-Process -Name $ProcessName -ErrorAction SilentlyContinue
         if ($process) {
             foreach ($proc in $process) {
-                # Set CPU affinity
                 $proc.ProcessorAffinity = $AffinityMask
-                # Set priority
                 switch ($Priority) {
                     "RealTime" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::RealTime }
                     "High" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::High }
@@ -261,68 +241,54 @@ function Set-ProcessOptimization {
     }
 }
 
-# Function to get system performance metrics with alternative methods
+# Function to get system performance metrics
 function Get-SystemPerformance {
     try {
-        # Method 1: Try using WMI to get CPU usage (more reliable for many-core systems)
+        # CPU usage
         try {
             $cpuUsage = [math]::Round((Get-WmiObject -Class Win32_Processor | Measure-Object -Property LoadPercentage -Average).Average, 2)
         } catch {
-            Write-Log "WMI CPU measurement failed, trying alternative method" -ForegroundColor Yellow
-
-            # Method 2: Try performance counters if WMI fails
+            Write-Log "WMI CPU measurement failed, trying performance counter" -ForegroundColor Yellow
             try {
                 $cpuCounter = Get-Counter '\Processor(_Total)\% Processor Time' -ErrorAction Stop
                 $cpuUsage = [math]::Round($cpuCounter.CounterSamples[0].CookedValue, 2)
             } catch {
-                Write-Log "Performance counter for CPU failed. Using Process CPU time as fallback." -ForegroundColor Yellow
-
-                # Method 3: Fallback to process CPU time calculation
+                Write-Log "Performance counter failed, using process CPU time" -ForegroundColor Yellow
                 $processes = Get-Process
                 $totalCPU = ($processes | Measure-Object -Property CPU -Sum).Sum
                 $cpuCount = (Get-WmiObject -Class Win32_ComputerSystem).NumberOfLogicalProcessors
                 $cpuUsage = [math]::Round(($totalCPU / $cpuCount), 2)
-                if ($cpuUsage -gt 100) { $cpuUsage = 99.9 } # Cap at 100%
+                if ($cpuUsage -gt 100) { $cpuUsage = 99.9 }
             }
         }
 
-        # Get memory usage - try different methods
+        # Memory usage
         try {
             $osInfo = Get-CimInstance Win32_OperatingSystem
             $memoryUsage = [math]::Round(($osInfo.TotalVisibleMemorySize - $osInfo.FreePhysicalMemory) / $osInfo.TotalVisibleMemorySize * 100, 2)
         } catch {
-            Write-Log "CIM memory measurement failed, trying alternative method" -ForegroundColor Yellow
-
-            # Fallback method for memory
+            Write-Log "CIM memory measurement failed, trying WMI" -ForegroundColor Yellow
             try {
                 $computerMemory = Get-WmiObject -Class Win32_OperatingSystem
                 $memoryUsage = [math]::Round((($computerMemory.TotalVisibleMemorySize - $computerMemory.FreePhysicalMemory) / $computerMemory.TotalVisibleMemorySize) * 100, 2)
             } catch {
-                # Last resort
                 $memoryUsage = "Unknown"
             }
         }
 
-        # Get GPU usage with multiple fallback mechanisms
+        # GPU usage
         $gpuUsage = "Unknown"
-
-        # Method 1: Try GPU performance counters
         try {
             $gpuCounter = Get-Counter '\GPU Engine(*engtype_3D)\Utilization Percentage' -ErrorAction Stop
             if ($gpuCounter) {
                 $gpuValues = $gpuCounter.CounterSamples | Where-Object { $_.CookedValue -gt 0 } |
                              Select-Object -ExpandProperty CookedValue
                 if ($gpuValues -and $gpuValues.Count -gt 0) {
-# PowerShell Script to Optimize Audio and Streaming Processes on Ryzen CPU
-# (Previous code remains unchanged up to the incomplete line)
-
                     $gpuUsage = [math]::Round(($gpuValues | Measure-Object -Average).Average, 2)
                 }
             }
         } catch {
-            Write-Log "GPU counter measurement failed. Trying alternative method..." -ForegroundColor Yellow -LogLevel "WARNING"
-
-            # Method 2: Fallback to NVIDIA/AMD GPU-specific queries if available
+            Write-Log "GPU counter measurement failed, trying NVIDIA/AMD tools" -ForegroundColor Yellow
             try {
                 if (Get-WmiObject -Class Win32_VideoController | Where-Object { $_.Name -like "*NVIDIA*" }) {
                     $nvidiaSmi = & "nvidia-smi" --query-gpu=utilization.gpu --format=csv -ErrorAction SilentlyContinue
@@ -331,7 +297,6 @@ function Get-SystemPerformance {
                             ForEach-Object { [int]($_ -replace '[^0-9]') } | Measure-Object -Average).Average, 2)
                     }
                 } elseif (Get-WmiObject -Class Win32_VideoController | Where-Object { $_.Name -like "*AMD*" }) {
-                    # AMD-specific GPU usage query (requires AMD tools installed)
                     $gpuUsage = "AMD GPU Tools Not Implemented"
                 }
             } catch {
@@ -346,7 +311,6 @@ function Get-SystemPerformance {
             Timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
         }
 
-        # Save metrics to report file
         $reportFile = Join-Path -Path $reportFolder -ChildPath "PerformanceReport_$timestamp.json"
         $performanceMetrics | ConvertTo-Json | Out-File -FilePath $reportFile -ErrorAction SilentlyContinue
         Write-Log "Performance metrics saved to $reportFile" -ForegroundColor Green -LogLevel "INFO"
@@ -358,8 +322,60 @@ function Get-SystemPerformance {
     }
 }
 
-# Function to optimize audio and streaming processes
-# (Previous code remains unchanged up to Optimize-AudioAndStreaming function)
+# New Function to monitor latency metrics (similar to LatencyMon)
+function Get-LatencyMetrics {
+    try {
+        $latencyMetrics = @{}
+
+        # Measure DPC queue length
+        try {
+            $dpcQueue = Get-Counter '\Processor(_Total)\DPCs Queued/sec' -ErrorAction Stop
+            $latencyMetrics.DPCQueueRate = [math]::Round($dpcQueue.CounterSamples[0].CookedValue, 2)
+        } catch {
+            Write-Log "Failed to get DPC queue rate: $_" -ForegroundColor Yellow -LogLevel "WARNING"
+            $latencyMetrics.DPCQueueRate = "Unknown"
+        }
+
+        # Measure interrupt rate
+        try {
+            $interrupts = Get-Counter '\Processor(_Total)\Interrupts/sec' -ErrorAction Stop
+            $latencyMetrics.InterruptRate = [math]::Round($interrupts.CounterSamples[0].CookedValue, 2)
+        } catch {
+            Write-Log "Failed to get interrupt rate: $_" -ForegroundColor Yellow -LogLevel "WARNING"
+            $latencyMetrics.InterruptRate = "Unknown"
+        }
+
+        # Measure interrupt-to-process latency (approximation)
+        try {
+            $interruptTime = Get-Counter '\Processor(_Total)\% Interrupt Time' -ErrorAction Stop
+            $latencyMetrics.InterruptTimePercent = [math]::Round($interruptTime.CounterSamples[0].CookedValue, 2)
+        } catch {
+            Write-Log "Failed to get interrupt time: $_" -ForegroundColor Yellow -LogLevel "WARNING"
+            $latencyMetrics.InterruptTimePercent = "Unknown"
+        }
+
+        # Measure page faults
+        try {
+            $pageFaults = Get-Counter '\Memory\Page Faults/sec' -ErrorAction Stop
+            $latencyMetrics.PageFaultsPerSec = [math]::Round($pageFaults.CounterSamples[0].CookedValue, 2)
+        } catch {
+            Write-Log "Failed to get page faults: $_" -ForegroundColor Yellow -LogLevel "WARNING"
+            $latencyMetrics.PageFaultsPerSec = "Unknown"
+        }
+
+        # Log metrics
+        $latencyMetrics.Timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        $latencyReport = Join-Path -Path $reportFolder -ChildPath "LatencyReport_$($timestamp).json"
+        $latencyMetrics | ConvertTo-Json | Out-File -FilePath $latencyReport -Append -ErrorAction SilentlyContinue
+
+        Write-Log "Latency Metrics: DPC Queue: $($latencyMetrics.DPCQueueRate)/sec, Interrupts: $($latencyMetrics.InterruptRate)/sec, Interrupt Time: $($latencyMetrics.InterruptTimePercent)%, Page Faults: $($latencyMetrics.PageFaultsPerSec)/sec" -ForegroundColor Cyan -LogLevel "INFO"
+
+        return $latencyMetrics
+    } catch {
+        Write-ErrorLog -ErrorRecord $_ -Context "Get-LatencyMetrics"
+        return $null
+    }
+}
 
 # Function to optimize audio and streaming processes
 function Optimize-AudioAndStreaming {
@@ -370,17 +386,17 @@ function Optimize-AudioAndStreaming {
         $totalCores = (Get-WmiObject -Class Win32_ComputerSystem).NumberOfLogicalProcessors
         Write-Log "Detected $totalCores logical cores" -ForegroundColor Cyan -LogLevel "INFO"
 
-        # Calculate affinity masks (optimized for Ryzen Threadripper PRO 3995WX with 128 logical cores)
-        $audioCores = [math]::Min(8, $totalCores)  # First 8 cores for audio
-        $streamingCores = [math]::Min(24, $totalCores - $audioCores)  # Next 24 for streaming
-        $systemCores = $totalCores - ($audioCores + $streamingCores)  # Remaining for system
+        # Calculate affinity masks (optimized for Ryzen Threadripper PRO 3995WX)
+        $audioCores = [math]::Min(8, $totalCores)
+        $streamingCores = [math]::Min(24, $totalCores - $audioCores)
+        $systemCores = $totalCores - ($audioCores + $streamingCores)
 
-        # Calculate affinity masks using BigInt to avoid overflow
+        # Use BigInt to avoid overflow
         $audioAffinity = [System.Numerics.BigInteger]::Pow(2, $audioCores) - 1
         $streamingAffinity = ([System.Numerics.BigInteger]::Pow(2, $audioCores + $streamingCores) - 1) - $audioAffinity
         $systemAffinity = ([System.Numerics.BigInteger]::Pow(2, [math]::Min($totalCores, 63)) - 1) - ($audioAffinity + $streamingAffinity)
 
-        # Convert BigInt to Int64 for compatibility, capping at 63 bits to avoid overflow
+        # Convert to Int64
         $audioAffinity = [int64]$audioAffinity
         $streamingAffinity = [int64]$streamingAffinity
         $systemAffinity = [int64]$systemAffinity
@@ -420,66 +436,27 @@ function Optimize-AudioAndStreaming {
     }
 }
 
-# Revised power settings in Set-OptimalPowerSettings (only showing modified portion)
-function Set-OptimalPowerSettings {
-    try {
-        # (Previous code unchanged up to power settings)
-        
-        # Configure power settings for optimal audio performance
-        $powerSettings = @{
-            # Hard disk turn off time - set to 0 (never)
-            "0012ee47-9041-4b5d-9b77-535fba8b1442 6738e2c4-e8a5-4a42-b16a-e040e769756e" = 0
-            # USB selective suspend - disabled
-            "2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226" = 0
-            # Processor performance core parking min cores - 100%
-            "54533251-82be-4824-96c1-47b60b740d00 0cc5b647-c1df-4637-891a-dec35c318583" = 100
-            # Processor performance core parking max cores - 100%
-            "54533251-82be-4824-96c1-47b60b740d00 ea062031-0e34-4ff1-9b6d-eb1059334028" = 100
-            # Hybrid sleep - disabled
-            "238c9fa8-0aad-41ed-83f4-97be242c8f20 94ac6d29-73ce-41a6-809f-6363ba21b47e" = 0
-            # System standby timeout - never (0)
-            "238c9fa8-0aad-41ed-83f4-97be242c8f20 29f6c1db-86da-48c5-9fdb-f2b67b1f44da" = 0
-            # System hibernate timeout - never (0)
-            "238c9fa8-0aad-41ed-83f4-97be242c8f20 9d7815a6-7ee4-497e-8888-515a05f02364" = 0
-        }
-
-        # Removed problematic setting: "Processor idle demote threshold"
-        # "54533251-82be-4824-96c1-47b60b740d00 68dd2f27-a4ce-4e11-8487-3794e4135dfa" = 100
-        # Also removed "Processor idle promote threshold" as it may not exist
-        # "54533251-82be-4824-96c1-47b60b740d00 7b224883-b3cc-4d79-819f-8374152cbe7c" = 100
-
-        # (Rest of the function remains unchanged)
-    } catch {
-        Write-Log "Error in Set-OptimalPowerSettings: $_" -ForegroundColor Red -LogLevel "ERROR"
-    }
-}
-
-# (Rest of the script remains unchanged)
 # Function to configure Windows Audio settings
 function Set-WindowsAudioSettings {
     try {
         Write-Log "Configuring Windows Audio settings..." -ForegroundColor Cyan -LogLevel "INFO"
 
-        # Set audio service to automatic
         Set-Service -Name Audiosrv -StartupType Automatic
         Write-Log "Audio service set to Automatic" -ForegroundColor Green -LogLevel "INFO"
 
-        # Configure audio endpoint builder
         $audioRegPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio"
         if (!(Test-Path $audioRegPath)) {
             New-Item -Path $audioRegPath -Force | Out-Null
         }
 
-        # Set audio processing to high quality
         Set-ItemProperty -Path $audioRegPath -Name "AudioQuality" -Value 1 -ErrorAction SilentlyContinue
         Write-Log "Audio quality settings configured" -ForegroundColor Green -LogLevel "INFO"
-
     } catch {
         Write-ErrorLog -ErrorRecord $_ -Context "Set-WindowsAudioSettings"
     }
 }
 
-# Main execution block
+# Main execution block with continuous monitoring
 try {
     Write-Log "Starting Audio and Streaming Optimization Script" -ForegroundColor Cyan -LogLevel "INFO"
 
@@ -492,31 +469,30 @@ try {
     # Configure Windows Audio settings
     Set-WindowsAudioSettings
 
-    # Get and log system performance metrics
-    $metrics = Get-SystemPerformance
-    if ($metrics) {
-        Write-Log "System Performance Metrics:" -ForegroundColor Cyan -LogLevel "INFO"
-        Write-Log "CPU Usage: $($metrics.CPUUsagePercent)%"
-        Write-Log "Memory Usage: $($metrics.MemoryUsagePercent)%"
-        Write-Log "GPU Usage: $($metrics.GPUUsagePercent)%"
+    # Continuous monitoring loop
+    Write-Log "Entering continuous latency monitoring mode. Press Ctrl+C to stop." -ForegroundColor Cyan -LogLevel "INFO"
+    
+    while ($true) {
+        # Get and log system performance metrics
+        $metrics = Get-SystemPerformance
+        if ($metrics) {
+            Write-Log "System Performance Metrics:" -ForegroundColor Cyan -LogLevel "INFO"
+            Write-Log "CPU Usage: $($metrics.CPUUsagePercent)%"
+            Write-Log "Memory Usage: $($metrics.MemoryUsagePercent)%"
+            Write-Log "GPU Usage: $($metrics.GPUUsagePercent)%"
+        }
+
+        # Get and log latency metrics
+        $latencyMetrics = Get-LatencyMetrics
+        if ($latencyMetrics) {
+            Write-Log "Latency Report Saved: $reportFolder\LatencyReport_$($timestamp).json" -ForegroundColor Green -LogLevel "INFO"
+        }
+
+        # Sleep for 10 seconds before next iteration
+        Start-Sleep -Seconds 10
     }
-
-    Write-Log "Optimization completed successfully. Check $logFilePath for details." -ForegroundColor Green -LogLevel "INFO"
-
-    # Display completion message
-    $completionMessage = @"
-Optimization Complete!
-- Power plan optimized for high performance
-- Audio processes assigned to dedicated cores
-- Streaming processes optimized
-- Windows Audio settings configured
-- Performance metrics saved to $reportFolder
-Please check $logFilePath for detailed logs.
-"@
-    Write-Host $completionMessage -ForegroundColor Green
 
 } catch {
     Write-ErrorLog -ErrorRecord $_ -Context "Main Execution"
     Write-Log "Script execution failed. Check logs for details." -ForegroundColor Red -LogLevel "CRITICAL"
-    exit 1
 }
