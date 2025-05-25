@@ -1,9 +1,9 @@
 # PowerShell Script to Optimize Audio and Streaming Processes on Ryzen CPU
-# Purpose: Set CPU affinity, priority, and monitor latency metrics in the background
+# Purpose: Set CPU affinity, priority, monitor latency metrics, and evaluate performance
 # Target CPU: AMD Ryzen Threadripper PRO 3995WX (128 logical cores) or other multi-core CPU
 # Audio Interfaces: Voicemeeter and Windows Audio
 # Date: May 25, 2025
-# Version: 2.4 - Added continuous latency monitoring like LatencyMon
+# Version: 2.5 - Added latency metric evaluation and recommendations
 
 # Requires Administrator privileges
 #Requires -RunAsAdministrator
@@ -121,7 +121,6 @@ function Set-OptimalPowerSettings {
                 $settingGuid = $settingPath[1]
                 $value = $setting.Value
                 
-                # Apply setting for AC power
                 $result = powercfg -setacvalueindex SCHEME_CURRENT $subgroup $settingGuid $value 2>&1
                 if ($LASTEXITCODE -eq 0) {
                     Write-Log "AC setting applied: $settingGuid = $value" -ForegroundColor Green -LogLevel "INFO"
@@ -129,7 +128,6 @@ function Set-OptimalPowerSettings {
                     Write-Log "Failed to apply AC setting $settingGuid : $result" -ForegroundColor Red -LogLevel "ERROR"
                 }
                 
-                # Apply setting for DC power (battery)
                 $result = powercfg -setdcvalueindex SCHEME_CURRENT $subgroup $settingGuid $value 2>&1
                 if ($LASTEXITCODE -eq 0) {
                     Write-Log "DC setting applied: $settingGuid = $value" -ForegroundColor Green -LogLevel "INFO"
@@ -141,7 +139,6 @@ function Set-OptimalPowerSettings {
             }
         }
 
-        # Apply the settings
         Write-Log "Applying power plan changes..." -ForegroundColor Yellow -LogLevel "INFO"
         try {
             powercfg -setactive SCHEME_CURRENT
@@ -150,7 +147,6 @@ function Set-OptimalPowerSettings {
             Write-Log "Error applying power plan: $_" -ForegroundColor Red -LogLevel "ERROR"
         }
 
-        # Verify core parking settings
         Write-Log "Verifying processor core parking configuration..." -ForegroundColor Yellow -LogLevel "INFO"
         try {
             $coreCountResult = powercfg -query SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 0cc5b647-c1df-4637-891a-dec35c318583 2>&1
@@ -162,7 +158,6 @@ function Set-OptimalPowerSettings {
             Write-Log "Error verifying core parking settings: $_" -ForegroundColor Red -LogLevel "ERROR"
         }
 
-        # Additional CPU performance settings
         Write-Log "Configuring additional CPU performance settings..." -ForegroundColor Yellow -LogLevel "INFO"
         
         try {
@@ -221,17 +216,21 @@ function Set-ProcessOptimization {
         $process = Get-Process -Name $ProcessName -ErrorAction SilentlyContinue
         if ($process) {
             foreach ($proc in $process) {
-                $proc.ProcessorAffinity = $AffinityMask
-                switch ($Priority) {
-                    "RealTime" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::RealTime }
-                    "High" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::High }
-                    "AboveNormal" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::AboveNormal }
-                    "Normal" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::Normal }
-                    "BelowNormal" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::BelowNormal }
-                    "Idle" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::Idle }
-                    default { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::Normal }
+                try {
+                    $proc.ProcessorAffinity = $AffinityMask
+                    switch ($Priority) {
+                        "RealTime" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::RealTime }
+                        "High" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::High }
+                        "AboveNormal" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::AboveNormal }
+                        "Normal" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::Normal }
+                        "BelowNormal" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::BelowNormal }
+                        "Idle" { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::Idle }
+                        default { $proc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::Normal }
+                    }
+                    Write-Log "Optimized $ProcessName (PID: $($proc.Id)) - Affinity: $AffinityMask, Priority: $Priority" -ForegroundColor Green
+                } catch {
+                    Write-Log "Error optimizing ${ProcessName} (PID: $($proc.Id)): $_" -ForegroundColor Red
                 }
-                Write-Log "Optimized $ProcessName (PID: $($proc.Id)) - Affinity: $AffinityMask, Priority: $Priority" -ForegroundColor Green
             }
         } else {
             Write-Log "Process $ProcessName not found." -ForegroundColor Red
@@ -312,7 +311,7 @@ function Get-SystemPerformance {
         }
 
         $reportFile = Join-Path -Path $reportFolder -ChildPath "PerformanceReport_$timestamp.json"
-        $performanceMetrics | ConvertTo-Json | Out-File -FilePath $reportFile -ErrorAction SilentlyContinue
+        $performanceMetrics | ConvertTo-Json | Out-File -FilePath $reportFile -Append -ErrorAction SilentlyContinue
         Write-Log "Performance metrics saved to $reportFile" -ForegroundColor Green -LogLevel "INFO"
 
         return $performanceMetrics
@@ -322,7 +321,7 @@ function Get-SystemPerformance {
     }
 }
 
-# New Function to monitor latency metrics (similar to LatencyMon)
+# New Function to monitor latency metrics
 function Get-LatencyMetrics {
     try {
         $latencyMetrics = @{}
@@ -345,7 +344,7 @@ function Get-LatencyMetrics {
             $latencyMetrics.InterruptRate = "Unknown"
         }
 
-        # Measure interrupt-to-process latency (approximation)
+        # Measure interrupt-to-process latency
         try {
             $interruptTime = Get-Counter '\Processor(_Total)\% Interrupt Time' -ErrorAction Stop
             $latencyMetrics.InterruptTimePercent = [math]::Round($interruptTime.CounterSamples[0].CookedValue, 2)
@@ -363,7 +362,6 @@ function Get-LatencyMetrics {
             $latencyMetrics.PageFaultsPerSec = "Unknown"
         }
 
-        # Log metrics
         $latencyMetrics.Timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
         $latencyReport = Join-Path -Path $reportFolder -ChildPath "LatencyReport_$($timestamp).json"
         $latencyMetrics | ConvertTo-Json | Out-File -FilePath $latencyReport -Append -ErrorAction SilentlyContinue
@@ -377,6 +375,108 @@ function Get-LatencyMetrics {
     }
 }
 
+# New Function to evaluate latency metrics
+function Evaluate-LatencyMetrics {
+    param (
+        [hashtable]$LatencyMetrics
+    )
+
+    try {
+        $evaluation = @{
+            DPCQueueRate = "Unknown"
+            InterruptRate = "Unknown"
+            InterruptTime = "Unknown"
+            PageFaults = "Unknown"
+            Overall = "Unknown"
+            Recommendations = @()
+        }
+
+        # Evaluate DPC Queue Rate
+        if ($LatencyMetrics.DPCQueueRate -ne "Unknown") {
+            if ($LatencyMetrics.DPCQueueRate -lt 500) {
+                $evaluation.DPCQueueRate = "Good"
+            } elseif ($LatencyMetrics.DPCQueueRate -lt 1000) {
+                $evaluation.DPCQueueRate = "Acceptable"
+            } else {
+                $evaluation.DPCQueueRate = "Bad"
+                $evaluation.Recommendations += "High DPC queue rate detected. Run LatencyMon to identify problematic drivers (e.g., ndis.sys, ACPI.sys)."
+            }
+        }
+
+        # Evaluate Interrupt Rate
+        if ($LatencyMetrics.InterruptRate -ne "Unknown") {
+            if ($LatencyMetrics.InterruptRate -lt 5000) {
+                $evaluation.InterruptRate = "Good"
+            } elseif ($LatencyMetrics.InterruptRate -lt 10000) {
+                $evaluation.InterruptRate = "Acceptable"
+            } else {
+                $evaluation.InterruptRate = "Bad"
+                $evaluation.Recommendations += "High interrupt rate detected. Check for outdated network/GPU drivers or excessive hardware interrupts."
+            }
+        }
+
+        # Evaluate Interrupt Time
+        if ($LatencyMetrics.InterruptTimePercent -ne "Unknown") {
+            if ($LatencyMetrics.InterruptTimePercent -lt 1) {
+                $evaluation.InterruptTime = "Good"
+            } elseif ($LatencyMetrics.InterruptTimePercent -lt 2) {
+                $evaluation.InterruptTime = "Acceptable"
+            } else {
+                $evaluation.InterruptTime = "Bad"
+                $evaluation.Recommendations += "High interrupt time detected. Investigate interrupt-heavy drivers using LatencyMon or xperf."
+            }
+        }
+
+        # Evaluate Page Faults
+        if ($LatencyMetrics.PageFaultsPerSec -ne "Unknown") {
+            if ($LatencyMetrics.PageFaultsPerSec -lt 100) {
+                $evaluation.PageFaults = "Good"
+            } elseif ($LatencyMetrics.PageFaultsPerSec -lt 1000) {
+                $evaluation.PageFaults = "Acceptable"
+            } else {
+                $evaluation.PageFaults = "Bad"
+                $evaluation.Recommendations += "High page faults detected. Check for memory-intensive applications or insufficient RAM."
+            }
+        }
+
+        # Determine overall evaluation
+        $ratings = @($evaluation.DPCQueueRate, $evaluation.InterruptRate, $evaluation.InterruptTime, $evaluation.PageFaults)
+        if ($ratings -contains "Bad") {
+            $evaluation.Overall = "Bad"
+            $evaluation.Recommendations += "System is not suitable for real-time audio/streaming without optimization."
+        } elseif ($ratings -contains "Acceptable") {
+            $evaluation.Overall = "Acceptable"
+            $evaluation.Recommendations += "System is marginally suitable for real-time audio/streaming. Consider optimizations for better performance."
+        } else {
+            $evaluation.Overall = "Good"
+            $evaluation.Recommendations += "System is suitable for real-time audio/streaming."
+        }
+
+        # Log evaluation
+        Write-Log "Latency Evaluation: Overall: $($evaluation.Overall)" -ForegroundColor Cyan -LogLevel "INFO"
+        Write-Log "DPC Queue Rate: $($evaluation.DPCQueueRate) ($($LatencyMetrics.DPCQueueRate)/sec)" -ForegroundColor Cyan -LogLevel "INFO"
+        Write-Log "Interrupt Rate: $($evaluation.InterruptRate) ($($LatencyMetrics.InterruptRate)/sec)" -ForegroundColor Cyan -LogLevel "INFO"
+        Write-Log "Interrupt Time: $($evaluation.InterruptTime) ($($LatencyMetrics.InterruptTimePercent)%)" -ForegroundColor Cyan -LogLevel "INFO"
+        Write-Log "Page Faults: $($evaluation.PageFaults) ($($LatencyMetrics.PageFaultsPerSec)/sec)" -ForegroundColor Cyan -LogLevel "INFO"
+        if ($evaluation.Recommendations) {
+            Write-Log "Recommendations:" -ForegroundColor Yellow -LogLevel "INFO"
+            foreach ($rec in $evaluation.Recommendations) {
+                Write-Log "- $rec" -ForegroundColor Yellow -LogLevel "INFO"
+            }
+        }
+
+        # Save evaluation to report
+        $evalReport = Join-Path -Path $reportFolder -ChildPath "LatencyEvaluation_$($timestamp).json"
+        $evaluation | ConvertTo-Json | Out-File -FilePath $evalReport -Append -ErrorAction SilentlyContinue
+        Write-Log "Latency evaluation saved to $evalReport" -ForegroundColor Green -LogLevel "INFO"
+
+        return $evaluation
+    } catch {
+        Write-ErrorLog -ErrorRecord $_ -Context "Evaluate-LatencyMetrics"
+        return $null
+    }
+}
+
 # Function to optimize audio and streaming processes
 function Optimize-AudioAndStreaming {
     try {
@@ -386,17 +486,15 @@ function Optimize-AudioAndStreaming {
         $totalCores = (Get-WmiObject -Class Win32_ComputerSystem).NumberOfLogicalProcessors
         Write-Log "Detected $totalCores logical cores" -ForegroundColor Cyan -LogLevel "INFO"
 
-        # Calculate affinity masks (optimized for Ryzen Threadripper PRO 3995WX)
+        # Calculate affinity masks
         $audioCores = [math]::Min(8, $totalCores)
         $streamingCores = [math]::Min(24, $totalCores - $audioCores)
         $systemCores = $totalCores - ($audioCores + $streamingCores)
 
-        # Use BigInt to avoid overflow
         $audioAffinity = [System.Numerics.BigInteger]::Pow(2, $audioCores) - 1
         $streamingAffinity = ([System.Numerics.BigInteger]::Pow(2, $audioCores + $streamingCores) - 1) - $audioAffinity
         $systemAffinity = ([System.Numerics.BigInteger]::Pow(2, [math]::Min($totalCores, 63)) - 1) - ($audioAffinity + $streamingAffinity)
 
-        # Convert to Int64
         $audioAffinity = [int64]$audioAffinity
         $streamingAffinity = [int64]$streamingAffinity
         $systemAffinity = [int64]$systemAffinity
@@ -482,9 +580,10 @@ try {
             Write-Log "GPU Usage: $($metrics.GPUUsagePercent)%"
         }
 
-        # Get and log latency metrics
+        # Get and evaluate latency metrics
         $latencyMetrics = Get-LatencyMetrics
         if ($latencyMetrics) {
+            $evaluation = Evaluate-LatencyMetrics -LatencyMetrics $latencyMetrics
             Write-Log "Latency Report Saved: $reportFolder\LatencyReport_$($timestamp).json" -ForegroundColor Green -LogLevel "INFO"
         }
 
