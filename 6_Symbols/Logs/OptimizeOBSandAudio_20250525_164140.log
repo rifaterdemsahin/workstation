@@ -1,0 +1,266 @@
+[2025-05-25 16:41:40] [INFO] Starting Audio and Streaming Optimization Script
+[2025-05-25 16:41:41] [INFO] Configuring optimal power plan settings for audio performance...
+[2025-05-25 16:41:41] [INFO] Setting up High Performance power plan...
+[2025-05-25 16:41:41] [INFO] High Performance power plan duplicated successfully
+[2025-05-25 16:41:41] [INFO] Activating High Performance power plan...
+[2025-05-25 16:41:41] [INFO] High Performance power plan activated successfully
+[2025-05-25 16:41:41] [INFO] Applying power configuration settings...
+[2025-05-25 16:41:41] [INFO] AC setting applied: 0cc5b647-c1df-4637-891a-dec35c318583 = 100
+[2025-05-25 16:41:41] [INFO] DC setting applied: 0cc5b647-c1df-4637-891a-dec35c318583 = 100
+[2025-05-25 16:41:41] [INFO] AC setting applied: 94ac6d29-73ce-41a6-809f-6363ba21b47e = 0
+[2025-05-25 16:41:41] [INFO] DC setting applied: 94ac6d29-73ce-41a6-809f-6363ba21b47e = 0
+[2025-05-25 16:41:41] [INFO] AC setting applied: ea062031-0e34-4ff1-9b6d-eb1059334028 = 100
+[2025-05-25 16:41:41] [INFO] DC setting applied: ea062031-0e34-4ff1-9b6d-eb1059334028 = 100
+[2025-05-25 16:41:41] [INFO] AC setting applied: 9d7815a6-7ee4-497e-8888-515a05f02364 = 0
+[2025-05-25 16:41:41] [INFO] DC setting applied: 9d7815a6-7ee4-497e-8888-515a05f02364 = 0
+[2025-05-25 16:41:41] [INFO] AC setting applied: 6738e2c4-e8a5-4a42-b16a-e040e769756e = 0
+[2025-05-25 16:41:41] [INFO] DC setting applied: 6738e2c4-e8a5-4a42-b16a-e040e769756e = 0
+[2025-05-25 16:41:41] [INFO] AC setting applied: 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 = 0
+[2025-05-25 16:41:41] [INFO] DC setting applied: 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 = 0
+[2025-05-25 16:41:41] [INFO] AC setting applied: 29f6c1db-86da-48c5-9fdb-f2b67b1f44da = 0
+[2025-05-25 16:41:41] [INFO] DC setting applied: 29f6c1db-86da-48c5-9fdb-f2b67b1f44da = 0
+[2025-05-25 16:41:41] [INFO] Applying power plan changes...
+[2025-05-25 16:41:41] [INFO] Power plan settings applied successfully
+[2025-05-25 16:41:41] [INFO] Verifying processor core parking configuration...
+[2025-05-25 16:41:41] [INFO] Core parking min cores setting verified
+[2025-05-25 16:41:41] [INFO] Core parking max cores setting verified
+[2025-05-25 16:41:41] [INFO] Configuring additional CPU performance settings...
+[2025-05-25 16:41:41] [INFO] Processor performance boost mode enabled
+[2025-05-25 16:41:41] [INFO] Processor performance increase policy set to ideal
+[2025-05-25 16:41:41] [INFO] Power settings configuration completed
+[2025-05-25 16:41:41] [INFO] Starting audio and streaming process optimization...
+[2025-05-25 16:41:41] [INFO] Detected 128 logical cores
+[2025-05-25 16:41:41] [INFO] Affinity masks - Audio: 255, Streaming: 4294967040, System: 9223372032559808512
+[2025-05-25 16:41:41] [INFO] Process voicemeeter not found.
+[2025-05-25 16:41:41] [INFO] Optimized audiodg (PID: 13288) - Affinity: 255, Priority: High
+[2025-05-25 16:41:41] [INFO] Process obs64 not found.
+[2025-05-25 16:41:41] [INFO] Process obs not found.
+[2025-05-25 16:41:41] [INFO] Process Streamlabs not found.
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 2984) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 3416) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 3544) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 3604) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 3624) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 3652) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 3796) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 3812) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 3820) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 3828) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 3836) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 3844) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 3948) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 4032) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 4040) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 4048) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 4116) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 4208) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 4240) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 4268) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 4424) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 4484) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 4520) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 4596) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 4600) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 4772) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 4784) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 4852) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 4868) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 5212) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 5280) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 5288) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 5308) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 5328) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 5432) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 5444) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 5728) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 5820) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 5876) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 5988) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 6000) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 6192) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 6200) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 6264) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 6372) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 6380) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 7092) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 7272) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 7296) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 7540) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 7604) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 7680) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 8272) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 8280) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Error optimizing svchost (PID: 8492): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 8612) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Error optimizing svchost (PID: 8688): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:41:41] [INFO] Error optimizing svchost (PID: 8720): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 8748) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 8904) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 8908) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 8936) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 9028) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 9076) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 9620) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 9676) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 9784) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 10156) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 10208) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 10256) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 10340) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 10428) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 10484) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 10572) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 11296) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 12496) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 12680) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 14368) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 14408) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 14644) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 15004) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 18444) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 18544) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 18788) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 18824) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 19416) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 19432) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 19856) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 21296) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 22588) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 28308) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Optimized svchost (PID: 28580) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:41:41] [INFO] Error optimizing csrss (PID: 3008): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:41:41] [INFO] Error optimizing csrss (PID: 3108): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:41:41] [INFO] Error optimizing smss (PID: 2160): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:41:41] [INFO] Process optimization completed
+[2025-05-25 16:41:41] [INFO] Configuring Windows Audio settings...
+[2025-05-25 16:41:41] [INFO] Audio service set to Automatic
+[2025-05-25 16:41:41] [INFO] Audio quality settings configured
+[2025-05-25 16:41:41] [INFO] Entering continuous latency monitoring mode. Press Ctrl+C to stop.
+[2025-05-25 16:41:44] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_164140.json
+[2025-05-25 16:41:44] [INFO] System Performance Metrics:
+[2025-05-25 16:41:44] [INFO] CPU Usage: 0%
+[2025-05-25 16:41:44] [INFO] Memory Usage: 26.47%
+[2025-05-25 16:41:44] [INFO] GPU Usage: 1.29%
+[2025-05-25 16:41:48] [INFO] Latency Metrics: DPC Queue: 12511.69/sec, Interrupts: 40297.93/sec, Interrupt Time: 0%, Page Faults: 218405.96/sec
+[2025-05-25 16:41:48] [INFO] Debugging high latency issues...
+[2025-05-25 16:41:48] [INFO] Analyzing high-resource processes...
+[2025-05-25 16:41:49] [INFO] High-resource processes detected:
+[2025-05-25 16:41:49] [INFO] Process: Discord (PID: 29384), CPU: 0, Memory: 77.8 MB, Page Faults: 895504508
+[2025-05-25 16:41:49] [INFO] Process: PowerToys.PowerLauncher (PID: 25944), CPU: 77.75, Memory: 703.01 MB, Page Faults: 606167760
+[2025-05-25 16:41:49] [INFO] Process: Microsoft.CmdPal.UI (PID: 16780), CPU: 81.390625, Memory: 276.04 MB, Page Faults: 606144651
+[2025-05-25 16:41:49] [INFO] Process: PowerToys.ColorPickerUI (PID: 3224), CPU: 1.234375, Memory: 225.93 MB, Page Faults: 605839680
+[2025-05-25 16:41:49] [INFO] Process: PowerToys.PowerAccent (PID: 26168), CPU: 1.34375, Memory: 257.25 MB, Page Faults: 605837076
+[2025-05-25 16:41:49] [INFO] Process: PowerToys.MouseJumpUI (PID: 25404), CPU: 0.015625, Memory: 51.62 MB, Page Faults: 605710678
+[2025-05-25 16:41:49] [INFO] Process: PowerToys.PowerOCR (PID: 26236), CPU: 0.140625, Memory: 63.33 MB, Page Faults: 605708853
+[2025-05-25 16:41:49] [INFO] Process: PowerToys.Awake (PID: 7448), CPU: 0.09375, Memory: 43.02 MB, Page Faults: 605698302
+[2025-05-25 16:41:49] [INFO] Process: TextInputHost (PID: 7436), CPU: 4.03125, Memory: 222.55 MB, Page Faults: 546741962
+[2025-05-25 16:41:49] [INFO] Process: SearchHost (PID: 21628), CPU: 1.84375, Memory: 215.43 MB, Page Faults: 546741807
+[2025-05-25 16:41:49] [INFO] Listing loaded drivers...
+[2025-05-25 16:41:59] [INFO] No common latency-causing drivers detected.
+[2025-05-25 16:41:59] [INFO] Checking system event logs for errors...
+[2025-05-25 16:41:59] [INFO] System errors detected in the last hour:
+[2025-05-25 16:41:59] [INFO] Event ID: 11, Source: Microsoft-Windows-Security-Kerberos, Time: 05/25/2025 16:41:17, Message: The Distinguished Name in the subject field of your smart card logon certificate does not contain enough information to identify the appropriate domain on an non-domain joined computer. Contact your system administrator.
+[2025-05-25 16:41:59] [INFO] Event ID: 7034, Source: Service Control Manager, Time: 05/25/2025 16:40:17, Message: The GameInput Service service terminated unexpectedly. It has done this 6 time(s).
+[2025-05-25 16:41:59] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:17, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:41:59] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:16, Message: The GameInput Service service terminated unexpectedly. It has done this 5 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:41:59] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:16, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:41:59] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:15, Message: The GameInput Service service terminated unexpectedly. It has done this 4 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:41:59] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:15, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:41:59] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:14, Message: The GameInput Service service terminated unexpectedly. It has done this 3 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:41:59] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:14, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:41:59] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:13, Message: The GameInput Service service terminated unexpectedly. It has done this 2 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:41:59] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:13, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:41:59] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:12, Message: The GameInput Service service terminated unexpectedly. It has done this 1 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:41:59] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:12, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:41:59] [INFO] Running xperf to capture DPC/ISR data (30 seconds)...
+[2025-05-25 16:42:31] [INFO] xperf trace captured to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_164140.etl. Analyze with Windows Performance Analyzer.
+[2025-05-25 16:42:31] [INFO] Latency debug report saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyDebug_20250525_164140.json
+[2025-05-25 16:42:31] [INFO] Debug Recommendations:
+[2025-05-25 16:42:31] [INFO] - Review high-resource processes (e.g., Discord) for excessive CPU/memory usage or page faults.
+[2025-05-25 16:42:31] [INFO] - Review system event logs for errors related to drivers or hardware.
+[2025-05-25 16:42:31] [INFO] - Analyze C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_164140.etl with Windows Performance Analyzer to identify DPC/ISR sources.
+[2025-05-25 16:42:31] [INFO] Latency Evaluation: Overall: Bad
+[2025-05-25 16:42:31] [INFO] DPC Queue Rate: Bad (12511.69/sec)
+[2025-05-25 16:42:31] [INFO] Interrupt Rate: Bad (40297.93/sec)
+[2025-05-25 16:42:31] [INFO] Interrupt Time: Good (0%)
+[2025-05-25 16:42:31] [INFO] Page Faults: Bad (218405.96/sec)
+[2025-05-25 16:42:31] [INFO] Recommendations:
+[2025-05-25 16:42:31] [INFO] - High DPC queue rate detected. Run LatencyMon to identify problematic drivers (e.g., ndis.sys, ACPI.sys).
+[2025-05-25 16:42:31] [INFO] - High interrupt rate detected. Check for outdated network/GPU drivers or excessive hardware interrupts.
+[2025-05-25 16:42:31] [INFO] - High page faults detected. Check for memory-intensive applications or insufficient RAM.
+[2025-05-25 16:42:31] [INFO] - System is not suitable for real-time audio/streaming without optimization.
+[2025-05-25 16:42:31] [INFO] Latency evaluation saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyEvaluation_20250525_164140.json
+[2025-05-25 16:42:31] [INFO] Latency Report Saved: C:\projects\workstation\6_Symbols\Logs\Reports\LatencyReport_20250525_164140.json
+[2025-05-25 16:42:45] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_164140.json
+[2025-05-25 16:42:45] [INFO] System Performance Metrics:
+[2025-05-25 16:42:45] [INFO] CPU Usage: 4%
+[2025-05-25 16:42:45] [INFO] Memory Usage: 32.82%
+[2025-05-25 16:42:45] [INFO] GPU Usage: 0.35%
+[2025-05-25 16:42:49] [INFO] Latency Metrics: DPC Queue: 3803.41/sec, Interrupts: 14365.4/sec, Interrupt Time: 0%, Page Faults: 54524.26/sec
+[2025-05-25 16:42:49] [INFO] Debugging high latency issues...
+[2025-05-25 16:42:49] [INFO] Analyzing high-resource processes...
+[2025-05-25 16:42:49] [INFO] High-resource processes detected:
+[2025-05-25 16:42:49] [INFO] Process: Discord (PID: 3980), CPU: 3.953125, Memory: 409.88 MB, Page Faults: 896927634
+[2025-05-25 16:42:49] [INFO] Process: Discord (PID: 29384), CPU: 1.5625, Memory: 155.08 MB, Page Faults: 895646559
+[2025-05-25 16:42:49] [INFO] Process: Text Blaze BETA (PID: 28904), CPU: 0.609375, Memory: 134.22 MB, Page Faults: 841397145
+[2025-05-25 16:42:49] [INFO] Process: Text Blaze BETA (PID: 25136), CPU: 0.28125, Memory: 102.5 MB, Page Faults: 841388733
+[2025-05-25 16:42:49] [INFO] Process: Text Blaze BETA (PID: 31292), CPU: 1.078125, Memory: 166.42 MB, Page Faults: 841093009
+[2025-05-25 16:42:49] [INFO] Process: Text Blaze BETA (PID: 29860), CPU: 0.53125, Memory: 158.86 MB, Page Faults: 840964224
+[2025-05-25 16:42:49] [INFO] Process: Text Blaze BETA (PID: 18804), CPU: 0.09375, Memory: 111.91 MB, Page Faults: 840963207
+[2025-05-25 16:42:49] [INFO] Process: Text Blaze BETA (PID: 3796), CPU: 0.21875, Memory: 102.91 MB, Page Faults: 840947431
+[2025-05-25 16:42:49] [INFO] Process: Text Blaze BETA (PID: 6836), CPU: 0.0625, Memory: 96.04 MB, Page Faults: 840933172
+[2025-05-25 16:42:49] [INFO] Process: QtWebEngineProcess (PID: 35848), CPU: 0.046875, Memory: 78.76 MB, Page Faults: 835067655
+[2025-05-25 16:42:49] [INFO] Listing loaded drivers...
+[2025-05-25 16:42:49] [INFO] No common latency-causing drivers detected.
+[2025-05-25 16:42:49] [INFO] Checking system event logs for errors...
+[2025-05-25 16:42:49] [INFO] System errors detected in the last hour:
+[2025-05-25 16:42:49] [INFO] Event ID: 2, Source: googledrivefs31626, Time: 05/25/2025 16:41:58, Message: The driver version of the disk does not match.
+[2025-05-25 16:42:49] [INFO] Event ID: 11, Source: Microsoft-Windows-Security-Kerberos, Time: 05/25/2025 16:41:17, Message: The Distinguished Name in the subject field of your smart card logon certificate does not contain enough information to identify the appropriate domain on an non-domain joined computer. Contact your system administrator.
+[2025-05-25 16:42:49] [INFO] Event ID: 7034, Source: Service Control Manager, Time: 05/25/2025 16:40:17, Message: The GameInput Service service terminated unexpectedly. It has done this 6 time(s).
+[2025-05-25 16:42:49] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:17, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:42:49] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:16, Message: The GameInput Service service terminated unexpectedly. It has done this 5 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:42:49] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:16, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:42:49] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:15, Message: The GameInput Service service terminated unexpectedly. It has done this 4 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:42:49] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:15, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:42:49] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:14, Message: The GameInput Service service terminated unexpectedly. It has done this 3 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:42:49] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:14, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:42:49] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:13, Message: The GameInput Service service terminated unexpectedly. It has done this 2 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:42:49] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:13, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:42:49] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:12, Message: The GameInput Service service terminated unexpectedly. It has done this 1 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:42:49] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:12, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:42:49] [INFO] Running xperf to capture DPC/ISR data (30 seconds)...
+[2025-05-25 16:43:20] [INFO] xperf trace captured to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_164140.etl. Analyze with Windows Performance Analyzer.
+[2025-05-25 16:43:20] [INFO] Latency debug report saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyDebug_20250525_164140.json
+[2025-05-25 16:43:20] [INFO] Debug Recommendations:
+[2025-05-25 16:43:20] [INFO] - Review high-resource processes (e.g., Discord) for excessive CPU/memory usage or page faults.
+[2025-05-25 16:43:20] [INFO] - Review system event logs for errors related to drivers or hardware.
+[2025-05-25 16:43:20] [INFO] - Analyze C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_164140.etl with Windows Performance Analyzer to identify DPC/ISR sources.
+[2025-05-25 16:43:20] [INFO] Latency Evaluation: Overall: Bad
+[2025-05-25 16:43:20] [INFO] DPC Queue Rate: Bad (3803.41/sec)
+[2025-05-25 16:43:20] [INFO] Interrupt Rate: Bad (14365.4/sec)
+[2025-05-25 16:43:20] [INFO] Interrupt Time: Good (0%)
+[2025-05-25 16:43:20] [INFO] Page Faults: Bad (54524.26/sec)
+[2025-05-25 16:43:20] [INFO] Recommendations:
+[2025-05-25 16:43:20] [INFO] - High DPC queue rate detected. Run LatencyMon to identify problematic drivers (e.g., ndis.sys, ACPI.sys).
+[2025-05-25 16:43:20] [INFO] - High interrupt rate detected. Check for outdated network/GPU drivers or excessive hardware interrupts.
+[2025-05-25 16:43:20] [INFO] - High page faults detected. Check for memory-intensive applications or insufficient RAM.
+[2025-05-25 16:43:20] [INFO] - System is not suitable for real-time audio/streaming without optimization.
+[2025-05-25 16:43:20] [INFO] Latency evaluation saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyEvaluation_20250525_164140.json
+[2025-05-25 16:43:20] [INFO] Latency Report Saved: C:\projects\workstation\6_Symbols\Logs\Reports\LatencyReport_20250525_164140.json
+[2025-05-25 16:43:33] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_164140.json
+[2025-05-25 16:43:33] [INFO] System Performance Metrics:
+[2025-05-25 16:43:33] [INFO] CPU Usage: 0%
+[2025-05-25 16:43:33] [INFO] Memory Usage: 31.47%
+[2025-05-25 16:43:33] [INFO] GPU Usage: 0.38%

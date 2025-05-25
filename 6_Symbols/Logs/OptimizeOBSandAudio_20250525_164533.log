@@ -1,0 +1,455 @@
+[2025-05-25 16:45:33] [INFO] Starting Audio and Streaming Optimization Script
+[2025-05-25 16:45:33] [INFO] Configuring optimal power plan settings for audio performance...
+[2025-05-25 16:45:33] [INFO] Setting up High Performance power plan...
+[2025-05-25 16:45:33] [INFO] High Performance power plan duplicated successfully
+[2025-05-25 16:45:33] [INFO] Activating High Performance power plan...
+[2025-05-25 16:45:33] [INFO] High Performance power plan activated successfully
+[2025-05-25 16:45:33] [INFO] Applying power configuration settings...
+[2025-05-25 16:45:33] [INFO] AC setting applied: 0cc5b647-c1df-4637-891a-dec35c318583 = 100
+[2025-05-25 16:45:33] [INFO] DC setting applied: 0cc5b647-c1df-4637-891a-dec35c318583 = 100
+[2025-05-25 16:45:33] [INFO] AC setting applied: 94ac6d29-73ce-41a6-809f-6363ba21b47e = 0
+[2025-05-25 16:45:33] [INFO] DC setting applied: 94ac6d29-73ce-41a6-809f-6363ba21b47e = 0
+[2025-05-25 16:45:33] [INFO] AC setting applied: ea062031-0e34-4ff1-9b6d-eb1059334028 = 100
+[2025-05-25 16:45:33] [INFO] DC setting applied: ea062031-0e34-4ff1-9b6d-eb1059334028 = 100
+[2025-05-25 16:45:33] [INFO] AC setting applied: 9d7815a6-7ee4-497e-8888-515a05f02364 = 0
+[2025-05-25 16:45:33] [INFO] DC setting applied: 9d7815a6-7ee4-497e-8888-515a05f02364 = 0
+[2025-05-25 16:45:33] [INFO] AC setting applied: 6738e2c4-e8a5-4a42-b16a-e040e769756e = 0
+[2025-05-25 16:45:33] [INFO] DC setting applied: 6738e2c4-e8a5-4a42-b16a-e040e769756e = 0
+[2025-05-25 16:45:33] [INFO] AC setting applied: 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 = 0
+[2025-05-25 16:45:33] [INFO] DC setting applied: 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 = 0
+[2025-05-25 16:45:33] [INFO] AC setting applied: 29f6c1db-86da-48c5-9fdb-f2b67b1f44da = 0
+[2025-05-25 16:45:33] [INFO] DC setting applied: 29f6c1db-86da-48c5-9fdb-f2b67b1f44da = 0
+[2025-05-25 16:45:33] [INFO] Applying power plan changes...
+[2025-05-25 16:45:33] [INFO] Power plan settings applied successfully
+[2025-05-25 16:45:33] [INFO] Verifying processor core parking configuration...
+[2025-05-25 16:45:33] [INFO] Core parking min cores setting verified
+[2025-05-25 16:45:33] [INFO] Core parking max cores setting verified
+[2025-05-25 16:45:33] [INFO] Configuring additional CPU performance settings...
+[2025-05-25 16:45:33] [INFO] Processor performance boost mode enabled
+[2025-05-25 16:45:34] [INFO] Processor performance increase policy set to ideal
+[2025-05-25 16:45:34] [INFO] Power settings configuration completed
+[2025-05-25 16:45:34] [INFO] Starting audio and streaming process optimization...
+[2025-05-25 16:45:34] [INFO] Detected 128 logical cores
+[2025-05-25 16:45:34] [INFO] Affinity masks - Audio: 255, Streaming: 4294967040, System: 9223372032559808512
+[2025-05-25 16:45:34] [INFO] Optimized voicemeeter (PID: 38760) - Affinity: 255, Priority: RealTime
+[2025-05-25 16:45:34] [INFO] Optimized audiodg (PID: 13288) - Affinity: 255, Priority: High
+[2025-05-25 16:45:34] [INFO] Process obs64 not found.
+[2025-05-25 16:45:34] [INFO] Process obs not found.
+[2025-05-25 16:45:34] [INFO] Process Streamlabs not found.
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 2984) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 3416) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 3544) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 3604) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 3624) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 3652) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 3812) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 3820) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 3828) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 3836) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 3844) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 3948) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 4032) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 4040) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 4048) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 4116) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 4208) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 4240) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 4424) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 4484) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 4520) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 4596) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 4600) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 4772) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 4784) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 4852) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 4868) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 5212) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 5280) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 5288) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 5308) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 5328) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 5432) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 5444) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 5728) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 5820) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 5876) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 5988) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 6000) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 6148) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 6192) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 6200) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 6264) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 6372) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 6380) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 7092) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 7272) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 7296) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 7540) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 7604) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 8272) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 8280) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 8612) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Error optimizing svchost (PID: 8688): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:45:34] [INFO] Error optimizing svchost (PID: 8720): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 8748) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 8904) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 8908) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 8936) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 9028) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 9076) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 9676) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 9784) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 10156) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 10208) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 10256) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 10340) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 10428) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 10484) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 10572) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 11296) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 12496) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 12680) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 14408) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 14644) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 15004) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 15080) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 18444) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 18544) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 18824) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 19416) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 19432) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 19856) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 21296) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 22588) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 28308) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 28580) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Optimized svchost (PID: 40120) - Affinity: 9223372032559808512, Priority: Normal
+[2025-05-25 16:45:34] [INFO] Error optimizing svchost (PID: 40880): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:45:34] [INFO] Error optimizing csrss (PID: 3008): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:45:34] [INFO] Error optimizing csrss (PID: 3108): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:45:34] [INFO] Error optimizing smss (PID: 2160): Exception setting "ProcessorAffinity": "Access is denied"
+[2025-05-25 16:45:34] [INFO] Process optimization completed
+[2025-05-25 16:45:34] [INFO] Configuring Windows Audio settings...
+[2025-05-25 16:45:34] [INFO] Audio service set to Automatic
+[2025-05-25 16:45:34] [INFO] Audio quality settings configured
+[2025-05-25 16:45:34] [INFO] Entering continuous latency monitoring mode. Press Ctrl+C to stop.
+[2025-05-25 16:45:37] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_164533.json
+[2025-05-25 16:45:37] [INFO] System Performance Metrics:
+[2025-05-25 16:45:37] [INFO] CPU Usage: 1%
+[2025-05-25 16:45:37] [INFO] Memory Usage: 34.6%
+[2025-05-25 16:45:37] [INFO] GPU Usage: 0.69%
+[2025-05-25 16:45:41] [INFO] Latency Metrics: DPC Queue: 2326.59/sec, Interrupts: 11328.57/sec, Interrupt Time: 0%, Page Faults: 22056.83/sec
+[2025-05-25 16:45:41] [INFO] Debugging high latency issues...
+[2025-05-25 16:45:41] [INFO] Analyzing high-resource processes...
+[2025-05-25 16:45:41] [INFO] High-resource processes detected:
+[2025-05-25 16:45:41] [INFO] Process: Discord (PID: 3980), CPU: 4, Memory: 398.14 MB, Page Faults: 896921202
+[2025-05-25 16:45:41] [INFO] Process: Discord (PID: 29384), CPU: 1.640625, Memory: 147.13 MB, Page Faults: 895642501
+[2025-05-25 16:45:41] [INFO] Process: Code (PID: 40488), CPU: 5.359375, Memory: 273.09 MB, Page Faults: 842310194
+[2025-05-25 16:45:41] [INFO] Process: Code (PID: 35884), CPU: 0.453125, Memory: 114.53 MB, Page Faults: 842237246
+[2025-05-25 16:45:41] [INFO] Process: Code (PID: 22860), CPU: 3.15625, Memory: 302.71 MB, Page Faults: 841799622
+[2025-05-25 16:45:41] [INFO] Process: Code (PID: 26116), CPU: 0.328125, Memory: 136.88 MB, Page Faults: 841552349
+[2025-05-25 16:45:41] [INFO] Process: Text Blaze BETA (PID: 28904), CPU: 0.625, Memory: 131.47 MB, Page Faults: 841395657
+[2025-05-25 16:45:41] [INFO] Process: Code (PID: 32940), CPU: 13.09375, Memory: 792.3 MB, Page Faults: 841384359
+[2025-05-25 16:45:41] [INFO] Process: Code (PID: 5344), CPU: 0.953125, Memory: 119.18 MB, Page Faults: 841383095
+[2025-05-25 16:45:41] [INFO] Process: Code (PID: 5360), CPU: 0.328125, Memory: 109.43 MB, Page Faults: 841382292
+[2025-05-25 16:45:41] [INFO] Listing loaded drivers...
+[2025-05-25 16:45:41] [INFO] No common latency-causing drivers detected.
+[2025-05-25 16:45:41] [INFO] Checking system event logs for errors...
+[2025-05-25 16:45:41] [INFO] System errors detected in the last hour:
+[2025-05-25 16:45:41] [INFO] Event ID: 1796, Source: Microsoft-Windows-TPM-WMI, Time: 05/25/2025 16:45:10, Message: The Secure Boot update failed to update a Secure Boot variable with error Secure Boot is not enabled on this machine.. For more information, please see https://go.microsoft.com/fwlink/?linkid=2169931
+[2025-05-25 16:45:41] [INFO] Event ID: 2, Source: googledrivefs31626, Time: 05/25/2025 16:41:58, Message: The driver version of the disk does not match.
+[2025-05-25 16:45:41] [INFO] Event ID: 11, Source: Microsoft-Windows-Security-Kerberos, Time: 05/25/2025 16:41:17, Message: The Distinguished Name in the subject field of your smart card logon certificate does not contain enough information to identify the appropriate domain on an non-domain joined computer. Contact your system administrator.
+[2025-05-25 16:45:41] [INFO] Event ID: 7034, Source: Service Control Manager, Time: 05/25/2025 16:40:17, Message: The GameInput Service service terminated unexpectedly. It has done this 6 time(s).
+[2025-05-25 16:45:41] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:17, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:45:41] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:16, Message: The GameInput Service service terminated unexpectedly. It has done this 5 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:45:41] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:16, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:45:41] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:15, Message: The GameInput Service service terminated unexpectedly. It has done this 4 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:45:41] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:15, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:45:41] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:14, Message: The GameInput Service service terminated unexpectedly. It has done this 3 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:45:41] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:14, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:45:41] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:13, Message: The GameInput Service service terminated unexpectedly. It has done this 2 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:45:41] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:13, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:45:41] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:12, Message: The GameInput Service service terminated unexpectedly. It has done this 1 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:45:41] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:12, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:45:41] [INFO] Running xperf to capture DPC/ISR data (30 seconds)...
+[2025-05-25 16:46:12] [INFO] xperf trace captured to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_164533.etl. Analyze with Windows Performance Analyzer.
+[2025-05-25 16:46:12] [INFO] Latency debug report saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyDebug_20250525_164533.json
+[2025-05-25 16:46:12] [INFO] Debug Recommendations:
+[2025-05-25 16:46:12] [INFO] - Review high-resource processes (e.g., Discord) for excessive CPU/memory usage or page faults.
+[2025-05-25 16:46:12] [INFO] - Review system event logs for errors related to drivers or hardware.
+[2025-05-25 16:46:12] [INFO] - Analyze C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_164533.etl with Windows Performance Analyzer to identify DPC/ISR sources.
+[2025-05-25 16:46:12] [INFO] Latency Evaluation: Overall: Bad
+[2025-05-25 16:46:12] [INFO] DPC Queue Rate: Bad (2326.59/sec)
+[2025-05-25 16:46:12] [INFO] Interrupt Rate: Bad (11328.57/sec)
+[2025-05-25 16:46:12] [INFO] Interrupt Time: Good (0%)
+[2025-05-25 16:46:12] [INFO] Page Faults: Bad (22056.83/sec)
+[2025-05-25 16:46:12] [INFO] Recommendations:
+[2025-05-25 16:46:12] [INFO] - High DPC queue rate detected. Run LatencyMon to identify problematic drivers (e.g., ndis.sys, ACPI.sys).
+[2025-05-25 16:46:12] [INFO] - High interrupt rate detected. Check for outdated network/GPU drivers or excessive hardware interrupts.
+[2025-05-25 16:46:12] [INFO] - High page faults detected. Check for memory-intensive applications or insufficient RAM.
+[2025-05-25 16:46:12] [INFO] - System is not suitable for real-time audio/streaming without optimization.
+[2025-05-25 16:46:12] [INFO] Latency evaluation saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyEvaluation_20250525_164533.json
+[2025-05-25 16:46:12] [INFO] Latency Report Saved: C:\projects\workstation\6_Symbols\Logs\Reports\LatencyReport_20250525_164533.json
+[2025-05-25 16:46:25] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_164533.json
+[2025-05-25 16:46:25] [INFO] System Performance Metrics:
+[2025-05-25 16:46:25] [INFO] CPU Usage: 1%
+[2025-05-25 16:46:25] [INFO] Memory Usage: 34.02%
+[2025-05-25 16:46:25] [INFO] GPU Usage: 0.58%
+[2025-05-25 16:46:29] [INFO] Latency Metrics: DPC Queue: 1352.41/sec, Interrupts: 11162.81/sec, Interrupt Time: 0%, Page Faults: 72036.54/sec
+[2025-05-25 16:46:29] [INFO] Debugging high latency issues...
+[2025-05-25 16:46:29] [INFO] Analyzing high-resource processes...
+[2025-05-25 16:46:29] [INFO] High-resource processes detected:
+[2025-05-25 16:46:29] [INFO] Process: Discord (PID: 3980), CPU: 4, Memory: 398.22 MB, Page Faults: 896921202
+[2025-05-25 16:46:29] [INFO] Process: Discord (PID: 29384), CPU: 1.640625, Memory: 146.91 MB, Page Faults: 895642501
+[2025-05-25 16:46:29] [INFO] Process: Code (PID: 40488), CPU: 5.359375, Memory: 272.96 MB, Page Faults: 842310194
+[2025-05-25 16:46:29] [INFO] Process: Code (PID: 35884), CPU: 0.453125, Memory: 114.57 MB, Page Faults: 842237246
+[2025-05-25 16:46:29] [INFO] Process: Code (PID: 22860), CPU: 3.15625, Memory: 302.91 MB, Page Faults: 841795526
+[2025-05-25 16:46:29] [INFO] Process: Code (PID: 26116), CPU: 0.328125, Memory: 132.27 MB, Page Faults: 841550301
+[2025-05-25 16:46:29] [INFO] Process: Text Blaze BETA (PID: 28904), CPU: 0.625, Memory: 131.98 MB, Page Faults: 841395721
+[2025-05-25 16:46:29] [INFO] Process: Code (PID: 5360), CPU: 0.328125, Memory: 109.43 MB, Page Faults: 841382292
+[2025-05-25 16:46:29] [INFO] Process: Code (PID: 32940), CPU: 13.09375, Memory: 792.32 MB, Page Faults: 841380263
+[2025-05-25 16:46:29] [INFO] Process: Code (PID: 5344), CPU: 0.953125, Memory: 119.04 MB, Page Faults: 841378999
+[2025-05-25 16:46:29] [INFO] Listing loaded drivers...
+[2025-05-25 16:46:29] [INFO] No common latency-causing drivers detected.
+[2025-05-25 16:46:29] [INFO] Checking system event logs for errors...
+[2025-05-25 16:46:30] [INFO] System errors detected in the last hour:
+[2025-05-25 16:46:30] [INFO] Event ID: 1796, Source: Microsoft-Windows-TPM-WMI, Time: 05/25/2025 16:45:10, Message: The Secure Boot update failed to update a Secure Boot variable with error Secure Boot is not enabled on this machine.. For more information, please see https://go.microsoft.com/fwlink/?linkid=2169931
+[2025-05-25 16:46:30] [INFO] Event ID: 2, Source: googledrivefs31626, Time: 05/25/2025 16:41:58, Message: The driver version of the disk does not match.
+[2025-05-25 16:46:30] [INFO] Event ID: 11, Source: Microsoft-Windows-Security-Kerberos, Time: 05/25/2025 16:41:17, Message: The Distinguished Name in the subject field of your smart card logon certificate does not contain enough information to identify the appropriate domain on an non-domain joined computer. Contact your system administrator.
+[2025-05-25 16:46:30] [INFO] Event ID: 7034, Source: Service Control Manager, Time: 05/25/2025 16:40:17, Message: The GameInput Service service terminated unexpectedly. It has done this 6 time(s).
+[2025-05-25 16:46:30] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:17, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:46:30] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:16, Message: The GameInput Service service terminated unexpectedly. It has done this 5 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:46:30] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:16, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:46:30] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:15, Message: The GameInput Service service terminated unexpectedly. It has done this 4 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:46:30] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:15, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:46:30] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:14, Message: The GameInput Service service terminated unexpectedly. It has done this 3 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:46:30] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:14, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:46:30] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:13, Message: The GameInput Service service terminated unexpectedly. It has done this 2 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:46:30] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:13, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:46:30] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:12, Message: The GameInput Service service terminated unexpectedly. It has done this 1 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:46:30] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:12, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:46:30] [INFO] Running xperf to capture DPC/ISR data (30 seconds)...
+[2025-05-25 16:47:01] [INFO] xperf trace captured to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_164533.etl. Analyze with Windows Performance Analyzer.
+[2025-05-25 16:47:01] [INFO] Latency debug report saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyDebug_20250525_164533.json
+[2025-05-25 16:47:01] [INFO] Debug Recommendations:
+[2025-05-25 16:47:01] [INFO] - Review high-resource processes (e.g., Discord) for excessive CPU/memory usage or page faults.
+[2025-05-25 16:47:01] [INFO] - Review system event logs for errors related to drivers or hardware.
+[2025-05-25 16:47:01] [INFO] - Analyze C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_164533.etl with Windows Performance Analyzer to identify DPC/ISR sources.
+[2025-05-25 16:47:01] [INFO] Latency Evaluation: Overall: Bad
+[2025-05-25 16:47:01] [INFO] DPC Queue Rate: Bad (1352.41/sec)
+[2025-05-25 16:47:01] [INFO] Interrupt Rate: Bad (11162.81/sec)
+[2025-05-25 16:47:01] [INFO] Interrupt Time: Good (0%)
+[2025-05-25 16:47:01] [INFO] Page Faults: Bad (72036.54/sec)
+[2025-05-25 16:47:01] [INFO] Recommendations:
+[2025-05-25 16:47:01] [INFO] - High DPC queue rate detected. Run LatencyMon to identify problematic drivers (e.g., ndis.sys, ACPI.sys).
+[2025-05-25 16:47:01] [INFO] - High interrupt rate detected. Check for outdated network/GPU drivers or excessive hardware interrupts.
+[2025-05-25 16:47:01] [INFO] - High page faults detected. Check for memory-intensive applications or insufficient RAM.
+[2025-05-25 16:47:01] [INFO] - System is not suitable for real-time audio/streaming without optimization.
+[2025-05-25 16:47:01] [INFO] Latency evaluation saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyEvaluation_20250525_164533.json
+[2025-05-25 16:47:01] [INFO] Latency Report Saved: C:\projects\workstation\6_Symbols\Logs\Reports\LatencyReport_20250525_164533.json
+[2025-05-25 16:47:14] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_164533.json
+[2025-05-25 16:47:14] [INFO] System Performance Metrics:
+[2025-05-25 16:47:14] [INFO] CPU Usage: 4%
+[2025-05-25 16:47:14] [INFO] Memory Usage: 33.89%
+[2025-05-25 16:47:14] [INFO] GPU Usage: 1.5%
+[2025-05-25 16:47:18] [INFO] Latency Metrics: DPC Queue: 3124.27/sec, Interrupts: 65250.2/sec, Interrupt Time: 0%, Page Faults: 110973.02/sec
+[2025-05-25 16:47:18] [INFO] Debugging high latency issues...
+[2025-05-25 16:47:18] [INFO] Analyzing high-resource processes...
+[2025-05-25 16:47:18] [INFO] High-resource processes detected:
+[2025-05-25 16:47:18] [INFO] Process: Discord (PID: 3980), CPU: 4.015625, Memory: 398.23 MB, Page Faults: 896921205
+[2025-05-25 16:47:18] [INFO] Process: Discord (PID: 29384), CPU: 1.640625, Memory: 147.64 MB, Page Faults: 895638405
+[2025-05-25 16:47:18] [INFO] Process: Code (PID: 40488), CPU: 5.609375, Memory: 272.16 MB, Page Faults: 842310194
+[2025-05-25 16:47:18] [INFO] Process: Code (PID: 35884), CPU: 0.453125, Memory: 113.84 MB, Page Faults: 842237246
+[2025-05-25 16:47:18] [INFO] Process: Code (PID: 22860), CPU: 3.15625, Memory: 303.34 MB, Page Faults: 841795526
+[2025-05-25 16:47:18] [INFO] Process: Code (PID: 26116), CPU: 0.328125, Memory: 132.77 MB, Page Faults: 841498102
+[2025-05-25 16:47:18] [INFO] Process: Code (PID: 5360), CPU: 0.328125, Memory: 109.71 MB, Page Faults: 841382292
+[2025-05-25 16:47:18] [INFO] Process: Code (PID: 32940), CPU: 13.109375, Memory: 743.22 MB, Page Faults: 841380263
+[2025-05-25 16:47:18] [INFO] Process: Code (PID: 5344), CPU: 0.96875, Memory: 110.14 MB, Page Faults: 841378999
+[2025-05-25 16:47:18] [INFO] Process: Code (PID: 7440), CPU: 0.09375, Memory: 94.56 MB, Page Faults: 840927872
+[2025-05-25 16:47:18] [INFO] Listing loaded drivers...
+[2025-05-25 16:47:18] [INFO] No common latency-causing drivers detected.
+[2025-05-25 16:47:18] [INFO] Checking system event logs for errors...
+[2025-05-25 16:47:19] [INFO] System errors detected in the last hour:
+[2025-05-25 16:47:19] [INFO] Event ID: 1796, Source: Microsoft-Windows-TPM-WMI, Time: 05/25/2025 16:45:10, Message: The Secure Boot update failed to update a Secure Boot variable with error Secure Boot is not enabled on this machine.. For more information, please see https://go.microsoft.com/fwlink/?linkid=2169931
+[2025-05-25 16:47:19] [INFO] Event ID: 2, Source: googledrivefs31626, Time: 05/25/2025 16:41:58, Message: The driver version of the disk does not match.
+[2025-05-25 16:47:19] [INFO] Event ID: 11, Source: Microsoft-Windows-Security-Kerberos, Time: 05/25/2025 16:41:17, Message: The Distinguished Name in the subject field of your smart card logon certificate does not contain enough information to identify the appropriate domain on an non-domain joined computer. Contact your system administrator.
+[2025-05-25 16:47:19] [INFO] Event ID: 7034, Source: Service Control Manager, Time: 05/25/2025 16:40:17, Message: The GameInput Service service terminated unexpectedly. It has done this 6 time(s).
+[2025-05-25 16:47:19] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:17, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:47:19] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:16, Message: The GameInput Service service terminated unexpectedly. It has done this 5 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:47:19] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:16, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:47:19] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:15, Message: The GameInput Service service terminated unexpectedly. It has done this 4 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:47:19] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:15, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:47:19] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:14, Message: The GameInput Service service terminated unexpectedly. It has done this 3 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:47:19] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:14, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:47:19] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:13, Message: The GameInput Service service terminated unexpectedly. It has done this 2 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:47:19] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:13, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:47:19] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:12, Message: The GameInput Service service terminated unexpectedly. It has done this 1 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:47:19] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:12, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:47:19] [INFO] Running xperf to capture DPC/ISR data (30 seconds)...
+[2025-05-25 16:47:50] [INFO] xperf trace captured to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_164533.etl. Analyze with Windows Performance Analyzer.
+[2025-05-25 16:47:50] [INFO] Latency debug report saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyDebug_20250525_164533.json
+[2025-05-25 16:47:50] [INFO] Debug Recommendations:
+[2025-05-25 16:47:50] [INFO] - Review high-resource processes (e.g., Discord) for excessive CPU/memory usage or page faults.
+[2025-05-25 16:47:50] [INFO] - Review system event logs for errors related to drivers or hardware.
+[2025-05-25 16:47:50] [INFO] - Analyze C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_164533.etl with Windows Performance Analyzer to identify DPC/ISR sources.
+[2025-05-25 16:47:50] [INFO] Latency Evaluation: Overall: Bad
+[2025-05-25 16:47:50] [INFO] DPC Queue Rate: Bad (3124.27/sec)
+[2025-05-25 16:47:50] [INFO] Interrupt Rate: Bad (65250.2/sec)
+[2025-05-25 16:47:50] [INFO] Interrupt Time: Good (0%)
+[2025-05-25 16:47:50] [INFO] Page Faults: Bad (110973.02/sec)
+[2025-05-25 16:47:50] [INFO] Recommendations:
+[2025-05-25 16:47:50] [INFO] - High DPC queue rate detected. Run LatencyMon to identify problematic drivers (e.g., ndis.sys, ACPI.sys).
+[2025-05-25 16:47:50] [INFO] - High interrupt rate detected. Check for outdated network/GPU drivers or excessive hardware interrupts.
+[2025-05-25 16:47:50] [INFO] - High page faults detected. Check for memory-intensive applications or insufficient RAM.
+[2025-05-25 16:47:50] [INFO] - System is not suitable for real-time audio/streaming without optimization.
+[2025-05-25 16:47:50] [INFO] Latency evaluation saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyEvaluation_20250525_164533.json
+[2025-05-25 16:47:50] [INFO] Latency Report Saved: C:\projects\workstation\6_Symbols\Logs\Reports\LatencyReport_20250525_164533.json
+[2025-05-25 16:48:02] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_164533.json
+[2025-05-25 16:48:02] [INFO] System Performance Metrics:
+[2025-05-25 16:48:02] [INFO] CPU Usage: 1%
+[2025-05-25 16:48:02] [INFO] Memory Usage: 33.33%
+[2025-05-25 16:48:02] [INFO] GPU Usage: 0.8%
+[2025-05-25 16:48:06] [INFO] Latency Metrics: DPC Queue: 1763.2/sec, Interrupts: 14290.31/sec, Interrupt Time: 0%, Page Faults: 89080.57/sec
+[2025-05-25 16:48:06] [INFO] Debugging high latency issues...
+[2025-05-25 16:48:06] [INFO] Analyzing high-resource processes...
+[2025-05-25 16:48:06] [INFO] High-resource processes detected:
+[2025-05-25 16:48:06] [INFO] Process: Discord (PID: 3980), CPU: 4.03125, Memory: 398.25 MB, Page Faults: 896919154
+[2025-05-25 16:48:06] [INFO] Process: Discord (PID: 29384), CPU: 1.640625, Memory: 142.23 MB, Page Faults: 895636357
+[2025-05-25 16:48:06] [INFO] Process: Code (PID: 40488), CPU: 5.609375, Memory: 273.03 MB, Page Faults: 842310194
+[2025-05-25 16:48:06] [INFO] Process: Code (PID: 35884), CPU: 0.453125, Memory: 113.77 MB, Page Faults: 842237246
+[2025-05-25 16:48:06] [INFO] Process: Code (PID: 22860), CPU: 3.15625, Memory: 294.37 MB, Page Faults: 841795526
+[2025-05-25 16:48:06] [INFO] Process: Code (PID: 26116), CPU: 0.328125, Memory: 131.21 MB, Page Faults: 841494006
+[2025-05-25 16:48:06] [INFO] Process: Code (PID: 5360), CPU: 0.328125, Memory: 109.8 MB, Page Faults: 841382292
+[2025-05-25 16:48:06] [INFO] Process: Code (PID: 32940), CPU: 13.109375, Memory: 742.82 MB, Page Faults: 841380263
+[2025-05-25 16:48:06] [INFO] Process: Code (PID: 5344), CPU: 0.96875, Memory: 109.3 MB, Page Faults: 841378999
+[2025-05-25 16:48:06] [INFO] Process: Code (PID: 7440), CPU: 0.09375, Memory: 94.67 MB, Page Faults: 840927872
+[2025-05-25 16:48:07] [INFO] Listing loaded drivers...
+[2025-05-25 16:48:07] [INFO] No common latency-causing drivers detected.
+[2025-05-25 16:48:07] [INFO] Checking system event logs for errors...
+[2025-05-25 16:48:07] [INFO] System errors detected in the last hour:
+[2025-05-25 16:48:07] [INFO] Event ID: 1796, Source: Microsoft-Windows-TPM-WMI, Time: 05/25/2025 16:45:10, Message: The Secure Boot update failed to update a Secure Boot variable with error Secure Boot is not enabled on this machine.. For more information, please see https://go.microsoft.com/fwlink/?linkid=2169931
+[2025-05-25 16:48:07] [INFO] Event ID: 2, Source: googledrivefs31626, Time: 05/25/2025 16:41:58, Message: The driver version of the disk does not match.
+[2025-05-25 16:48:07] [INFO] Event ID: 11, Source: Microsoft-Windows-Security-Kerberos, Time: 05/25/2025 16:41:17, Message: The Distinguished Name in the subject field of your smart card logon certificate does not contain enough information to identify the appropriate domain on an non-domain joined computer. Contact your system administrator.
+[2025-05-25 16:48:07] [INFO] Event ID: 7034, Source: Service Control Manager, Time: 05/25/2025 16:40:17, Message: The GameInput Service service terminated unexpectedly. It has done this 6 time(s).
+[2025-05-25 16:48:07] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:17, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:48:07] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:16, Message: The GameInput Service service terminated unexpectedly. It has done this 5 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:48:07] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:16, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:48:07] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:15, Message: The GameInput Service service terminated unexpectedly. It has done this 4 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:48:07] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:15, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:48:07] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:14, Message: The GameInput Service service terminated unexpectedly. It has done this 3 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:48:07] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:14, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:48:07] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:13, Message: The GameInput Service service terminated unexpectedly. It has done this 2 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:48:07] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:13, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:48:07] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:12, Message: The GameInput Service service terminated unexpectedly. It has done this 1 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:48:07] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:12, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:48:07] [INFO] Running xperf to capture DPC/ISR data (30 seconds)...
+[2025-05-25 16:48:38] [INFO] xperf trace captured to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_164533.etl. Analyze with Windows Performance Analyzer.
+[2025-05-25 16:48:38] [INFO] Latency debug report saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyDebug_20250525_164533.json
+[2025-05-25 16:48:38] [INFO] Debug Recommendations:
+[2025-05-25 16:48:38] [INFO] - Review high-resource processes (e.g., Discord) for excessive CPU/memory usage or page faults.
+[2025-05-25 16:48:38] [INFO] - Review system event logs for errors related to drivers or hardware.
+[2025-05-25 16:48:38] [INFO] - Analyze C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_164533.etl with Windows Performance Analyzer to identify DPC/ISR sources.
+[2025-05-25 16:48:38] [INFO] Latency Evaluation: Overall: Bad
+[2025-05-25 16:48:38] [INFO] DPC Queue Rate: Bad (1763.2/sec)
+[2025-05-25 16:48:38] [INFO] Interrupt Rate: Bad (14290.31/sec)
+[2025-05-25 16:48:38] [INFO] Interrupt Time: Good (0%)
+[2025-05-25 16:48:38] [INFO] Page Faults: Bad (89080.57/sec)
+[2025-05-25 16:48:38] [INFO] Recommendations:
+[2025-05-25 16:48:38] [INFO] - High DPC queue rate detected. Run LatencyMon to identify problematic drivers (e.g., ndis.sys, ACPI.sys).
+[2025-05-25 16:48:38] [INFO] - High interrupt rate detected. Check for outdated network/GPU drivers or excessive hardware interrupts.
+[2025-05-25 16:48:38] [INFO] - High page faults detected. Check for memory-intensive applications or insufficient RAM.
+[2025-05-25 16:48:38] [INFO] - System is not suitable for real-time audio/streaming without optimization.
+[2025-05-25 16:48:38] [INFO] Latency evaluation saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyEvaluation_20250525_164533.json
+[2025-05-25 16:48:38] [INFO] Latency Report Saved: C:\projects\workstation\6_Symbols\Logs\Reports\LatencyReport_20250525_164533.json
+[2025-05-25 16:48:51] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_164533.json
+[2025-05-25 16:48:51] [INFO] System Performance Metrics:
+[2025-05-25 16:48:51] [INFO] CPU Usage: 1%
+[2025-05-25 16:48:51] [INFO] Memory Usage: 33.33%
+[2025-05-25 16:48:51] [INFO] GPU Usage: 0.86%
+[2025-05-25 16:48:55] [INFO] Latency Metrics: DPC Queue: 1463.65/sec, Interrupts: 11530.1/sec, Interrupt Time: 0%, Page Faults: 4175.79/sec
+[2025-05-25 16:48:55] [INFO] Debugging high latency issues...
+[2025-05-25 16:48:55] [INFO] Analyzing high-resource processes...
+[2025-05-25 16:48:55] [INFO] High-resource processes detected:
+[2025-05-25 16:48:55] [INFO] Process: Discord (PID: 3980), CPU: 4.03125, Memory: 398.39 MB, Page Faults: 896917106
+[2025-05-25 16:48:55] [INFO] Process: Discord (PID: 29384), CPU: 1.640625, Memory: 142.62 MB, Page Faults: 895636357
+[2025-05-25 16:48:55] [INFO] Process: Code (PID: 40488), CPU: 5.609375, Memory: 272.63 MB, Page Faults: 842314290
+[2025-05-25 16:48:55] [INFO] Process: Code (PID: 35884), CPU: 0.453125, Memory: 113.91 MB, Page Faults: 842241598
+[2025-05-25 16:48:55] [INFO] Process: Code (PID: 22860), CPU: 3.15625, Memory: 294.5 MB, Page Faults: 841799622
+[2025-05-25 16:48:55] [INFO] Process: Code (PID: 26116), CPU: 0.328125, Memory: 131.16 MB, Page Faults: 841498102
+[2025-05-25 16:48:55] [INFO] Process: Code (PID: 5360), CPU: 0.328125, Memory: 110.08 MB, Page Faults: 841386388
+[2025-05-25 16:48:55] [INFO] Process: Code (PID: 32940), CPU: 13.3125, Memory: 742.45 MB, Page Faults: 841384359
+[2025-05-25 16:48:55] [INFO] Process: Code (PID: 5344), CPU: 0.96875, Memory: 110.14 MB, Page Faults: 841383095
+[2025-05-25 16:48:55] [INFO] Process: Code (PID: 7440), CPU: 0.09375, Memory: 94.75 MB, Page Faults: 840931968
+[2025-05-25 16:48:55] [INFO] Listing loaded drivers...
+[2025-05-25 16:48:55] [INFO] No common latency-causing drivers detected.
+[2025-05-25 16:48:55] [INFO] Checking system event logs for errors...
+[2025-05-25 16:48:55] [INFO] System errors detected in the last hour:
+[2025-05-25 16:48:55] [INFO] Event ID: 1796, Source: Microsoft-Windows-TPM-WMI, Time: 05/25/2025 16:45:10, Message: The Secure Boot update failed to update a Secure Boot variable with error Secure Boot is not enabled on this machine.. For more information, please see https://go.microsoft.com/fwlink/?linkid=2169931
+[2025-05-25 16:48:55] [INFO] Event ID: 2, Source: googledrivefs31626, Time: 05/25/2025 16:41:58, Message: The driver version of the disk does not match.
+[2025-05-25 16:48:55] [INFO] Event ID: 11, Source: Microsoft-Windows-Security-Kerberos, Time: 05/25/2025 16:41:17, Message: The Distinguished Name in the subject field of your smart card logon certificate does not contain enough information to identify the appropriate domain on an non-domain joined computer. Contact your system administrator.
+[2025-05-25 16:48:55] [INFO] Event ID: 7034, Source: Service Control Manager, Time: 05/25/2025 16:40:17, Message: The GameInput Service service terminated unexpectedly. It has done this 6 time(s).
+[2025-05-25 16:48:55] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:17, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:48:55] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:16, Message: The GameInput Service service terminated unexpectedly. It has done this 5 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:48:55] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:16, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:48:56] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:15, Message: The GameInput Service service terminated unexpectedly. It has done this 4 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:48:56] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:15, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:48:56] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:14, Message: The GameInput Service service terminated unexpectedly. It has done this 3 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:48:56] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:14, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:48:56] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:13, Message: The GameInput Service service terminated unexpectedly. It has done this 2 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:48:56] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:13, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:48:56] [INFO] Event ID: 7031, Source: Service Control Manager, Time: 05/25/2025 16:40:12, Message: The GameInput Service service terminated unexpectedly. It has done this 1 time(s). The following corrective action will be taken in 1000 milliseconds: Restart the service.
+[2025-05-25 16:48:56] [INFO] Event ID: 7023, Source: Service Control Manager, Time: 05/25/2025 16:40:12, Message: The GameInput Service service terminated with the following error: 
+The compound file GameInput Service was produced with a newer version of storage.
+[2025-05-25 16:48:56] [INFO] Running xperf to capture DPC/ISR data (30 seconds)...
+[2025-05-25 16:49:27] [INFO] xperf trace captured to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_164533.etl. Analyze with Windows Performance Analyzer.
+[2025-05-25 16:49:31] [INFO] Latency debug report saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyDebug_20250525_164533.json
+[2025-05-25 16:49:31] [INFO] Debug Recommendations:
+[2025-05-25 16:49:31] [INFO] - Review high-resource processes (e.g., Discord) for excessive CPU/memory usage or page faults.
+[2025-05-25 16:49:31] [INFO] - Review system event logs for errors related to drivers or hardware.
+[2025-05-25 16:49:31] [INFO] - Analyze C:\projects\workstation\6_Symbols\Logs\Reports\LatencyTrace_20250525_164533.etl with Windows Performance Analyzer to identify DPC/ISR sources.
+[2025-05-25 16:49:31] [INFO] Latency Evaluation: Overall: Bad
+[2025-05-25 16:49:31] [INFO] DPC Queue Rate: Bad (1463.65/sec)
+[2025-05-25 16:49:31] [INFO] Interrupt Rate: Bad (11530.1/sec)
+[2025-05-25 16:49:31] [INFO] Interrupt Time: Good (0%)
+[2025-05-25 16:49:31] [INFO] Page Faults: Bad (4175.79/sec)
+[2025-05-25 16:49:31] [INFO] Recommendations:
+[2025-05-25 16:49:31] [INFO] - High DPC queue rate detected. Run LatencyMon to identify problematic drivers (e.g., ndis.sys, ACPI.sys).
+[2025-05-25 16:49:31] [INFO] - High interrupt rate detected. Check for outdated network/GPU drivers or excessive hardware interrupts.
+[2025-05-25 16:49:31] [INFO] - High page faults detected. Check for memory-intensive applications or insufficient RAM.
+[2025-05-25 16:49:31] [INFO] - System is not suitable for real-time audio/streaming without optimization.
+[2025-05-25 16:49:31] [INFO] Latency evaluation saved to C:\projects\workstation\6_Symbols\Logs\Reports\LatencyEvaluation_20250525_164533.json
+[2025-05-25 16:49:31] [INFO] Latency Report Saved: C:\projects\workstation\6_Symbols\Logs\Reports\LatencyReport_20250525_164533.json
+[2025-05-25 16:49:44] [INFO] Performance metrics saved to C:\projects\workstation\6_Symbols\Logs\Reports\PerformanceReport_20250525_164533.json
+[2025-05-25 16:49:44] [INFO] System Performance Metrics:
+[2025-05-25 16:49:44] [INFO] CPU Usage: 0%
+[2025-05-25 16:49:44] [INFO] Memory Usage: 33.55%
+[2025-05-25 16:49:44] [INFO] GPU Usage: 1.22%
