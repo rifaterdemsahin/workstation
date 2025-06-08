@@ -1,0 +1,1 @@
+"C:\projects\workstation\6_Symbols\multimonitortool-x64\MultiMonitorTool.exe"  /MoveWindow 5 Process "PaintDotNet.exe"
