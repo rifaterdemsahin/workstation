@@ -116,7 +116,7 @@ add_to_context() {
 NEW_CONVERSATION=false
 SHOW_CONTEXT=false
 CLEAR_CONTEXT=false
-SAVE_TO_SECONDBRAIN=false
+SAVE_TO_SECONDBRAIN=true
 
 if [[ $# -eq 0 ]]; then
     if [[ -p /dev/stdin ]]; then
