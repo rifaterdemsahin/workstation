@@ -76,7 +76,7 @@ fi
 echo -e "${BLUE}🤖 Thinking...${NC}"
 
 # Escape quotes in input for JSON
-ESCAPED_INPUT=$(echo "$INPUT" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
+ESCAPED_INPUT=$(echo "$INPUT" | sed 's/"/\\"/g' | sed 's/$/\\n/' | tr -d '\n' | sed 's/\\n$//')
 
 # Create JSON payload
 JSON_PAYLOAD=$(cat <<EOF
