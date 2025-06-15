@@ -1,12 +1,18 @@
 #!/bin/bash
 
-# Simple AI CLI Tool
+# Simple AI CLI Tool with Context Support
 # Usage: ai "your question here"
 # Or: ai < file.txt
 # Or: echo "question" | ai
+# Or: ai --new "start a new conversation"
+# Or: ai --context "show current conversation context"
 
 # Default model
 MODEL="${AI_MODEL:-anthropic/claude-3.5-sonnet}"
+
+# Context file location
+CONTEXT_DIR="${HOME}/.ai_cli"
+CONTEXT_FILE="${CONTEXT_DIR}/conversation.json"
 
 # Colors
 RED='\033[0;31m'
@@ -31,13 +37,18 @@ fi
 
 # Help function
 show_help() {
-    echo -e "${BLUE}🤖 Simple AI CLI${NC}"
+    echo -e "${BLUE}🤖 Simple AI CLI with Context Support${NC}"
     echo ""
     echo -e "${GREEN}Usage:${NC}"
     echo "  ai \"What is today's date?\""
     echo "  ai \"Explain quantum physics\""
     echo "  echo \"Hello\" | ai"
     echo "  ai < myfile.txt"
+    echo ""
+    echo -e "${GREEN}Context Options:${NC}"
+    echo "  ai --new \"Start a new conversation\""
+    echo "  ai --context          Show current conversation context"
+    echo "  ai --clear            Clear conversation history"
     echo ""
     echo -e "${GREEN}Environment Variables:${NC}"
     echo "  OPENROUTER_API_KEY    Your API key (required)"
@@ -46,9 +57,60 @@ show_help() {
     echo -e "${GREEN}Examples:${NC}"
     echo "  export AI_MODEL=\"openai/gpt-4o\""
     echo "  ai \"Write a haiku about cats\""
+    echo "  ai \"Tell me more about their behavior\""
+}
+
+# Initialize context directory if it doesn't exist
+init_context() {
+    if [[ ! -d "$CONTEXT_DIR" ]]; then
+        mkdir -p "$CONTEXT_DIR"
+    fi
+    
+    if [[ ! -f "$CONTEXT_FILE" || "$1" == "new" ]]; then
+        echo '{"messages":[]}' > "$CONTEXT_FILE"
+        echo -e "${GREEN}✨ Started a new conversation${NC}"
+    fi
+}
+
+# Show current conversation context
+show_context() {
+    if [[ ! -f "$CONTEXT_FILE" ]]; then
+        echo -e "${YELLOW}⚠️ No active conversation${NC}"
+        return
+    fi
+    
+    echo -e "${BLUE}🔄 Current Conversation:${NC}"
+    echo ""
+    
+    # Extract and display messages in a readable format
+    jq -r '.messages[] | "\(.role): \(.content)"' "$CONTEXT_FILE" | while read -r line; do
+        role=${line%%: *}
+        content=${line#*: }
+        
+        if [[ "$role" == "user" ]]; then
+            echo -e "${YELLOW}You: ${NC}$content"
+        else
+            echo -e "${GREEN}AI: ${NC}$content"
+        fi
+        echo ""
+    done
+}
+
+# Add a message to the context
+add_to_context() {
+    local role="$1"
+    local content="$2"
+    
+    # Create a temporary file with the new message added
+    jq --arg role "$role" --arg content "$content" '.messages += [{"role": $role, "content": $content}]' "$CONTEXT_FILE" > "${CONTEXT_FILE}.tmp"
+    mv "${CONTEXT_FILE}.tmp" "$CONTEXT_FILE"
 }
 
 # Get input from command line argument, pipe, or stdin
+NEW_CONVERSATION=false
+SHOW_CONTEXT=false
+CLEAR_CONTEXT=false
+
 if [[ $# -eq 0 ]]; then
     if [[ -p /dev/stdin ]]; then
         # Input from pipe
@@ -61,9 +123,37 @@ if [[ $# -eq 0 ]]; then
 elif [[ "$1" == "--help" || "$1" == "-h" ]]; then
     show_help
     exit 0
+elif [[ "$1" == "--new" ]]; then
+    NEW_CONVERSATION=true
+    shift
+    INPUT="$*"
+elif [[ "$1" == "--context" ]]; then
+    SHOW_CONTEXT=true
+elif [[ "$1" == "--clear" ]]; then
+    CLEAR_CONTEXT=true
 else
     # Input from command line argument
     INPUT="$*"
+fi
+
+# Initialize context
+if [[ "$NEW_CONVERSATION" == true ]]; then
+    init_context "new"
+else
+    init_context
+fi
+
+# Show context if requested
+if [[ "$SHOW_CONTEXT" == true ]]; then
+    show_context
+    exit 0
+fi
+
+# Clear context if requested
+if [[ "$CLEAR_CONTEXT" == true ]]; then
+    init_context "new"
+    echo -e "${GREEN}✨ Conversation history cleared${NC}"
+    exit 0
 fi
 
 # Check if input is empty
@@ -78,17 +168,11 @@ echo -e "${BLUE}🤖 Thinking...${NC}"
 # Escape quotes in input for JSON
 ESCAPED_INPUT=$(echo "$INPUT" | sed 's/"/\\"/g' | sed 's/$/\\n/' | tr -d '\n' | sed 's/\\n$//')
 
-# Create JSON payload
-JSON_PAYLOAD=$(cat <<EOF
-{
-    "model": "$MODEL",
-    "messages": [
-        {"role": "user", "content": "$ESCAPED_INPUT"}
-    ],
-    "max_tokens": 4000
-}
-EOF
-)
+# Add user message to context
+add_to_context "user" "$INPUT"
+
+# Create JSON payload with full conversation history
+JSON_PAYLOAD=$(jq --arg model "$MODEL" '{model: $model, messages: .messages, max_tokens: 4000}' "$CONTEXT_FILE")
 
 # Make API call
 RESPONSE=$(curl -s https://openrouter.ai/api/v1/chat/completions \
@@ -117,6 +201,9 @@ if [[ -z "$CONTENT" || "$CONTENT" == "null" ]]; then
     echo -e "${YELLOW}Raw response: $RESPONSE${NC}"
     exit 1
 fi
+
+# Add assistant response to context
+add_to_context "assistant" "$CONTENT"
 
 # Output the response
 echo ""
