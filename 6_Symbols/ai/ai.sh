@@ -6,6 +6,7 @@
 # Or: echo "question" | ai
 # Or: ai --new "start a new conversation"
 # Or: ai --context "show current conversation context"
+# Or: ai --save "save conversation to secondbrain and commit"
 
 # Default model
 MODEL="${AI_MODEL:-anthropic/claude-3.5-sonnet}"
@@ -13,6 +14,9 @@ MODEL="${AI_MODEL:-anthropic/claude-3.5-sonnet}"
 # Context file location
 CONTEXT_DIR="${HOME}/.ai_cli"
 CONTEXT_FILE="${CONTEXT_DIR}/conversation.json"
+
+# Secondbrain location
+SECONDBRAIN_DIR="/Users/rifaterdemsahin/projects/secondbrain/secondbrain/4 _Archieve"
 
 # Colors
 RED='\033[0;31m'
@@ -49,6 +53,7 @@ show_help() {
     echo "  ai --new \"Start a new conversation\""
     echo "  ai --context          Show current conversation context"
     echo "  ai --clear            Clear conversation history"
+    echo "  ai --save \"Save conversation to secondbrain and commit\""
     echo ""
     echo -e "${GREEN}Environment Variables:${NC}"
     echo "  OPENROUTER_API_KEY    Your API key (required)"
@@ -106,10 +111,61 @@ add_to_context() {
     mv "${CONTEXT_FILE}.tmp" "$CONTEXT_FILE"
 }
 
+# Save conversation to secondbrain and commit
+save_to_secondbrain() {
+    # Check if secondbrain directory exists
+    if [[ ! -d "$SECONDBRAIN_DIR" ]]; then
+        echo -e "${RED}❌ Error: Secondbrain directory not found: $SECONDBRAIN_DIR${NC}"
+        exit 1
+    fi
+    
+    # Generate unique filename based on date
+    local timestamp=$(date +"%Y%m%d_%H%M%S")
+    local filename="${timestamp}_openrouter.md"
+    local filepath="${SECONDBRAIN_DIR}/${filename}"
+    
+    # Create markdown content
+    local markdown="# OpenRouter Conversation - $(date +"%Y-%m-%d %H:%M:%S")\n\n"
+    
+    # Add conversation to markdown
+    jq -r '.messages[] | "\(.role): \(.content)"' "$CONTEXT_FILE" | while read -r line; do
+        role=${line%%: *}
+        content=${line#*: }
+        
+        if [[ "$role" == "user" ]]; then
+            markdown+="## 🧑 User\n\n$content\n\n"
+        else
+            markdown+="## 🤖 AI\n\n$content\n\n"
+        fi
+    done
+    
+    # Save to file
+    echo -e "$markdown" > "$filepath"
+    
+    # Git operations
+    cd "$SECONDBRAIN_DIR/.." || exit 1
+    
+    # Check if git repository
+    if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+        echo -e "${YELLOW}⚠️ Not a git repository, saving file without commit${NC}"
+        echo -e "${GREEN}✅ Saved conversation to: $filepath${NC}"
+        return
+    fi
+    
+    # Add, commit and push
+    git add "$filepath"
+    git commit -m "Add AI conversation: $filename"
+    git push
+    
+    echo -e "${GREEN}✅ Saved conversation to: $filepath${NC}"
+    echo -e "${GREEN}✅ Committed and pushed to git repository${NC}"
+}
+
 # Get input from command line argument, pipe, or stdin
 NEW_CONVERSATION=false
 SHOW_CONTEXT=false
 CLEAR_CONTEXT=false
+SAVE_TO_SECONDBRAIN=false
 
 if [[ $# -eq 0 ]]; then
     if [[ -p /dev/stdin ]]; then
@@ -131,6 +187,10 @@ elif [[ "$1" == "--context" ]]; then
     SHOW_CONTEXT=true
 elif [[ "$1" == "--clear" ]]; then
     CLEAR_CONTEXT=true
+elif [[ "$1" == "--save" ]]; then
+    SAVE_TO_SECONDBRAIN=true
+    shift
+    INPUT="$*"
 else
     # Input from command line argument
     INPUT="$*"
@@ -153,6 +213,12 @@ fi
 if [[ "$CLEAR_CONTEXT" == true ]]; then
     init_context "new"
     echo -e "${GREEN}✨ Conversation history cleared${NC}"
+    exit 0
+fi
+
+# Save to secondbrain if requested
+if [[ "$SAVE_TO_SECONDBRAIN" == true && -z "$INPUT" ]]; then
+    save_to_secondbrain
     exit 0
 fi
 
@@ -210,3 +276,8 @@ echo ""
 echo -e "${GREEN}✨ Response:${NC}"
 echo "$CONTENT"
 echo ""
+
+# Save to secondbrain if requested
+if [[ "$SAVE_TO_SECONDBRAIN" == true ]]; then
+    save_to_secondbrain
+fi
