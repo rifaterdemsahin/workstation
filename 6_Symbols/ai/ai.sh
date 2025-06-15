@@ -6,6 +6,8 @@
 # Or: echo "question" | ai
 # Or: ai --new "start a new conversation"
 # Or: ai --context "show current conversation context"
+# Or: ai --clear "clear conversation history"
+# Or: ai --save "save conversation to second brain"
 
 # Default model
 MODEL="${AI_MODEL:-anthropic/claude-3.5-sonnet}"
@@ -49,6 +51,7 @@ show_help() {
     echo "  ai --new \"Start a new conversation\""
     echo "  ai --context          Show current conversation context"
     echo "  ai --clear            Clear conversation history"
+    echo "  ai --save \"Query to save to second brain\""
     echo ""
     echo -e "${GREEN}Environment Variables:${NC}"
     echo "  OPENROUTER_API_KEY    Your API key (required)"
@@ -106,17 +109,44 @@ add_to_context() {
     mv "${CONTEXT_FILE}.tmp" "$CONTEXT_FILE"
 }
 
-# Get input from command line argument, pipe, or stdin
-# Sample values:
-# NEW_CONVERSATION=true    # Set to true to start a new conversation
-# SHOW_CONTEXT=true        # Set to true to display the current conversation context
-# CLEAR_CONTEXT=true       # Set to true to clear the conversation history
-# SAVE_TO_SECONDBRAIN=true # Set to true to save the conversation to your second brain
+# Save conversation to second brain
+save_to_secondbrain() {
+    local conversation_id=$(date +%Y%m%d%H%M%S)
+    local save_dir="${HOME}/secondbrain/ai_conversations"
+    local save_file="${save_dir}/conversation_${conversation_id}.md"
+    
+    # Create directory if it doesn't exist
+    if [[ ! -d "$save_dir" ]]; then
+        mkdir -p "$save_dir"
+    fi
+    
+    # Create markdown file with conversation
+    echo "# AI Conversation - $(date)" > "$save_file"
+    echo "" >> "$save_file"
+    
+    # Extract and save messages in markdown format
+    jq -r '.messages[] | "\(.role): \(.content)"' "$CONTEXT_FILE" | while read -r line; do
+        role=${line%%: *}
+        content=${line#*: }
+        
+        if [[ "$role" == "user" ]]; then
+            echo "## User" >> "$save_file"
+        else
+            echo "## Assistant" >> "$save_file"
+        fi
+        
+        echo "$content" >> "$save_file"
+        echo "" >> "$save_file"
+    done
+    
+    echo -e "${GREEN}✨ Conversation saved to second brain: $save_file${NC}"
+}
 
+# Get input from command line argument, pipe, or stdin
 NEW_CONVERSATION=false
 SHOW_CONTEXT=false
 CLEAR_CONTEXT=false
-SAVE_TO_SECONDBRAIN=true
+SAVE_TO_SECONDBRAIN=false
 
 if [[ $# -eq 0 ]]; then
     if [[ -p /dev/stdin ]]; then
@@ -138,6 +168,10 @@ elif [[ "$1" == "--context" ]]; then
     SHOW_CONTEXT=true
 elif [[ "$1" == "--clear" ]]; then
     CLEAR_CONTEXT=true
+elif [[ "$1" == "--save" ]]; then
+    SAVE_TO_SECONDBRAIN=true
+    shift
+    INPUT="$*"
 else
     # Input from command line argument
     INPUT="$*"
@@ -211,6 +245,11 @@ fi
 
 # Add assistant response to context
 add_to_context "assistant" "$CONTENT"
+
+# Save to second brain if requested
+if [[ "$SAVE_TO_SECONDBRAIN" == true ]]; then
+    save_to_secondbrain
+fi
 
 # Output the response
 echo ""
