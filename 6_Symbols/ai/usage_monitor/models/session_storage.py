@@ -87,8 +87,8 @@ class SessionStorage:
                 last_entry = json.loads(lines[-1])
                 last_timestamp = datetime.fromisoformat(last_entry['timestamp'].replace('Z', '+00:00'))
                 
-                # Check if within 30 minutes (temporarily reduced to 10 seconds for testing)
-                return datetime.now(timezone.utc) - last_timestamp < timedelta(seconds=10)
+                # Check if within 30 minutes
+                return datetime.now(timezone.utc) - last_timestamp < timedelta(minutes=30)
         except (json.JSONDecodeError, KeyError, ValueError):
             return False
     
