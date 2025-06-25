@@ -204,7 +204,7 @@ if [[ -z "$INPUT" ]]; then
 fi
 
 # Show what we're doing
-echo -e "${BLUE}🤖 Thinking...${NC}"
+echo -e "${BLUE}🧠 AI is thinking...${NC}"
 
 # Escape quotes in input for JSON
 ESCAPED_INPUT=$(echo "$INPUT" | sed 's/"/\\"/g' | sed 's/$/\\n/' | tr -d '\n' | sed 's/\\n$//')
@@ -251,8 +251,12 @@ if [[ "$SAVE_TO_SECONDBRAIN" == true ]]; then
     save_to_secondbrain
 fi
 
-# Output the response
+# Output the response with visual separator
 echo ""
-echo -e "${GREEN}✨ Response:${NC}"
+echo -e "${RED}████████████████████████████████████████████████████████████████████████████████${NC}"
+echo -e "${GREEN}🤖 AI Response:${NC}"
+echo -e "${RED}████████████████████████████████████████████████████████████████████████████████${NC}"
+echo ""
 echo "$CONTENT"
 echo ""
+echo -e "${RED}████████████████████████████████████████████████████████████████████████████████${NC}"
