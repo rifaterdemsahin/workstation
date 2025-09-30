@@ -1,0 +1,45 @@
+[2025-09-30 09:49:37] [INFO] Starting Voice Assistant Disable Script
+[2025-09-30 09:49:37] [INFO] This script will disable Cortana and voice assistant features
+[2025-09-30 09:49:37] [INFO] Disabling Cortana service...
+[2025-09-30 09:49:37] [INFO] Cortana service stopped
+[2025-09-30 09:49:37] [ERROR] Failed to disable Cortana service: Service Cortana was not found on computer '.'.
+[2025-09-30 09:49:37] [INFO] Disabling voice-related services...
+[2025-09-30 09:49:37] [WARNING] Cortana service not found
+[2025-09-30 09:49:37] [WARNING] SpeechRuntime service not found
+[2025-09-30 09:49:37] [WARNING] SpeechService service not found
+[2025-09-30 09:49:37] [WARNING] WindowsSpeechPlatform service not found
+[2025-09-30 09:49:37] [WARNING] VoiceActivationService service not found
+[2025-09-30 09:49:37] [INFO] Disabling Cortana via registry...
+[2025-09-30 09:49:38] [INFO] Created registry path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search
+[2025-09-30 09:49:38] [INFO] Cortana disabled in Windows Search policy
+[2025-09-30 09:49:38] [INFO] Web search disabled
+[2025-09-30 09:49:38] [INFO] Cortana consent disabled
+[2025-09-30 09:49:38] [INFO] Cortana voice activation disabled
+[2025-09-30 09:49:38] [INFO] Disabling voice features in Windows settings...
+[2025-09-30 09:49:38] [INFO] Voice activation disabled in user settings
+[2025-09-30 09:49:38] [INFO] Speech recognition disabled
+[2025-09-30 09:49:38] [INFO] Microphone access for voice assistant denied
+[2025-09-30 09:49:38] [INFO] Disabling Windows Hello voice features...
+[2025-09-30 09:49:38] [INFO] Windows Hello biometrics disabled
+[2025-09-30 09:49:38] [INFO] Voice wake-up disabled
+[2025-09-30 09:49:38] [INFO] Disabling voice assistant in Microsoft Edge...
+[2025-09-30 09:49:38] [INFO] Cortana disabled in Edge
+[2025-09-30 09:49:38] [INFO] Voice search disabled in Edge
+[2025-09-30 09:49:38] [INFO] Creating startup script to ensure voice assistant stays disabled...
+[2025-09-30 09:49:38] [INFO] Startup script created: C:\projects\workstation\5_Formula\DisableVoiceAssistant_Startup.ps1
+[2025-09-30 09:49:38] [INFO] Scheduled task created to run at startup
+[2025-09-30 09:49:38] [INFO] Verifying voice assistant is disabled...
+[2025-09-30 09:49:38] [ERROR] Cortana service is not disabled
+[2025-09-30 09:49:38] [ERROR] SpeechRuntime service is not disabled
+[2025-09-30 09:49:38] [ERROR] SpeechService service is not disabled
+[2025-09-30 09:49:38] [ERROR] WindowsSpeechPlatform service is not disabled
+[2025-09-30 09:49:38] [ERROR] VoiceActivationService service is not disabled
+[2025-09-30 09:49:39] [INFO] Cortana registry policy is disabled
+[2025-09-30 09:49:39] [WARNING] Voice assistant is partially disabled - some features may still be active
+[2025-09-30 09:49:39] [INFO] Voice Assistant Disable Script completed
+[2025-09-30 09:49:39] [INFO] Log file saved to: C:\projects\workstation\5_Formula\DisableVoiceAssistant_20250930_094937.log
+[2025-09-30 09:49:39] [INFO] Verification Results:
+[2025-09-30 09:49:39] [INFO] Overall Status: Partially Disabled
+[2025-09-30 09:49:39] [INFO] Cortana Service: False
+[2025-09-30 09:49:39] [INFO] Voice Services: SpeechRuntime: Not Disabled, SpeechService: Not Disabled, WindowsSpeechPlatform: Not Disabled, VoiceActivationService: Not Disabled
+[2025-09-30 09:49:39] [INFO] Registry Settings: Cortana Policy: Disabled
