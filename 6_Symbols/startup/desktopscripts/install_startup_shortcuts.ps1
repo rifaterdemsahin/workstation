@@ -7,7 +7,8 @@ if (-not $ScriptDir) { $ScriptDir = Get-Location }
 
 $ScriptsToInstall = @(
     "launch_chrome_urls.ps1",
-    "start_gemini_secondbrain.ps1"
+    "start_gemini_secondbrain.ps1",
+    "run_updates_admin.ps1"
 )
 
 $WScriptShell = New-Object -ComObject WScript.Shell
