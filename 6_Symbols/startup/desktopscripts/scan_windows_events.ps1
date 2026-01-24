@@ -24,57 +24,66 @@ Function Write-Header {
     Write-Host "================================================================================" -ForegroundColor Cyan
 }
 
-Function Search-EventLog {
-    param (
-        [string]$LogName
-    )
-
-    Write-Header "Scanning $LogName Log (Last $HoursBack Hours)"
-
+Function Get-HardwareAppEvents {
+    param ([string]$LogName)
     try {
-        $events = Get-EventLog -LogName $LogName -After $StartDate -EntryType Error, Warning -ErrorAction SilentlyContinue
-
-        if (-not $events) {
-            Write-Host "  [OK] No issues found." -ForegroundColor Green
-            return
-        }
-
-        $events | Sort-Object TimeGenerated | ForEach-Object {
-            $type = $_.EntryType
-            $time = $_.TimeGenerated.ToString("yyyy-MM-dd HH:mm:ss")
-            $source = $_.Source
-            # Clean message: remove newlines, take first 150 chars
-            $message = ($_.Message -replace "[\r\n]+", " ").Trim()
-            if ($message.Length -gt 150) { $message = $message.Substring(0, 150) + "..." }
-
-            $color = if ($type -eq "Error") { "Red" } else { "Yellow" }
-            
-            Write-Host "  [$time] [$type] [$source]" -ForegroundColor $color -NoNewline
-            Write-Host " $message" -ForegroundColor Gray
-        }
-        
-        $errorCount = ($events | Where-Object { $_.EntryType -eq 'Error' }).Count
-        $warnCount = ($events | Where-Object { $_.EntryType -eq 'Warning' }).Count
-        
-        Write-Host "`n  Summary: " -NoNewline
-        if ($errorCount -gt 0) { Write-Host "$errorCount Errors " -ForegroundColor Red -NoNewline }
-        if ($warnCount -gt 0) { Write-Host "$warnCount Warnings" -ForegroundColor Yellow }
-        
+        $found = Get-EventLog -LogName $LogName -After $StartDate -EntryType Error, Warning -ErrorAction SilentlyContinue 
+        if ($found) { return $found }
     }
     catch {
         Write-Host "  [ERROR] Could not read log $LogName. (Run as Administrator?)" -ForegroundColor Red
-        Write-Host "  Details: $_" -ForegroundColor DarkRed
     }
+    return @()
 }
 
 Clear-Host
 Write-Header "Starting Windows Hardware & Application Event Scanner"
 
-# System Log (Hardware, Driver, Service issues often appear here)
-Search-EventLog -LogName "System"
+Write-Host "Scanning System and Application logs (Last $HoursBack Hours)..." -ForegroundColor Cyan
 
-# Application Log (App crashes, hangs, issues)
-Search-EventLog -LogName "Application"
+$allEvents = @()
+$allEvents += Get-HardwareAppEvents -LogName "System"
+$allEvents += Get-HardwareAppEvents -LogName "Application"
+
+# ------- Summary Section -------
+if ($allEvents.Count -eq 0) {
+    Write-Host "`n  [OK] No issues found." -ForegroundColor Green
+}
+else {
+    # 1. Top Recurring Issues
+    $groupedEvents = $allEvents | Group-Object Source, InstanceId | Sort-Object Count -Descending | Select-Object -First 10
+    
+    Write-Header "Top Recurring Issues"
+    foreach ($group in $groupedEvents) {
+        $first = $group.Group[0]
+        $msg = ($first.Message -replace "[\r\n]+", " ").Trim()
+        if ($msg.Length -gt 90) { $msg = $msg.Substring(0, 90) + "..." }
+        
+        $color = if ($first.EntryType -eq 'Error') { 'Red' } else { 'Yellow' }
+        Write-Host "  [$($group.Count)x] [$($first.Log)] [$($first.Source)] $msg" -ForegroundColor $color
+    }
+
+    # 2. Total Counts & Last Restart Stats
+    $errorCount = ($allEvents | Where-Object { $_.EntryType -eq 'Error' }).Count
+    $warnCount = ($allEvents | Where-Object { $_.EntryType -eq 'Warning' }).Count
+    
+    # Calculate Last Restart Stats
+    $lastBoot = Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object -ExpandProperty LastBootUpTime
+    $sinceRestartCount = ($allEvents | Where-Object { $_.EntryType -eq 'Error' -and $_.TimeGenerated -ge $lastBoot }).Count
+    $bootTimeStr = $lastBoot.ToString("yyyy-MM-dd HH:mm")
+
+    Write-Host "`n  Total Summary (Last 24h): " -NoNewline
+    if ($errorCount -gt 0) { Write-Host "$errorCount Errors " -ForegroundColor Red -NoNewline }
+    if ($warnCount -gt 0) { Write-Host "$warnCount Warnings" -ForegroundColor Yellow }
+    
+    Write-Host "`n  Since Last Restart ($bootTimeStr): " -NoNewline
+    if ($sinceRestartCount -gt 0) { 
+        Write-Host "$sinceRestartCount Errors" -ForegroundColor Red
+    }
+    else {
+        Write-Host "0 Errors" -ForegroundColor Green
+    }
+}
 
 # Function to show a graphical close button
 Function Show-CloseButton {
@@ -82,7 +91,30 @@ Function Show-CloseButton {
     [System.Windows.Forms.MessageBox]::Show("Scan Complete. Click OK to close the terminal.", "Hardware & App Scanner", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
 }
 
-Write-Header "Scan Complete"
-Write-Host "Waiting for user to close..." -ForegroundColor Cyan
-Show-CloseButton
+# ------- Interaction Section -------
+Write-Host "`n`nPress 'L' to list individual errors." -ForegroundColor Cyan -NoNewline
+Write-Host " Any other key to close." -ForegroundColor Gray
+$key = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+
+if ($key.Character -eq 'l' -or $key.Character -eq 'L') {
+    Write-Header "Detailed Event Log"
+    
+    $allEvents | Sort-Object TimeGenerated | ForEach-Object {
+        $type = $_.EntryType
+        $time = $_.TimeGenerated.ToString("yyyy-MM-dd HH:mm:ss")
+        $source = $_.Source
+        $log = $_.Log
+        $message = ($_.Message -replace "[\r\n]+", " ").Trim()
+        if ($message.Length -gt 150) { $message = $message.Substring(0, 150) + "..." }
+
+        $color = if ($type -eq "Error") { "Red" } else { "Yellow" }
+        
+        Write-Host "  [$time] [$log] [$type] [$source]" -ForegroundColor $color -NoNewline
+        Write-Host " $message" -ForegroundColor Gray
+    }
+    
+    Write-Host "`nEnd of List." -ForegroundColor Cyan
+    Show-CloseButton
+}
+
 $Host.UI.RawUI.WindowTitle = $originalTitle
