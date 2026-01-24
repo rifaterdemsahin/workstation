@@ -8,7 +8,8 @@ if (-not $ScriptDir) { $ScriptDir = Get-Location }
 $ScriptsToInstall = @(
     "launch_chrome_urls.ps1",
     "start_gemini_secondbrain.ps1",
-    "run_updates_admin.ps1"
+    "run_updates_admin.ps1",
+    "scan_windows_events.ps1"
 )
 
 $WScriptShell = New-Object -ComObject WScript.Shell
@@ -22,7 +23,11 @@ foreach ($ScriptName in $ScriptsToInstall) {
         
         $Shortcut = $WScriptShell.CreateShortcut($ShortcutPath)
         $Shortcut.TargetPath = "powershell.exe"
-        $Shortcut.Arguments = "-ExecutionPolicy Bypass -WindowStyle Hidden -File `"$TargetScript`""
+        
+        # Determine window style: Scan events needs to be seen (Normal), others Hidden
+        $windowStyle = if ($ScriptName -eq "scan_windows_events.ps1") { "Normal" } else { "Hidden" }
+        
+        $Shortcut.Arguments = "-ExecutionPolicy Bypass -WindowStyle $windowStyle -File `"$TargetScript`""
         $Shortcut.WorkingDirectory = $ScriptDir
         $Shortcut.Description = "Startup Script for $ScriptName"
         $Shortcut.Save()
