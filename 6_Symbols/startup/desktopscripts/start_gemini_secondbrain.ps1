@@ -2,7 +2,7 @@
 # Purpose: Open a new terminal window, navigate to Second Brain repo, and start Gemini
 # Date: $(Get-Date -Format "yyyy-MM-dd")
 
-$SecondBrainPath = "C:\projects\secondbrain"
+$SecondBrainPath = "F:\secondbrain_v4\secondbrain"
 if (-not (Test-Path $SecondBrainPath)) {
     $SecondBrainPath = "F:\secondbrain_v4\secondbrain"
 }
