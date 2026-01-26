@@ -32,7 +32,11 @@ $Config = @{
         "https://huggingface.co/models",
         "https://www.speedtest.net/result/18645473959",
         "https://calendly.com/rifaterdemsahin",
-        "https://192.168.3.1/#Security/Firewall/Policies"
+        "https://192.168.3.1/#Security/Firewall/Policies",
+        "https://studio.youtube.com/channel/UCSJyG3bTM7lnjMIZcV8C4OQ/analytics/tab-overview/period-default",
+        "https://rifaterdemsahin.github.io/contractormarketing-email-helper/blacklist.html",
+        "https://www.remotion.dev/",
+        "http://localhost:3000/MapOfConsciousness"
     )
 }
 
@@ -176,6 +180,14 @@ try {
     Write-Host "=======================================" -ForegroundColor Cyan
     Write-Host "🚀 Telegram & Gemini Chrome Launcher" -ForegroundColor Green
     Write-Host "=======================================" -ForegroundColor Cyan
+    
+    Write-Host "#########################################################" -ForegroundColor Yellow
+    Write-Host "#                                                       #" -ForegroundColor Yellow
+    Write-Host "#   PLEASE OPEN CHROME IN THE VERTICAL SCREEN           #" -ForegroundColor Yellow
+    Write-Host "#                                                       #" -ForegroundColor Yellow
+    Write-Host "#   USE VERTICAL TABS CHROME EXTENSION                  #" -ForegroundColor Yellow
+    Write-Host "#                                                       #" -ForegroundColor Yellow
+    Write-Host "#########################################################" -ForegroundColor Yellow
     
     Write-Log "Script started at $(Get-Date)"
     

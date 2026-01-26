@@ -1,5 +1,5 @@
 # GPU Diagnostic Startup Service
-# Runs at Windows startup and logs results
+# Runs at User Logon and logs results
 # Minimal performance impact - runs in background
 
 # Configuration

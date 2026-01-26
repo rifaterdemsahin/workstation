@@ -70,9 +70,9 @@ try {
     }
 }
 
-# Create trigger (at system startup)
-`$trigger = New-ScheduledTaskTrigger -AtStartup
-`$trigger.Delay = 'PT2M'  # 2 minute delay after startup to avoid startup congestion
+# Create trigger (at user logon)
+`$trigger = New-ScheduledTaskTrigger -AtLogOn
+`$trigger.Delay = 'PT30S'  # 30 second delay after logon to avoid congestion
 
 # Create action (run PowerShell script)
 `$action = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument \"-NoProfile -ExecutionPolicy Bypass -File `'`$scriptPath`'\" -WorkingDirectory 'C:\Windows\System32'
@@ -84,7 +84,7 @@ try {
 try {
     Register-ScheduledTask -TaskName `$taskName -TaskPath `$taskFolder -Trigger `$trigger -Action `$action -Settings `$settings -RunLevel Highest -Force -ErrorAction Stop
     Write-Host '[✓] Scheduled task created successfully'
-    Write-Host '[✓] Task will run 2 minutes after Windows startup'
+    Write-Host '[✓] Task will run 30 seconds after User Logon'
 } catch {
     Write-Host '[✗] Failed to create scheduled task: ' `$_.Exception.Message
     exit 1
@@ -100,14 +100,14 @@ if %errorLevel% equ 0 (
     echo Task Details:
     echo - Name: %TASK_NAME%
     echo - Folder: %TASK_FOLDER%
-    echo - Trigger: At Windows startup (2 minute delay)
+    echo - Trigger: At User Logon (30s delay)
     echo - Runs as: System (HIGHEST privilege)
     echo.
     echo Log Files Location:
     echo   C:\ProgramData\GPU_Diagnostics\diagnostic_YYYY-MM-DD.log
     echo   C:\ProgramData\GPU_Diagnostics\latest_report.txt
     echo.
-    echo The diagnostic will run automatically at each startup!
+    echo The diagnostic will run automatically at each logon!
     echo.
     pause
 ) else (
