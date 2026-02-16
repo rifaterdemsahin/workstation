@@ -156,7 +156,7 @@ To add more scripts to the startup:
 To use a different Ollama model:
 
 1. Edit `start_ollama.ps1`
-2. Change the `$ModelName` variable (line 6):
+2. Change the `$ModelName` variable (line 7):
    ```powershell
    $ModelName = "your-model-name"
    ```
