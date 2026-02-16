@@ -124,17 +124,16 @@ function Test-ModelRunning {
     Write-Log "Running test with model '$Model'..."
     
     try {
-        # Run a simple embedding test
-        $testProcess = Start-Process -FilePath "ollama" -ArgumentList "run", $Model, "test" -Wait -PassThru -NoNewWindow -RedirectStandardOutput "$PSScriptRoot\ollama_test_output.txt" -ErrorAction SilentlyContinue
+        # Run a simple test by checking if model exists via API
+        $response = Invoke-RestMethod -Uri "http://localhost:11434/api/tags" -Method GET -ErrorAction SilentlyContinue
+        $modelExists = $response.models | Where-Object { $_.name -like "$Model*" }
         
-        if ($testProcess.ExitCode -eq 0) {
-            Write-Log "Model '$Model' is working correctly."
-            # Clean up test output
-            Remove-Item "$PSScriptRoot\ollama_test_output.txt" -ErrorAction SilentlyContinue
+        if ($null -ne $modelExists) {
+            Write-Log "Model '$Model' is available and ready."
             return $true
         }
         else {
-            Write-Log "WARNING: Model test returned exit code: $($testProcess.ExitCode)"
+            Write-Log "WARNING: Model '$Model' not found in available models."
             return $false
         }
     }
