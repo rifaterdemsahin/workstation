@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workstation Setup & Configuration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 20px 0 10px 0;
+        }
+        
+        .section p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .folder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .folder-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .folder-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .folder-card h3 {
+            color: #667eea;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+        
+        .folder-card .emoji {
+            font-size: 2em;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .folder-card p {
+            color: #555;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+        }
+        
+        .folder-card .action {
+            color: #764ba2;
+            font-weight: bold;
+            font-style: italic;
+        }
+        
+        .key-features {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .key-features ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .key-features li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .key-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .links a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        
+        .links a:hover {
+            background: #764ba2;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        .table-section {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        table tr:hover {
+            background: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🖥️ Workstation Setup & Configuration</h1>
+            <p>Self Learning Project Template - Filling Skills Gaps Through Technology</p>
+        </header>
+        
+        <div class="content">
+            <section class="section">
+                <h2>🎯 Project Overview</h2>
+                <p>
+                    This workstation project serves as a comprehensive setup and configuration guide for a development 
+                    environment. It follows a structured self-learning approach, organizing resources, scripts, 
+                    documentation, and implementations across multiple domains.
+                </p>
+                
+                <div class="key-features">
+                    <h3>Key Features:</h3>
+                    <ul>
+                        <li>Automated startup scripts for Windows</li>
+                        <li>PowerShell automation tools</li>
+                        <li>Docker and Kubernetes configurations</li>
+                        <li>AI and machine learning integrations</li>
+                        <li>Hardware setup and driver management</li>
+                        <li>Multi-monitor configurations</li>
+                        <li>Backup and restore utilities</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2>📁 Project Structure</h2>
+                <p>The project is organized into seven main sections, each serving a specific purpose in the learning journey:</p>
+                
+                <div class="folder-grid">
+                    <div class="folder-card">
+                        <span class="emoji">🌍</span>
+                        <h3>1. Journey</h3>
+                        <p>Learning paths and progress tracking</p>
+                        <p class="action">Track your learning journey</p>
+                    </div>
+                    
+                    <div class="folder-card">
+                        <span class="emoji">🎯</span>
+                        <h3>2. Real</h3>
+                        <p>Job objectives and key results</p>
+                        <p class="action">Aim > Goals</p>
+                    </div>
+                    
+                    <div class="folder-card">
+                        <span class="emoji">🌳</span>
+                        <h3>3. Environment</h3>
+                        <p>Roadmap, modules, and use cases</p>
+                        <p class="action">Create > Runtimes</p>
+                    </div>
+                    
+                    <div class="folder-card">
+                        <span class="emoji">🖼️</span>
+                        <h3>4. UI</h3>
+                        <p>Screenshots and visual documentation</p>
+                        <p class="action">Capture > Screenshots</p>
+                    </div>
+                    
+                    <div class="folder-card">
+                        <span class="emoji">📐</span>
+                        <h3>5. Formula</h3>
+                        <p>Essential guides and formulas</p>
+                        <p class="action">GPT > Learn from it</p>
+                    </div>
+                    
+                    <div class="folder-card">
+                        <span class="emoji">🔣</span>
+                        <h3>6. Symbols</h3>
+                        <p>Code implementations and examples</p>
+                        <p class="action">Execute > Code</p>
+                    </div>
+                    
+                    <div class="folder-card">
+                        <span class="emoji">🌀</span>
+                        <h3>7. Semblance</h3>
+                        <p>Errors and solutions documented</p>
+                        <p class="action">Fix > Errors</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2>🚀 Startup Scripts</h2>
+                <p>Automated startup scripts located in <code>6_Symbols/startup/desktopscripts/</code>:</p>
+                
+                <div class="table-section">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Script</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>launch_chrome_urls.ps1</td>
+                                <td>Launches Chrome with specific profiles and URLs</td>
+                            </tr>
+                            <tr>
+                                <td>start_gemini_secondbrain.ps1</td>
+                                <td>Opens terminal and starts Gemini agent</td>
+                            </tr>
+                            <tr>
+                                <td>run_updates_admin.ps1</td>
+                                <td>Checks and runs system updates (Winget, Chocolatey)</td>
+                            </tr>
+                            <tr>
+                                <td>scan_windows_events.ps1</td>
+                                <td>Scans Windows event logs for issues</td>
+                            </tr>
+                            <tr>
+                                <td>start_ollama.ps1</td>
+                                <td>Starts Ollama service with nomic-embed-text model</td>
+                            </tr>
+                            <tr>
+                                <td>install_startup_shortcuts.ps1</td>
+                                <td>Installs all startup scripts to Windows Startup folder</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2>🤖 AI & Machine Learning</h2>
+                <p>
+                    The project includes AI integrations with tools like Ollama for running local language models. 
+                    The startup scripts automatically initialize the Ollama service with the nomic-embed-text model 
+                    for text embeddings and semantic search capabilities.
+                </p>
+            </section>
+            
+            <section class="section">
+                <h2>📚 Quick Links</h2>
+                <div class="links">
+                    <a href="readme.md">Main README</a>
+                    <a href="6_Symbols/startup/desktopscripts/startup_installation.md">Startup Installation Guide</a>
+                    <a href="2_Real/README.md">Objectives & Key Results</a>
+                    <a href="5_Formula/README.md">Guides & Formulas</a>
+                    <a href="6_Symbols/README.md">Code Examples</a>
+                    <a href="7_Semblance/README.md">Error Solutions</a>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2>💻 Technologies & Tools</h2>
+                <div class="key-features">
+                    <ul>
+                        <li>PowerShell automation scripts</li>
+                        <li>Docker containerization</li>
+                        <li>Kubernetes orchestration</li>
+                        <li>Azure cloud services</li>
+                        <li>Ollama AI models</li>
+                        <li>AutoHotkey macros</li>
+                        <li>OBS Studio configurations</li>
+                        <li>Multi-monitor tools</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <p>&copy; 2024 Workstation Project | Self Learning Template</p>
+            <p>Goal: Fill the skills gaps by self learning while leveraging technology</p>
+        </footer>
+    </div>
+</body>
+</html>

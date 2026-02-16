@@ -10,6 +10,7 @@ $ScriptsToInstall = @(
     "start_gemini_secondbrain.ps1",
     "run_updates_admin.ps1",
     "scan_windows_events.ps1",
+    "start_ollama.ps1",
     "gpudiag\GPU_Diagnostic_Startup.ps1"
 )
 
