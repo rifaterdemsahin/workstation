@@ -125,7 +125,7 @@ function Test-ModelRunning {
     
     try {
         # Run a simple embedding test
-        $testProcess = Start-Process -FilePath "ollama" -ArgumentList "run", $Model, "test" -Wait -PassThru -WindowStyle Hidden -RedirectStandardOutput "$PSScriptRoot\ollama_test_output.txt" -ErrorAction SilentlyContinue
+        $testProcess = Start-Process -FilePath "ollama" -ArgumentList "run", $Model, "test" -Wait -PassThru -NoNewWindow -RedirectStandardOutput "$PSScriptRoot\ollama_test_output.txt" -ErrorAction SilentlyContinue
         
         if ($testProcess.ExitCode -eq 0) {
             Write-Log "Model '$Model' is working correctly."
