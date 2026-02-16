@@ -9,6 +9,7 @@ This document describes how to configure the workstation startup scripts to run 
 1. **launch_chrome_urls.ps1**: Launches Chrome with a specific profile and opens a set of defined URLs (Telegram, Gemini, etc.).
 2. **start_gemini_secondbrain.ps1**: Opens a new terminal, navigates to the Second Brain repository, and launches the Gemini agent.
 3. **run_updates_admin.ps1**: Checks for updates (Winget, Chocolatey, Windows Update) and runs them. Automatically prompts for Admin privileges if needed.
+4. **start_ollama.ps1**: Starts Ollama service automatically at Windows startup and ensures the nomic-embed-text model is available for text embeddings.
 
 ## Installation Instructions
 
