@@ -14,6 +14,7 @@ This script starts the following applications:
 4. **Obsidian** - Knowledge management and note-taking application
 5. **WhatsApp** - WhatsApp desktop messenger
 6. **MultiMonitorTool** - NirSoft multi-monitor management utility
+7. **Blender** - 3D modeling and animation software
 
 ## Features
 
@@ -56,6 +57,7 @@ The script assumes the following default installation paths:
 | Obsidian | `%LOCALAPPDATA%\Obsidian\Obsidian.exe` |
 | WhatsApp | `%LOCALAPPDATA%\WhatsApp\WhatsApp.exe` |
 | MultiMonitorTool | `C:\Program Files\NirSoft\MultiMonitorTool\MultiMonitorTool.exe` |
+| Blender | `C:\Program Files\Blender Foundation\Blender 4.0\blender.exe` |
 
 ## Customizing Application Paths
 

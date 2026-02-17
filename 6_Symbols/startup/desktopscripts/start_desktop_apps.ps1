@@ -96,6 +96,11 @@ $Applications = @(
         Name = "MultiMonitorTool"
         ProcessName = "MultiMonitorTool"
         ExePath = "${env:ProgramFiles}\NirSoft\MultiMonitorTool\MultiMonitorTool.exe"
+    },
+    @{
+        Name = "Blender"
+        ProcessName = "blender"
+        ExePath = "${env:ProgramFiles}\Blender Foundation\Blender 4.0\blender.exe"
     }
 )
 
