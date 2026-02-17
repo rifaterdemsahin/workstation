@@ -40,6 +40,8 @@ Workstation setup an configuration and execution
 ### Windows Startup Scripts
 Located in `6_Symbols/startup/desktopscripts/`:
 - `start_ollama.ps1` - Starts Ollama with nomic-embed-text model
+- `start_desktop_apps.ps1` - Starts Epic Pen, Stream Deck, Insta360 Link Controller, Obsidian, and WhatsApp
 - `copy_startup_scripts.bat` - Easy installer for all startup scripts
 - `install_startup_shortcuts.ps1` - PowerShell installer for startup shortcuts
 - See [COPY_STARTUP_SCRIPTS_GUIDE.md](6_Symbols/startup/desktopscripts/COPY_STARTUP_SCRIPTS_GUIDE.md) for detailed instructions
+- See [START_DESKTOP_APPS_README.md](6_Symbols/startup/desktopscripts/START_DESKTOP_APPS_README.md) for desktop apps startup details
