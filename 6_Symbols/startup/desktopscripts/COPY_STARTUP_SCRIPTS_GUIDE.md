@@ -57,7 +57,7 @@ If you prefer to manually install specific scripts:
 | **start_gemini_secondbrain.ps1** | Starts Gemini AI agent in terminal | Hidden |
 | **run_updates_admin.ps1** | Checks and runs system updates | Hidden |
 | **scan_windows_events.ps1** | Scans Windows event logs for errors | Normal (Visible) |
-| **start_desktop_apps.ps1** | Starts Epic Pen, Stream Deck, Insta360 Link Controller, Obsidian, and WhatsApp | Hidden |
+| **start_desktop_apps.ps1** | Starts Epic Pen, Stream Deck, Insta360 Link Controller, Obsidian, WhatsApp, and MultiMonitorTool | Hidden |
 | **GPU_Diagnostic_Startup.ps1** | Runs GPU diagnostics | Hidden |
 
 ## Ollama Startup Script Details
@@ -107,6 +107,7 @@ The script starts the following applications:
 - **Insta360 Link Controller** - Insta360 webcam controller
 - **Obsidian** - Knowledge management and note-taking app
 - **WhatsApp** - WhatsApp desktop messenger
+- **MultiMonitorTool** - NirSoft multi-monitor management utility
 
 ### Default Installation Paths
 
@@ -117,6 +118,7 @@ The script uses these common default paths:
 - Insta360 Link Controller: `C:\Program Files\Insta360\Insta360 Link Controller\Insta360LinkController.exe`
 - Obsidian: `%LOCALAPPDATA%\Obsidian\Obsidian.exe`
 - WhatsApp: `%LOCALAPPDATA%\WhatsApp\WhatsApp.exe`
+- MultiMonitorTool: `C:\Program Files\NirSoft\MultiMonitorTool\MultiMonitorTool.exe`
 
 ### Customizing Application Paths
 

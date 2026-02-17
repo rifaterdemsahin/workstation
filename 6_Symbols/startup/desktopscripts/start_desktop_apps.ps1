@@ -91,6 +91,11 @@ $Applications = @(
         Name = "WhatsApp"
         ProcessName = "WhatsApp"
         ExePath = "${env:LOCALAPPDATA}\WhatsApp\WhatsApp.exe"
+    },
+    @{
+        Name = "MultiMonitorTool"
+        ProcessName = "MultiMonitorTool"
+        ExePath = "${env:ProgramFiles}\NirSoft\MultiMonitorTool\MultiMonitorTool.exe"
     }
 )
 

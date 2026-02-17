@@ -13,6 +13,7 @@ This script starts the following applications:
 3. **Insta360 Link Controller** - Controller for Insta360 webcam
 4. **Obsidian** - Knowledge management and note-taking application
 5. **WhatsApp** - WhatsApp desktop messenger
+6. **MultiMonitorTool** - NirSoft multi-monitor management utility
 
 ## Features
 
@@ -54,6 +55,7 @@ The script assumes the following default installation paths:
 | Insta360 Link Controller | `C:\Program Files\Insta360\Insta360 Link Controller\Insta360LinkController.exe` |
 | Obsidian | `%LOCALAPPDATA%\Obsidian\Obsidian.exe` |
 | WhatsApp | `%LOCALAPPDATA%\WhatsApp\WhatsApp.exe` |
+| MultiMonitorTool | `C:\Program Files\NirSoft\MultiMonitorTool\MultiMonitorTool.exe` |
 
 ## Customizing Application Paths
 
