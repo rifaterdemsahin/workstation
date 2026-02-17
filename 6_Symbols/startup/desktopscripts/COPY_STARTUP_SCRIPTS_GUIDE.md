@@ -57,6 +57,7 @@ If you prefer to manually install specific scripts:
 | **start_gemini_secondbrain.ps1** | Starts Gemini AI agent in terminal | Hidden |
 | **run_updates_admin.ps1** | Checks and runs system updates | Hidden |
 | **scan_windows_events.ps1** | Scans Windows event logs for errors | Normal (Visible) |
+| **start_desktop_apps.ps1** | Starts Epic Pen, Stream Deck, Insta360 Link Controller, Obsidian, and WhatsApp | Hidden |
 | **GPU_Diagnostic_Startup.ps1** | Runs GPU diagnostics | Hidden |
 
 ## Ollama Startup Script Details
@@ -88,6 +89,53 @@ If Ollama is not installed:
    ```
 4. The startup script will automatically pull the nomic-embed-text model on first run
 
+## Desktop Applications Startup Script Details
+
+The `start_desktop_apps.ps1` script performs the following actions:
+
+1. **Checks if applications are already running** - Avoids duplicate instances
+2. **Verifies application paths** - Checks if executables exist before launching
+3. **Starts applications sequentially** - Launches each app with a 2-second delay
+4. **Logs all actions** - Creates a log file (`start_desktop_apps.log`) for troubleshooting
+
+### Applications Configured
+
+The script starts the following applications:
+
+- **Epic Pen** - Digital annotation and drawing tool
+- **Stream Deck** - Elgato Stream Deck control software
+- **Insta360 Link Controller** - Insta360 webcam controller
+- **Obsidian** - Knowledge management and note-taking app
+- **WhatsApp** - WhatsApp desktop messenger
+
+### Default Installation Paths
+
+The script uses these common default paths:
+
+- Epic Pen: `C:\Program Files\Epic Pen\EpicPen.exe`
+- Stream Deck: `C:\Program Files\Elgato\StreamDeck\StreamDeck.exe`
+- Insta360 Link Controller: `C:\Program Files\Insta360\Insta360 Link Controller\Insta360LinkController.exe`
+- Obsidian: `%LOCALAPPDATA%\Obsidian\Obsidian.exe`
+- WhatsApp: `%LOCALAPPDATA%\WhatsApp\WhatsApp.exe`
+
+### Customizing Application Paths
+
+If your applications are installed in different locations:
+
+1. Open `start_desktop_apps.ps1` in a text editor
+2. Locate the `$Applications` array (around line 66)
+3. Update the `ExePath` values to match your installation paths
+4. Save the file
+
+Example:
+```powershell
+@{
+    Name = "Epic Pen"
+    ProcessName = "EpicPen"
+    ExePath = "D:\MyApps\Epic Pen\EpicPen.exe"  # Custom path
+}
+```
+
 ## Verification
 
 After installation, verify the scripts:
@@ -103,6 +151,7 @@ After installation, verify the scripts:
 
 3. **Check Logs**:
    - For Ollama: Check `start_ollama.log` in the desktopscripts folder
+   - For Desktop Apps: Check `start_desktop_apps.log` in the desktopscripts folder
    - For other scripts: Check their respective log files
 
 ## Troubleshooting
@@ -115,6 +164,18 @@ After installation, verify the scripts:
   ```
   
 - **Path Issues**: Verify the script paths in the shortcuts are correct
+
+### Desktop Applications Not Starting
+
+- **Installation Check**: Verify all applications are installed
+- **Path Verification**: Check that application paths in the script match your installations
+- **Log Review**: Check `start_desktop_apps.log` for specific error messages
+- **Manual Test**: Try running the script manually:
+  ```powershell
+  cd C:\path\to\workstation\6_Symbols\startup\desktopscripts
+  .\start_desktop_apps.ps1
+  ```
+- **Individual App Issues**: The script will skip apps that aren't found and continue with others
 
 ### Ollama Service Not Starting
 
