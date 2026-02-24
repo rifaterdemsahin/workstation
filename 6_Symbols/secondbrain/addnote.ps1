@@ -164,17 +164,18 @@ $newFiles = git diff --cached --name-status | Where-Object { $_ -match '^A\s' } 
             ForEach-Object { ($_ -replace '^A\s+', '').Trim() }
 
 # Commit
+# Exit code 1 from git commit can mean "nothing to commit" (not a real error).
+# We do NOT exit here — always continue to push, in case there are
+# previously committed but unpushed changes waiting on the local branch.
 Write-Host "Committing: '$commitMessage'" -ForegroundColor Yellow
 git commit -m "$commitMessage"
-Write-Host "[DEBUG] git commit exit code: $LASTEXITCODE" -ForegroundColor DarkCyan
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "WARNING: Nothing to commit or commit failed." -ForegroundColor DarkYellow
-    Stop-Transcript
-    Read-Host "Press Enter to close"
-    exit 1
+$commitExitCode = $LASTEXITCODE
+Write-Host "[DEBUG] git commit exit code: $commitExitCode" -ForegroundColor DarkCyan
+if ($commitExitCode -ne 0) {
+    Write-Host "NOTE: Nothing new to commit (or commit skipped). Continuing to push anyway..." -ForegroundColor DarkYellow
 }
 
-# Push
+# Push — always runs, even if there was nothing to commit locally
 Write-Host ""
 Write-Host "--------------------------------------------" -ForegroundColor DarkGray
 Write-Host "Pushing to $remoteRepo/$branch..." -ForegroundColor Yellow
