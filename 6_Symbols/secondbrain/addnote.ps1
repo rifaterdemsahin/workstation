@@ -190,19 +190,29 @@ Write-Host "  Committed : $commitMessage" -ForegroundColor Green
 Write-Host "  Log saved : $logFile" -ForegroundColor DarkGray
 Write-Host ""
 
-# Show newly created files
+# Show both created files: the transcript log AND any new files in the secondbrain repo
+Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+Write-Host "Files created this run:" -ForegroundColor Cyan
+Write-Host "--------------------------------------------" -ForegroundColor DarkGray
+
+# 1. Transcript log (always created)
+Write-Host "  [LOG]  $logFile" -ForegroundColor Yellow
+
+# 2. New files committed to the repo (full absolute paths)
 if ($newFiles) {
-    Write-Host "New files created in repo:" -ForegroundColor Cyan
     foreach ($f in $newFiles) {
-        Write-Host "  + $f" -ForegroundColor White
+        $fullPath = Join-Path $gitRoot $f
+        Write-Host "  [REPO] $fullPath" -ForegroundColor White
     }
 } else {
-    Write-Host "No new files - only existing files were modified." -ForegroundColor DarkGray
+    Write-Host "  [REPO] No new files - only existing files were modified." -ForegroundColor DarkGray
 }
+Write-Host "--------------------------------------------" -ForegroundColor DarkGray
 Write-Host ""
 
-# Copy final summary line to clipboard so it can be pasted anywhere after closing
-$clipboardSummary = "Committed: $commitMessage | Repo: $gitRoot | $date"
+# Copy final summary to clipboard (commit message + both file paths)
+$repoFileList = if ($newFiles) { ($newFiles | ForEach-Object { Join-Path $gitRoot $_ }) -join ', ' } else { "no new files" }
+$clipboardSummary = "Committed: $commitMessage | Log: $logFile | Repo files: $repoFileList"
 Set-Clipboard -Value $clipboardSummary
 Write-Host "Copied to clipboard:" -ForegroundColor Cyan
 Write-Host "  $clipboardSummary" -ForegroundColor White
