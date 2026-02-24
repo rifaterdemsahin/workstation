@@ -32,10 +32,10 @@ if ([string]::IsNullOrWhiteSpace($noteText)) {
 # =============================================================================
 # 2. Configuration
 # =============================================================================
-$remoteRepo  = "origin"
-$branch      = "main"
-$repoPath    = "F:\secondbrain_v4\secondbrain\secondbrain\"
-$notesFolder = "quick_notes"
+$remoteRepo = "origin"
+$branch     = "main"
+$repoPath   = "F:\secondbrain_v4\secondbrain\secondbrain\"
+$saveDir    = "F:\secondbrain_v4\secondbrain\"
 
 # =============================================================================
 # 3. Navigate to repo
@@ -62,7 +62,6 @@ Set-Location $gitRoot
 # =============================================================================
 # 4. Save note as individual file
 # =============================================================================
-$saveDir = Join-Path $gitRoot $notesFolder
 if (-not (Test-Path $saveDir)) {
     New-Item -ItemType Directory -Path $saveDir | Out-Null
     Write-Host "Created folder: $saveDir" -ForegroundColor DarkYellow
