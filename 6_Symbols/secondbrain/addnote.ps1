@@ -124,6 +124,28 @@ Write-Host "[DEBUG] Git repo root : $gitRoot" -ForegroundColor DarkCyan
 Write-Host "[DEBUG] Current location: $(Get-Location)" -ForegroundColor DarkCyan
 Write-Host ""
 
+# =============================================================================
+# CREATE NOTE FILE — note_YYYY-MM-DD_HH-MM.md inside the secondbrain folder
+# File name uses datetime so every run produces a unique, sortable file.
+# Content is the clipboard text (the thing you copied before pressing StreamDeck).
+# =============================================================================
+$noteDateTime   = Get-Date -Format "yyyy-MM-dd_HH-mm"
+$noteFileName   = "note_$noteDateTime.md"
+$noteFilePath   = Join-Path $repoPath $noteFileName
+
+$noteContent = @"
+# $commitMessage
+
+$clipboardText
+
+---
+Created: $date
+"@
+
+Set-Content -Path $noteFilePath -Value $noteContent -Encoding UTF8
+Write-Host "[DEBUG] Note file created: $noteFilePath" -ForegroundColor DarkGreen
+Write-Host ""
+
 # Pull latest changes — show output so user can see what came down
 Write-Host "--------------------------------------------" -ForegroundColor DarkGray
 Write-Host "Pulling from $remoteRepo/$branch..." -ForegroundColor Yellow
@@ -196,24 +218,25 @@ Write-Host "--------------------------------------------" -ForegroundColor DarkG
 Write-Host "Files created this run:" -ForegroundColor Cyan
 Write-Host "--------------------------------------------" -ForegroundColor DarkGray
 
-# 1. Transcript log (always created)
+# 1. Note file created in secondbrain (primary output — shown first and most prominent)
+Write-Host "  [NOTE] $noteFilePath" -ForegroundColor Green
+
+# 2. Transcript log (always created)
 Write-Host "  [LOG]  $logFile" -ForegroundColor Yellow
 
-# 2. New files committed to the repo (full absolute paths)
-if ($newFiles) {
-    foreach ($f in $newFiles) {
+# 3. Any other new files committed to the repo (full absolute paths)
+$otherNewFiles = $newFiles | Where-Object { (Join-Path $gitRoot $_) -ne $noteFilePath }
+if ($otherNewFiles) {
+    foreach ($f in $otherNewFiles) {
         $fullPath = Join-Path $gitRoot $f
         Write-Host "  [REPO] $fullPath" -ForegroundColor White
     }
-} else {
-    Write-Host "  [REPO] No new files - only existing files were modified." -ForegroundColor DarkGray
 }
 Write-Host "--------------------------------------------" -ForegroundColor DarkGray
 Write-Host ""
 
-# Copy final summary to clipboard (commit message + both file paths)
-$repoFileList = if ($newFiles) { ($newFiles | ForEach-Object { Join-Path $gitRoot $_ }) -join ', ' } else { "no new files" }
-$clipboardSummary = "Committed: $commitMessage | Log: $logFile | Repo files: $repoFileList"
+# Copy note file path + commit message to clipboard
+$clipboardSummary = "Note: $noteFilePath | Committed: $commitMessage"
 Set-Clipboard -Value $clipboardSummary
 Write-Host "Copied to clipboard:" -ForegroundColor Cyan
 Write-Host "  $clipboardSummary" -ForegroundColor White
