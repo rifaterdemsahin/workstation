@@ -105,9 +105,22 @@ if (-not (Test-Path $repoPath)) {
 }
 Write-Host "[DEBUG] Path exists: OK" -ForegroundColor DarkGreen
 
-# Navigate to the second brain repo directory
+# Navigate to the configured path first, then find the actual git repo root
+# This matters when $repoPath is a subfolder — git add . would miss files outside it
 Write-Host "[DEBUG] Changing location to: $repoPath" -ForegroundColor DarkCyan
 Set-Location $repoPath
+
+$gitRoot = git rev-parse --show-toplevel 2>&1
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "ERROR: Not inside a git repo at: $repoPath" -ForegroundColor Red
+    Stop-Transcript
+    Read-Host "Press Enter to close"
+    exit 1
+}
+# Normalise to Windows path (git returns forward slashes)
+$gitRoot = $gitRoot -replace '/', '\'
+Set-Location $gitRoot
+Write-Host "[DEBUG] Git repo root : $gitRoot" -ForegroundColor DarkCyan
 Write-Host "[DEBUG] Current location: $(Get-Location)" -ForegroundColor DarkCyan
 Write-Host ""
 
@@ -125,9 +138,10 @@ if ($LASTEXITCODE -ne 0) {
 }
 Write-Host ""
 
-# Stage all changes
-Write-Host "Staging all changes..." -ForegroundColor Yellow
-git add .
+# Stage all changes from the entire repo root (not just current subdir)
+# -A includes deletions and renames anywhere in the repo, not just below cwd
+Write-Host "Staging all changes (git add -A from repo root)..." -ForegroundColor Yellow
+git add -A
 Write-Host "[DEBUG] git add exit code: $LASTEXITCODE" -ForegroundColor DarkCyan
 Write-Host ""
 
@@ -185,6 +199,13 @@ if ($newFiles) {
 } else {
     Write-Host "No new files - only existing files were modified." -ForegroundColor DarkGray
 }
+Write-Host ""
+
+# Copy final summary line to clipboard so it can be pasted anywhere after closing
+$clipboardSummary = "Committed: $commitMessage | Repo: $gitRoot | $date"
+Set-Clipboard -Value $clipboardSummary
+Write-Host "Copied to clipboard:" -ForegroundColor Cyan
+Write-Host "  $clipboardSummary" -ForegroundColor White
 Write-Host ""
 
 Stop-Transcript
