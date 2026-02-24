@@ -129,9 +129,9 @@ Write-Host ""
 # File name uses datetime so every run produces a unique, sortable file.
 # Content is the clipboard text (the thing you copied before pressing StreamDeck).
 # =============================================================================
-$noteDateTime   = Get-Date -Format "yyyy-MM-dd_HH-mm"
+$noteDateTime   = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
 $noteFileName   = "note_$noteDateTime.md"
-$noteFilePath   = Join-Path $repoPath $noteFileName
+$noteFilePath   = Join-Path $gitRoot $noteFileName   # gitRoot = F:\secondbrain_v4\secondbrain\
 
 $noteContent = @"
 # $commitMessage
