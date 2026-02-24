@@ -183,7 +183,7 @@ if ($newFiles) {
         Write-Host "  + $f" -ForegroundColor White
     }
 } else {
-    Write-Host "No new files — only existing files were modified." -ForegroundColor DarkGray
+    Write-Host "No new files - only existing files were modified." -ForegroundColor DarkGray
 }
 Write-Host ""
 
