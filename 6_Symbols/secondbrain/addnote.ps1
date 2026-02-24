@@ -244,5 +244,14 @@ Write-Host ""
 
 Stop-Transcript
 
+# Open the note in Obsidian using the obsidian:// URI scheme
+# Vault name = last folder segment of gitRoot (e.g. "secondbrain")
+# File path  = relative path from vault root, URL-encoded
+$vaultName    = Split-Path $gitRoot -Leaf
+$fileRelative = $noteFileName   # note is in the vault root
+$obsidianUrl  = "obsidian://open?vault=$([System.Uri]::EscapeDataString($vaultName))&file=$([System.Uri]::EscapeDataString($fileRelative))"
+Write-Host "Opening in Obsidian: $obsidianUrl" -ForegroundColor Cyan
+Start-Process $obsidianUrl
+
 # Keep window open - always ask before closing
 Read-Host "Press Enter to close"
