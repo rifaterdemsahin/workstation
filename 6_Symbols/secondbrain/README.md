@@ -1,6 +1,6 @@
 # Second Brain - StreamDeck Git Sync
 
-Automates committing and pushing notes from a local Second Brain vault to GitHub,
+Automates committing and pushing notes and images from a local Second Brain vault to GitHub,
 triggered by a single StreamDeck button press.
 
 ---
@@ -13,6 +13,8 @@ triggered by a single StreamDeck button press.
 | `addnote.ps1` | PowerShell script behind `addnote.bat`. |
 | [`commit_push_sync/commit_push_sync.bat`](commit_push_sync/commit_push_sync.bat) | **StreamDeck entry point — sync only.** Just stages, commits, and pushes. No note creation, no Obsidian. |
 | [`commit_push_sync/commit_push_sync.ps1`](commit_push_sync/commit_push_sync.ps1) | PowerShell script behind `commit_push_sync.bat`. |
+| [`clipboard_image_sync/clipboard_image_sync.bat`](clipboard_image_sync/clipboard_image_sync.bat) | **StreamDeck entry point — clipboard image.** Saves clipboard image to repo, commits, and pushes. |
+| [`clipboard_image_sync/clipboard_image_sync.ps1`](clipboard_image_sync/clipboard_image_sync.ps1) | PowerShell script behind `clipboard_image_sync.bat`. |
 | `readme.tct` | Original scratch notes (screenshots, tools used). |
 
 ---

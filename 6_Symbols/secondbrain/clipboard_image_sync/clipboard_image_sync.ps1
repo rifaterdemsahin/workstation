@@ -1,35 +1,46 @@
 # =============================================================================
-# commit_push_sync.ps1 - Lightweight Git Commit & Push
-# Just stages everything, commits, and pushes. No note creation, no Obsidian.
+# clipboard_image_sync.ps1 - Save Clipboard Image to Second Brain & Push
+# Grabs whatever image is on the clipboard, saves it as a timestamped PNG
+# inside the second brain repo, then stages, commits, and pushes.
 # =============================================================================
 
-$logFile = "C:\Temp\commit_push_sync_log.txt"
+$logFile = "C:\Temp\clipboard_image_sync_log.txt"
 if (-not (Test-Path "C:\Temp")) { New-Item -ItemType Directory -Path "C:\Temp" | Out-Null }
 Start-Transcript -Path $logFile -Append
 
-$date = Get-Date -Format "yyyy-MM-dd HH:mm"
+$datetime   = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
+$dateLabel  = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
 Write-Host ""
 Write-Host "============================================" -ForegroundColor Magenta
-Write-Host "   Second Brain - Commit & Push Only       " -ForegroundColor Magenta
+Write-Host "   Second Brain - Clipboard Image Sync     " -ForegroundColor Magenta
 Write-Host "============================================" -ForegroundColor Magenta
 Write-Host ""
 
 # =============================================================================
-# 1. COMMIT MESSAGE — auto-generated (StreamDeck + timestamp)
+# 1. Grab image from clipboard
 # =============================================================================
-$commitMessage = "StreamDeck sync $date"
+Add-Type -AssemblyName System.Windows.Forms
+$clipImage = [System.Windows.Forms.Clipboard]::GetImage()
 
-Write-Host ""
-Write-Host "Commit message: '$commitMessage'" -ForegroundColor Cyan
+if ($null -eq $clipImage) {
+    Write-Host "ERROR: No image found on clipboard." -ForegroundColor Red
+    Write-Host "       Copy a screenshot or image first, then run this script." -ForegroundColor Yellow
+    Stop-Transcript
+    Read-Host "Press Enter to close"
+    exit 1
+}
+
+Write-Host "Image detected on clipboard ($($clipImage.Width)x$($clipImage.Height)px)" -ForegroundColor Cyan
 Write-Host ""
 
 # =============================================================================
 # 2. Configuration
 # =============================================================================
-$remoteRepo = "origin"
-$branch     = "main"
-$repoPath   = "F:\secondbrain_v4\secondbrain\secondbrain\"
+$remoteRepo  = "origin"
+$branch      = "main"
+$repoPath    = "F:\secondbrain_v4\secondbrain\secondbrain\"
+$imageFolder = "screenshots"
 
 # =============================================================================
 # 3. Navigate to repo
@@ -54,7 +65,26 @@ $gitRoot = $gitRoot -replace '/', '\'
 Set-Location $gitRoot
 
 # =============================================================================
-# 4. Pull, Stage, Commit, Push
+# 4. Save image
+# =============================================================================
+$saveDir = Join-Path $gitRoot $imageFolder
+if (-not (Test-Path $saveDir)) {
+    New-Item -ItemType Directory -Path $saveDir | Out-Null
+    Write-Host "Created folder: $saveDir" -ForegroundColor DarkYellow
+}
+
+Write-Host "Enter a name for the image file:" -ForegroundColor Yellow
+$userInput = Read-Host " >"
+$baseName  = $userInput.Trim() -replace '\s+', '_' -replace '[\\/:*?"<>|]', '_'
+$fileName  = "${baseName}_${datetime}.png"
+$savePath  = Join-Path $saveDir $fileName
+
+$clipImage.Save($savePath, [System.Drawing.Imaging.ImageFormat]::Png)
+Write-Host "Saved: $savePath" -ForegroundColor Green
+Write-Host ""
+
+# =============================================================================
+# 5. Pull, Stage, Commit, Push
 # =============================================================================
 Write-Host "Pulling from $remoteRepo/$branch..." -ForegroundColor Yellow
 git pull $remoteRepo $branch
@@ -74,6 +104,7 @@ Write-Host "Changes to commit:" -ForegroundColor Cyan
 git diff --cached --name-status
 Write-Host ""
 
+$commitMessage = "StreamDeck clipboard image $dateLabel"
 Write-Host "Committing: '$commitMessage'" -ForegroundColor Yellow
 git commit -m "$commitMessage"
 $commitExitCode = $LASTEXITCODE
@@ -87,8 +118,9 @@ git push $remoteRepo $branch
 
 Write-Host ""
 Write-Host "============================================" -ForegroundColor Green
-Write-Host "   Done! Committed & Pushed.               " -ForegroundColor Green
+Write-Host "   Done! Image saved & pushed.             " -ForegroundColor Green
 Write-Host "============================================" -ForegroundColor Green
+Write-Host "  File:    $savePath" -ForegroundColor Green
 Write-Host "  Message: $commitMessage" -ForegroundColor Green
 Write-Host ""
 
