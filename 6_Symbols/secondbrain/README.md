@@ -15,6 +15,8 @@ triggered by a single StreamDeck button press.
 | [`commit_push_sync/commit_push_sync.ps1`](commit_push_sync/commit_push_sync.ps1) | PowerShell script behind `commit_push_sync.bat`. |
 | [`clipboard_image_sync/clipboard_image_sync.bat`](clipboard_image_sync/clipboard_image_sync.bat) | **StreamDeck entry point — clipboard image.** Saves clipboard image to repo, commits, and pushes. |
 | [`clipboard_image_sync/clipboard_image_sync.ps1`](clipboard_image_sync/clipboard_image_sync.ps1) | PowerShell script behind `clipboard_image_sync.bat`. |
+| [`quick_note/quick_note.bat`](quick_note/quick_note.bat) | **StreamDeck entry point — quick note.** Type a note in the terminal, appends to `quick_notes.md`, commits, and pushes. |
+| [`quick_note/quick_note.ps1`](quick_note/quick_note.ps1) | PowerShell script behind `quick_note.bat`. |
 | `readme.tct` | Original scratch notes (screenshots, tools used). |
 
 ---
