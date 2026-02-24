@@ -33,7 +33,10 @@ Write-Host ""
 Write-Host "--- Starting Git Automation ---" -ForegroundColor Cyan
 
 # Navigate to the second brain repo directory
-Set-Location "F:\secondbrain_v4\secondbrain\secondbrain\"
+# This is where notes/files are committed from
+$repoPath = "F:\secondbrain_v4\secondbrain\secondbrain\"
+Set-Location $repoPath
+Write-Host "Working directory: $repoPath" -ForegroundColor Cyan
 
 # Pull latest changes to avoid conflicts
 Write-Host "Pulling from $remoteRepo/$branch..." -ForegroundColor Yellow
@@ -41,8 +44,8 @@ git pull $remoteRepo $branch
 if ($LASTEXITCODE -ne 0) {
     Write-Host "ERROR: Pull failed. Please resolve conflicts manually." -ForegroundColor Red
     Write-Host ""
-    Read-Host "Press Enter to close"
-    exit
+    Read-Host "Press Enter to close"   # Always ask before closing - never silent exit
+    exit 1
 }
 
 # Stage all changes
@@ -55,8 +58,8 @@ git commit -m "$commitMessage"
 if ($LASTEXITCODE -ne 0) {
     Write-Host "WARNING: Nothing to commit or commit failed." -ForegroundColor DarkYellow
     Write-Host ""
-    Read-Host "Press Enter to close"
-    exit
+    Read-Host "Press Enter to close"   # Always ask before closing - never silent exit
+    exit 1
 }
 
 # Push to remote
@@ -70,4 +73,5 @@ Write-Host "============================================" -ForegroundColor Green
 Write-Host ""
 
 # Keep window open - required for StreamDeck Multi Action which closes terminal immediately
+# Always ask before closing - never silent exit
 Read-Host "Press Enter to close"
