@@ -133,6 +133,7 @@ Write-Host ""
 
 # =============================================================================
 # SHOW WHAT WILL BE COMMITTED — diff stat so user sees exactly what goes in
+# Capture new files (status A) now so we can show them in the final summary
 # =============================================================================
 Write-Host "--------------------------------------------" -ForegroundColor DarkGray
 Write-Host "Changes about to be committed:" -ForegroundColor Cyan
@@ -143,6 +144,10 @@ Write-Host "Full staged diff:" -ForegroundColor Cyan
 git diff --cached --name-status
 Write-Host "--------------------------------------------" -ForegroundColor DarkGray
 Write-Host ""
+
+# Capture newly created files (A = Added) for the end summary
+$newFiles = git diff --cached --name-status | Where-Object { $_ -match '^A\s' } |
+            ForEach-Object { ($_ -replace '^A\s+', '').Trim() }
 
 # Commit
 Write-Host "Committing: '$commitMessage'" -ForegroundColor Yellow
@@ -169,6 +174,17 @@ Write-Host "          Process Complete!                 " -ForegroundColor Green
 Write-Host "============================================" -ForegroundColor Green
 Write-Host "  Committed : $commitMessage" -ForegroundColor Green
 Write-Host "  Log saved : $logFile" -ForegroundColor DarkGray
+Write-Host ""
+
+# Show newly created files
+if ($newFiles) {
+    Write-Host "New files created in repo:" -ForegroundColor Cyan
+    foreach ($f in $newFiles) {
+        Write-Host "  + $f" -ForegroundColor White
+    }
+} else {
+    Write-Host "No new files — only existing files were modified." -ForegroundColor DarkGray
+}
 Write-Host ""
 
 Stop-Transcript
