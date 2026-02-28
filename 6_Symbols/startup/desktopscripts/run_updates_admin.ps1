@@ -12,7 +12,60 @@ if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
 # Main Update Logic
 try {
     Write-Host "Starting Winget package upgrades..." -ForegroundColor Green
-    winget upgrade --all --include-unknown
+
+    # Get list of upgradable packages in JSON format
+    $upgradeList = winget upgrade --source winget | Out-String
+
+    # Parse the output to find packages with Unknown versions
+    $lines = $upgradeList -split "`n"
+    $packagesToSkip = @()
+    $packagesToUpgrade = @()
+
+    # Find packages with Unknown version (skip header and separator lines)
+    $inDataSection = $false
+    foreach ($line in $lines) {
+        if ($line -match '^-+$') {
+            $inDataSection = $true
+            continue
+        }
+
+        if ($inDataSection -and $line.Trim() -ne '' -and $line -notmatch '^\d+\s+upgrade' -and $line -notmatch 'package.*pin') {
+            # Check if line contains "Unknown" in the version column
+            if ($line -match '\s+Unknown\s+') {
+                # Extract package ID (3rd column typically)
+                if ($line -match '(\S+\.\S+)\s+Unknown') {
+                    $packagesToSkip += $matches[1]
+                }
+            }
+            elseif ($line -match '(\S+\.\S+)\s+[\d\.]+\s+[\d\.]+') {
+                # Package has known versions
+                $packagesToUpgrade += $matches[1]
+            }
+        }
+    }
+
+    # Display skipped packages
+    if ($packagesToSkip.Count -gt 0) {
+        Write-Host "`nSkipping packages with Unknown versions:" -ForegroundColor Yellow
+        foreach ($pkg in $packagesToSkip) {
+            Write-Host "  - $pkg" -ForegroundColor Yellow
+        }
+        Write-Host ""
+    }
+
+    # Upgrade packages with known versions
+    if ($packagesToUpgrade.Count -gt 0) {
+        Write-Host "Upgrading packages with known versions..." -ForegroundColor Cyan
+        foreach ($pkg in $packagesToUpgrade) {
+            Write-Host "Upgrading: $pkg" -ForegroundColor Green
+            winget upgrade --id $pkg --silent --accept-source-agreements --accept-package-agreements
+        }
+    }
+    else {
+        # If parsing failed or no packages found, fall back to upgrading all except unknown
+        Write-Host "No packages identified for upgrade, running standard upgrade (excluding unknown versions)..." -ForegroundColor Cyan
+        winget upgrade --all
+    }
 
     Write-Host "Starting Chocolatey package upgrades..." -ForegroundColor Green
     if (Get-Command choco -ErrorAction SilentlyContinue) {
