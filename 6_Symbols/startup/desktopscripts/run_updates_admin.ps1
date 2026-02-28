@@ -9,6 +9,20 @@ if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
     exit
 }
 
+# Check if updates have already run successfully today
+$lockFile = Join-Path $env:TEMP "winget_update_last_run.txt"
+$today = Get-Date -Format "yyyy-MM-dd"
+
+if (Test-Path $lockFile) {
+    $lastRun = Get-Content $lockFile -ErrorAction SilentlyContinue
+    if ($lastRun -eq $today) {
+        Write-Host "Updates have already been run successfully today ($today). Skipping..." -ForegroundColor Cyan
+        Write-Host "Press Enter to close..."
+        Read-Host
+        exit 0
+    }
+}
+
 # Main Update Logic
 try {
     Write-Host "Starting Winget package upgrades..." -ForegroundColor Green
@@ -93,12 +107,17 @@ try {
     Get-WindowsUpdate -Install -AcceptAll -Verbose
 
     Write-Host "All updates complete!" -ForegroundColor Cyan
-    
+
+    # Mark today's date as successfully completed
+    Set-Content -Path $lockFile -Value $today
+    Write-Host "Update completion recorded for $today" -ForegroundColor Green
+
     # Pause to let user see output
     Write-Host "Press Enter to close..."
     Read-Host
 }
 catch {
     Write-Error $_
+    Write-Host "Updates failed - will retry on next run" -ForegroundColor Yellow
     Read-Host "Error occurred. Press Enter to exit..."
 }
