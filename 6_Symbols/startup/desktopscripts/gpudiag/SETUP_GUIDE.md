@@ -2,7 +2,7 @@
 
 ## Overview
 
-This service automatically runs GPU diagnostics at User Logon with minimal performance impact. It logs results to `C:\ProgramData\GPU_Diagnostics\` for monitoring hardware stability.
+This service continuously monitors GPU and DaVinci Resolve health, running diagnostics every 5 minutes. It logs results to `C:\ProgramData\GPU_Diagnostics\` for monitoring hardware stability and detecting issues in real-time.
 
 ---
 
@@ -10,9 +10,11 @@ This service automatically runs GPU diagnostics at User Logon with minimal perfo
 
 1. **GPU_Diagnostic_Startup.ps1**
    - Main diagnostic script
-   - Runs automatically at user logon (30-second delay)
+   - Runs continuously every 5 minutes (300 seconds)
+   - Monitors DaVinci Resolve, GPU health, PCIe errors in real-time
    - Logs to: C:\ProgramData\GPU_Diagnostics\diagnostic_YYYY-MM-DD.log
    - Generates human-readable report
+   - Does not exit - keeps monitoring until manually stopped (Ctrl+C)
 
 2. **Install_GPU_Diagnostic_Task.bat**
    - Installation script (creates Windows scheduled task)
@@ -156,11 +158,12 @@ Uninstalls the scheduled task (can be reinstalled anytime)
 
 ## PERFORMANCE IMPACT
 
-⚡ **Minimal** - Runs 30 seconds after logon
-⏱️ **Duration**: 5-10 seconds
+⚡ **Minimal** - Runs every 5 minutes in background
+⏱️ **Duration**: 5-10 seconds per check
 💾 **Memory**: <50 MB
-📊 **CPU**: <1% during check
+📊 **CPU**: <1% during check, 0% while sleeping
 🎯 **No impact** on DaVinci Resolve performance during normal work
+♻️ **Continuous**: Monitors indefinitely until stopped (Ctrl+C)
 
 ---
 
@@ -315,7 +318,7 @@ Get-WmiObject Win32_VideoController | Format-List Name, DriverVersion, AdapterRA
 A: No, it runs 30 seconds after logon and takes ~5 seconds. Zero impact on DaVinci Resolve performance.
 
 **Q: How often does it run?**
-A: At every user logon automatically. You can also run it on-demand anytime.
+A: Continuously every 5 minutes in the background. Once started, it monitors indefinitely until stopped with Ctrl+C.
 
 **Q: Can I uninstall it?**
 A: Yes, run: `.\GPU_Diagnostic_Manager.ps1 -Action remove`

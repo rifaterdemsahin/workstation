@@ -1,11 +1,11 @@
 # GPU Diagnostic Startup Service
-# Runs at User Logon and logs results
+# Runs continuously every 5 minutes to monitor DaVinci Resolve and GPU health
 # Minimal performance impact - runs in background
 
 # Configuration
 $LogDir = "C:\ProgramData\GPU_Diagnostics"
-$LogFile = "$LogDir\diagnostic_$(Get-Date -Format 'yyyy-MM-dd').log"
-$ReportFile = "$LogDir\latest_report.txt"
+$CheckIntervalSeconds = 300  # Run every 5 minutes (300 seconds)
+$RunContinuously = $true
 
 # Create log directory if it doesn't exist
 if (-not (Test-Path $LogDir)) {
@@ -41,9 +41,18 @@ function Log-Message {
     }
 }
 
-# Initialize log
-Log-Message "====== GPU DIAGNOSTIC STARTUP SERVICE ======"
-Log-Message "Starting system diagnostics..."
+# Main monitoring loop
+$runCount = 0
+while ($RunContinuously) {
+    $runCount++
+
+    # Update log file path daily
+    $LogFile = "$LogDir\diagnostic_$(Get-Date -Format 'yyyy-MM-dd').log"
+    $ReportFile = "$LogDir\latest_report.txt"
+
+    # Initialize log for this run
+    Log-Message "====== GPU DIAGNOSTIC CHECK #$runCount ======"
+    Log-Message "Starting system diagnostics..."
 
 try {
     # 1. Quick GPU Status (Fast)
@@ -129,7 +138,8 @@ try {
     }
 
     Log-Message "====== DIAGNOSTIC COMPLETE ======"
-    Log-Message "Next check: $(Get-Date -Date (Get-Date).AddDays(1) -Format 'yyyy-MM-dd HH:00:00')"
+    $nextCheck = (Get-Date).AddSeconds($CheckIntervalSeconds)
+    Log-Message "Next check: $(Get-Date -Date $nextCheck -Format 'yyyy-MM-dd HH:mm:ss') (in $($CheckIntervalSeconds/60) minutes)"
 
 }
 catch {
@@ -186,12 +196,19 @@ catch {
 
 # Cleanup old logs (keep only 30 days)
 try {
-    Get-ChildItem -Path $LogDir -Filter "diagnostic_*.log" -ErrorAction SilentlyContinue | 
-    Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-30) } | 
+    Get-ChildItem -Path $LogDir -Filter "diagnostic_*.log" -ErrorAction SilentlyContinue |
+    Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-30) } |
     Remove-Item -Force -ErrorAction SilentlyContinue
 }
 catch {
     Log-Message "Cleanup error: $($_.Exception.Message)" "WARNING"
 }
 
+    # Wait for next check interval
+    Log-Message "Waiting for next check cycle... (Press Ctrl+C to stop monitoring)"
+    Start-Sleep -Seconds $CheckIntervalSeconds
+}
+
+# This line is only reached if $RunContinuously is set to $false
+Log-Message "Monitoring stopped."
 exit 0
