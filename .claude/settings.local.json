@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(echo $USERNAME)",
-      "Read(//c/Users//**)"
+      "Read(//c/Users//**)",
+      "Bash(find /c/projects/workstation -name \"*.ps1\" -type f -exec grep -l \"davinci\\|resolve\" {} ;)",
+      "Bash(powershell -Command '$PROFILE')",
+      "Bash(powershell -Command 'Test-Path $PROFILE')",
+      "Bash(powershell -ExecutionPolicy Bypass -File \"C:\\projects\\workstation\\6_Symbols\\powershell_profile\\backup_powershell_profile.ps1\")"
     ],
     "deny": [],
     "ask": []
