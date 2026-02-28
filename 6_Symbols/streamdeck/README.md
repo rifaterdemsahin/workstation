@@ -15,9 +15,30 @@ Automatically resets your Stream Deck setup by killing the application, setting 
 
 ### Quick Run (from anywhere)
 
-```bash
+```powershell
 reset-streamdeck
 ```
+
+### Setup the Alias
+
+Add this function to your PowerShell profile to use `reset-streamdeck` from anywhere:
+
+1. Open your PowerShell profile:
+   ```powershell
+   notepad $PROFILE
+   ```
+
+2. Add this function:
+   ```powershell
+   function reset-streamdeck {
+       & powershell -ExecutionPolicy Bypass -File "C:\projects\workstation\6_Symbols\streamdeck\Reset-StreamDeck.ps1"
+   }
+   ```
+
+3. Reload your profile:
+   ```powershell
+   . $PROFILE
+   ```
 
 ### Direct Execution
 
