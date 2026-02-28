@@ -5,7 +5,7 @@
 # Configuration
 $LogDir = "C:\ProgramData\GPU_Diagnostics"
 $CheckIntervalSeconds = 300  # Run every 5 minutes (300 seconds)
-$RunContinuously = $false  # Set to $false for testing, $true for continuous monitoring
+$RunContinuously = $true  # Set to $false for testing, $true for continuous monitoring
 
 # Create log directory if it doesn't exist
 if (-not (Test-Path $LogDir)) {
@@ -26,19 +26,20 @@ function Log-Message {
     param([string]$Message, [string]$Type = "INFO")
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
-    # Add emojis based on type
-    $emoji = switch ($Type) {
-        "ERROR"   { "🔴" }
-        "WARNING" { "⚠️" }
-        "SUCCESS" { "✅" }
-        "INFO"    { "ℹ️" }
-        "GPU"     { "🎮" }
-        "MEMORY"  { "🧠" }
-        "DISK"    { "💾" }
-        "CHECK"   { "🔍" }
-        "TIMER"   { "⏰" }
-        default   { "ℹ️" }
+    # Add emojis based on type (using proper Unicode for emojis)
+    $emojiMap = @{
+        "ERROR"   = [System.Char]::ConvertFromUtf32(0x1F534)  # Red circle
+        "WARNING" = [System.Char]::ConvertFromUtf32(0x26A0)   # Warning sign
+        "SUCCESS" = [System.Char]::ConvertFromUtf32(0x2705)   # Check mark
+        "INFO"    = [System.Char]::ConvertFromUtf32(0x2139)   # Info
+        "GPU"     = [System.Char]::ConvertFromUtf32(0x1F3AE)  # Game controller
+        "MEMORY"  = [System.Char]::ConvertFromUtf32(0x1F9E0)  # Brain
+        "DISK"    = [System.Char]::ConvertFromUtf32(0x1F4BE)  # Floppy disk
+        "CHECK"   = [System.Char]::ConvertFromUtf32(0x1F50D)  # Magnifying glass
+        "TIMER"   = [System.Char]::ConvertFromUtf32(0x23F0)   # Alarm clock
     }
+
+    $emoji = if ($emojiMap.ContainsKey($Type)) { $emojiMap[$Type] } else { [System.Char]::ConvertFromUtf32(0x2139) }
 
     $logEntry = "[$timestamp] [$Type] $Message"
     $displayEntry = "$emoji [$timestamp] $Message"
@@ -47,7 +48,8 @@ function Log-Message {
         Add-Content -Path $LogFile -Value $logEntry -Force
     }
     catch {
-        Write-Host "❌ Error writing to log: $_" -ForegroundColor Red
+        $cross = [System.Char]::ConvertFromUtf32(0x274C)
+        Write-Host "$cross Error writing to log: $_" -ForegroundColor Red
     }
 
     # Enhanced color scheme
@@ -76,7 +78,8 @@ while ($RunContinuously) {
     $ReportFile = "$LogDir\latest_report.txt"
 
     # Initialize log for this run
-    Write-Host "`n🚀 ====== GPU DIAGNOSTIC CHECK #$runCount ======" -ForegroundColor Cyan
+    $rocket = [System.Char]::ConvertFromUtf32(0x1F680)
+    Write-Host "`n$rocket ====== GPU DIAGNOSTIC CHECK #$runCount ======" -ForegroundColor Cyan
     Log-Message "Starting system diagnostics..." "CHECK"
 
 try {
@@ -162,7 +165,8 @@ try {
         Log-Message "No recent DaVinci Resolve errors" "SUCCESS"
     }
 
-    Write-Host "`n✨ ====== DIAGNOSTIC COMPLETE ======" -ForegroundColor Green
+    $sparkles = [System.Char]::ConvertFromUtf32(0x2728)
+    Write-Host "`n$sparkles ====== DIAGNOSTIC COMPLETE ======" -ForegroundColor Green
     $nextCheck = (Get-Date).AddSeconds($CheckIntervalSeconds)
     Log-Message "Next check: $(Get-Date -Date $nextCheck -Format 'yyyy-MM-dd HH:mm:ss') (in $($CheckIntervalSeconds/60) minutes)" "TIMER"
 
@@ -173,7 +177,9 @@ catch {
 
 # Generate Human-Readable Report
 try {
-    $recents = if ($criticalErrors) { "⚠️ WARNING: PCIe/GPU errors detected - Check Event Viewer!" } else { "✅ OK: No critical errors" }
+    $warningEmoji = [System.Char]::ConvertFromUtf32(0x26A0)
+    $checkEmoji = [System.Char]::ConvertFromUtf32(0x2705)
+    $recents = if ($criticalErrors) { "$warningEmoji WARNING: PCIe/GPU errors detected - Check Event Viewer!" } else { "$checkEmoji OK: No critical errors" }
 
     $gpuName = if ($gpu) { $gpu.Name } else { "Unknown" }
     $driverVer = if ($gpu) { $gpu.DriverVersion } else { "Unknown" }
@@ -182,34 +188,45 @@ try {
     $osInfo = Get-CimInstance Win32_OperatingSystem | Select-Object -ExpandProperty Caption
     $diskInfo = if ($systemDrive) { "$([math]::Round(($systemDrive.Size - $systemDrive.FreeSpace) / $systemDrive.Size * 100, 2))%" } else { "Unknown" }
 
+    $gamepad = [System.Char]::ConvertFromUtf32(0x1F3AE)
+    $computer = [System.Char]::ConvertFromUtf32(0x1F4BB)
+    $chart = [System.Char]::ConvertFromUtf32(0x1F4CA)
+    $magnify = [System.Char]::ConvertFromUtf32(0x1F50D)
+    $bulb = [System.Char]::ConvertFromUtf32(0x1F4A1)
+    $thermometer = [System.Char]::ConvertFromUtf32(0x1F321)
+    $arrows = [System.Char]::ConvertFromUtf32(0x1F504)
+    $clipboard = [System.Char]::ConvertFromUtf32(0x1F4CB)
+    $wrench = [System.Char]::ConvertFromUtf32(0x1F527)
+    $folder = [System.Char]::ConvertFromUtf32(0x1F4C1)
+
     $report = @"
-🎮 GPU DIAGNOSTIC REPORT 🎮
+$gamepad GPU DIAGNOSTIC REPORT $gamepad
 Generated: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
 ================================
-💻 SYSTEM INFO:
+$computer SYSTEM INFO:
 - Computer: $($env:COMPUTERNAME)
 - User: $($env:USERNAME)
 - OS: $osInfo
 
-🎮 LATEST GPU STATUS:
+$gamepad LATEST GPU STATUS:
 - GPU: $gpuName
 - Driver Version: $driverVer
 - VRAM: $vramInfo
 
-📊 SYSTEM RESOURCES:
+$chart SYSTEM RESOURCES:
 - Memory Used: $usedPercent%
 - Disk C: $diskInfo
 
-🔍 RECENT ISSUES:
+$magnify RECENT ISSUES:
 $recents
 
-💡 RECOMMENDATIONS:
-1. 🌡️ Monitor GPU temperature - should stay below 80C during work
-2. 🔄 Keep drivers updated
-3. 📋 Check Event Viewer regularly for PCIe errors
-4. 🔧 Reseat GPU if PCIe errors appear
+$bulb RECOMMENDATIONS:
+1. $thermometer Monitor GPU temperature - should stay below 80C during work
+2. $arrows Keep drivers updated
+3. $clipboard Check Event Viewer regularly for PCIe errors
+4. $wrench Reseat GPU if PCIe errors appear
 
-📁 FULL LOGS: $LogFile
+$folder FULL LOGS: $LogFile
 "@
 
     $report | Out-File -FilePath $ReportFile -Force
@@ -231,10 +248,12 @@ catch {
 }
 
     # Wait for next check interval
-    Write-Host "`n💤 Waiting for next check cycle... (Press Ctrl+C to stop monitoring)" -ForegroundColor DarkGray
+    $sleep = [System.Char]::ConvertFromUtf32(0x1F4A4)
+    Write-Host "`n$sleep Waiting for next check cycle... (Press Ctrl+C to stop monitoring)" -ForegroundColor DarkGray
     Start-Sleep -Seconds $CheckIntervalSeconds
 }
 
 # This line is only reached if $RunContinuously is set to $false
-Write-Host "`n🛑 Monitoring stopped." -ForegroundColor Red
+$stop = [System.Char]::ConvertFromUtf32(0x1F6D1)
+Write-Host "`n$stop Monitoring stopped." -ForegroundColor Red
 exit 0
