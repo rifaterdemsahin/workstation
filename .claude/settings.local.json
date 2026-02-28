@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(echo $USERNAME)",
+      "Read(//c/Users//**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
