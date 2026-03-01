@@ -1,0 +1,1 @@
+Get-PnpDevice | Where-Object { $_.Status -eq 'Unknown' -and $_.Problem -eq 'CM_PROB_PHANTOM' } | ForEach-Object { Write-Host "Removing: $($_.FriendlyName)" -ForegroundColor Yellow; pnputil /remove-device $_.InstanceId }
