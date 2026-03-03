@@ -94,7 +94,7 @@ function Get-FixSteps {
         }
         "Degraded" {
             $fixes += "Run: 'usbview.exe' (USB Device Viewer) to check connection speed"
-            $fixes += "Device may be running at USB 2.0 speed on a USB 3.0 port — try a different port"
+            $fixes += "Device may be running at USB 2.0 speed on a USB 3.0 port -- try a different port"
             $fixes += "Replace the USB cable; damaged cables cause speed degradation"
         }
         "Not Present" {
@@ -107,17 +107,17 @@ function Get-FixSteps {
     # Extra fix if ErrorCode is known
     switch ($ErrorCode) {
         "43" {
-            $fixes += "Code 43: Windows stopped the device — uninstall driver, reboot, replug"
+            $fixes += "Code 43: Windows stopped the device -- uninstall driver, reboot, replug"
             $fixes += "Run: 'devmgmt.msc' > right-click > Properties > Error Code 43"
         }
         "10" {
-            $fixes += "Code 10: Device cannot start — reinstall driver from manufacturer site"
+            $fixes += "Code 10: Device cannot start --reinstall driver from manufacturer site"
         }
         "28" {
-            $fixes += "Code 28: No driver installed — download driver from manufacturer"
+            $fixes += "Code 28: No driver installed --download driver from manufacturer"
         }
         "45" {
-            $fixes += "Code 45: Currently not connected — replug the device and rescan"
+            $fixes += "Code 45: Currently not connected --replug the device and rescan"
         }
     }
 
@@ -136,7 +136,7 @@ Write-Host "  Computer : $env:COMPUTERNAME   User: $env:USERNAME" -ForegroundCol
 Write-Host ""
 
 # ─────────────────────────────────────────────
-# SECTION 1 — USB Controllers
+# SECTION 1 --USB Controllers
 # ─────────────────────────────────────────────
 Write-Host "  $($ico.SCAN) ─── USB CONTROLLERS ──────────────────────────────────" -ForegroundColor Magenta
 Write-Host ""
@@ -156,11 +156,11 @@ if (-not $controllers) {
             Write-Status -Emoji $ico.OK -Label $ctrl.FriendlyName -Message "OK" -Color Green
         } elseif ($ctrl.Status -match "Warn|Degraded") {
             $stats.Warn++
-            Write-Status -Emoji $ico.WARN -Label $ctrl.FriendlyName -Message "WARNING — $($ctrl.Status)" -Color Yellow
+            Write-Status -Emoji $ico.WARN -Label $ctrl.FriendlyName -Message "WARNING --$($ctrl.Status)" -Color Yellow
             Write-FixSuggestion -Steps (Get-FixSteps -Status $ctrl.Status -DeviceName $ctrl.FriendlyName -ErrorCode "")
         } else {
             $stats.Error++
-            Write-Status -Emoji $ico.ERR -Label $ctrl.FriendlyName -Message "ERROR — $($ctrl.Status)" -Color Red
+            Write-Status -Emoji $ico.ERR -Label $ctrl.FriendlyName -Message "ERROR --$($ctrl.Status)" -Color Red
             Write-FixSuggestion -Steps (Get-FixSteps -Status $ctrl.Status -DeviceName $ctrl.FriendlyName -ErrorCode "")
         }
     }
@@ -169,7 +169,7 @@ if (-not $controllers) {
 Write-Host ""
 
 # ─────────────────────────────────────────────
-# SECTION 2 — All USB-connected Devices
+# SECTION 2 --All USB-connected Devices
 # ─────────────────────────────────────────────
 Write-Host "  $($ico.SCAN) ─── CONNECTED USB DEVICES ─────────────────────────────" -ForegroundColor Magenta
 Write-Host ""
@@ -209,19 +209,19 @@ if (-not $allDevices) {
             Write-Status -Emoji "$devIcon" -Label $name -Message "OK" -Color Green
         } elseif ($dev.Status -match "Warn|Degraded") {
             $stats.Warn++
-            Write-Status -Emoji $ico.WARN -Label $name -Message "WARNING — $($dev.Status)$suffix" -Color Yellow
+            Write-Status -Emoji $ico.WARN -Label $name -Message "WARNING --$($dev.Status)$suffix" -Color Yellow
             Write-FixSuggestion -Steps (Get-FixSteps -Status $dev.Status -DeviceName $name -ErrorCode $errorCode)
         } elseif ($dev.Status -eq "Unknown") {
             $stats.Warn++
             Write-Status -Emoji $ico.GHOST -Label $name -Message "UNKNOWN STATUS$suffix" -Color DarkYellow
             Write-FixSuggestion -Steps (Get-FixSteps -Status "Unknown" -DeviceName $name -ErrorCode $errorCode)
         } elseif ($dev.Status -eq "Not Present") {
-            # Not connected now — skip silent, only show if verbose needed
+            # Not connected now --skip silent, only show if verbose needed
             # Skip to avoid noise from historical devices
             $stats.Total--
         } else {
             $stats.Error++
-            Write-Status -Emoji $ico.ERR -Label $name -Message "ERROR — $($dev.Status)$suffix" -Color Red
+            Write-Status -Emoji $ico.ERR -Label $name -Message "ERROR --$($dev.Status)$suffix" -Color Red
             Write-FixSuggestion -Steps (Get-FixSteps -Status $dev.Status -DeviceName $name -ErrorCode $errorCode)
         }
     }
@@ -230,7 +230,7 @@ if (-not $allDevices) {
 Write-Host ""
 
 # ─────────────────────────────────────────────
-# SECTION 3 — USB Event Log (last boot)
+# SECTION 3 --USB Event Log (last boot)
 # ─────────────────────────────────────────────
 Write-Host "  $($ico.SCAN) ─── USB EVENTS (last 30 minutes) ──────────────────────" -ForegroundColor Magenta
 Write-Host ""
@@ -280,7 +280,7 @@ Write-Host $totLine  -ForegroundColor Cyan
 Write-Host ""
 
 if ($stats.Error -gt 0) {
-    Write-Host "  $($ico.ERR)  ACTION REQUIRED — $($stats.Error) device(s) have errors." -ForegroundColor Red
+    Write-Host "  $($ico.ERR)  ACTION REQUIRED --$($stats.Error) device(s) have errors." -ForegroundColor Red
     Write-Host ""
     Write-Host "  $($ico.FIX)  QUICK FIX GUIDE:" -ForegroundColor DarkYellow
     Write-Host "     1. Open Device Manager  :  Win + X > Device Manager" -ForegroundColor DarkYellow
@@ -291,7 +291,7 @@ if ($stats.Error -gt 0) {
     Write-Host "                                 Properties > Power Management tab" -ForegroundColor DarkYellow
     Write-Host "     6. Run as Admin          :  Some errors only show with elevated rights" -ForegroundColor DarkYellow
 } elseif ($stats.Warn -gt 0) {
-    Write-Host "  $($ico.WARN)  ADVISORY — $($stats.Warn) device(s) may need attention." -ForegroundColor Yellow
+    Write-Host "  $($ico.WARN)  ADVISORY --$($stats.Warn) device(s) may need attention." -ForegroundColor Yellow
 } else {
     Write-Host "  $($ico.OK)  All USB devices are healthy!" -ForegroundColor Green
 }
