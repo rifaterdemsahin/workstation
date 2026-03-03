@@ -66,10 +66,7 @@ function Send-ToPico {
         [string]$Text,
 
         [Parameter(Mandatory=$false)]
-        [switch]$Clipboard,
-
-        [Parameter(Mandatory=$false)]
-        [switch]$Base64
+        [switch]$Clipboard
     )
 
     $ProjectDir = "C:\projects\raspberry-pico-2-hid"
@@ -80,25 +77,16 @@ function Send-ToPico {
     try {
         if ($Clipboard) {
             Write-Host "$wifi Sending clipboard to Pico..." -ForegroundColor Cyan
-            if ($Base64) {
-                python send_wifi_windows.py --clip --base64
-            } else {
-                python send_wifi_windows.py --clip
-            }
+            python send_wifi.py --clip
         }
         elseif ($Text) {
             Write-Host "$wifi Sending text to Pico: $Text" -ForegroundColor Cyan
-            if ($Base64) {
-                $Text | python send_wifi_windows.py --stdin --base64
-            } else {
-                $Text | python send_wifi_windows.py --stdin
-            }
+            python send_wifi.py $Text
         }
         else {
             $info = [System.Char]::ConvertFromUtf32(0x2139)
             Write-Host "$info Usage: Send-ToPico 'text to send'" -ForegroundColor Yellow
             Write-Host "$info        Send-ToPico -Clipboard" -ForegroundColor Yellow
-            Write-Host "$info        Send-ToPico 'text' -Base64  (preserves all special chars)" -ForegroundColor Yellow
         }
     }
     finally {
