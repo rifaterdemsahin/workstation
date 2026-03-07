@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(powershell -NoProfile -Command \". ''C:\\projects\\workstation\\6_Symbols\\powershell_profile\\Microsoft.PowerShell_profile.ps1''\")",
-      "Bash(powershell -Command \". $PROFILE\")"
+      "Bash(powershell -Command \". $PROFILE\")",
+      "Bash(powershell -Command \"[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; & ''.\\\\6_Symbols\\\\Bookmarks\\\\search.ps1'' -Query ''ece''\")",
+      "Bash(powershell -Command \":*)"
     ],
     "deny": [],
     "ask": []
