@@ -2,6 +2,8 @@
 Workstation setup an configuration and execution
 ```
 
+> https://rifaterdemsahin.github.io/workstation/
+
 # Self Learning Project Template
 
 ## Goal : Fill the skills gaps by self learning while leveraging technology
