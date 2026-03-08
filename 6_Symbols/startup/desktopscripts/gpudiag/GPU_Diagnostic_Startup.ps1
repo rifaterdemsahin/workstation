@@ -138,11 +138,20 @@ try {
     # DisplayLink uses shared memory only, so its dedicated usage is 0.
     $discreteLuid = $gpuMemByLuid.Keys | Sort-Object { $gpuMemByLuid[$_] } -Descending | Select-Object -First 1
 
-    # Try rocm-smi for AMD temperature
+    # Try rocm-smi / amd-smi for AMD temperature (check known install paths too)
     $rocmLines = @()
-    if (Get-Command "rocm-smi" -ErrorAction SilentlyContinue) {
+    $amdTool   = $null
+    $amdArgs   = @()
+    if     (Get-Command "rocm-smi" -ErrorAction SilentlyContinue) { $amdTool = "rocm-smi"; $amdArgs = @("--showtemp","--showuse","--showmemuse","--csv") }
+    elseif (Get-Command "amd-smi"  -ErrorAction SilentlyContinue) { $amdTool = "amd-smi";  $amdArgs = @("metric","--gpu","0","--temperature","--usage") }
+    else {
+        foreach ($p in @("C:\Program Files\AMD\ROCm\bin\rocm-smi.exe","C:\Program Files\AMD\ROCm\bin\amd-smi.exe")) {
+            if (Test-Path $p) { $amdTool = $p; $amdArgs = @("--showtemp","--showuse","--showmemuse","--csv"); break }
+        }
+    }
+    if ($amdTool) {
         try {
-            $rocmOut = & rocm-smi --showtemp --showuse --showmemuse --csv 2>$null
+            $rocmOut = & $amdTool @amdArgs 2>$null
             if ($rocmOut) { $rocmLines = $rocmOut | Select-Object -Skip 1 | Where-Object { $_.Trim() } }
         } catch {}
     }
@@ -166,10 +175,11 @@ try {
         }
 
         if ($rocmLines.Count -gt 0) {
-            Log-Message "AMD rocm-smi:" "GPU"
+            Log-Message "AMD temp ($amdTool):" "GPU"
             foreach ($line in $rocmLines) { Log-Message "  $line" "GPU" }
         } elseif ($allGpus | Where-Object { $_.Name -like "*AMD*" -or $_.Name -like "*Radeon*" }) {
-            Log-Message "AMD temp: install rocm-smi for temperature data" "INFO"
+            $scriptDir = Split-Path $MyInvocation.MyCommand.Path -Parent
+            Log-Message "AMD temp unavailable -- run: $scriptDir\Install-AMDTemp.ps1 (as Admin)" "WARNING"
         }
     }
     else {
