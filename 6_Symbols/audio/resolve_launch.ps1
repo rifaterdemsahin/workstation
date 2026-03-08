@@ -1,4 +1,4 @@
-# ============================================================
+﻿# ============================================================
 #  RESOLVE OPTIMIZER - Stream Deck Launcher
 #  Pins Resolve to Processor Group 0 (NUMA node 0, 32 cores)
 #  Performance fix for Threadripper 3995WX + RX 6900 XT
