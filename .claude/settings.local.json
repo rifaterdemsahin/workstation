@@ -1,18 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(powershell -NoProfile -Command \". ''C:\\projects\\workstation\\6_Symbols\\powershell_profile\\Microsoft.PowerShell_profile.ps1''\")",
-      "Bash(powershell -Command \". $PROFILE\")",
-      "Bash(powershell -Command \"[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; & ''.\\\\6_Symbols\\\\Bookmarks\\\\search.ps1'' -Query ''ece''\")",
-      "Bash(powershell -Command \":*)",
-      "Bash(powershell -NoProfile -Command \":*)",
-      "Bash(powershell -NoProfile -Command \"& ''C:/projects/workstation/6_Symbols/startup/desktopscripts/gpudiag/GPU_Diagnostic_Startup.ps1''\")",
-      "Bash(powershell.exe -NoProfile -File \"C:/projects/workstation/tmp_vram_check.ps1\")",
-      "Bash(powershell.exe -NoProfile -File \"C:/projects/workstation/6_Symbols/startup/desktopscripts/gpudiag/GPU_Diagnostic_Startup.ps1\")",
-      "Bash(powershell -NonInteractive -File \"C:\\\\projects\\\\workstation\\\\6_Symbols\\\\startup\\\\desktopscripts\\\\scan_davinci_resolve_events.ps1\")",
-      "Bash(echo \"EXIT:$LASTEXITCODE\")",
-      "Bash(timeout 20 tail -f \"C:\\\\Users\\\\Pexabo\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--projects-workstation\\\\tasks\\\\bya29mgq7.output\")",
-      "Bash(timeout 25 tail -f \"C:\\\\Users\\\\Pexabo\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--projects-workstation\\\\tasks\\\\bs9118fzp.output\")"
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File vmware_bluestacks_cleanup_report.ps1)",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File generate_cleanup_report.ps1)",
+      "Bash(git add vmware_bluestacks_cleanup_report.md generate_cleanup_report.ps1 post_reboot_check.ps1 stopped_services_formula_report.md)",
+      "Bash(git add 6_Symbols/startup/desktopscripts/scan_devices.ps1)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfeat(diagnostics): add VMware/BlueStacks cleanup and service health reports\n\nAdd comprehensive system diagnostic and cleanup reports:\n- VMware VM file scanner and cleanup report generator\n- BlueStacks remnant detection and removal guide\n- Post-reboot verification script for virtualization cleanup\n- Stopped services formula report with risk analysis\n- Automated device scanning script for Stream Deck\n\nReports include:\n- VMware service, package, and VM file enumeration\n- BlueStacks directory detection across system paths\n- Audio device health monitoring (29 endpoints, 5 issues found)\n- Service health metrics with risk scoring formulas\n- Automated cleanup PowerShell scripts\n\nKey findings:\n- 3 VMware VM configurations found in Documents\n- 2 BlueStacks directories remaining\n- 5 audio devices in Unknown status\n- 8 stopped automatic services with priority classification\n\nGenerated with Claude Code\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File \"C:\\\\projects\\\\workstation\\\\6_Symbols\\\\audio\\\\resolve_launch.ps1\")",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -Command \":*)",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -NonInteractive -File \"C:\\\\projects\\\\workstation\\\\6_Symbols\\\\audio\\\\resolve_launch.ps1\")",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -Command \"$p = Get-Process -Name ''Resolve'' -EA SilentlyContinue; if \\($p\\) { $aff = [long]$p.ProcessorAffinity; Write-Host \\(''PID: '' + $p.Id + ''  Affinity: 0x'' + \\(''{0:X}'' -f $aff\\) + ''  \\('' + $aff + '' decimal\\)''\\) } else { Write-Host ''Resolve not running'' }\")",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File \"C:\\\\projects\\\\workstation\\\\6_Symbols\\\\audio\\\\check_affinity.ps1\")"
     ],
     "deny": [],
     "ask": []

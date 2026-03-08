@@ -1,0 +1,189 @@
+--[[
+  DaVinci Resolve - Audio Crackling Diagnostic
+  Place in: %APPDATA%\Blackmagic Design\DaVinci Resolve\Support\Scripts\Utility\
+  Run via: Workspace > Scripts > Utility > audio_diagnostic
+--]]
+
+local resolve = Resolve()
+local pm      = resolve:GetProjectManager()
+local project = pm:GetCurrentProject()
+local tl      = project:GetCurrentTimeline()
+
+-- ── Helpers ──────────────────────────────────────────────────
+local sep  = string.rep("═", 60)
+local sep2 = string.rep("─", 60)
+
+local function header(title)
+    print("\n" .. sep)
+    print("  " .. title)
+    print(sep)
+end
+
+local function warn(msg)  print("  ⚠️  " .. msg) end
+local function ok(msg)    print("  ✅  " .. msg) end
+local function info(msg)  print("  ℹ️   " .. msg) end
+
+local issues = {}
+local function flag(msg)
+    table.insert(issues, msg)
+    warn(msg)
+end
+
+-- ── 1. Project Settings ───────────────────────────────────────
+header("1. PROJECT SETTINGS")
+
+local tlFPS        = project:GetSetting("timelineFrameRate")
+local tlSampleRate = project:GetSetting("audioSampleRate")
+local tlBitDepth   = project:GetSetting("audioBitDepth")
+local tlWidth      = project:GetSetting("timelineResolutionWidth")
+local tlHeight     = project:GetSetting("timelineResolutionHeight")
+
+print(string.format("  Project       : %s", project:GetName()))
+print(string.format("  Timeline FPS  : %s", tlFPS  or "unknown"))
+print(string.format("  Sample Rate   : %s Hz", tlSampleRate or "unknown"))
+print(string.format("  Bit Depth     : %s bit", tlBitDepth or "unknown"))
+print(string.format("  Resolution    : %sx%s", tlWidth or "?", tlHeight or "?"))
+
+if tlSampleRate and tonumber(tlSampleRate) ~= 48000 then
+    flag("Sample rate is " .. tlSampleRate .. "Hz — Focusrite defaults to 48000Hz. Mismatch = crackling!")
+else
+    ok("Sample rate is 48000Hz")
+end
+
+-- ── 2. Timeline Info ──────────────────────────────────────────
+header("2. TIMELINE")
+
+if not tl then
+    warn("No active timeline found — open your crackling project's timeline and re-run")
+    return
+end
+
+print(string.format("  Timeline name : %s", tl:GetName()))
+print(string.format("  Duration      : %s", tl:GetEndFrame() - tl:GetStartFrame() .. " frames"))
+
+local audioTrackCount = tl:GetTrackCount("audio")
+local videoTrackCount = tl:GetTrackCount("video")
+print(string.format("  Audio tracks  : %d", audioTrackCount))
+print(string.format("  Video tracks  : %d", videoTrackCount))
+
+if audioTrackCount > 16 then
+    flag("High audio track count (" .. audioTrackCount .. ") — may stress audio engine during playback")
+end
+
+-- ── 3. Clip Scan ──────────────────────────────────────────────
+header("3. AUDIO CLIP SCAN (checking sample rates & formats)")
+
+local mismatchCount = 0
+local totalAudioClips = 0
+local formatCounts = {}
+
+for trackIdx = 1, audioTrackCount do
+    local clips = tl:GetItemListInTrack("audio", trackIdx)
+    if clips then
+        for _, clip in ipairs(clips) do
+            totalAudioClips = totalAudioClips + 1
+            local mediaItem = clip:GetMediaPoolItem()
+
+            if mediaItem then
+                local clipProps = mediaItem:GetClipProperty()
+
+                local clipSampleRate = clipProps["Sample Rate"] or clipProps["Audio Sample Rate"] or "unknown"
+                local clipFormat     = clipProps["Format"] or clipProps["Codec"] or "unknown"
+                local clipChannels   = clipProps["Audio Ch"]   or clipProps["Channels"] or "unknown"
+                local clipName       = clipProps["Clip Name"]  or mediaItem:GetName()
+
+                -- Track format distribution
+                formatCounts[clipFormat] = (formatCounts[clipFormat] or 0) + 1
+
+                -- Check for sample rate mismatch
+                local clipSR = tonumber(clipSampleRate)
+                local tlSR   = tonumber(tlSampleRate)
+
+                if clipSR and tlSR and clipSR ~= tlSR then
+                    mismatchCount = mismatchCount + 1
+                    print(string.format("\n  🔴 MISMATCH  Track %d | %s", trackIdx, clipName))
+                    print(string.format("     Clip SR: %dHz  |  Timeline SR: %dHz", clipSR, tlSR))
+                    print(string.format("     Format: %s  |  Channels: %s", clipFormat, clipChannels))
+                end
+            end
+        end
+    end
+end
+
+print(string.format("\n  Total audio clips scanned : %d", totalAudioClips))
+print(string.format("  Sample rate mismatches    : %d", mismatchCount))
+
+if mismatchCount == 0 then
+    ok("No sample rate mismatches found")
+else
+    flag(mismatchCount .. " clips have sample rate mismatch — these will crackle during playback")
+end
+
+-- ── 4. Format Distribution ────────────────────────────────────
+header("4. AUDIO FORMATS IN TIMELINE")
+for fmt, count in pairs(formatCounts) do
+    print(string.format("  %-20s : %d clips", fmt, count))
+end
+if next(formatCounts) == nil then
+    info("No format data available from clip properties")
+end
+
+-- ── 5. Video Clip Scan (frame rate mismatch) ──────────────────
+header("5. VIDEO CLIP FRAME RATE CHECK")
+
+local fpsMismatches = 0
+local tlFPSnum = tonumber(tlFPS)
+
+for trackIdx = 1, videoTrackCount do
+    local clips = tl:GetItemListInTrack("video", trackIdx)
+    if clips then
+        for _, clip in ipairs(clips) do
+            local mediaItem = clip:GetMediaPoolItem()
+            if mediaItem then
+                local clipProps = mediaItem:GetClipProperty()
+                local clipFPS   = tonumber(clipProps["FPS"] or clipProps["Frame Rate"] or 0)
+                local clipName  = clipProps["Clip Name"] or mediaItem:GetName()
+
+                if clipFPS and tlFPSnum and clipFPS > 0 and math.abs(clipFPS - tlFPSnum) > 0.5 then
+                    fpsMismatches = fpsMismatches + 1
+                    print(string.format("  ⚠️  Track %d | %s", trackIdx, clipName))
+                    print(string.format("     Clip FPS: %.2f  |  Timeline FPS: %.2f", clipFPS, tlFPSnum))
+                end
+            end
+        end
+    end
+end
+
+if fpsMismatches == 0 then
+    ok("No frame rate mismatches found")
+else
+    flag(fpsMismatches .. " video clips have frame rate mismatch — causes audio sync drift")
+end
+
+-- ── 6. Render Cache Status ────────────────────────────────────
+header("6. RENDER CACHE")
+local cacheMode = project:GetSetting("perfProxyMediaOn")
+info("To enable Smart render cache: Playback menu → Render Cache → Smart")
+info("Then: Fairlight menu → Create Audio Render Cache")
+info("This pre-renders audio so Resolve isn't resampling live during playback")
+
+-- ── 7. Summary ────────────────────────────────────────────────
+header("7. DIAGNOSTIC SUMMARY")
+
+if #issues == 0 then
+    ok("No issues detected in this project")
+    info("If crackling persists, check Focusrite Control app sample rate matches timeline (" .. (tlSampleRate or "?") .. "Hz)")
+    info("Also check: Preferences > System > Audio I/O > Buffer Size (try 512 or 1024)")
+else
+    print(string.format("  Found %d issue(s):\n", #issues))
+    for i, issue in ipairs(issues) do
+        print(string.format("  %d. %s", i, issue))
+    end
+    print("")
+    warn("Most likely fix: Fairlight > Create Audio Render Cache")
+    warn("Then check Focusrite Control app sample rate = " .. (tlSampleRate or "48000") .. "Hz")
+end
+
+print("\n" .. sep)
+print("  Diagnostic complete — " .. os.date("%Y-%m-%d %H:%M:%S"))
+print(sep .. "\n")
