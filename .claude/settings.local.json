@@ -4,7 +4,9 @@
       "Bash(powershell -NoProfile -Command \". ''C:\\projects\\workstation\\6_Symbols\\powershell_profile\\Microsoft.PowerShell_profile.ps1''\")",
       "Bash(powershell -Command \". $PROFILE\")",
       "Bash(powershell -Command \"[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; & ''.\\\\6_Symbols\\\\Bookmarks\\\\search.ps1'' -Query ''ece''\")",
-      "Bash(powershell -Command \":*)"
+      "Bash(powershell -Command \":*)",
+      "Bash(powershell -NoProfile -Command \":*)",
+      "Bash(powershell -NoProfile -Command \"& ''C:/projects/workstation/6_Symbols/startup/desktopscripts/gpudiag/GPU_Diagnostic_Startup.ps1''\")"
     ],
     "deny": [],
     "ask": []

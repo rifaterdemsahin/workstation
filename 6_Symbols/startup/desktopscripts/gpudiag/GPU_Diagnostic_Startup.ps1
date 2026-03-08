@@ -68,6 +68,22 @@ function Log-Message {
     Write-Host $displayEntry -ForegroundColor $color
 }
 
+# Helper: real VRAM from registry (Win32_VideoController caps at 4GB for >4GB cards)
+function Get-RealVram {
+    param([string]$DriverDesc)
+    $base = "HKLM:\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}"
+    try {
+        foreach ($key in (Get-ChildItem $base -ErrorAction SilentlyContinue | Where-Object { $_.PSChildName -match '^\d{4}$' })) {
+            $p = Get-ItemProperty $key.PSPath -ErrorAction SilentlyContinue
+            if ($p -and $p.DriverDesc -and $DriverDesc -like "*$($p.DriverDesc)*") {
+                $mem = $p.'HardwareInformation.MemorySize'
+                if ($mem -and [int64]$mem -gt 0) { return [math]::Round([int64]$mem / 1GB, 2) }
+            }
+        }
+    } catch {}
+    return $null
+}
+
 # Main monitoring loop
 $runCount = 0
 while ($RunContinuously) {
@@ -83,13 +99,75 @@ while ($RunContinuously) {
     Log-Message "Starting system diagnostics..." "CHECK"
 
 try {
-    # 1. Quick GPU Status (Fast)
+    # 1. GPU Status - all GPUs
     Log-Message "Scanning GPU status..." "CHECK"
-    $gpu = Get-CimInstance Win32_VideoController -ErrorAction SilentlyContinue | Where-Object { $_.Name -notlike "*Basic*" -and $_.Name -notlike "*Microsoft Remote Display Adapter*" } | Select-Object -First 1
+    $allGpus = Get-CimInstance Win32_VideoController -ErrorAction SilentlyContinue |
+        Where-Object { $_.Name -notlike "*Basic*" -and $_.Name -notlike "*Microsoft Remote Display Adapter*" }
 
-    if ($gpu) {
-        $vram = [math]::Round($gpu.AdapterRAM / 1GB, 2)
-        Log-Message "GPU: $($gpu.Name) | Driver: $($gpu.DriverVersion) | VRAM: ${vram}GB" "GPU"
+    # Use first discrete GPU for report summary (prefer AMD/NVIDIA over DisplayLink)
+    $gpu = $allGpus | Where-Object { $_.Name -notlike "*DisplayLink*" } | Select-Object -First 1
+    if (-not $gpu) { $gpu = $allGpus | Select-Object -First 1 }
+
+    # GPU perf counters via Windows Performance Counters (keyed by adapter LUID)
+    $gpuUtilByLuid = @{}
+    $gpuMemByLuid  = @{}
+    try {
+        # Aggregate 3D utilization per LUID across all processes/engines
+        $utilSamples = (Get-Counter "\GPU Engine(*engtype_3D)\Utilization Percentage" -ErrorAction SilentlyContinue).CounterSamples
+        foreach ($s in $utilSamples) {
+            if ($s.InstanceName -match 'luid_(0x[0-9a-fA-F]+_0x[0-9a-fA-F]+)') {
+                $luid = $Matches[1]
+                if (-not $gpuUtilByLuid.ContainsKey($luid)) { $gpuUtilByLuid[$luid] = 0.0 }
+                $gpuUtilByLuid[$luid] += $s.CookedValue
+            }
+        }
+        # Dedicated VRAM currently in use per LUID
+        $memSamples = (Get-Counter "\GPU Adapter Memory(*)\Dedicated Usage" -ErrorAction SilentlyContinue).CounterSamples
+        foreach ($s in $memSamples) {
+            if ($s.InstanceName -match 'luid_(0x[0-9a-fA-F]+_0x[0-9a-fA-F]+)') {
+                $luid = $Matches[1]
+                $gpuMemByLuid[$luid] = [math]::Round($s.CookedValue / 1MB, 0)
+            }
+        }
+    } catch {}
+
+    # The LUID with the highest dedicated VRAM usage = discrete GPU (AMD).
+    # DisplayLink uses shared memory only, so its dedicated usage is 0.
+    $discreteLuid = $gpuMemByLuid.Keys | Sort-Object { $gpuMemByLuid[$_] } -Descending | Select-Object -First 1
+
+    # Try rocm-smi for AMD temperature
+    $rocmLines = @()
+    if (Get-Command "rocm-smi" -ErrorAction SilentlyContinue) {
+        try {
+            $rocmOut = & rocm-smi --showtemp --showuse --showmemuse --csv 2>$null
+            if ($rocmOut) { $rocmLines = $rocmOut | Select-Object -Skip 1 | Where-Object { $_.Trim() } }
+        } catch {}
+    }
+
+    if ($allGpus) {
+        foreach ($g in $allGpus) {
+            $realVram = Get-RealVram $g.Name
+            $vramDisplay = if ($realVram) { "${realVram}GB" } else { "$([math]::Round($g.AdapterRAM / 1GB, 2))GB" }
+
+            $isDiscrete = $g.Name -notlike "*DisplayLink*"
+            $utilStr = ""
+            $memStr  = ""
+            if ($isDiscrete -and $discreteLuid) {
+                $util    = [math]::Round($gpuUtilByLuid[$discreteLuid], 1)
+                $memUsed = $gpuMemByLuid[$discreteLuid]
+                $utilStr = " | 3D Util: ${util}%"
+                $memStr  = " | VRAM Used: ${memUsed}MB"
+            }
+
+            Log-Message "GPU: $($g.Name) | Driver: $($g.DriverVersion) | VRAM: ${vramDisplay}${utilStr}${memStr}" "GPU"
+        }
+
+        if ($rocmLines.Count -gt 0) {
+            Log-Message "AMD rocm-smi:" "GPU"
+            foreach ($line in $rocmLines) { Log-Message "  $line" "GPU" }
+        } elseif ($allGpus | Where-Object { $_.Name -like "*AMD*" -or $_.Name -like "*Radeon*" }) {
+            Log-Message "AMD temp: install rocm-smi for temperature data" "INFO"
+        }
     }
     else {
         Log-Message "No discrete GPU detected" "WARNING"
@@ -181,10 +259,13 @@ try {
     $checkEmoji = [System.Char]::ConvertFromUtf32(0x2705)
     $recents = if ($criticalErrors) { "$warningEmoji WARNING: PCIe/GPU errors detected - Check Event Viewer!" } else { "$checkEmoji OK: No critical errors" }
 
-    $gpuName = if ($gpu) { $gpu.Name } else { "Unknown" }
-    $driverVer = if ($gpu) { $gpu.DriverVersion } else { "Unknown" }
-    $vramInfo = if ($gpu) { "$([math]::Round($gpu.AdapterRAM / 1GB, 2)) GB" } else { "Unknown" }
-
+    $gpuLines = if ($allGpus) {
+        ($allGpus | ForEach-Object {
+            $rv = Get-RealVram $_.Name
+            $v  = if ($rv) { "${rv}GB" } else { "$([math]::Round($_.AdapterRAM / 1GB, 2))GB" }
+            "- $($_.Name) | Driver: $($_.DriverVersion) | VRAM: $v"
+        }) -join "`n"
+    } else { "- Unknown" }
     $osInfo = Get-CimInstance Win32_OperatingSystem | Select-Object -ExpandProperty Caption
     $diskInfo = if ($systemDrive) { "$([math]::Round(($systemDrive.Size - $systemDrive.FreeSpace) / $systemDrive.Size * 100, 2))%" } else { "Unknown" }
 
@@ -208,10 +289,8 @@ $computer SYSTEM INFO:
 - User: $($env:USERNAME)
 - OS: $osInfo
 
-$gamepad LATEST GPU STATUS:
-- GPU: $gpuName
-- Driver Version: $driverVer
-- VRAM: $vramInfo
+$gamepad ALL GPUs:
+$gpuLines
 
 $chart SYSTEM RESOURCES:
 - Memory Used: $usedPercent%
