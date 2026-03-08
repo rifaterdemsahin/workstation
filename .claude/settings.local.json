@@ -11,7 +11,8 @@
       "Bash(powershell.exe -NoProfile -File \"C:/projects/workstation/6_Symbols/startup/desktopscripts/gpudiag/GPU_Diagnostic_Startup.ps1\")",
       "Bash(powershell -NonInteractive -File \"C:\\\\projects\\\\workstation\\\\6_Symbols\\\\startup\\\\desktopscripts\\\\scan_davinci_resolve_events.ps1\")",
       "Bash(echo \"EXIT:$LASTEXITCODE\")",
-      "Bash(timeout 20 tail -f \"C:\\\\Users\\\\Pexabo\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--projects-workstation\\\\tasks\\\\bya29mgq7.output\")"
+      "Bash(timeout 20 tail -f \"C:\\\\Users\\\\Pexabo\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--projects-workstation\\\\tasks\\\\bya29mgq7.output\")",
+      "Bash(timeout 25 tail -f \"C:\\\\Users\\\\Pexabo\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--projects-workstation\\\\tasks\\\\bs9118fzp.output\")"
     ],
     "deny": [],
     "ask": []

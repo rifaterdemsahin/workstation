@@ -24,9 +24,9 @@ $StartDate = (Get-Date).AddHours(-$HoursBack)
 # ── Keywords used to filter relevant events ──────────────────────────────────
 $ResolveKeywords = @("resolve", "blackmagic", "davinci", "bmd", "braw")
 $AudioKeywords   = @("audio", "wasapi", "audiodg", "audiosrv", "audioendpoint", "mmdevapi", "soundmax", "realtek", "audioservice")
-$GpuKeywords     = @("nvlddmkm", "amdkmdag", "amdkmdap", "igdkmd", "display", "dxgi", "d3d", "directx", "gpu", "nvwmi", "atikmdag", "nvapi", "cuda", "opencl")
-$AudioSources    = @("AudioSrv", "AudioEndpointBuilder", "AudioClientRpc", "Windows Audio", "PlugPlay")
-$GpuSources      = @("nvlddmkm", "amdkmdag", "Display", "igdkmd64", "Microsoft-Windows-Kernel-PnP")
+$GpuKeywords     = @("nvlddmkm", "amdkmdag", "amdkmdap", "igdkmd", "dxgi", "directx", "nvwmi", "atikmdag", "nvapi", "cuda", "opencl", "video driver", "display driver", "graphics driver")
+$AudioSources    = @("AudioSrv", "AudioEndpointBuilder", "AudioClientRpc", "Windows Audio")
+$GpuSources      = @("nvlddmkm", "amdkmdag", "atikmdag", "igdkmd64")
 $AppCrashSources = @("Application Error", "Application Hang", "Windows Error Reporting")
 
 Function Write-Header {
