@@ -61,12 +61,11 @@ Function Get-RelevantEvents {
             $isCrash   = ($AppCrashSources -contains $src) -and (Test-Keywords -Text $combined -Keywords ($ResolveKeywords + $AudioKeywords + $GpuKeywords))
 
             if ($isResolve -or $isAudio -or $isGpu -or $isCrash) {
-                $ev | Add-Member -NotePropertyName "_Category" -NotePropertyValue (
-                    if ($isResolve) { "DAVINCI" }
-                    elseif ($isAudio) { "AUDIO" }
-                    elseif ($isGpu)   { "GPU" }
-                    else              { "CRASH" }
-                ) -Force
+                $cat = if ($isResolve)    { "DAVINCI" }
+                       elseif ($isAudio)  { "AUDIO" }
+                       elseif ($isGpu)    { "GPU" }
+                       else               { "CRASH" }
+                $ev | Add-Member -NotePropertyName "_Category" -NotePropertyValue $cat -Force
                 $results += $ev
             }
         }
@@ -82,7 +81,7 @@ $fatalError = $null
 
 try {
     Clear-Host
-    Write-Header "DaVinci Resolve — Audio & Visual Diagnostic Scanner"
+    Write-Header "DaVinci Resolve - Audio & Visual Diagnostic Scanner"
     Write-Host "  Scanning last $HoursBack hours of System + Application logs..." -ForegroundColor Cyan
 
     $allEvents  = @()
@@ -187,7 +186,7 @@ try {
     }
 
     $sb.ToString() | Set-Clipboard
-    Write-Host "  [OK] Report copied to clipboard — paste into your AI assistant." -ForegroundColor Green
+    Write-Host "  [OK] Report copied to clipboard - paste into your AI assistant." -ForegroundColor Green
 }
 catch {
     $fatalError = $_
@@ -201,7 +200,7 @@ finally {
     if ($fatalError) {
         [System.Windows.Forms.MessageBox]::Show(
             "An error occurred during the scan:`n`n$fatalError`n`nCheck the terminal for details.",
-            "DaVinci Resolve Scanner — Error",
+            "DaVinci Resolve Scanner - Error",
             [System.Windows.Forms.MessageBoxButtons]::OK,
             [System.Windows.Forms.MessageBoxIcon]::Error
         ) | Out-Null
