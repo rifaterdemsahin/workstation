@@ -76,7 +76,10 @@ function Get-RealVram {
         foreach ($key in (Get-ChildItem $base -ErrorAction SilentlyContinue | Where-Object { $_.PSChildName -match '^\d{4}$' })) {
             $p = Get-ItemProperty $key.PSPath -ErrorAction SilentlyContinue
             if ($p -and $p.DriverDesc -and $DriverDesc -like "*$($p.DriverDesc)*") {
-                $mem = $p.'HardwareInformation.MemorySize'
+                # qwMemorySize is a QWORD (64-bit) — accurate for >4GB cards
+                # MemorySize is a DWORD (32-bit) — caps at ~4GB, unreliable
+                $mem = $p.'HardwareInformation.qwMemorySize'
+                if (-not $mem) { $mem = $p.'HardwareInformation.MemorySize' }
                 if ($mem -and [int64]$mem -gt 0) { return [math]::Round([int64]$mem / 1GB, 2) }
             }
         }
