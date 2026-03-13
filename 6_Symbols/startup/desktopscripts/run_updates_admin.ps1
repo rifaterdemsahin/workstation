@@ -1,12 +1,46 @@
 # PowerShell Script to Run System Updates (Admin)
 # Purpose: Runs winget, Windows Update, and Chocolatey updates.
 # Checks for Admin privileges and elevates if necessary.
+# Schedule: Preferably runs on Monday mornings (6 AM - 12 PM)
+
+param(
+    [switch]$Force  # Use -Force to bypass Monday morning check
+)
 
 # Check for Administrator privileges
 if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     Write-Host "Requesting Administrator privileges..." -ForegroundColor Yellow
-    Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSScriptRoot\run_updates_admin.ps1`"" -Verb RunAs
+    $forceArg = if ($Force) { "-Force" } else { "" }
+    Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSScriptRoot\run_updates_admin.ps1`" $forceArg" -Verb RunAs
     exit
+}
+
+# Check if today is Monday and within morning hours (6 AM - 12 PM)
+$currentDate = Get-Date
+$dayOfWeek = $currentDate.DayOfWeek
+$currentHour = $currentDate.Hour
+
+$isMondayMorning = ($dayOfWeek -eq "Monday") -and ($currentHour -ge 6 -and $currentHour -lt 12)
+
+if (-not $isMondayMorning -and -not $Force) {
+    Write-Host "===================================================================" -ForegroundColor Yellow
+    Write-Host "Updates are scheduled for Monday mornings (6 AM - 12 PM)" -ForegroundColor Yellow
+    Write-Host "Today is $dayOfWeek at $($currentDate.ToString('HH:mm'))" -ForegroundColor Cyan
+    Write-Host ""
+    Write-Host "To run updates anyway, use: " -ForegroundColor White
+    Write-Host "  .\run_updates_admin.ps1 -Force" -ForegroundColor Green
+    Write-Host ""
+    Write-Host "Recommended schedule: Weekly on Monday mornings" -ForegroundColor Gray
+    Write-Host "See: 6_Symbols\ToolsStayAwake\formula_workstation_update_frequency.md" -ForegroundColor Gray
+    Write-Host "===================================================================" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "Press Enter to close..."
+    Read-Host
+    exit 0
+}
+
+if ($Force) {
+    Write-Host "Force mode enabled - running updates outside scheduled time" -ForegroundColor Magenta
 }
 
 # Check if updates have already run successfully today
@@ -115,9 +149,12 @@ try {
     # Log update information to second brain
     $secondBrainLogPath = "F:\secondbrain_v4\secondbrain\system-updates.log"
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $dayOfWeekLog = $currentDate.DayOfWeek
+    $forceMode = if ($Force) { "Yes (Manual override)" } else { "No (Scheduled run)" }
     $logEntry = @"
 
-=== Update Run: $timestamp ===
+=== Update Run: $timestamp ($dayOfWeekLog) ===
+Forced: $forceMode
 Winget packages upgraded: $($packagesToUpgrade.Count)
 Chocolatey upgrade completed
 Windows Update completed
