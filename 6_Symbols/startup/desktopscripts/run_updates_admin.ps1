@@ -112,6 +112,26 @@ try {
     Set-Content -Path $lockFile -Value $today
     Write-Host "Update completion recorded for $today" -ForegroundColor Green
 
+    # Log update information to second brain
+    $secondBrainLogPath = "F:\secondbrain_v4\secondbrain\system-updates.log"
+    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $logEntry = @"
+
+=== Update Run: $timestamp ===
+Winget packages upgraded: $($packagesToUpgrade.Count)
+Chocolatey upgrade completed
+Windows Update completed
+Lock file: $lockFile
+"@
+
+    try {
+        Add-Content -Path $secondBrainLogPath -Value $logEntry -ErrorAction Stop
+        Write-Host "Update log saved to second brain: $secondBrainLogPath" -ForegroundColor Green
+    }
+    catch {
+        Write-Warning "Could not write to second brain log: $_"
+    }
+
     # Pause to let user see output
     Write-Host "Press Enter to close..."
     Read-Host
