@@ -19,7 +19,7 @@
     Requires: Windows Terminal (wt.exe), claude, copilot, gemini CLI tools installed.
 #>
 
-$WorkDir = "C:\projects\workstation"
+$WorkDir = "C:\Users\Pexabo\ObsidianVault\"
 
 # Verify Windows Terminal is available
 if (-not (Get-Command wt.exe -ErrorAction SilentlyContinue)) {
@@ -30,19 +30,14 @@ if (-not (Get-Command wt.exe -ErrorAction SilentlyContinue)) {
 # Define agents with their colors and commands
 $Agents = @(
     @{
-        Name    = "Claude"
-        Color   = "#E87D2F"   # Orange
-        Command = "Write-Host '🤖 Claude Agent - Ready' -ForegroundColor Yellow; claude"
-    },
-    @{
-        Name    = "Copilot"
-        Color   = "#8B5CF6"   # Purple
-        Command = "Write-Host '🤖 Copilot Agent - Ready' -ForegroundColor Magenta; copilot"
-    },
-    @{
         Name    = "Gemini"
         Color   = "#4285F4"   # Blue
         Command = "Write-Host '🤖 Gemini Agent - Ready' -ForegroundColor Cyan; gemini"
+    },
+    @{
+        Name    = "OpenCode"
+        Color   = "#32CD32"   # Green
+        Command = "Write-Host '📝 OpenCode - Ready' -ForegroundColor Green; code ."
     }
 )
 
@@ -52,7 +47,7 @@ Write-Host "Launching AI Agents in Windows Terminal..." -ForegroundColor Cyan
 # First tab (Claude) uses default new-tab, subsequent tabs use `;` separator
 $wtArgs = @()
 
-# Tab 1: Claude
+# Tab 1: Gemini
 $wtArgs += "new-tab"
 $wtArgs += "--title"
 $wtArgs += $Agents[0].Name
@@ -65,7 +60,7 @@ $wtArgs += "-NoExit"
 $wtArgs += "-Command"
 $wtArgs += $Agents[0].Command
 
-# Tab 2: Copilot
+# Tab 2: OpenCode
 $wtArgs += ";"
 $wtArgs += "new-tab"
 $wtArgs += "--title"
@@ -79,24 +74,9 @@ $wtArgs += "-NoExit"
 $wtArgs += "-Command"
 $wtArgs += $Agents[1].Command
 
-# Tab 3: Gemini
-$wtArgs += ";"
-$wtArgs += "new-tab"
-$wtArgs += "--title"
-$wtArgs += $Agents[2].Name
-$wtArgs += "--tabColor"
-$wtArgs += $Agents[2].Color
-$wtArgs += "-d"
-$wtArgs += $WorkDir
-$wtArgs += "pwsh"
-$wtArgs += "-NoExit"
-$wtArgs += "-Command"
-$wtArgs += $Agents[2].Command
-
 # Launch Windows Terminal with all tabs
 Start-Process wt.exe -ArgumentList $wtArgs
 
-Write-Host "AI Agents launched in 3 tabs:" -ForegroundColor Green
-Write-Host "  Tab 1 - Claude  (Orange)" -ForegroundColor Yellow
-Write-Host "  Tab 2 - Copilot (Purple)" -ForegroundColor Magenta
-Write-Host "  Tab 3 - Gemini  (Blue)"   -ForegroundColor Cyan
+Write-Host "AI Agents launched in 2 tabs:" -ForegroundColor Green
+Write-Host "  Tab 1 - Gemini  (Blue)"   -ForegroundColor Cyan
+Write-Host "  Tab 2 - OpenCode (Green)" -ForegroundColor Green
