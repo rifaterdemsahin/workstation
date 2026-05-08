@@ -1,18 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Bash(powershell.exe -ExecutionPolicy Bypass -File vmware_bluestacks_cleanup_report.ps1)",
-      "Bash(powershell.exe -ExecutionPolicy Bypass -File generate_cleanup_report.ps1)",
-      "Bash(git add vmware_bluestacks_cleanup_report.md generate_cleanup_report.ps1 post_reboot_check.ps1 stopped_services_formula_report.md)",
-      "Bash(git add 6_Symbols/startup/desktopscripts/scan_devices.ps1)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nfeat(diagnostics): add VMware/BlueStacks cleanup and service health reports\n\nAdd comprehensive system diagnostic and cleanup reports:\n- VMware VM file scanner and cleanup report generator\n- BlueStacks remnant detection and removal guide\n- Post-reboot verification script for virtualization cleanup\n- Stopped services formula report with risk analysis\n- Automated device scanning script for Stream Deck\n\nReports include:\n- VMware service, package, and VM file enumeration\n- BlueStacks directory detection across system paths\n- Audio device health monitoring (29 endpoints, 5 issues found)\n- Service health metrics with risk scoring formulas\n- Automated cleanup PowerShell scripts\n\nKey findings:\n- 3 VMware VM configurations found in Documents\n- 2 BlueStacks directories remaining\n- 5 audio devices in Unknown status\n- 8 stopped automatic services with priority classification\n\nGenerated with Claude Code\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
-      "Bash(powershell.exe -ExecutionPolicy Bypass -File \"C:\\\\projects\\\\workstation\\\\6_Symbols\\\\audio\\\\resolve_launch.ps1\")",
-      "Bash(powershell.exe -ExecutionPolicy Bypass -Command \":*)",
-      "Bash(powershell.exe -ExecutionPolicy Bypass -NonInteractive -File \"C:\\\\projects\\\\workstation\\\\6_Symbols\\\\audio\\\\resolve_launch.ps1\")",
-      "Bash(echo \"EXIT: $?\")",
-      "Bash(powershell.exe -ExecutionPolicy Bypass -Command \"$p = Get-Process -Name ''Resolve'' -EA SilentlyContinue; if \\($p\\) { $aff = [long]$p.ProcessorAffinity; Write-Host \\(''PID: '' + $p.Id + ''  Affinity: 0x'' + \\(''{0:X}'' -f $aff\\) + ''  \\('' + $aff + '' decimal\\)''\\) } else { Write-Host ''Resolve not running'' }\")",
-      "Bash(powershell.exe -ExecutionPolicy Bypass -File \"C:\\\\projects\\\\workstation\\\\6_Symbols\\\\audio\\\\check_affinity.ps1\")",
-      "Bash(powershell.exe -ExecutionPolicy Bypass -Command \"[System.IO.File]::WriteAllText\\(''C:/projects/workstation/6_Symbols/audio/resolve_launch.ps1'', \\(Get-Content ''C:/projects/workstation/6_Symbols/audio/resolve_launch.ps1'' -Raw -Encoding UTF8\\), [System.Text.UTF8Encoding]::new\\([bool]1\\)\\); Write-Host ''BOM saved: resolve_launch.ps1''\")"
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File \"C:\\projects\\workstation\\6_Symbols\\usb\\streamdeck_fix.ps1\")",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -Command \"& ''C:\\projects\\workstation\\6_Symbols\\startup\\desktopscripts\\run_updates_admin.ps1''\")",
+      "Bash(powershell.exe -Command \"Get-Date | Select-Object DayOfWeek, Hour, @{Name=''IsMondayMorning'';Expression={($_DayOfWeek -eq ''Monday'') -and ($_Hour -ge 6 -and $_Hour -lt 12)}}\")",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -Command \"$currentDate = Get-Date; $dayOfWeek = $currentDate.DayOfWeek; $currentHour = $currentDate.Hour; $isMondayMorning = ($dayOfWeek -eq ''Monday'') -and ($currentHour -ge 6 -and $currentHour -lt 12); Write-Host ''Day: ''$dayOfWeek'', Hour: ''$currentHour'', IsMondayMorning: ''$isMondayMorning -ForegroundColor Cyan\")",
+      "Bash(git add 6_Symbols/startup/desktopscripts/run_updates_admin.ps1 6_Symbols/ToolsStayAwake/formula_workstation_update_frequency.md)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfeat(updates): schedule updates for Monday mornings with force override\n\nUpdated update script to enforce weekly Monday morning schedule (6 AM - 12 PM) as per the workstation update frequency formula. This provides optimal balance between security and productivity.\n\nChanges:\n- Added -Force parameter to bypass schedule check when needed\n- Script now checks day of week and time before running\n- Displays helpful message with schedule info when run outside window\n- Enhanced second brain logging to track day of week and force mode\n- References new formula documentation for update frequency rationale\n\nUsage:\n- Normal: Script only runs Monday 6 AM - 12 PM\n- Override: Use -Force flag to run anytime\n- Documentation: See formula_workstation_update_frequency.md\n\nBenefits:\n- Prevents accidental mid-week disruptions\n- Encourages consistent weekly maintenance\n- Tracks adherence to update schedule in logs\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(shutdown /r /t 10 /c \"System reboot requested - rebooting in 10 seconds\")",
+      "Bash(shutdown /r /t 10)"
     ],
     "deny": [],
     "ask": []

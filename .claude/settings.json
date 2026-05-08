@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell.exe -ExecutionPolicy Bypass -Command \"[System.IO.File]::WriteAllText\\(''C:/projects/workstation/6_Symbols/audio/resolve_launch.ps1'', \\(Get-Content ''C:/projects/workstation/6_Symbols/audio/resolve_launch.ps1'' -Raw -Encoding UTF8\\), [System.Text.UTF8Encoding]::new\\([bool]1\\)\\)\")"
+    ]
+  }
+}
