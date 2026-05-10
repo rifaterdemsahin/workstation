@@ -56,3 +56,16 @@ Here are the recommended steps to troubleshoot and resolve the issue:
 5.  **Check PSU:** If the issue persists after trying the steps above, the user should consider testing the PSU. A local computer repair shop can test the PSU for a small fee.
 
 Given the information provided, the most likely solution is to either disable Fast Startup or revert to the previous BIOS version.
+
+## 7. Event Log Analysis
+
+A review of the Windows Event Logs has revealed a significant number of "corrected hardware errors" from the `Microsoft-Windows-WHEA-Logger` source. These errors, while "corrected", are a strong indication of underlying hardware instability, especially when they occur frequently (65 times in the last 24 hours).
+
+The WHEA (Windows Hardware Error Architecture) logger is reporting errors on the PCIe bus. This could be related to a number of components, including the graphics card, storage controllers, or other expansion cards.
+
+Given that this issue started after a BIOS update, it is highly probable that the new BIOS has introduced a compatibility or timing issue with one of the hardware components, leading to these errors. These errors could be causing the system to become unstable during the power-on sequence, leading to the observed problem.
+
+The other errors in the event log (DCOM, nssm, Kernel-PnP, etc.) are less likely to be related to the power-on issue and are likely unrelated software configuration problems.
+
+The presence of these WHEA errors reinforces the recommendation to revert to a previous, stable BIOS version. If the errors persist even with an older BIOS, then it would be a strong indicator of a hardware fault in one of the components.
+
