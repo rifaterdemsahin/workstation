@@ -1,0 +1,537 @@
+Last login: Sat Aug 22 05:35:40 on ttys019
+rifaterdemsahin@Rifats-MacBook-Pro-25457 ~ % brew upgrade
+==> Downloading Homebrew API data
+✔︎ JSON API packages.arm64_tahoe.jws.json                                  Downloaded   15.7MB/ 15.7MB
+Warning: The following taps are not trusted:
+  anomalyco/tap
+  dopplerhq/doppler
+
+Homebrew is currently ignoring formulae, casks and commands from these taps because tap trust is required.
+
+Untap them with:
+  brew untap anomalyco/tap dopplerhq/doppler
+Trust specific formulae, casks and commands with:
+  brew trust --formula <user>/<tap>/<formula>
+  brew trust --cask <user>/<tap>/<cask>
+  brew trust --command <user>/<tap>/<command>
+Whole-tap trust is broader and includes all current and future formulae,
+casks and commands from the listed taps. Trust whole taps with:
+  brew trust anomalyco/tap dopplerhq/doppler
+To disable trust checks:
+  export HOMEBREW_NO_REQUIRE_TAP_TRUST=1
+This is not recommended and will be removed in a later release.
+For more information, see:
+  https://docs.brew.sh/Tap-Trust
+==> Downloading bottle manifests
+✔︎ Bottle Manifest simdutf (9.1.0)                                         Downloaded   22.5KB/ 22.5KB
+✔︎ Bottle Manifest openshift-cli (4.22.9)                                  Downloaded   24.1KB/ 24.1KB
+✔︎ Bottle Manifest merve (1.2.2_2)                                         Downloaded   27.8KB/ 27.8KB
+✔︎ Bottle Manifest flyctl (0.4.87)                                         Downloaded   15.3KB/ 15.3KB
+✔︎ Bottle Manifest go (1.27.0)                                             Downloaded   14.8KB/ 14.8KB
+✔︎ Bottle Manifest aws-c-sdkutils (0.2.10)                                 Downloaded   21.2KB/ 21.2KB
+✔︎ Bottle Manifest aws-c-cal (0.9.15_1)                                    Downloaded   33.8KB/ 33.8KB
+✔︎ Bottle Manifest aws-c-compression (0.3.3)                               Downloaded   21.3KB/ 21.3KB
+✔︎ Bottle Manifest s2n (1.7.8)                                             Downloaded   27.1KB/ 27.1KB
+✔︎ Bottle Manifest node@22 (22.23.2_1)                                     Downloaded  136.6KB/136.6KB
+✔︎ Bottle Manifest aws-c-http (0.11.1)                                     Downloaded   58.5KB/ 58.5KB
+✔︎ Bottle Manifest aws-c-io (0.27.7)                                       Downloaded   45.7KB/ 45.7KB
+✔︎ Bottle Manifest aws-checksums (0.2.11)                                  Downloaded   21.2KB/ 21.2KB
+✔︎ Bottle Manifest aws-c-event-stream (0.7.2)                              Downloaded   59.0KB/ 59.0KB
+✔︎ Bottle Manifest yt-dlp (2026.8.19)                                      Downloaded  135.3KB/135.3KB
+✔︎ Bottle Manifest gh (2.98.0)                                             Downloaded   14.6KB/ 14.6KB
+✔︎ Bottle Manifest awscli (2.36.29)                                        Downloaded  164.7KB/164.7KB
+✔︎ Bottle Manifest aws-c-mqtt (0.16.2)                                     Downloaded   64.8KB/ 64.8KB
+✔︎ Bottle Manifest mlx (0.32.1)                                            Downloaded   36.7KB/ 36.7KB
+✔︎ Bottle Manifest mlx-c (0.6.0_4)                                         Downloaded   39.3KB/ 39.3KB
+✔︎ Bottle Manifest htop (3.5.3)                                            Downloaded   23.0KB/ 23.0KB
+✔︎ Bottle Manifest tmux (3.7c)                                             Downloaded   49.9KB/ 49.9KB
+✔︎ Bottle Manifest kubernetes-cli (1.36.4)                                 Downloaded   15.6KB/ 15.6KB
+✔︎ Bottle Manifest ollama (0.32.15)                                        Downloaded   51.2KB/ 51.2KB
+✔︎ Bottle Manifest aws-c-s3 (0.13.7)                                       Downloaded   83.7KB/ 83.7KB
+✔︎ Bottle Manifest aws-c-auth (0.10.5)                                     Downloaded   71.2KB/ 71.2KB
+==> Would install 1 dependency for tmux:
+jemalloc 5.3.1
+Homebrew will now attempt to upgrade casks with `auto_updates true`.
+Disable this behaviour with `HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1`.
+Some casks with `auto_updates true` or `version :latest` may still require `--greedy`,
+`HOMEBREW_UPGRADE_GREEDY` or `HOMEBREW_UPGRADE_GREEDY_CASKS` to be upgraded.
+Hide these hints with `HOMEBREW_NO_ENV_HINTS=1` (see `man brew`).
+==> Would upgrade 35 outdated packages
+simdutf             9.0.0                        -> 9.1.0 (395.4KB)
+node@22             22.23.2                      -> 22.23.2_1 (15.2MB)
+openshift-cli       4.22.8                       -> 4.22.9 (30.8MB)
+merve               1.2.2_1                      -> 1.2.2_2 (33KB)
+flyctl              0.4.83                       -> 0.4.87 (25MB)
+go                  1.26.6                       -> 1.27.0 (67.6MB)
+gh                  2.97.0                       -> 2.98.0 (13.7MB)
+aws-c-sdkutils      0.2.9                        -> 0.2.10 (51.6KB)
+aws-c-cal           0.9.15                       -> 0.9.15_1 (43.8KB)
+aws-c-compression   0.3.2                        -> 0.3.3 (15.3KB)
+s2n                 1.7.7                        -> 1.7.8 (755.6KB)
+aws-c-io            0.27.6                       -> 0.27.7 (198.2KB)
+aws-c-http          0.11.0                       -> 0.11.1 (167.8KB)
+yt-dlp              2026.7.4                     -> 2026.8.19 (5.4MB)
+aws-c-mqtt          0.16.1                       -> 0.16.2 (145KB)
+aws-checksums       0.2.10                       -> 0.2.11 (78.7KB)
+aws-c-event-stream  0.7.1                        -> 0.7.2 (46.8KB)
+aws-c-auth          0.10.4                       -> 0.10.5 (107.4KB)
+aws-c-s3            0.13.5                       -> 0.13.7 (128.5KB)
+awscli              2.36.24                      -> 2.36.29 (23.2MB)
+mlx                 0.32.0                       -> 0.32.1 (39.7MB)
+mlx-c               0.6.0_3                      -> 0.6.0_4 (187.6KB)
+htop                3.5.2                        -> 3.5.3 (156.0KB)
+tmux                3.7b                         -> 3.7c (543KB)
+kubernetes-cli      1.36.3                       -> 1.36.4 (18.3MB)
+ollama              0.32.13                      -> 0.32.15 (17.3MB)
+bettertouchtool     6.726,2026081403             -> 6.746,2026082105
+loom                0.368.1                      -> 0.369.2
+obs                 32.2.1                       -> 32.2.2
+rectangle           0.98                         -> 0.99
+virtualbox          7.2.14,174565                -> 7.2.16,174877
+visual-studio-code  1.133.0                      -> 1.134.0
+warp                0.2026.08.12.21.54.stable_00 -> 0.2026.08.19.08.15.stable_01
+whatsapp            26.32.19                     -> 26.33.19
+wispr-flow          1.6.531                      -> 1.6.606
+==> 1 Deprecated or disabled package
+microsoft-remote-desktop (disabled)
+==> Do you want to proceed with the upgrade? [y/n]
+==> Upgrading 36 outdated packages:
+simdutf             9.0.0                        -> 9.1.0 (395.4KB)
+node@22             22.23.2                      -> 22.23.2_1 (15.2MB)
+openshift-cli       4.22.8                       -> 4.22.9 (30.8MB)
+merve               1.2.2_1                      -> 1.2.2_2 (33KB)
+flyctl              0.4.83                       -> 0.4.87 (25MB)
+go                  1.26.6                       -> 1.27.0 (67.6MB)
+gh                  2.97.0                       -> 2.98.0 (13.7MB)
+aws-c-sdkutils      0.2.9                        -> 0.2.10 (51.6KB)
+aws-c-cal           0.9.15                       -> 0.9.15_1 (43.8KB)
+aws-c-compression   0.3.2                        -> 0.3.3 (15.3KB)
+s2n                 1.7.7                        -> 1.7.8 (755.6KB)
+aws-c-io            0.27.6                       -> 0.27.7 (198.2KB)
+aws-c-http          0.11.0                       -> 0.11.1 (167.8KB)
+yt-dlp              2026.7.4                     -> 2026.8.19 (5.4MB)
+aws-c-mqtt          0.16.1                       -> 0.16.2 (145KB)
+aws-checksums       0.2.10                       -> 0.2.11 (78.7KB)
+aws-c-event-stream  0.7.1                        -> 0.7.2 (46.8KB)
+aws-c-auth          0.10.4                       -> 0.10.5 (107.4KB)
+aws-c-s3            0.13.5                       -> 0.13.7 (128.5KB)
+awscli              2.36.24                      -> 2.36.29 (23.2MB)
+mlx                 0.32.0                       -> 0.32.1 (39.7MB)
+mlx-c               0.6.0_3                      -> 0.6.0_4 (187.6KB)
+htop                3.5.2                        -> 3.5.3 (156.0KB)
+tmux                3.7b                         -> 3.7c (543KB)
+kubernetes-cli      1.36.3                       -> 1.36.4 (18.3MB)
+ollama              0.32.13                      -> 0.32.15 (17.3MB)
+node@22             22.23.2                      -> 22.23.2_1 (15.2MB)
+bettertouchtool     6.726,2026081403             -> 6.746,2026082105
+loom                0.368.1                      -> 0.369.2
+obs                 32.2.1                       -> 32.2.2
+rectangle           0.98                         -> 0.99
+virtualbox          7.2.14,174565                -> 7.2.16,174877
+visual-studio-code  1.133.0                      -> 1.134.0
+warp                0.2026.08.12.21.54.stable_00 -> 0.2026.08.19.08.15.stable_01
+whatsapp            26.32.19                     -> 26.33.19
+wispr-flow          1.6.531                      -> 1.6.606
+
+==> Fetching downloads for: simdutf, node@22, openshift-cli, merve, flyctl, go, gh, aws-c-sdkutils, aws-c-cal, aws-c-compression, s2n, aws-c-io, aws-c-http, yt-dlp, aws-c-mqtt, aws-checksums, aws-c-event-stream, aws-c-auth, aws-c-s3, awscli, mlx, mlx-c, htop, tmux, kubernetes-cli, ollama, bettertouchtool, loom, obs, rectangle, virtualbox, visual-studio-code, warp, whatsapp and wispr-flow
+✔︎ Bottle simdutf (9.1.0)                                                  Downloaded  395.4KB/395.4KB
+✔︎ Bottle node@22 (22.23.2_1)                                              Downloaded   15.2MB/ 15.2MB
+✔︎ Bottle openshift-cli (4.22.9)                                           Downloaded   30.8MB/ 30.8MB
+✔︎ Bottle merve (1.2.2_2)                                                  Downloaded   33.1KB/ 33.1KB
+✔︎ Bottle flyctl (0.4.87)                                                  Downloaded   25.0MB/ 25.0MB
+✔︎ Bottle go (1.27.0)                                                      Downloaded   67.6MB/ 67.6MB
+✔︎ Bottle gh (2.98.0)                                                      Downloaded   13.7MB/ 13.7MB
+✔︎ Bottle aws-c-sdkutils (0.2.10)                                          Downloaded   51.6KB/ 51.6KB
+✔︎ Bottle aws-c-cal (0.9.15_1)                                             Downloaded   43.8KB/ 43.8KB
+✔︎ Bottle aws-c-compression (0.3.3)                                        Downloaded   15.3KB/ 15.3KB
+✔︎ Bottle s2n (1.7.8)                                                      Downloaded  755.6KB/755.6KB
+✔︎ Bottle aws-c-io (0.27.7)                                                Downloaded  198.2KB/198.2KB
+✔︎ Bottle aws-c-http (0.11.1)                                              Downloaded  167.8KB/167.8KB
+✔︎ Bottle yt-dlp (2026.8.19)                                               Downloaded    5.4MB/  5.4MB
+✔︎ Bottle aws-c-mqtt (0.16.2)                                              Downloaded  145.0KB/145.0KB
+✔︎ Bottle aws-checksums (0.2.11)                                           Downloaded   78.7KB/ 78.7KB
+✔︎ Bottle aws-c-event-stream (0.7.2)                                       Downloaded   46.8KB/ 46.8KB
+✔︎ Bottle aws-c-auth (0.10.5)                                              Downloaded  107.4KB/107.4KB
+✔︎ Bottle aws-c-s3 (0.13.7)                                                Downloaded  128.5KB/128.5KB
+✔︎ Bottle awscli (2.36.29)                                                 Downloaded   23.2MB/ 23.2MB
+✔︎ Bottle mlx (0.32.1)                                                     Downloaded   39.7MB/ 39.7MB
+✔︎ Bottle mlx-c (0.6.0_4)                                                  Downloaded  187.6KB/187.6KB
+✔︎ Bottle htop (3.5.3)                                                     Downloaded  156.0KB/156.0KB
+✔︎ Bottle tmux (3.7c)                                                      Downloaded  543.0KB/543.0KB
+✔︎ Bottle kubernetes-cli (1.36.4)                                          Downloaded   18.3MB/ 18.3MB
+✔︎ Bottle ollama (0.32.15)                                                 Downloaded   17.3MB/ 17.3MB
+✔︎ Bottle Manifest jemalloc (5.3.1)                                        Downloaded   16.5KB/ 16.5KB
+✔︎ Bottle jemalloc (5.3.1)                                                 Downloaded  929.9KB/929.9KB
+✔︎ Cask bettertouchtool (6.746,2026082105)                                 Downloaded   81.6MB/ 81.6MB
+✔︎ Cask rectangle (0.99)                                                   Downloaded    4.3MB/  4.3MB
+✔︎ Cask whatsapp (26.33.19)                                                Downloaded  264.7MB/264.7MB
+✔︎ Cask obs (32.2.2)                                                       Downloaded  187.7MB/187.7MB
+✔︎ Cask loom (0.369.2)                                                     Downloaded  228.5MB/228.5MB
+✔︎ Cask warp (0.2026.08.19.08.15.stable_01)                                Downloaded  333.9MB/333.9MB
+✔︎ Cask wispr-flow (1.6.606)                                               Downloaded  326.7MB/326.7MB
+✔︎ Cask visual-studio-code (1.134.0)                                       Downloaded  317.0MB/317.0MB
+✔︎ Cask virtualbox (7.2.16,174877)                                         Downloaded  160.0MB/160.0MB
+==> Upgrading simdutf
+  9.0.0 -> 9.1.0
+==> Pouring simdutf--9.1.0.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/simdutf/9.1.0: 65 files, 2MB
+==> Running `brew cleanup simdutf`...
+Disable this behaviour by setting `HOMEBREW_NO_INSTALL_CLEANUP=1`.
+Hide these hints with `HOMEBREW_NO_ENV_HINTS=1` (see `man brew`).
+Removing: /opt/homebrew/Cellar/simdutf/9.0.0... (65 files, 2MB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/simdutf_bottle_manifest--9.0.0... (9KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/simdutf--9.0.0... (391KB)
+==> Upgrading node@22
+  22.23.2 -> 22.23.2_1
+==> Pouring node@22--22.23.2_1.arm64_tahoe.bottle.tar.gz
+Warning: node@22 was installed but not linked because node is already linked.
+To link this version, run:
+  brew link node@22
+==> Caveats
+node@22 is keg-only, which means it was not symlinked into /opt/homebrew,
+because this is an alternate version of another formula.
+
+If you need to have node@22 first in your PATH, run:
+  echo 'export PATH="/opt/homebrew/opt/node@22/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find node@22 you may need to set:
+  export LDFLAGS="-L/opt/homebrew/opt/node@22/lib"
+  export CPPFLAGS="-I/opt/homebrew/opt/node@22/include"
+==> Summary
+🍺  /opt/homebrew/Cellar/node@22/22.23.2_1: 2,140 files, 54.7MB
+==> Running `brew cleanup node@22`...
+Removing: /opt/homebrew/Cellar/node@22/22.23.2... (2,140 files, 54.7MB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/node@22_bottle_manifest--22.23.2... (136.5KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/node@22--22.23.2... (15.2MB)
+==> Upgrading openshift-cli
+  4.22.8 -> 4.22.9
+==> Pouring openshift-cli--4.22.9.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/openshift-cli/4.22.9: 10 files, 109.5MB
+==> Running `brew cleanup openshift-cli`...
+Removing: /opt/homebrew/Cellar/openshift-cli/4.22.8... (10 files, 109.5MB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/openshift-cli_bottle_manifest--4.22.8... (24KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/openshift-cli--4.22.8... (30.8MB)
+==> Upgrading merve
+  1.2.2_1 -> 1.2.2_2
+==> Pouring merve--1.2.2_2.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/merve/1.2.2_2: 19 files, 134.9KB
+==> Running `brew cleanup merve`...
+Removing: /opt/homebrew/Cellar/merve/1.2.2_1... (19 files, 152.0KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/merve_bottle_manifest--1.2.2_1... (9.4KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/merve--1.2.2_1... (33.0KB)
+==> Upgrading flyctl
+  0.4.83 -> 0.4.87
+==> Pouring flyctl--0.4.87.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/flyctl/0.4.87: 15 files, 77.1MB
+==> Running `brew cleanup flyctl`...
+Removing: /opt/homebrew/Cellar/flyctl/0.4.83... (15 files, 76.9MB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/flyctl_bottle_manifest--0.4.83... (15.3KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/flyctl--0.4.83... (25.0MB)
+==> Upgrading go
+  1.26.6 -> 1.27.0
+==> Pouring go--1.27.0.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/go/1.27.0: 15,575 files, 239.8MB
+==> Running `brew cleanup go`...
+Removing: /opt/homebrew/Cellar/go/1.26.6... (14,973 files, 228.7MB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/go_bottle_manifest--1.26.6... (14.8KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/go--1.26.6... (64MB)
+==> Upgrading gh
+  2.97.0 -> 2.98.0
+==> Pouring gh--2.98.0.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/gh/2.98.0: 238 files, 39.8MB
+==> Running `brew cleanup gh`...
+Removing: /opt/homebrew/Cellar/gh/2.97.0... (238 files, 39.4MB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/gh_bottle_manifest--2.97.0... (14.6KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/gh--2.97.0... (13.6MB)
+==> Upgrading aws-c-sdkutils
+  0.2.9 -> 0.2.10
+==> Pouring aws-c-sdkutils--0.2.10.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/aws-c-sdkutils/0.2.10: 18 files, 189.6KB
+==> Running `brew cleanup aws-c-sdkutils`...
+Removing: /opt/homebrew/Cellar/aws-c-sdkutils/0.2.9... (18 files, 189.4KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-c-sdkutils_bottle_manifest--0.2.9... (21.2KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-c-sdkutils--0.2.9... (51.6KB)
+==> Upgrading aws-c-cal
+  0.9.15 -> 0.9.15_1
+==> Pouring aws-c-cal--0.9.15_1.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/aws-c-cal/0.9.15_1: 21 files, 187.3KB
+==> Running `brew cleanup aws-c-cal`...
+Removing: /opt/homebrew/Cellar/aws-c-cal/0.9.15... (21 files, 183KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-c-cal_bottle_manifest--0.9.15... (25.2KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-c-cal--0.9.15... (41.9KB)
+==> Upgrading aws-c-compression
+  0.3.2 -> 0.3.3
+==> Pouring aws-c-compression--0.3.3.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/aws-c-compression/0.3.3: 14 files, 91.8KB
+==> Running `brew cleanup aws-c-compression`...
+Removing: /opt/homebrew/Cellar/aws-c-compression/0.3.2... (14 files, 88.8KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-c-compression_bottle_manifest--0.3.2... (8KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-c-compression--0.3.2... (15.2KB)
+==> Upgrading s2n
+  1.7.7 -> 1.7.8
+==> Pouring s2n--1.7.8.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/s2n/1.7.8: 28 files, 2.9MB
+==> Running `brew cleanup s2n`...
+Removing: /opt/homebrew/Cellar/s2n/1.7.7... (28 files, 3.3MB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/s2n_bottle_manifest--1.7.7... (27.1KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/s2n--1.7.7... (762.3KB)
+==> Upgrading aws-c-io
+  0.27.6 -> 0.27.7
+==> Pouring aws-c-io--0.27.7.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/aws-c-io/0.27.7: 36 files, 709.3KB
+==> Running `brew cleanup aws-c-io`...
+Removing: /opt/homebrew/Cellar/aws-c-io/0.27.6... (36 files, 725.7KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-c-io_bottle_manifest--0.27.6... (45.7KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-c-io--0.27.6... (198.5KB)
+==> Upgrading aws-c-http
+  0.11.0 -> 0.11.1
+==> Pouring aws-c-http--0.11.1.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/aws-c-http/0.11.1: 22 files, 573.3KB
+==> Running `brew cleanup aws-c-http`...
+Removing: /opt/homebrew/Cellar/aws-c-http/0.11.0... (22 files, 563.8KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-c-http_bottle_manifest--0.11.0... (12.3KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-c-http--0.11.0... (167.6KB)
+==> Upgrading yt-dlp
+  2026.7.4 -> 2026.8.19
+==> Pouring yt-dlp--2026.8.19.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/yt-dlp/2026.8.19: 1,698 files, 20.9MB
+==> Running `brew cleanup yt-dlp`...
+Removing: /opt/homebrew/Cellar/yt-dlp/2026.7.4... (1,938 files, 26MB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/yt-dlp_bottle_manifest--2026.7.4... (25.9KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/yt-dlp--2026.7.4... (5.3MB)
+==> Upgrading aws-c-mqtt
+  0.16.1 -> 0.16.2
+==> Pouring aws-c-mqtt--0.16.2.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/aws-c-mqtt/0.16.2: 20 files, 500.4KB
+==> Running `brew cleanup aws-c-mqtt`...
+Removing: /opt/homebrew/Cellar/aws-c-mqtt/0.16.1... (20 files, 500.2KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-c-mqtt_bottle_manifest--0.16.1... (64.8KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-c-mqtt--0.16.1... (144.8KB)
+==> Upgrading aws-checksums
+  0.2.10 -> 0.2.11
+==> Pouring aws-checksums--0.2.11.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/aws-checksums/0.2.11: 14 files, 156.8KB
+==> Running `brew cleanup aws-checksums`...
+Removing: /opt/homebrew/Cellar/aws-checksums/0.2.10... (14 files, 153.9KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-checksums_bottle_manifest--0.2.10... (8KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-checksums--0.2.10... (78.6KB)
+==> Upgrading aws-c-event-stream
+  0.7.1 -> 0.7.2
+==> Pouring aws-c-event-stream--0.7.2.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/aws-c-event-stream/0.7.2: 17 files, 205.8KB
+==> Running `brew cleanup aws-c-event-stream`...
+Removing: /opt/homebrew/Cellar/aws-c-event-stream/0.7.1... (17 files, 196.5KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-c-event-stream_bottle_manifest--0.7.1... (12.3KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-c-event-stream--0.7.1... (46.7KB)
+==> Upgrading aws-c-auth
+  0.10.4 -> 0.10.5
+==> Pouring aws-c-auth--0.10.5.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/aws-c-auth/0.10.5: 19 files, 418.3KB
+==> Running `brew cleanup aws-c-auth`...
+Removing: /opt/homebrew/Cellar/aws-c-auth/0.10.4... (19 files, 418.1KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-c-auth_bottle_manifest--0.10.4... (71.2KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-c-auth--0.10.4... (107.4KB)
+==> Upgrading aws-c-s3
+  0.13.5 -> 0.13.7
+==> Pouring aws-c-s3--0.13.7.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/aws-c-s3/0.13.7: 18 files, 431.6KB
+==> Running `brew cleanup aws-c-s3`...
+Removing: /opt/homebrew/Cellar/aws-c-s3/0.13.5... (18 files, 431.2KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-c-s3_bottle_manifest--0.13.5... (83.6KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/aws-c-s3--0.13.5... (128.4KB)
+==> Upgrading awscli
+  2.36.24 -> 2.36.29
+==> Pouring awscli--2.36.29.arm64_tahoe.bottle.tar.gz
+==> Caveats
+The "examples" directory has been installed to:
+  /opt/homebrew/share/awscli/examples
+==> Summary
+🍺  /opt/homebrew/Cellar/awscli/2.36.29: 14,675 files, 161.4MB
+==> Running `brew cleanup awscli`...
+Removing: /opt/homebrew/Cellar/awscli/2.36.24... (14,674 files, 161MB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/awscli_bottle_manifest--2.36.24... (164.6KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/awscli--2.36.24... (23.2MB)
+==> Upgrading mlx
+  0.32.0 -> 0.32.1
+==> Pouring mlx--0.32.1.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/mlx/0.32.1: 455 files, 158.1MB
+==> Running `brew cleanup mlx`...
+Removing: /opt/homebrew/Cellar/mlx/0.32.0... (442 files, 151.1MB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/mlx_bottle_manifest--0.32.0... (36.7KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/mlx--0.32.0... (38MB)
+==> Upgrading mlx-c
+  0.6.0_3 -> 0.6.0_4
+==> Pouring mlx-c--0.6.0_4.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/mlx-c/0.6.0_4: 40 files, 882.3KB
+==> Running `brew cleanup mlx-c`...
+Removing: /opt/homebrew/Cellar/mlx-c/0.6.0_3... (40 files, 884KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/mlx-c_bottle_manifest--0.6.0_3... (39.3KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/mlx-c--0.6.0_3... (186.5KB)
+==> Upgrading htop
+  3.5.2 -> 3.5.3
+==> Pouring htop--3.5.3.arm64_tahoe.bottle.tar.gz
+==> Caveats
+htop requires root privileges to correctly display all running processes,
+so you will need to run `sudo htop`.
+You should be certain that you trust any software you grant root privileges.
+==> Summary
+🍺  /opt/homebrew/Cellar/htop/3.5.3: 13 files, 406.5KB
+==> Running `brew cleanup htop`...
+Removing: /opt/homebrew/Cellar/htop/3.5.2... (13 files, 403.4KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/htop_bottle_manifest--3.5.2... (23.0KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/htop--3.5.2... (154.3KB)
+==> Upgrading tmux
+  3.7b -> 3.7c
+==> Installing tmux dependency: jemalloc
+==> Pouring jemalloc--5.3.1.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/jemalloc/5.3.1: 17 files, 3MB
+==> Installing tmux
+==> Pouring tmux--3.7c.arm64_tahoe.bottle.tar.gz
+==> Caveats
+Example configuration has been installed to:
+  /opt/homebrew/opt/tmux/share/tmux
+==> Summary
+🍺  /opt/homebrew/Cellar/tmux/3.7c: 9 files, 1.4MB
+==> Running `brew cleanup tmux`...
+Removing: /opt/homebrew/Cellar/tmux/3.7b... (9 files, 1.4MB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/tmux_bottle_manifest--3.7b... (12.6KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/tmux--3.7b... (542.3KB)
+==> Upgrading kubernetes-cli
+  1.36.3 -> 1.36.4
+==> Pouring kubernetes-cli--1.36.4.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/kubernetes-cli/1.36.4: 261 files, 62.5MB
+==> Running `brew cleanup kubernetes-cli`...
+Removing: /opt/homebrew/Cellar/kubernetes-cli/1.36.3... (261 files, 62.5MB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/kubernetes-cli_bottle_manifest--1.36.3... (15.6KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/kubernetes-cli--1.36.3... (18.2MB)
+==> Upgrading ollama
+  0.32.13 -> 0.32.15
+==> Pouring ollama--0.32.15.arm64_tahoe.bottle.tar.gz
+==> Caveats
+To start ollama now and restart at login:
+  brew services start ollama
+Or, if you don't want/need a background service you can just run:
+  OLLAMA_FLASH_ATTENTION="1" OLLAMA_KV_CACHE_TYPE="q8_0" /opt/homebrew/opt/ollama/bin/ollama serve
+==> Summary
+🍺  /opt/homebrew/Cellar/ollama/0.32.15: 12 files, 50.4MB
+==> Running `brew cleanup ollama`...
+Removing: /opt/homebrew/Cellar/ollama/0.32.13... (12 files, 50.0MB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/ollama_bottle_manifest--0.32.13... (51.2KB)
+Removing: /Users/rifaterdemsahin/Library/Caches/Homebrew/ollama--0.32.13... (17MB)
+==> Upgrading bettertouchtool
+  6.726,2026081403 -> 6.746,2026082105
+==> Backing up App 'BetterTouchTool.app' to '/opt/homebrew/Caskroom/bettertouchtool/6.726,2026081403/B
+==> Removing App '/Applications/BetterTouchTool.app'
+==> Moving App 'BetterTouchTool.app' to '/Applications/BetterTouchTool.app'
+==> Purging files for version 6.726,2026081403 of Cask bettertouchtool
+🍺  bettertouchtool was successfully upgraded!
+==> Upgrading loom
+  0.368.1 -> 0.369.2
+==> Backing up App 'Loom.app' to '/opt/homebrew/Caskroom/loom/0.368.1/Loom.app'
+==> Removing App '/Applications/Loom.app'
+==> Moving App 'Loom.app' to '/Applications/Loom.app'
+==> Purging files for version 0.368.1 of Cask loom
+🍺  loom was successfully upgraded!
+==> Upgrading obs
+  32.2.1 -> 32.2.2
+==> Removing files:
+/Library/CoreMediaIO/Plug-Ins/DAL/obs-mac-virtualcam.plugin
+==> Backing up App 'OBS.app' to '/opt/homebrew/Caskroom/obs/32.2.1/OBS.app'
+==> Removing App '/Applications/OBS.app'
+==> Unlinking Binary '/opt/homebrew/bin/obs'
+==> Moving App 'OBS.app' to '/Applications/OBS.app'
+==> Linking Command Wrapper 'obs' to '/opt/homebrew/bin/obs'
+==> Purging files for version 32.2.1 of Cask obs
+🍺  obs was successfully upgraded!
+==> Upgrading rectangle
+  0.98 -> 0.99
+==> Backing up App 'Rectangle.app' to '/opt/homebrew/Caskroom/rectangle/0.98/Rectangle.app'
+==> Removing App '/Applications/Rectangle.app'
+==> Moving App 'Rectangle.app' to '/Applications/Rectangle.app'
+==> Purging files for version 0.98 of Cask rectangle
+🍺  rectangle was successfully upgraded!
+==> Upgrading virtualbox
+  7.2.14,174565 -> 7.2.16,174877
+==> Running uninstall script VirtualBox_Uninstall.tool
+Successfully unloaded VirtualBox kernel extensions.
+Forgot package 'org.virtualbox.pkg.virtualbox' on '/'.
+Forgot package 'org.virtualbox.pkg.virtualboxcli' on '/'.
+Done.
+==> Uninstalling packages with `sudo` (which may request your password)...
+==> Removing files:
+/usr/local/bin/vboximg-mount
+==> Running installer for virtualbox with `sudo` (which may request your password)...
+installer: Package name is Oracle VirtualBox
+installer: choices changes file '/private/tmp/choices20260822-7156-gmosub.xml' applied
+installer: Installing at base path /
+installer: The install was successful.
+==> Purging files for version 7.2.14,174565 of Cask virtualbox
+🍺  virtualbox was successfully upgraded!
+==> Upgrading visual-studio-code
+  1.133.0 -> 1.134.0
+==> Removing launchctl service com.microsoft.VSCode.ShipIt
+==> Backing up App 'Visual Studio Code.app' to '/opt/homebrew/Caskroom/visual-studio-code/1.133.0/Visu
+==> Removing App '/Applications/Visual Studio Code.app'
+==> Unlinking Binary '/opt/homebrew/bin/code'
+==> Unlinking Binary '/opt/homebrew/bin/code-tunnel'
+==> Moving App 'Visual Studio Code.app' to '/Applications/Visual Studio Code.app'
+==> Linking Binary 'code' to '/opt/homebrew/bin/code'
+==> Linking Binary 'code-tunnel' to '/opt/homebrew/bin/code-tunnel'
+==> Purging files for version 1.133.0 of Cask visual-studio-code
+🍺  visual-studio-code was successfully upgraded!
+==> Upgrading warp
+  0.2026.08.12.21.54.stable_00 -> 0.2026.08.19.08.15.stable_01
+==> Backing up App 'Warp.app' to '/opt/homebrew/Caskroom/warp/0.2026.08.12.21.54.stable_00/Warp.app'
+==> Removing App '/Applications/Warp.app'
+==> Moving App 'Warp.app' to '/Applications/Warp.app'
+==> Purging files for version 0.2026.08.12.21.54.stable_00 of Cask warp
+🍺  warp was successfully upgraded!
+==> Upgrading whatsapp
+  26.32.19 -> 26.33.19
+==> Quitting application 'net.whatsapp.WhatsApp'...
+Application 'net.whatsapp.WhatsApp' quit successfully.
+==> Backing up App 'WhatsApp.app' to '/opt/homebrew/Caskroom/whatsapp/26.32.19/WhatsApp.app'
+==> Removing App '/Applications/WhatsApp.app'
+==> Moving App 'WhatsApp.app' to '/Applications/WhatsApp.app'
+==> Purging files for version 26.32.19 of Cask whatsapp
+🍺  whatsapp was successfully upgraded!
+==> Reopening 1 application closed during upgrade:
+net.whatsapp.WhatsApp
+==> Upgrading wispr-flow
+  1.6.531 -> 1.6.606
+==> Backing up App 'Wispr Flow.app' to '/opt/homebrew/Caskroom/wispr-flow/1.6.531/Wispr Flow.app'
+==> Removing App '/Applications/Wispr Flow.app'
+==> Moving App 'Wispr Flow.app' to '/Applications/Wispr Flow.app'
+==> Purging files for version 1.6.531 of Cask wispr-flow
+🍺  wispr-flow was successfully upgraded!
+==> Caveats
+zsh completions have been installed to:
+  /opt/homebrew/share/zsh/site-functions
+zsh completions and functions have been installed to:
+  /opt/homebrew/share/zsh/site-functions
+==> node@22
+node@22 is keg-only, which means it was not symlinked into /opt/homebrew,
+because this is an alternate version of another formula.
+
+If you need to have node@22 first in your PATH, run:
+  echo 'export PATH="/opt/homebrew/opt/node@22/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find node@22 you may need to set:
+  export LDFLAGS="-L/opt/homebrew/opt/node@22/lib"
+  export CPPFLAGS="-I/opt/homebrew/opt/node@22/include"
+==> awscli
+The "examples" directory has been installed to:
+  /opt/homebrew/share/awscli/examples
+==> htop
+htop requires root privileges to correctly display all running processes,
+so you will need to run `sudo htop`.
+You should be certain that you trust any software you grant root privileges.
+==> tmux
+Example configuration has been installed to:
+  /opt/homebrew/opt/tmux/share/tmux
+==> ollama
+To start ollama now and restart at login:
+  brew services start ollama
+Or, if you don't want/need a background service you can just run:
+  OLLAMA_FLASH_ATTENTION="1" OLLAMA_KV_CACHE_TYPE="q8_0" /opt/homebrew/opt/ollama/bin/ollama serve
+==> Upgraded 35 outdated packages
